@@ -9,7 +9,6 @@ import com.vondear.rxtools.RxAppTool;
 import com.vondear.rxtools.RxClipboardTool;
 import com.yc.answer.R;
 import com.yc.answer.utils.ToastUtils;
-import com.yc.answer.utils.UIUtils;
 
 
 import java.util.concurrent.TimeUnit;
@@ -17,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BasePopwindow;
+import yc.com.base.UIUtils;
 
 /**
  * Created by zhangkai on 2017/8/2.

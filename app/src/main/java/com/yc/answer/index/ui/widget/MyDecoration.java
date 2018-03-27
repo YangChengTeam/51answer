@@ -12,17 +12,18 @@ import com.vondear.rxtools.RxImageTool;
 
 public class MyDecoration extends RecyclerView.ItemDecoration {
 
-    private int width = 0;
+    private int width;
     private int height;
+
+    public MyDecoration(int height) {
+        this(height, 0);
+    }
 
     public MyDecoration(int height, int width) {
         this.height = height;
         this.width = width;
     }
 
-    public MyDecoration(int height) {
-        this.height = height;
-    }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {

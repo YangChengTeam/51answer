@@ -5,6 +5,8 @@ import com.kk.securityhttp.net.contains.HttpConfig;
 import com.yc.answer.constant.HttpStatus;
 import com.yc.answer.utils.UserInfoHelper;
 
+import yc.com.base.EmptyUtils;
+
 /**
  * Created by zhangkai on 2017/8/3.
  */

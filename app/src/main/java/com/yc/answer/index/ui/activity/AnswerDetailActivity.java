@@ -28,7 +28,6 @@ import com.yc.answer.index.ui.fragment.DeleteTintFragment;
 import com.yc.answer.setting.model.bean.ShareInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.setting.ui.fragment.ShareFragment;
-import com.yc.answer.utils.FileUtils;
 import com.yc.answer.utils.RxDownloadManager;
 import com.yc.answer.utils.ToastUtils;
 import com.yc.answer.utils.UserInfoHelper;
@@ -43,6 +42,7 @@ import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
+import yc.com.base.FileUtils;
 
 /**
  * Created by wanglin  on 2018/3/12 10:58.

@@ -11,7 +11,6 @@ import com.yc.answer.index.contract.AnswerDetailContract;
 import com.yc.answer.index.model.bean.BookInfo;
 import com.yc.answer.index.model.engine.AnswerDetailEngine;
 import com.yc.answer.utils.EngineUtils;
-import com.yc.answer.utils.FileUtils;
 import com.yc.answer.utils.ToastUtils;
 
 import rx.Subscriber;

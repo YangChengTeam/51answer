@@ -15,12 +15,12 @@ import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.setting.model.engine.LoginGroupEngine;
 import com.yc.answer.utils.EngineUtils;
 import com.yc.answer.utils.ToastUtils;
-import com.yc.answer.utils.UIUtils;
 import com.yc.answer.utils.UserInfoHelper;
 
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
+import yc.com.base.UIUtils;
 
 
 /**

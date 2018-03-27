@@ -12,7 +12,6 @@ import com.vondear.rxtools.RxLogTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 import com.yc.answer.R;
-import com.yc.answer.base.EmptyUtils;
 import com.yc.answer.constant.HttpStatus;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.setting.model.bean.UserInfo;
@@ -24,6 +23,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import yc.com.base.EmptyUtils;
+import yc.com.base.UIUtils;
 
 /**
  * Created by wanglin  on 2018/3/9 19:17.
