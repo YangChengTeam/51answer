@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:titleTextAppearance="@style/ToolBar" />
+
+            <include layout="@layout/fragment_my_top" />
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_f5f5f5"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/distance_10"
+            android:orientation="vertical">
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_wx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@mipmap/setting_wx"
+                app:title="@string/care_wx_number" />
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                app:icon="@mipmap/setting_share"
+                app:title="@string/share_friend" />
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_net"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                app:icon="@mipmap/setting_net"
+                app:title="@string/answer_net" />
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                app:icon="@mipmap/setting_setting"
+                app:title="@string/setting" />
+
+            <TextView
+                android:id="@+id/tv_statement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/distance_20"
+                android:text="51答案免责声明" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

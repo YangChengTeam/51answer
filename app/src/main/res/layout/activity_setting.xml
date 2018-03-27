@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/common_top_view" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_5"
+            android:background="@color/white" />
+
+        <com.yc.answer.setting.ui.widget.BaseSettingView
+            android:id="@+id/baseSettingView_face"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_extra="true"
+            app:title="@string/change_avtor"
+            app:titleSize="@dimen/text_14" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_05"
+            android:layout_marginLeft="@dimen/distance_15"
+            android:layout_marginRight="@dimen/distance_15"
+            android:background="@color/gray_f5f5f5" />
+
+        <com.yc.answer.setting.ui.widget.BaseSettingView
+            android:id="@+id/baseSettingView_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_extra="true"
+            app:title="@string/phone"
+            app:titleSize="@dimen/text_14" />
+
+        <com.yc.answer.setting.ui.widget.BaseSettingView
+            android:id="@+id/baseSettingView_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance_10"
+            app:show_extra="true"
+            app:title="@string/clear_cache"
+            app:titleSize="@dimen/text_14" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_05"
+            android:layout_marginLeft="@dimen/distance_15"
+            android:layout_marginRight="@dimen/distance_15"
+            android:background="@color/gray_f5f5f5" />
+
+        <com.yc.answer.setting.ui.widget.BaseSettingView
+            android:id="@+id/baseSettingView_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_extra="true"
+            app:title="@string/version_update"
+            app:titleSize="@dimen/text_14" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_ripper_bg"
+        android:text="@string/logout"
+        android:textColor="@color/red_f14343"
+        android:textSize="@dimen/text_16" />
+
+</RelativeLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.answer">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+
+    <application
+        android:name="com.yc.answer.base.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".index.ui.activity.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".base.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a94cee38f4a9d77d3000024" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="app_online" />
+
+        <activity
+            android:name=".setting.ui.activity.SettingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.ui.activity.LoginGroupActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.SearchActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.AnswerDetailActivity"
+            android:exported="true"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".setting.ui.activity.BindPhoneActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".base.WebActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name=".index.ui.activity.ScanTintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.ui.activity.StatementActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="Pzp6GbjhhZHHXa1872MlCen2yhfx2I9g" />
+
+
+    </application>
+
+</manifest>

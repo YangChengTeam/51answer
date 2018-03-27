@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/common_view"
+        layout="@layout/common_top_view" />
+
+    <com.yc.answer.base.StateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rl_collect"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@mipmap/collect_unselect_icon"
+                    android:drawablePadding="@dimen/distance_5"
+                    android:text="@string/main_collect"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_download"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_downLoad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@mipmap/download"
+                    android:drawablePadding="@dimen/distance_5"
+                    android:text="@string/download"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_share"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@mipmap/share_icon"
+                    android:drawablePadding="@dimen/distance_5"
+                    android:text="@string/share"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/m_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom"
+            android:layout_marginTop="@dimen/distance_20" />
+
+        <LinearLayout
+            android:id="@+id/ll_top_guide"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/distance_15">
+
+            <TextView
+                android:id="@+id/tv_current_page"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="1"
+                android:textColor="@color/red_f14343" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text=" / "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_sum_page"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="@dimen/distance_05"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/distance_10"
+                android:layout_marginLeft="@dimen/distance_10"
+                android:layout_marginTop="@dimen/distance_10"
+                android:background="@color/gray_555555" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/red_f14343"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/red_f14343"
+                app:tabTextColor="@color/black" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

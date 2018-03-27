@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_header_bg"
+        android:paddingTop="@dimen/distance_25">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/distance_5"
+            android:paddingLeft="@dimen/distance_10"
+            android:paddingRight="@dimen/distance_10">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/distance_15"
+                android:layout_toRightOf="@id/iv_back"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_container"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_translate_bg"
+                    android:padding="@dimen/distance_5">
+
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/search_white" />
+
+                    <ImageView
+                        android:id="@+id/iv_scan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/scan_gray" />
+
+                    <android.support.v7.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/distance_5"
+                        android:layout_marginRight="@dimen/distance_5"
+                        android:layout_toLeftOf="@id/iv_scan"
+                        android:layout_toRightOf="@id/iv_search"
+                        android:background="@null"
+                        android:completionThreshold="1"
+                        android:dropDownAnchor="@id/rl"
+                        android:dropDownHeight="match_parent"
+                        android:dropDownVerticalOffset="@dimen/distance_2"
+                        android:dropDownWidth="match_parent"
+                        android:ellipsize="end"
+                        android:hint="@string/input_book_name"
+                        android:popupBackground="@color/white"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textCursorDrawable="@drawable/et_cursor_bg"
+                        android:textSize="@dimen/text_14" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/distance_15"
+                    android:layout_marginRight="@dimen/distance_5"
+                    android:gravity="center"
+                    android:text="@string/seek"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_14" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

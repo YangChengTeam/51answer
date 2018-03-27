@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_top_view" />
+
+    <com.yc.answer.base.StateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/distance_10">
+
+            <TextView
+                android:id="@+id/tv_collect_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/collect_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10" />
+        </LinearLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

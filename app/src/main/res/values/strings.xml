@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">51答案</string>
+
+    <string name="datum_update">资料持续更新中</string>
+    <string name="after_class_answer">课后答案</string>
+    <string name="school">学校</string>
+    <string name="final_exam">期末考试</string>
+    <string name="search_answer">求答案</string>
+    <string name="seek">搜索</string>
+    <string name="contact_service">联系客服</string>
+    <string name="hot_answer">热门答案</string>
+    <string name="no_data">暂无数据</string>
+
+    <string name="main_index">首页</string>
+    <string name="main_collect">收藏</string>
+    <string name="main_my">我的</string>
+    <string name="register">注册</string>
+    <string name="input_book_name">请输入书本名称看答案</string>
+    <string name="filrate">筛选</string>
+    <string name="subject">科目</string>
+    <string name="grade">年级</string>
+    <string name="part">上下册</string>
+    <string name="reset">返回</string>
+    <string name="confirm">确认</string>
+
+    <string name="collect_count">共收藏 "<font color="#FF0000"> %d</font>" 个</string>
+    <string name="primary_school_qq">小学答案QQ群</string>
+    <string name="middle_school_qq">中学答案QQ群</string>
+    <string name="setting">设置</string>
+    <string name="care_wx_number">关注微信公众号</string>
+    <string name="share_friend">分享好友</string>
+    <string name="answer_net">51答案网站</string>
+    <string name="change_avtor">修改图像</string>
+    <string name="phone">手机号</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="version_update">版本更新</string>
+    <string name="version">版本</string>
+    <string name="logout">退出登录</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="delete">删除</string>
+    <string name="search_histroty">搜索记录</string>
+    <string name="download">下载</string>
+    <string name="share">分享</string>
+    <string name="all">全部</string>
+    <string name="not_login">还没有登录，点击立即登录</string>
+    <string name="login">登录</string>
+    <string name="reset_password">找回密码</string>
+    <string name="setting_follow_title">关注公众号</string>
+    <string name="setting_follow_desc">已复制微信号:51答案</string>
+    <string name="setting_follow_desc2">打开微信，搜索公众号关注</string>
+    <string name="base_ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="tint">提示</string>
+    <string name="warm_tint">温馨提示</string>
+    <string name="tint_content">亲，分享给微信群或朋友后，即可查看本书答案！</string>
+    <string name="delete_tint">删除后就不能离线看答案了，确定吗？</string>
+    <string name="wx">微信</string>
+    <string name="wx_circle">朋友圈</string>
+    <string name="qq">QQ</string>
+    <string name="share_cancel">取消分享</string>
+    <string name="exit">退出</string>
+    <string name="is_exit">是否退出%s？</string>
+    <string name="hot_book">热门书籍</string>
+    <string name="hot_recommand">热门推荐</string>
+    <string name="collect_cancel">取消收藏</string>
+    <string name="scan_tint">扫码提示</string>
+    <string name="shared">已分享</string>
+    <string name="statement">免责声明</string>
+
+
+</resources>

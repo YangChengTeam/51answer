@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_top_view" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/distance_10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="email|web"
+                android:lineSpacingExtra="@dimen/distance_5"
+                android:text="   51答案汇总全国各地中小学生各科各年级试卷、教辅、练习册解析、作业答案等学习内容的分享个人非盈利平台，为学生们提供不同思路的题目讲解及答案，为家长检查作业提供答案服务，为中小学生提供了一个汇总，讨论，学习知识的交流分享平台。\n
+    软件中图书试卷等内容由各地学生等用户上传而来，如果您发现有图书侵犯了您或者他人的权利，请及时提出权利通知，我会第一时间优先处理，并于7-15个工作日内给予回复，请发送以下信息至
+jkdlj2008@163.com
+
+(1)如果您个人是这份文档的权利人，请在邮件的附件中提供您的身份证复印件（必须提供）；以及版权说明书（能证明版权归属的文件，如作品登记证书、加盖出版社公章的版权说明书等）（必须提供），示例如下" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                android:src="@mipmap/state1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                android:lineSpacingExtra="@dimen/distance_5"
+                android:text="如果您是这份文档的单位权利人，请在邮件的附件中提供单位营业执照复印件（必须提供）；以及版权说明书（能证明版权归属的文件，如作品登记证书、加盖出版社公章的版权说明书等）（必须提供），示例如下：" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                android:src="@mipmap/state2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
+                android:lineSpacingExtra="@dimen/distance_5"
+                android:text="2)请出具保证函（权利人是单位的，请加盖单位公章；权利人是个人的，请在保证函上签名），在填写完全部内容并签字后扫描复印并在邮件的附件中提供复印件；（必须提供）保证函内容如下：\n
+                       本人/本单位承诺，对51答案内容中侵犯本人/本单位合法权利的指控真实、准确、完整，并愿意对要求51答案删除相关涉嫌侵权内容的行为承担一切法律责任和后果。\n
+签字（单位加盖公章）：\n
+年 月 日\n
+联系方式：\n
+联系人：\n
+电子邮件：\n
+地址：\n
+建议您将此保证函直接复制到文档中再打印即可。\n
+温馨提示：\n
+请确保您上传的复印件清晰无污损，并提交所需的全部材料，若提交的材料不完整或无法识别内容，我将无法处理您的反馈。" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

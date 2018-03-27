@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/exit_white_bg"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/distance_20">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/tint"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/tv_tint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/distance_10"
+            android:gravity="center"
+            android:text="是否退出?" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/distance_15"
+            android:background="@color/gray_qian"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/base_ok"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="@dimen/distance_05"
+                android:layout_height="match_parent"
+                android:background="@color/gray_aaa"
+                android:layout_marginTop="@dimen/distance_10"
+                android:layout_marginBottom="@dimen/distance_10"/>
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

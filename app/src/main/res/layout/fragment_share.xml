@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/distance_15"
+    android:paddingTop="@dimen/distance_15">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="分享到"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/distance_05"
+        android:layout_marginTop="@dimen/distance_15"
+        android:background="@color/gray_f5f5f5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_15"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:id="@+id/ll_wx"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/wx_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_5"
+                android:text="@string/wx"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_circle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/circlr_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_5"
+                android:text="@string/wx_circle"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_qq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qq_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_5"
+                android:text="@string/qq"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/distance_05"
+        android:layout_marginTop="@dimen/distance_15"
+        android:background="@color/gray_f5f5f5" />
+
+    <TextView
+        android:id="@+id/tv_cancel_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_15"
+        android:gravity="center"
+        android:text="@string/share_cancel"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_16" />
+
+
+</LinearLayout>

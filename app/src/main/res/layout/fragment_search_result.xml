@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.yc.answer.base.StateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/distance_5"
+            android:layout_marginTop="@dimen/distance_5"
+            android:padding="@dimen/distance_10">
+
+            <TextView
+                android:id="@+id/tv_sum_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/tv_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@mipmap/filtrate"
+                android:drawablePadding="@dimen/distance_5"
+                android:text="@string/filrate"
+                android:textColor="@color/red_f14343" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_05"
+            android:background="@color/gray_555555" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/result_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/distance_10" />
+    </LinearLayout>
+</LinearLayout>
