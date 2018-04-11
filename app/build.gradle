@@ -8,8 +8,8 @@ android {
         applicationId "com.yc.answer"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -22,7 +22,7 @@ android {
         defaultConfig {
             ndk {
                 // 设置支持的SO库架构
-                abiFilters 'armeabi', 'armeabi-v7a', 'x86_64', 'arm64-v8a' //,'x86',
+                abiFilters 'armeabi', 'armeabi-v7a', 'x86_64', 'arm64-v8a' //,'x86'
             }
         }
     }
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding:rxbinding:+'
     implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:+'
     implementation 'com.jakewharton.rxbinding:rxbinding-design:+'
-    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
     compile 'com.umeng.analytics:analytics:latest.integration'
     //    compile 'com.kk:securityhttp:1.1.3'
     compile 'com.androidkun:XTabLayout:1.0.9'

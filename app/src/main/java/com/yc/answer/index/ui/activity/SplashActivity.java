@@ -1,15 +1,10 @@
 package com.yc.answer.index.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.yc.answer.R;
 import com.yc.answer.base.MainActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import yc.com.base.BaseActivity;
 
 /**

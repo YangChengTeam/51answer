@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/t50dp"
+    android:orientation="vertical">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/distance_1"
+        android:background="@color/gray_f5f5f5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yc.answer.base.BaseBottomTab
+            android:id="@+id/index_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:select="true"
+            app:select_icon="@mipmap/index_select"
+            app:select_textColor="@color/red_f14343"
+            app:tab_title="@string/main_index"
+            app:unselect_icon="@mipmap/index_unselect"
+            app:unselect_textColor="@color/gray_bfbfbf" />
+
+        <com.yc.answer.base.BaseBottomTab
+            android:id="@+id/collect_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:select="false"
+            app:select_icon="@mipmap/collect_select"
+            app:select_textColor="@color/red_f14343"
+            app:tab_title="@string/main_collect"
+            app:unselect_icon="@mipmap/collect_unselect"
+            app:unselect_textColor="@color/gray_bfbfbf" />
+
+        <com.yc.answer.base.BaseBottomTab
+            android:id="@+id/my_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:select="false"
+            app:select_icon="@mipmap/my_select"
+            app:select_textColor="@color/red_f14343"
+            app:tab_title="@string/main_my"
+            app:unselect_icon="@mipmap/my_unselect"
+            app:unselect_textColor="@color/gray_bfbfbf" />
+
+    </LinearLayout>
+
+</LinearLayout>

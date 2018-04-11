@@ -107,6 +107,7 @@ public class SearchResultFragment extends BaseFragment<BookPresenter> implements
             }
         });
 
+
         RxView.clicks(tvFilter).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -114,6 +115,7 @@ public class SearchResultFragment extends BaseFragment<BookPresenter> implements
                 filterPopwindow.showAsDropDown(rlFilter);
             }
         });
+
     }
 
     private void initAdapter() {

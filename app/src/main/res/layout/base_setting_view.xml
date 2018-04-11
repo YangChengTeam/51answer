@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/btn_ripper_bg"
     android:padding="@dimen/distance_10">
 
     <ImageView
@@ -37,16 +37,17 @@
         android:id="@+id/fl_extra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/iv_right_arrow"
         android:visibility="gone">
+
 
         <ImageView
             android:id="@+id/iv_avator"
             android:layout_width="@dimen/distance_30"
             android:layout_height="@dimen/distance_30"
-            android:layout_marginRight="@dimen/distance_10" />
+            android:layout_marginRight="@dimen/distance_10"
+            android:src="@mipmap/default_avatar" />
 
         <TextView
             android:id="@+id/tv_extra"

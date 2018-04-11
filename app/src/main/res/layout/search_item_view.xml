@@ -15,6 +15,7 @@
         android:paddingLeft="@dimen/distance_15"
         android:paddingRight="@dimen/distance_15"
         android:textColor="@color/black"
+        android:textSize="@dimen/text_12"
         tools:text="adff" />
 
 </android.support.constraint.ConstraintLayout>

@@ -3,18 +3,20 @@ package com.yc.answer.setting.ui.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.vondear.rxtools.RxImageTool;
 import com.yc.answer.R;
 
 import butterknife.BindView;
@@ -37,6 +39,8 @@ public class BaseSettingView extends BaseView {
     TextView tvExtra;
     @BindView(R.id.fl_extra)
     FrameLayout flExtra;
+    @BindView(R.id.rl_container)
+    RelativeLayout rlContainer;
     private Drawable mDrawable;
 
     private CharSequence mTitle;
@@ -46,11 +50,9 @@ public class BaseSettingView extends BaseView {
 
     public BaseSettingView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BaseSettingView);
 
         try {
-
             mDrawable = ta.getDrawable(R.styleable.BaseSettingView_icon);
             mTitle = ta.getString(R.styleable.BaseSettingView_title);
 
@@ -66,6 +68,12 @@ public class BaseSettingView extends BaseView {
             tvTitle.getPaint().setTextSize(mTitleSize);
             flExtra.setVisibility(isShowExtra ? VISIBLE : GONE);
             ivIcon.setVisibility(isShowExtra ? GONE : VISIBLE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                rlContainer.setBackgroundResource(R.drawable.btn_ripper_bg);
+            } else {
+                rlContainer.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+            }
 
         } finally {
             ta.recycle();

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -34,11 +35,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
 
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener, BaseBottomView.onTabSelectedListener {
 
 
     @BindView(R.id.main_viewpager)
@@ -49,6 +51,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     FloatingActionButton floatingActionButton;
     @BindView(R.id.iv_code_tint)
     ImageView mIvCodeTint;
+    @BindView(R.id.main_base_bottom_view)
+    BaseBottomView mainBaseBottomView;
     private List<Fragment> mList;
 
 
@@ -210,4 +214,12 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
 
+    private void initBottomView(){
+        mainBaseBottomView.setTabSelectedListener(this);
+    }
+
+    @Override
+    public void onTabSelect(int position) {
+
+    }
 }

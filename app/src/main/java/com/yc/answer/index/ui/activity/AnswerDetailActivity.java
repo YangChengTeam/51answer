@@ -233,7 +233,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             tvShare.setText(data.getAccess() == 1 ? getString(R.string.shared) : getString(R.string.share));
 
             if (!isReload)
-                initViewPager(downLoadUrlList);
+                initViewPager(data.getAnswer_list());
         }
     }
 
@@ -326,7 +326,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     private boolean isShare(BookInfo bookInfo) {
         boolean flag = false;
-        if (bookInfo != null && bookInfo.getAccess() == 1) {
+        if ((bookInfo != null && bookInfo.getAccess() == 1) || judgeIsDownload()) {
             flag = true;
         }
         return flag;
