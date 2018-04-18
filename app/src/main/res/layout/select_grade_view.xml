@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小学"
+        android:textColor="@color/black_430206"
+        android:textSize="@dimen/text_16" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_15"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>

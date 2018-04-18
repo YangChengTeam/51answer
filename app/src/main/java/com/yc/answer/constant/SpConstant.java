@@ -28,5 +28,8 @@ public class SpConstant {
 
     public static final String SHARE_INFO = "share_info";
 
-    public static final String IS_OPEN_SCAN="is_open_scan";
+    public static final String IS_OPEN_SCAN = "is_open_scan";
+
+    public static final String SELECT_GRADE = "select_grade";
+
 }

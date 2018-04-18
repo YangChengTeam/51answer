@@ -26,7 +26,7 @@ public class IndexBookAdapter extends BaseQuickAdapter<BookInfo, BaseViewHolder>
     protected void convert(BaseViewHolder helper, BookInfo item) {
         helper.setText(R.id.tv_book_name, item.getName());
         Glide.with(mContext).load(item.getCover_img()).apply(new RequestOptions()
-                .placeholder(R.mipmap.small_placeholder).error(R.mipmap.small_placeholder)
+                .placeholder(R.mipmap.small_placeholder).error(R.mipmap.small_placeholder).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true)).into((ImageView) helper.getView(R.id.iv_book));
     }
 }

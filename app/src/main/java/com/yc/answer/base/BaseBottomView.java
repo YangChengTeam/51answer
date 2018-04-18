@@ -14,6 +14,7 @@ import yc.com.base.BaseView;
 
 /**
  * Created by wanglin  on 2018/4/10 15:05.
+ * 自定义底部导航栏
  */
 
 public class BaseBottomView extends BaseView {

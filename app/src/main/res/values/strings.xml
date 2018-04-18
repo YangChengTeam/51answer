@@ -66,6 +66,24 @@
     <string name="scan_tint">扫码提示</string>
     <string name="shared">已分享</string>
     <string name="statement">免责声明</string>
+    <string name="skip">跳过</string>
+    <string-array name="small_grade">
+        <item>一年级</item>
+        <item>二年级</item>
+        <item>三年级</item>
+        <item>四年级</item>
+        <item>五年级</item>
+        <item>六年级</item>
+    </string-array>
 
-
+    <string-array name="middle_grade">
+        <item>初一</item>
+        <item>初二</item>
+        <item>初三</item>
+    </string-array>
+    <string-array name="senior_grade">
+        <item>高一</item>
+        <item>高二</item>
+        <item>高三</item>
+    </string-array>
 </resources>

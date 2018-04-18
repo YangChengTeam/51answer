@@ -35,7 +35,7 @@ public class BaseBookView extends BaseView {
 
 
     public void setBookInfo(String url, String name) {
-        Glide.with(mContext).load(url).apply(new RequestOptions().error(R.mipmap.big_placeholder).placeholder(R.mipmap.big_placeholder)).into(ivBook);
+        Glide.with(mContext).load(url).apply(new RequestOptions().error(R.mipmap.big_placeholder).centerCrop().placeholder(R.mipmap.big_placeholder)).into(ivBook);
         tvBookName.setText(name);
     }
 }
