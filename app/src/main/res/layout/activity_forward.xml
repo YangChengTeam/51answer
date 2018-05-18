@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_top_view" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/t10dp"
+            android:paddingRight="@dimen/t10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/t15dp"
+                android:text="奖励须知"
+                android:textColor="@color/black"
+                android:textSize="@dimen/t16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/t10dp"
+                android:lineSpacingExtra="@dimen/t10dp"
+                android:text="
+   1.找:如果你发现有很多课本和练习册答案是我们没有的，那么就赶快拿出手机上传答案吧!\n
+   2.传:打开51答案app，点击“上传答案得QB”功能。按提示步骤上传清晰、完整的答案。\n
+   3.审:上传的答案可以在“上传答案得QB”页面查看,并可实时查看审核进度哦,一般在7个工作日审核完成，同一本书多人上传,将优先通过最早上传的那位\n
+   4.奖:审核通过后可以在个人中心查看你的Q币奖励，然后在那里申请提现哦。\n
+"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/t20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/t10dp"
+                android:text="
+   1.在上传答案之前，一定要在51答案app里面搜索一下，看里面是否已经存在有你要上传的答案，如果有将无法通过审核哦！\n
+
+   2.前期准备:光线充足的地方、像素不错的手机、带答案的练习册\n
+   3.位置摆放:将练习册平铺摆放,桌面上不放置与该练习册无关的物品，拍下来的照片里应该是只有课本和答案的。\n
+
+​"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

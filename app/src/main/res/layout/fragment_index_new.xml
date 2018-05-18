@@ -6,6 +6,7 @@
     android:background="@color/gray_qian"
     android:paddingTop="@dimen/distance_25">
 
+    <!---->
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
@@ -30,12 +31,11 @@
                     <com.youth.banner.Banner
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
-                        android:layout_height="135dp"
+                        android:layout_height="150dp"
                         app:indicator_height="6dp"
                         app:indicator_margin="5dp"
                         app:indicator_width="6dp"
                         app:layout_collapseMode="pin" />
-
 
                 </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -55,23 +55,28 @@
 
             </android.support.design.widget.AppBarLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:padding="@dimen/distance_15"
+                android:paddingBottom="@dimen/t15dp"
+                android:paddingLeft="@dimen/t15dp"
+                android:paddingTop="@dimen/t15dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <RelativeLayout
                     android:id="@+id/rl_tab"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingRight="@dimen/t15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/hot_book"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/t16sp" />
 
                     <LinearLayout
@@ -87,7 +92,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/filtrate" />
+                            android:src="@mipmap/filtrate"
+                            android:visibility="gone" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -102,7 +108,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_15">
+                    android:layout_marginTop="@dimen/distance_15"
+                    android:visibility="gone">
 
                     <RelativeLayout
                         android:layout_width="0dp"
@@ -137,7 +144,7 @@
                             android:id="@+id/rl_plug_filter"
                             android:layout_width="@dimen/t73dp"
                             android:layout_height="@dimen/t100dp"
-                            android:background="@drawable/plug_bg">
+                            android:background="@drawable/exit_white_bg">
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -154,17 +161,45 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/distance_15"
                     android:text="@string/hot_recommand"
-                    android:textSize="@dimen/t16sp" />
+                    android:textSize="@dimen/t16sp"
+                    android:visibility="gone" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_15" />
+                    android:layout_marginTop="@dimen/distance_10" />
 
+                <LinearLayout
+                    android:id="@+id/ll_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/t40dp"
+                    android:layout_marginRight="@dimen/distance_15"
+                    android:layout_marginTop="@dimen/t30dp"
+                    android:background="@drawable/upload_answer_bg"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/upload_answer" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/upload_answer"
+                        android:textColor="@color/red_f14343"
+                        android:textSize="@dimen/text_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/q"
+                        android:textColor="@color/red_f14343"
+                        android:textSize="@dimen/text_12" />
+                </LinearLayout>
 
             </LinearLayout>
-
 
         </android.support.design.widget.CoordinatorLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

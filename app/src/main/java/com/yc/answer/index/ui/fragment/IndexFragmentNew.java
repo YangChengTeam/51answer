@@ -26,13 +26,14 @@ import com.yc.answer.index.model.bean.SlideInfo;
 import com.yc.answer.index.model.bean.VersionDetailInfo;
 import com.yc.answer.index.presenter.IndexPresenter;
 import com.yc.answer.index.ui.activity.AnswerDetailActivity;
-import com.yc.answer.index.ui.activity.SearchActivity;
+import com.yc.answer.index.ui.activity.SearchActivityNew;
+import com.yc.answer.index.ui.activity.UploadBookListActivity;
 import com.yc.answer.index.ui.adapter.BannerImageLoader;
-import com.yc.answer.index.ui.adapter.IndexItemAdapter;
+import com.yc.answer.index.ui.adapter.IndexBookAdapter;
 import com.yc.answer.index.ui.widget.BaseSearchView;
 import com.yc.answer.index.ui.widget.FilterPopwindow;
 import com.yc.answer.index.ui.widget.MyDecoration;
-import com.yc.answer.utils.SearchHistoryHelper;
+import com.yc.answer.utils.UserInfoHelper;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -70,9 +71,11 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     RelativeLayout rlPlugFilter;
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.ll_upload)
+    LinearLayout llUpload;
 
 
-    private IndexItemAdapter hotItemAdapter;
+    private IndexBookAdapter hotItemAdapter;
 
 
     @Override
@@ -85,8 +88,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         mPresenter = new IndexPresenter(getActivity(), this);
 
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        hotItemAdapter = new IndexItemAdapter(null, true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        hotItemAdapter = new IndexBookAdapter(null);
         recyclerView.setAdapter(hotItemAdapter);
 
         recyclerView.addItemDecoration(new MyDecoration(10, 10));
@@ -112,7 +115,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), SearchActivity.class));
+                startActivity(new Intent(getActivity(), SearchActivityNew.class));
             }
         });
         banner.setOnBannerListener(new OnBannerListener() {
@@ -130,46 +133,55 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         RxView.clicks(llFilter).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                FilterPopwindow filterPopwindow = new FilterPopwindow(getActivity());
-                filterPopwindow.showAsDropDown(rlTab);
-            }
-        });
-
-        RxView.clicks(baseBookViewFirst).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                if (firstBookInfo != null) {
-                    intent.putExtra("bookId", firstBookInfo.getId());
-                    intent.putExtra("bookName", firstBookInfo.getName());
-
-//                    intent.putExtra("bookInfo",firstBookInfo);
-                }
+//                FilterPopwindow filterPopwindow = new FilterPopwindow(getActivity());
+//                filterPopwindow.showAsDropDown(rlTab);
+                Intent intent = new Intent(getActivity(), SearchActivityNew.class);
                 startActivity(intent);
             }
         });
 
-        RxView.clicks(baseBookViewSecond).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                if (secondBookInfo != null) {
-                    intent.putExtra("bookId", secondBookInfo.getId());
-                    intent.putExtra("bookName", secondBookInfo.getName());
-//                    intent.putExtra("bookInfo",secondBookInfo);
-                }
-                startActivity(intent);
-            }
-        });
+//        RxView.clicks(baseBookViewFirst).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+//            @Override
+//            public void call(Void aVoid) {
+//                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
+//                if (firstBookInfo != null) {
+//                    intent.putExtra("bookId", firstBookInfo.getId());
+//                    intent.putExtra("bookName", firstBookInfo.getName());
+//
+////                    intent.putExtra("bookInfo",firstBookInfo);
+//                }
+//                startActivity(intent);
+//            }
+//        });
+//
+//        RxView.clicks(baseBookViewSecond).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+//            @Override
+//            public void call(Void aVoid) {
+//                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
+//                if (secondBookInfo != null) {
+//                    intent.putExtra("bookId", secondBookInfo.getId());
+//                    intent.putExtra("bookName", secondBookInfo.getName());
+////                    intent.putExtra("bookInfo",secondBookInfo);
+//                }
+//                startActivity(intent);
+//            }
+//        });
         hotItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                String tag = (String) adapter.getItem(position);
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                intent.putExtra("text", tag);
-                SearchHistoryHelper.saveHistoryList(tag);
-                intent.putExtra("page", 1);
+//                String tag = (String) adapter.getItem(position);
+//                Intent intent = new Intent(getActivity(), SearchActivity.class);
+//                intent.putExtra("text", tag);
+//                SearchHistoryHelper.saveHistoryList(tag);
+//                intent.putExtra("page", 1);
+//                startActivity(intent);
+                BookInfo bookInfo = (BookInfo) adapter.getItem(position);
+                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
+
+                intent.putExtra("bookName", bookInfo.getName());
+                intent.putExtra("bookId", bookInfo.getId());
                 startActivity(intent);
+
             }
         });
 
@@ -178,6 +190,15 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
             public void call(Void aVoid) {
                 FilterPopwindow filterPopwindow = new FilterPopwindow(getActivity());
                 filterPopwindow.showAsDropDown(rlTab);
+            }
+        });
+        RxView.clicks(llUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                    Intent intent = new Intent(getActivity(), UploadBookListActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -220,20 +241,10 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     }
 
 
-    private BookInfo firstBookInfo;
-    private BookInfo secondBookInfo;
-
     @Override
     public void showHotBooks(List<BookInfo> lists) {
         if (lists != null) {
-            if (lists.size() > 0) {
-                firstBookInfo = lists.get(0);
-                baseBookViewFirst.setBookInfo(firstBookInfo.getCover_img(), firstBookInfo.getName());
-                if (lists.size() > 1) {
-                    secondBookInfo = lists.get(1);
-                    baseBookViewSecond.setBookInfo(secondBookInfo.getCover_img(), secondBookInfo.getName());
-                }
-            }
+            hotItemAdapter.setNewData(lists);
         }
         if (smartRefreshLayout != null) {
             smartRefreshLayout.finishRefresh();
@@ -243,7 +254,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void showConditionList(List<String> data) {
-        hotItemAdapter.setNewData(data);
+
 
     }
 
@@ -275,10 +286,12 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     }
 
     private void getData() {
-        mPresenter.getHotBooks("2");
+        mPresenter.getHotBooks();
         mPresenter.getSlideInfo("home");
         mPresenter.getVersionList();
         mPresenter.getConditionList();
 
     }
+
+
 }

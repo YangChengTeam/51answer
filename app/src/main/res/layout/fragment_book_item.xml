@@ -13,19 +13,34 @@
 
         <ImageView
             android:id="@+id/iv_book"
-            android:layout_width="73dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/book_width"
+            android:layout_height="@dimen/book_height"
             android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/tv_book_name"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_12" />
+            android:layout_marginTop="@dimen/t5dp">
+
+            <ImageView
+                android:id="@+id/iv_grade_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/yuwen" />
+
+            <TextView
+                android:id="@+id/tv_book_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/distance_5"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_12" />
+        </FrameLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

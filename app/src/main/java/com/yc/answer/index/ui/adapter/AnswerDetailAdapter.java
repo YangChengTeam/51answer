@@ -64,14 +64,6 @@ public class AnswerDetailAdapter extends PagerAdapter {
                 .placeholder(R.mipmap.big_placeholder).error(R.mipmap.big_placeholder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true).centerInside()).thumbnail(0.1f).into(scaleImageView);
         container.addView(view);
 
-
-//        new SimpleTarget<Bitmap>() {
-//        @Override
-//        public void onResourceReady(Bitmap bitmap, Transition<? super Bitmap> transition) {
-//            scaleImageView.setImageBitmap(bitmap);
-//        }
-//    }
-
         scaleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

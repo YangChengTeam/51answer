@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -16,6 +19,8 @@ import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.R;
 import com.yc.answer.constant.SpConstant;
+import com.yc.answer.index.model.bean.VersionDetailInfo;
+import com.yc.answer.index.ui.adapter.BookInfoItemAdapter;
 
 import java.util.List;
 
@@ -31,41 +36,29 @@ public class SelectGradeView extends BaseView {
     TextView tvGrade;
     @BindView(R.id.recyclerView_select)
     RecyclerView recyclerViewSelect;
-    private List<String> mContents;
-    private SelectGradeViewAdapter gradeViewAdapter;
+
 
     public SelectGradeView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SelectGradeView);
         try {
             String name = ta.getString(R.styleable.SelectGradeView_select_name);
+            int textColor = ta.getColor(R.styleable.SelectGradeView_select_name_color, ContextCompat.getColor(context, R.color.black_430206));
+            float topMargin = ta.getDimension(R.styleable.SelectGradeView_select_margin_top, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics()));
             if (!TextUtils.isEmpty(name)) {
                 tvGrade.setText(name);
             }
-            recyclerViewSelect.setLayoutManager(new GridLayoutManager(context, 3));
-            gradeViewAdapter = new SelectGradeViewAdapter(mContents);
-            recyclerViewSelect.setAdapter(gradeViewAdapter);
-            recyclerViewSelect.addItemDecoration(new MyDecoration(RxImageTool.dip2px(5)));
-            initListener();
+            tvGrade.setTextColor(textColor);
+            LinearLayout.MarginLayoutParams params = (MarginLayoutParams) recyclerViewSelect.getLayoutParams();
+            params.topMargin = (int) topMargin;
+            recyclerViewSelect.setLayoutParams(params);
 
+            recyclerViewSelect.setLayoutManager(new GridLayoutManager(mContext, 3));
         } finally {
             ta.recycle();
         }
     }
 
-    private void initListener() {
-        gradeViewAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                RxSPTool.putString(mContext, SpConstant.SELECT_GRADE, gradeViewAdapter.getItem(position));
-                if (listener != null) {
-                    listener.onSelect(position);
-                }
-//                gradeViewAdapter.onClick(position);
-
-            }
-        });
-    }
 
     @Override
     public int getLayoutId() {
@@ -73,14 +66,46 @@ public class SelectGradeView extends BaseView {
     }
 
 
-    public List<String> getmContents() {
-        return mContents;
+    public void setContents(List<String> mContents) {
+        final SelectGradeViewAdapter gradeViewAdapter = new SelectGradeViewAdapter(mContents);
+        recyclerViewSelect.setAdapter(gradeViewAdapter);
+        recyclerViewSelect.addItemDecoration(new MyDecoration(RxImageTool.dip2px(5)));
+        gradeViewAdapter.setNewData(mContents);
+        gradeViewAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                RxSPTool.putString(mContext, SpConstant.SELECT_GRADE, gradeViewAdapter.getItem(position));
+                if (listener != null) {
+                    listener.onSelect(position, gradeViewAdapter.getItem(position));
+                }
+//                gradeViewAdapter.onClick(position);
+
+            }
+        });
     }
 
-    public void setContents(List<String> mContents) {
-        this.mContents = mContents;
-        gradeViewAdapter.setNewData(mContents);
+    public void setGrades(List<VersionDetailInfo> mContents, final int tag) {
+        recyclerViewSelect.setLayoutManager(new GridLayoutManager(mContext, 3));
+        final BookInfoItemAdapter bookInfoItemAdapter = new BookInfoItemAdapter(mContents);
+        recyclerViewSelect.setAdapter(bookInfoItemAdapter);
+        recyclerViewSelect.addItemDecoration(new MyDecoration(10, 10));
+        bookInfoItemAdapter.setNewData(mContents);
+        bookInfoItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (listener != null) {
+                    setTag(tag);
+                    listener.onSelect(position, bookInfoItemAdapter.getItem(position).getName());
+                }
+            }
+        });
+
     }
+
+    public void showTv(boolean isShow) {
+        tvGrade.setVisibility(isShow ? VISIBLE : GONE);
+    }
+
 
     public void clearSelect() {
         for (int i = 0; i < recyclerViewSelect.getChildCount(); i++) {
@@ -100,7 +125,7 @@ public class SelectGradeView extends BaseView {
     }
 
     public interface OnSelectGradeListener {
-        void onSelect(int position);
+        void onSelect(int position, String data);
     }
 
 

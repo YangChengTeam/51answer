@@ -1,7 +1,5 @@
 package com.yc.answer.constant;
 
-import java.nio.file.FileAlreadyExistsException;
-
 /**
  * Created by wanglin  on 2018/3/8 16:07.
  */
@@ -32,4 +30,15 @@ public class SpConstant {
 
     public static final String SELECT_GRADE = "select_grade";
 
+    public static final String SELECT_SUBJECT = "select_subject";
+
+    public static final String SELECT_PART = "select_part";
+
+    public static final String SELECT_VERSION = "select_version";
+
+    public static final String BOOK_NAME = "book_name";
+
+    public static final String BOOK_GRADE = "book_grade";
+
+    public static final String BOOK_SUBJECT = "book_subject";
 }

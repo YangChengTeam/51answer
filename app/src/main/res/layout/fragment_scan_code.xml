@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/distance_30" />
+        android:layout_marginTop="@dimen/distance_30"
+        android:src="@mipmap/prompt_code" />
 
     <TextView
         android:layout_width="wrap_content"

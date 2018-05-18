@@ -29,6 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/distance_10"
         android:src="@mipmap/main_scan"
+        android:visibility="gone"
         app:backgroundTint="@color/red_f14343"
         app:fabSize="auto" />
 
@@ -46,5 +47,6 @@
         android:layout_above="@id/floatingActionButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/distance_5"
-        android:src="@mipmap/code_tint" />
+        android:src="@mipmap/code_tint"
+        android:visibility="gone" />
 </RelativeLayout>

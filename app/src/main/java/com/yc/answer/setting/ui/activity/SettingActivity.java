@@ -3,27 +3,21 @@ package com.yc.answer.setting.ui.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.LogUtil;
 import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtools.RxAppTool;
 import com.vondear.rxtools.RxPhotoTool;
-import com.yalantis.ucrop.UCrop;
-import com.yalantis.ucrop.UCropActivity;
 import com.yc.answer.R;
 import com.yc.answer.constant.BusAction;
 import com.yc.answer.setting.contract.SettingContract;
@@ -35,14 +29,10 @@ import com.yc.answer.utils.ToastUtils;
 import com.yc.answer.utils.UserInfoHelper;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Subscriber;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
@@ -65,6 +55,9 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
     BaseSettingView baseSettingViewCache;
     @BindView(R.id.baseSettingView_version)
     BaseSettingView baseSettingViewVersion;
+    @BindView(R.id.ll_common_container)
+    LinearLayout llCommonContainer;
+
 
     private String NOT_BIND = "未绑定";
     private String GO_CHANGE = "去修改";

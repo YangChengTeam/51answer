@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_top_view" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseBookView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:show_extra="true"
+                app:title="课本名称（必填）"
+                app:titleSize="@dimen/text_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_05"
+                android:background="@color/gray_dddddd" />
+
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseGradeView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:show_extra="true"
+                app:title="年级（必填）"
+                app:titleSize="@dimen/text_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_05"
+                android:background="@color/gray_dddddd" />
+
+            <com.yc.answer.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSubjectView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:show_extra="true"
+                app:title="学科（必填）"
+                app:titleSize="@dimen/text_14" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/t44dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/common_header_bg"
+            android:gravity="center"
+            android:text="@string/down"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16" />
+
+    </RelativeLayout>
+
+</LinearLayout>

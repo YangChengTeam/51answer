@@ -26,4 +26,13 @@ public class BookConditionEngine extends BaseEngine {
         super(context);
     }
 
+    public Observable<ResultInfo<String>> favoriteAnswer(String book_id) {
+        Map<String, String> params = new HashMap<>();
+        params.put("book_id", book_id);
+
+        return HttpCoreEngin.get(mContext).rxpost(NetConstant.book_favorite_url, new TypeReference<ResultInfo<String>>() {
+        }.getType(), params, getHeaders(), false, false, false);
+
+    }
+
 }

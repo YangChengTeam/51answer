@@ -58,7 +58,7 @@ public class IvAvatarHelper {
     }
 
 
-    private static void initUCrop(Activity activity, Uri uri) {
+    public static void initUCrop(Activity activity, Uri uri) {
         //Uri destinationUri = RxPhotoTool.createImagePathUri(this);
 
         SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);

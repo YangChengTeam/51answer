@@ -100,18 +100,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
                 startActivity(new Intent(getActivity(), LoginGroupActivity.class));
             }
         });
-        RxView.clicks(baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
 
-            }
-        });
-        RxView.clicks(baseSettingViewNet).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-
-            }
-        });
         RxView.clicks(baseSettingViewSetting).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {

@@ -1,6 +1,8 @@
 package com.yc.answer.index.contract;
 
 
+import com.yc.answer.index.model.bean.BookInfo;
+
 import java.util.List;
 
 import yc.com.base.IHide;
@@ -18,6 +20,10 @@ public interface BookConditionContract {
 
     interface View extends IView, ILoading, INoData, INoNet, IHide {
         void showConditionList(List<String> data);
+
+        void showBookInfoList(List<BookInfo> lists);
+
+        void showFavoriteResult(boolean isCollect);
     }
 
     interface Presenter extends IPresenter {

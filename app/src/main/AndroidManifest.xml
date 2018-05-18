@@ -62,6 +62,10 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".index.ui.activity.SearchActivityNew"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".index.ui.activity.AnswerDetailActivity"
             android:exported="true"
             android:hardwareAccelerated="false"
@@ -97,6 +101,40 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".setting.ui.activity.StatementActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".index.ui.activity.UploadBookActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.UploadAnswerActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".index.ui.activity.PerfectBookInfoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.PerfectBookDetailInfoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.AnswerPreviewActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.UploadBookListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.ForwardActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".index.ui.activity.SearchCodeActivity"
+            android:exported="true"
             android:screenOrientation="portrait" />
 
         <service

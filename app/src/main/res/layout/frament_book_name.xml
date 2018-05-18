@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_book_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/t46dp"
+        android:background="@color/white"
+        android:hint="@string/input_book"
+        android:paddingLeft="@dimen/t10dp"
+        android:singleLine="true"
+        android:textSize="@dimen/t14sp" />
+
+</android.support.constraint.ConstraintLayout>

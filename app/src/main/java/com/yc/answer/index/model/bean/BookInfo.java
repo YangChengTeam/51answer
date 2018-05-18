@@ -3,6 +3,8 @@ package com.yc.answer.index.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class BookInfo implements Parcelable {
     private int access;// 用户是否private String有权访问 0;// 无授权；1;// 有授权
     private int favorite;// 用户private String是否收藏 0;// 未收藏；1;// 已收藏
     private List<VersionDetailInfo> flag;// [
-
+    @JSONField(name = "check")
+    private int state;//审核状态 1 拒绝 0 通过
 
     private String share_content;// 分享内容
 
@@ -38,6 +41,9 @@ public class BookInfo implements Parcelable {
     private String time;// 日期 2018-03-07
 
     private List<String> answer_list;
+
+    private String cover_id;//临时书本id
+    private String answer_img;
 
     public String getId() {
         return id;
@@ -215,6 +221,30 @@ public class BookInfo implements Parcelable {
         this.answer_list = answer_list;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getCover_id() {
+        return cover_id;
+    }
+
+    public void setCover_id(String cover_id) {
+        this.cover_id = cover_id;
+    }
+
+    public String getAnswer_img() {
+        return answer_img;
+    }
+
+    public void setAnswer_img(String answer_img) {
+        this.answer_img = answer_img;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -239,7 +269,7 @@ public class BookInfo implements Parcelable {
         dest.writeString(this.pv_num);
         dest.writeInt(this.access);
         dest.writeInt(this.favorite);
-
+        dest.writeInt(state);
         dest.writeString(this.share_content);
         dest.writeString(this.author);
         dest.writeString(this.time);
@@ -267,6 +297,7 @@ public class BookInfo implements Parcelable {
         this.pv_num = in.readString();
         this.access = in.readInt();
         this.favorite = in.readInt();
+        this.state = in.readInt();
         in.readList(this.flag, VersionDetailInfo.class.getClassLoader());
         this.share_content = in.readString();
         this.author = in.readString();
@@ -285,4 +316,33 @@ public class BookInfo implements Parcelable {
             return new BookInfo[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "BookInfo{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", cover_img='" + cover_img + '\'' +
+                ", year='" + year + '\'' +
+                ", version='" + version + '\'' +
+                ", period='" + period + '\'' +
+                ", part_type='" + part_type + '\'' +
+                ", grade='" + grade + '\'' +
+                ", subject='" + subject + '\'' +
+                ", press='" + press + '\'' +
+                ", code='" + code + '\'' +
+                ", is_del=" + is_del +
+                ", sort='" + sort + '\'' +
+                ", share_num='" + share_num + '\'' +
+                ", pv_num='" + pv_num + '\'' +
+                ", access=" + access +
+                ", favorite=" + favorite +
+                ", flag=" + flag +
+                ", state=" + state +
+                ", share_content='" + share_content + '\'' +
+                ", author='" + author + '\'' +
+                ", time='" + time + '\'' +
+                ", answer_list=" + answer_list +
+                '}';
+    }
 }

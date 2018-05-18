@@ -16,4 +16,6 @@ public class BusAction {
     public static final String DOWNLOAD = "download";
 
     public static final String SHARE_SUCCESS = "share_success";
+
+    public static final String FINISH = "finish";
 }

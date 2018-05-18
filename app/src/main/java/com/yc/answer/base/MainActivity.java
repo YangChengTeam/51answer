@@ -24,6 +24,7 @@ import com.yc.answer.R;
 import com.yc.answer.collect.ui.fragment.CollectFragment;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.index.ui.activity.ScanTintActivity;
+import com.yc.answer.index.ui.fragment.IndexFragment;
 import com.yc.answer.index.ui.fragment.IndexFragmentNew;
 import com.yc.answer.setting.ui.fragment.MyFragment;
 import com.yc.answer.utils.ActivityScanHelper;
@@ -106,16 +107,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         applyPermission();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
-            mIvCodeTint.setVisibility(View.VISIBLE);
-            RxSPTool.putBoolean(this, SpConstant.IS_FIRST_OPEN, true);
-        } else {
-            mIvCodeTint.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -125,11 +116,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void onPageSelected(int position) {
         mainBottomNavigationBar.selectTab(position);
-        if (position == 2) {
-            floatingActionButton.setVisibility(View.GONE);
-        } else {
-            floatingActionButton.setVisibility(View.VISIBLE);
-        }
+//        if (position == 2) {
+//            floatingActionButton.setVisibility(View.GONE);
+//        } else {
+//            floatingActionButton.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override
@@ -140,11 +131,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void onTabSelected(int position) {
         mMainViewPager.setCurrentItem(position);
-        if (position == 2) {
-            floatingActionButton.setVisibility(View.GONE);
-        } else {
-            floatingActionButton.setVisibility(View.VISIBLE);
-        }
+//        if (position == 2) {
+//            floatingActionButton.setVisibility(View.GONE);
+//        } else {
+//            floatingActionButton.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override

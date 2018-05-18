@@ -10,6 +10,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yc.answer.R;
 import com.yc.answer.index.model.bean.BookInfo;
+import com.yc.answer.utils.GlideHelper;
+import com.yc.answer.utils.SubjectHelper;
 
 import java.util.List;
 
@@ -24,9 +26,9 @@ public class IndexBookAdapter extends BaseQuickAdapter<BookInfo, BaseViewHolder>
 
     @Override
     protected void convert(BaseViewHolder helper, BookInfo item) {
-        helper.setText(R.id.tv_book_name, item.getName());
-        Glide.with(mContext).load(item.getCover_img()).apply(new RequestOptions()
-                .placeholder(R.mipmap.small_placeholder).error(R.mipmap.small_placeholder).centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true)).into((ImageView) helper.getView(R.id.iv_book));
+        helper.setText(R.id.tv_book_name, "        " + item.getName());
+        GlideHelper.loadImage(mContext, item.getCover_img(), (ImageView) helper.getView(R.id.iv_book));
+
+        SubjectHelper.setSubject(helper, item, R.id.iv_grade_tag);
     }
 }

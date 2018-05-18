@@ -22,7 +22,9 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"
-            android:padding="@dimen/distance_10">
+            android:paddingBottom="@dimen/t10dp"
+            android:paddingLeft="@dimen/t12dp"
+            android:paddingTop="@dimen/t10dp">
 
             <TextView
                 android:id="@+id/tv_collect_count"

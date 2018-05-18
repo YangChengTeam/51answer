@@ -17,6 +17,7 @@ import com.yc.answer.R;
 import com.yc.answer.index.model.bean.BookInfo;
 import com.yc.answer.index.model.bean.VersionDetailInfo;
 import com.yc.answer.index.ui.widget.MyRecyclerView;
+import com.yc.answer.utils.SubjectHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,25 +33,29 @@ public class SearchResultItemAdapter extends BaseQuickAdapter<BookInfo, BaseView
 
     @Override
     protected void convert(BaseViewHolder helper, BookInfo item) {
-        helper.setText(R.id.tv_book_title, item.getName()).setText(R.id.tv_author, item.getAuthor())
-                .setText(R.id.tv_time, item.getTime());
+        helper.setText(R.id.tv_book_title, item.getName()).setText(R.id.tv_grade, item.getGrade())
+                .setText(R.id.tv_part, item.getPart_type()).setText(R.id.tv_version, item.getVersion()).addOnClickListener(R.id.tv_collect);
+        helper.setBackgroundRes(R.id.tv_collect, item.getFavorite() == 1 ? R.drawable.book_collect_gray_bg : R.drawable.book_collect_red_bg);
+        helper.setText(R.id.tv_collect, item.getFavorite() == 1 ? "已收藏" : "收藏");
 
         Glide.with(mContext).load(item.getCover_img()).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
-                .skipMemoryCache(true).error(R.mipmap.small_placeholder).dontAnimate()).thumbnail(0.1f).into((ImageView) helper.getView(R.id.iv_book));
+                .skipMemoryCache(true).centerCrop().error(R.mipmap.small_placeholder).dontAnimate()).thumbnail(0.1f).into((ImageView) helper.getView(R.id.iv_book));
+
+        SubjectHelper.setSubject(helper, item, R.id.iv_subject);
 
 
-        List<VersionDetailInfo> flag = item.getFlag();
-        if (flag == null || flag.size() == 0) {
-            flag = new ArrayList<>();
-            flag.add(new VersionDetailInfo("", item.getVersion()));
-        }
-
-        MyRecyclerView recyclerView = helper.getView(R.id.tag_recyclerView);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-
-        DetailFlagAdapter detailFlagAdapter = new DetailFlagAdapter(flag, false);
-        recyclerView.setAdapter(detailFlagAdapter);
+//        List<VersionDetailInfo> flag = item.getFlag();
+//        if (flag == null || flag.size() == 0) {
+//            flag = new ArrayList<>();
+//            flag.add(new VersionDetailInfo("", item.getVersion()));
+//        }
+//
+//        MyRecyclerView recyclerView = helper.getView(R.id.tag_recyclerView);
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+//
+//        DetailFlagAdapter detailFlagAdapter = new DetailFlagAdapter(flag, false);
+//        recyclerView.setAdapter(detailFlagAdapter);
 
     }
 

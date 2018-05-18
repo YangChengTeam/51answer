@@ -5,41 +5,97 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/t100dp">
 
         <ImageView
             android:id="@+id/iv_book"
-            android:layout_width="73dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/t73dp"
+            android:layout_height="@dimen/t90dp"
+            android:layout_centerVertical="true"
             android:layout_gravity="center" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/t30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/book_collect_red_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/distance_15"
+            android:paddingRight="@dimen/distance_15"
+            android:text="@string/main_collect"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="@dimen/t90dp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/distance_15"
+            android:layout_marginRight="@dimen/distance_10"
+            android:layout_toLeftOf="@id/tv_collect"
+            android:layout_toRightOf="@id/iv_book"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_book_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_16" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_10"
+
+                    android:textSize="@dimen/t12sp" />
+
+                <TextView
+                    android:id="@+id/tv_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/t12sp" />
+
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_10"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textSize="@dimen/t12sp" />
+
+            </LinearLayout>
+
 
             <com.yc.answer.index.ui.widget.MyRecyclerView
                 android:id="@+id/tag_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_5" />
+                android:layout_marginTop="@dimen/distance_5"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_5">
+                android:layout_marginTop="@dimen/distance_15"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_author"
@@ -54,19 +110,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:visibility="gone"
                     tools:text="2018-03-10" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/distance_05"
         android:layout_marginBottom="@dimen/distance_5"
         android:layout_marginTop="@dimen/distance_5"
-        android:background="@color/gray_tint_555555" />
+        android:background="@color/gray_cccccc" />
 </LinearLayout>

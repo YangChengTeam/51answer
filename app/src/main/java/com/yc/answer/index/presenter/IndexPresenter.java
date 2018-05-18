@@ -1,10 +1,12 @@
 package com.yc.answer.index.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.alibaba.fastjson.TypeReference;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.index.contract.IndexContract;
 import com.yc.answer.index.model.bean.BookInfo;
@@ -172,7 +174,11 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
     }
 
 
-    public void getHotBooks(String flag_id) {//1: 推荐；2: 热门
+    public void getHotBooks() {//1: 推荐；2: 热门
+        String grade = RxSPTool.getString(mContext, SpConstant.SELECT_GRADE);
+//        if (TextUtils.isEmpty(grage)) {
+//            grage = "全部";
+//        }
 
         CommonInfoHelper.getO(mContext, SpConstant.HOT_BOOK, new TypeReference<List<BookInfo>>() {
         }.getType(), new CommonInfoHelper.onParseListener<List<BookInfo>>() {
@@ -189,7 +195,7 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
             }
         });
 
-        Subscription subscription = EngineUtils.getBookInfoList(mContext, 1, 2, "", "", "", "", "", "", "", "", "", "", flag_id, "", "", "").subscribe(new Subscriber<ResultInfo<BookInfoWrapper>>() {
+        Subscription subscription = EngineUtils.getBookInfoList(mContext, 1, 4, "", "", "", grade, "", "", "", "", "", "", "", "", "", "").subscribe(new Subscriber<ResultInfo<BookInfoWrapper>>() {
             @Override
             public void onCompleted() {
 

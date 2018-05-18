@@ -20,6 +20,7 @@ import com.yc.answer.constant.SpConstant;
 import com.yc.answer.index.ui.widget.SelectGradeView;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -76,7 +77,7 @@ public class SplashActivity extends BaseActivity {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        }, 500);
+        }, 1000);
     }
 
     private void initListener() {
@@ -95,10 +96,19 @@ public class SplashActivity extends BaseActivity {
             llSelectGrade.setLayoutParams(params);
         }
 
-        smallGradeView.setContents(Arrays.asList(getResources().getStringArray(R.array.small_grade)));
+        final List<String> smallGrades = Arrays.asList(getResources().getStringArray(R.array.small_grade));
+        smallGradeView.setContents(smallGrades);
         middleGradeView.setContents(Arrays.asList(getResources().getStringArray(R.array.middle_grade)));
         seniorGradeView.setContents(Arrays.asList(getResources().getStringArray(R.array.senior_grade)));
 
+//        smallGradeView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                smallGradeView.click(0);
+//                RxSPTool.putString(SplashActivity.this, SpConstant.SELECT_GRADE, smallGrades.get(0));
+//                switchActivity();
+//            }
+//        });
         setSelectState(smallGradeView);
         setSelectState(middleGradeView);
         setSelectState(seniorGradeView);
@@ -109,11 +119,12 @@ public class SplashActivity extends BaseActivity {
     private void setSelectState(final SelectGradeView view) {
         view.setOnSelectGradeListener(new SelectGradeView.OnSelectGradeListener() {
             @Override
-            public void onSelect(int position) {
+            public void onSelect(int position, String data) {
                 middleGradeView.clearSelect();
                 seniorGradeView.clearSelect();
                 smallGradeView.clearSelect();
                 view.click(position);
+                RxSPTool.putString(SplashActivity.this, SpConstant.SELECT_GRADE, data);
                 switchActivity();
             }
         });

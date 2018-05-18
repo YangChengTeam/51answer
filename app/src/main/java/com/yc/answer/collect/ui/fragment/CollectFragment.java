@@ -77,7 +77,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         collectRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         indexBookAdapter = new IndexBookAdapter(null);
         collectRecyclerView.setAdapter(indexBookAdapter);
-        collectRecyclerView.addItemDecoration(new MyDecoration(20));
+        collectRecyclerView.addItemDecoration(new MyDecoration(10, 10));
 
         initListener();
         initRefresh();

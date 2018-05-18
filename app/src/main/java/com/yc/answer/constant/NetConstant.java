@@ -45,7 +45,7 @@ public interface NetConstant {
     /**
      * 设置用户名
      */
-    String user_username_url =BaseNetConstant.getBaseUrl() + "user/username";
+    String user_username_url = BaseNetConstant.getBaseUrl() + "user/username";
     /**
      * 修改手机
      */
@@ -59,7 +59,7 @@ public interface NetConstant {
     /**
      * 第三方登录
      */
-    String user_sns_url = BaseNetConstant.getBaseUrl()+ "user/sns";
+    String user_sns_url = BaseNetConstant.getBaseUrl() + "user/sns";
 
     /**
      * 书本版本列表
@@ -108,4 +108,21 @@ public interface NetConstant {
      * 搜索下拉
      */
     String book_tip_url = BaseNetConstant.getBaseUrl() + "book/tip";
+
+    /**
+     * 阿里云获取AccessKeyId SecretKeyId SecurityToken
+     */
+    String oss_api_url = "http://answer.bshu.com/api/ali_oss/osstmpkey";
+
+    String user_img_upload_book_url = BaseNetConstant.getBaseUrl() + "user_img/upload_book";
+
+    /**
+     * 上传新书的列表
+     */
+    String upload_list_url = BaseNetConstant.getBaseUrl() + "user_img/check_list";
+
+    /**
+     * 用户反馈
+     */
+    String user_img_feedback_url = BaseNetConstant.getBaseUrl() + "user_img/feedback";
 }

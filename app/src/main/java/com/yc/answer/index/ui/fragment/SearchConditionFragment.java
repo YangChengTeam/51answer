@@ -14,6 +14,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.yc.answer.R;
 import com.yc.answer.base.StateView;
 import com.yc.answer.index.contract.BookConditionContract;
+import com.yc.answer.index.model.bean.BookInfo;
 import com.yc.answer.index.presenter.BookConditionPresenter;
 import com.yc.answer.index.ui.activity.SearchActivity;
 import com.yc.answer.index.ui.adapter.SearchItemAdapter;
@@ -47,18 +48,12 @@ public class SearchConditionFragment extends BaseFragment<BookConditionPresenter
 
     private SearchItemAdapter hotItemAdapter;
     private SearchItemAdapter historyItemAdapter;
-    private SearchActivity searchActivity;
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_search_condition;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        searchActivity = ((SearchActivity) context);
-    }
 
     @Override
     public void init() {
@@ -78,7 +73,7 @@ public class SearchConditionFragment extends BaseFragment<BookConditionPresenter
 
                 String data = (String) adapter.getItem(position);
                 SearchHistoryHelper.saveHistoryList(data);
-                ((SearchActivity) getActivity()).replaceFragment(1, data, "", "", "", "","");
+                ((SearchActivity) getActivity()).replaceFragment(1, data, "", "", "", "", "");
             }
         });
 
@@ -87,7 +82,7 @@ public class SearchConditionFragment extends BaseFragment<BookConditionPresenter
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = (String) adapter.getItem(position);
                 SearchHistoryHelper.saveHistoryList(data);
-                ((SearchActivity) getActivity()).replaceFragment(1, data, "", "", "", "","");
+                ((SearchActivity) getActivity()).replaceFragment(1, data, "", "", "", "", "");
             }
         });
 
@@ -127,6 +122,17 @@ public class SearchConditionFragment extends BaseFragment<BookConditionPresenter
     public void showConditionList(List<String> data) {
         hotItemAdapter.setNewData(data);
     }
+
+    @Override
+    public void showBookInfoList(List<BookInfo> lists) {
+
+    }
+
+    @Override
+    public void showFavoriteResult(boolean isCollect) {
+
+    }
+
 
     private void setHistoryList() {
         historyItemAdapter.setNewData(SearchHistoryHelper.getHistoryList());

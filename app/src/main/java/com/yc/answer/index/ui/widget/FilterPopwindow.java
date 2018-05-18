@@ -95,13 +95,13 @@ public class FilterPopwindow extends BasePopwindow {
                 gradeDetailInfo = gradeList.get(0);
                 patrDetailInfo = partList.get(0);
                 versionDetailInfo = versionList.get(0);
-                subjectFilterItemAdapter = new FilterItemDetailAdapter(subjectList);
+                subjectFilterItemAdapter = new FilterItemDetailAdapter(subjectList, "");
 
-                gradeFilterItemAdapter = new FilterItemDetailAdapter(gradeList);
+                gradeFilterItemAdapter = new FilterItemDetailAdapter(gradeList, "");
 
-                patrFilterItemAdapter = new FilterItemDetailAdapter(partList);
+                patrFilterItemAdapter = new FilterItemDetailAdapter(partList, "");
 
-                versionFilterItemAdapter = new FilterItemDetailAdapter(versionList);
+                versionFilterItemAdapter = new FilterItemDetailAdapter(versionList, "");
 
                 subjectRecyclerView.setAdapter(subjectFilterItemAdapter);
                 gradeRecyclerView.setAdapter(gradeFilterItemAdapter);

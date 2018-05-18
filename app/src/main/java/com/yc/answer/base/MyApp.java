@@ -1,5 +1,6 @@
 package com.yc.answer.base;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.support.multidex.MultiDexApplication;
 
@@ -13,14 +14,24 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxTool;
+import com.yc.answer.R;
+import com.yc.answer.index.listener.GlidePauseOnScrollListener;
+import com.yc.answer.index.ui.widget.GlideImageLoader;
 import com.yc.answer.utils.UserInfoHelper;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
+import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ImageLoader;
+import cn.finalteam.galleryfinal.ThemeConfig;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+
+import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Created by wanglin  on 2018/2/27 11:15.
@@ -35,6 +46,7 @@ public class MyApp extends MultiDexApplication {
             @Override
             public void call(String s) {
                 init();
+                initGalleryFinal();
             }
         });
 
@@ -81,5 +93,37 @@ public class MyApp extends MultiDexApplication {
 
     public static String getSV() {
         return Build.MODEL.contains(Build.BRAND) ? Build.MODEL + " " + Build.VERSION.RELEASE : Build.BRAND + " " + Build.MODEL + " " + Build.VERSION.RELEASE;
+    }
+
+    private void initGalleryFinal() {
+
+        ThemeConfig theme = new ThemeConfig.Builder()
+                .setTitleBarBgColor(Color.rgb(228,50,50))//标题栏背景颜色
+                .setFabNornalColor(Color.rgb(228,50,50))//确定按钮Noimal状态
+                .setFabPressedColor(Color.rgb(228,60,60))//确定按钮Pressed状态
+                .setCheckNornalColor(Color.rgb(204, 204, 204))
+                .setCheckSelectedColor(Color.rgb(228,50,50))//选择框选中颜色
+                .setIconBack(R.mipmap.back)//返回按钮
+                .build();
+        //初始化图片选择器
+        FunctionConfig functionConfig = new FunctionConfig.Builder()
+                .setEnablePreview(true)//是否开启预览功能
+                .setEnableEdit(true)//开启编辑功能
+                .setEnableCrop(true)//开启裁剪功能
+                .setEnableCamera(true)//开启相机功能
+                .setCropWidth(getResources().getDisplayMetrics().widthPixels)
+                .setCropHeight(getResources().getDisplayMetrics().widthPixels)
+                .build();
+
+        GlideImageLoader imageloader = new GlideImageLoader();
+
+        //配置imageloader
+        CoreConfig coreConfig = new CoreConfig.Builder(this, imageloader, theme)
+                .setFunctionConfig(functionConfig)
+                .setPauseOnScrollListener(new GlidePauseOnScrollListener(false, true))
+                .build();
+
+        GalleryFinal.init(coreConfig);
+        //设置主题
     }
 }

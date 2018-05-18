@@ -23,6 +23,10 @@
     <dimen name="distance_50">50dp</dimen>
     <dimen name="distance_2">2dp</dimen>
     <dimen name="distance_40">40dp</dimen>
+    <!--73dp-->
+    <dimen name="book_width">90dp</dimen>
+    <!--90dp-->
+    <dimen name="book_height">120dp</dimen>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.yc.answer.index.ui.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -9,7 +10,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
+import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.R;
+import com.yc.answer.base.MainActivity;
+import com.yc.answer.constant.SpConstant;
+import com.yc.answer.index.ui.activity.ScanTintActivity;
 import com.yc.answer.utils.ActivityScanHelper;
 
 import java.util.concurrent.TimeUnit;

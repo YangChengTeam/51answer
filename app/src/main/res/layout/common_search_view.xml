@@ -19,19 +19,18 @@
             android:id="@+id/iv_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/search"
-            android:tint="@color/red_f14343" />
+            android:src="@mipmap/search" />
 
         <TextView
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/distance_5"
-            android:layout_toLeftOf="@id/iv_search"
+            android:layout_marginLeft="@dimen/distance_5"
+            android:layout_toRightOf="@id/iv_search"
             android:text="@string/input_book_name"
+            android:textColor="@color/gray_aaa"
             android:textSize="@dimen/text_16" />
 
 
@@ -41,8 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/scan_black"
-            android:visibility="gone" />
+            android:src="@mipmap/scan_black" />
     </RelativeLayout>
 
     <TextView

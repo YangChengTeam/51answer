@@ -7,4 +7,5 @@ package com.yc.answer.setting.model.bean;
 public class UploadInfo {
     public String path;
     public String url;
+
 }

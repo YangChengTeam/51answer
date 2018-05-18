@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
@@ -82,8 +83,11 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     @BindView(R.id.tv_share)
     TextView tvShare;
+
     @BindView(R.id.ll_container)
     RelativeLayout llContainer;
+    @BindView(R.id.ll_common_container)
+    LinearLayout llCommonContainer;
     private BookInfo bookInfo;
 
 
@@ -274,13 +278,15 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
                 llTopGuide.setVisibility(isClick ? View.INVISIBLE : View.VISIBLE);
                 llBottom.setVisibility(isClick ? View.INVISIBLE : View.VISIBLE);
-
+                llContainer.setBackgroundColor(ContextCompat.getColor(AnswerDetailActivity.this, R.color.white));
             }
 
             @Override
             public void onViewDoubleClick(boolean isClick) {
                 llTopGuide.setVisibility(isClick ? View.GONE : View.VISIBLE);
                 llBottom.setVisibility(isClick ? View.GONE : View.VISIBLE);
+                llCommonContainer.setVisibility(isClick ? View.GONE : View.VISIBLE);
+                llContainer.setBackgroundColor(ContextCompat.getColor(AnswerDetailActivity.this, R.color.black));
             }
 
         });

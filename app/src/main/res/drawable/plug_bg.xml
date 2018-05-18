@@ -4,5 +4,4 @@
     <stroke
         android:width="@dimen/distance_1"
         android:color="#CECECE" />
-
 </shape>

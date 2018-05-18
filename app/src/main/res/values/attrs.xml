@@ -20,6 +20,8 @@
     </declare-styleable>
 
     <declare-styleable name="SelectGradeView">
-        <attr name="select_name" format="string"/>
+        <attr name="select_name" format="string" />
+        <attr name="select_name_color" format="color" />
+        <attr name="select_margin_top" format="dimension" />
     </declare-styleable>
 </resources>

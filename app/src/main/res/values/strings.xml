@@ -15,9 +15,10 @@
     <string name="main_collect">收藏</string>
     <string name="main_my">我的</string>
     <string name="register">注册</string>
-    <string name="input_book_name">请输入书本名称看答案</string>
-    <string name="filrate">筛选</string>
-    <string name="subject">科目</string>
+    <string name="input_book_name">请输入书籍相关名称</string>
+    <string name="input_book">请填写书本名称</string>
+    <string name="filrate">书名搜索</string>
+    <string name="subject">学科</string>
     <string name="grade">年级</string>
     <string name="part">上下册</string>
     <string name="reset">返回</string>
@@ -67,6 +68,22 @@
     <string name="shared">已分享</string>
     <string name="statement">免责声明</string>
     <string name="skip">跳过</string>
+    <string name="upload_answer">上传答案</string>
+    <string name="q">(马上得Q币)</string>
+    <string name="feedback">反馈</string>
+    <string name="photo_book_tint">拍照时要保证书本拍全，还要拍清楚哦！</string>
+    <string name="photo_answer_tint">拍照时要保证答案文字清晰，页面完整哦！</string>
+    <string name="sample_cover">示范封面</string>
+    <string name="your_cover">你的封面</string>
+    <string name="next">下一步</string>
+    <string name="down">完成</string>
+    <string name="upload_book">上传新书</string>
+    <string name="book_info">书籍信息</string>
+    <string name="small_school">小学</string>
+    <string name="middle_school">初中</string>
+    <string name="high_school">高中</string>
+    <string name="forword_explain">奖励须知</string>
+
     <string-array name="small_grade">
         <item>一年级</item>
         <item>二年级</item>
@@ -85,5 +102,9 @@
         <item>高一</item>
         <item>高二</item>
         <item>高三</item>
+    </string-array>
+    <string-array name="photo_item">
+        <item>相册</item>
+        <item>拍照</item>
     </string-array>
 </resources>
