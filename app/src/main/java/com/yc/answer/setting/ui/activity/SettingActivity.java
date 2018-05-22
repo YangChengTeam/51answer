@@ -2,7 +2,9 @@ package com.yc.answer.setting.ui.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -77,6 +79,9 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
         baseSettingViewVersion.setExtraText(RxAppTool.getAppVersionName(this));
 
         updateInfo(UserInfoHelper.getUserInfo());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            btnLogout.setBackgroundResource(R.drawable.btn_ripper_bg);
+        }
 
         initListener();
     }

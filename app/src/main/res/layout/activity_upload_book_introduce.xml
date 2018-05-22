@@ -66,6 +66,7 @@
                 android:layout_marginRight="@dimen/dp_10">
 
                 <Button
+                    android:id="@+id/btn_share"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/t40dp"
                     android:layout_marginRight="@dimen/distance_5"
@@ -75,6 +76,7 @@
                     android:textColor="@color/white" />
 
                 <Button
+                    android:id="@+id/btn_upload"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/t40dp"
                     android:layout_marginLeft="@dimen/distance_5"

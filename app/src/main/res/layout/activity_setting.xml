@@ -82,8 +82,8 @@
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/white"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/btn_ripper_bg"
                 android:text="@string/logout"
                 android:textColor="@color/red_f14343"
                 android:textSize="@dimen/text_16" />

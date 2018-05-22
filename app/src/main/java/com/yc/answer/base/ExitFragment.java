@@ -58,7 +58,7 @@ public class ExitFragment extends BaseDialogFragment {
 
     @Override
     protected float getWidth() {
-        return 0.7f;
+        return 0.8f;
     }
 
     @Override
