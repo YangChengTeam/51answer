@@ -24,4 +24,21 @@
         <attr name="select_name_color" format="color" />
         <attr name="select_margin_top" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="StateView">
+        <attr name="gravity" format="enum">
+            <enum name="Top" value="1" />
+            <enum name="Left" value="2" />
+            <enum name="Right" value="3" />
+            <enum name="Bottom" value="4" />
+            <enum name="Center" value="5" />
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="IncomeView">
+        <attr name="pic" format="reference" />
+        <attr name="name" format="string" />
+        <attr name="nameSize" format="dimension" />
+    </declare-styleable>
 </resources>

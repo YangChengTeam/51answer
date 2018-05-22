@@ -1,12 +1,10 @@
 package com.yc.answer.index.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -24,7 +22,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
@@ -58,7 +55,7 @@ public class UploadBookListActivity extends BaseActivity<UploadBookListPresenter
     @Override
     public void init() {
         commonTvTitle.setText(getString(R.string.all));
-        tvOk.setText(getString(R.string.forword_explain));
+        tvOk.setText(getString(R.string.forward_explain));
         tvOk.setVisibility(View.VISIBLE);
         mPresenter = new UploadBookListPresenter(this, this);
         RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {

@@ -128,7 +128,7 @@ public class UploadBookActivity extends BaseActivity<UploadPresenter> implements
                     Uri resultUri = UCrop.getOutput(data);
                     path = RxPhotoTool.getImageAbsolutePath(UploadBookActivity.this, resultUri);
                     mPresenter.getOssInfo(path, "cover", "");
-//                    GlideImageLoader.loadImage(UploadBookActivity.this, path, ivYourCover, R.mipmap.add_cover);
+//                    GlideImageLoader.loadImage(UploadBookIntroduceActivity.this, path, ivYourCover, R.mipmap.add_cover);
                 }
                 break;
         }

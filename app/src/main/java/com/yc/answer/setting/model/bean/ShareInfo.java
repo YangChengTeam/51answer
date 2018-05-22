@@ -1,5 +1,6 @@
 package com.yc.answer.setting.model.bean;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,6 +14,7 @@ public class ShareInfo implements Parcelable {
     private String content;
     private String img;// 分享图片;
     private String book_id;
+    private Bitmap bitmap;
 
     public String getUrl() {
         return url;
@@ -54,6 +56,14 @@ public class ShareInfo implements Parcelable {
         this.book_id = book_id;
     }
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
 
     @Override
     public int describeContents() {
@@ -67,6 +77,7 @@ public class ShareInfo implements Parcelable {
         dest.writeString(this.content);
         dest.writeString(this.img);
         dest.writeString(this.book_id);
+        dest.writeParcelable(this.bitmap, flags);
     }
 
     public ShareInfo() {
@@ -78,9 +89,10 @@ public class ShareInfo implements Parcelable {
         this.content = in.readString();
         this.img = in.readString();
         this.book_id = in.readString();
+        this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<ShareInfo> CREATOR = new Parcelable.Creator<ShareInfo>() {
+    public static final Creator<ShareInfo> CREATOR = new Creator<ShareInfo>() {
         @Override
         public ShareInfo createFromParcel(Parcel source) {
             return new ShareInfo(source);

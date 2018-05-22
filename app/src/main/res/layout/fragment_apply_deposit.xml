@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/search_white_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_40">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不足5Q币，无法提现"
+        android:textColor="@color/black"
+        android:textSize="@dimen/t16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="先取完成任务再来吧!"
+        android:textColor="@color/black"
+        android:textSize="@dimen/t16sp" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/distance_20"
+        android:background="@drawable/common_cirlce_deposit_red_bg"
+        android:gravity="center"
+        android:text="点 击 完 成"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>

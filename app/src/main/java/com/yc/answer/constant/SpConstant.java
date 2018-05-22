@@ -16,8 +16,6 @@ public class SpConstant {
 
     public static final String SLIDE_INFO = "slide_info";
 
-    public static final String ANSWER_DETAIL_POSITION = "answer_detail_position";
-
     public static final String IS_FIRST_OPEN = "is_first_open";
 
     public static final String HOT_BOOK = "hot_book";
@@ -41,4 +39,8 @@ public class SpConstant {
     public static final String BOOK_GRADE = "book_grade";
 
     public static final String BOOK_SUBJECT = "book_subject";
+
+    public static final String OPEN_MARKET = "open_market";
+
+    public static final String SHARE_SUCCESS = "share_success";
 }

@@ -136,11 +136,27 @@
             android:name=".index.ui.activity.SearchCodeActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.ui.activity.InvitationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.ui.activity.EarningsDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.ui.activity.InvitationFriendActicity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.ui.activity.UploadBookIntroduceActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

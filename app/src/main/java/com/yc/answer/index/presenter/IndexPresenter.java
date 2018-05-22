@@ -195,7 +195,7 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
             }
         });
 
-        Subscription subscription = EngineUtils.getBookInfoList(mContext, 1, 4, "", "", "", grade, "", "", "", "", "", "", "", "", "", "").subscribe(new Subscriber<ResultInfo<BookInfoWrapper>>() {
+        Subscription subscription = EngineUtils.getBookInfoList(mContext, 1, 3, "", "", "", grade, "", "", "", "", "", "", "", "", "", "").subscribe(new Subscriber<ResultInfo<BookInfoWrapper>>() {
             @Override
             public void onCompleted() {
 

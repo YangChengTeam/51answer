@@ -57,10 +57,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     BaseSearchView baseSearchView;
     @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
-    @BindView(R.id.baseBookView_first)
-    BaseBookView baseBookViewFirst;
-    @BindView(R.id.baseBookView_second)
-    BaseBookView baseBookViewSecond;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.ll_filter)
@@ -88,7 +85,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         mPresenter = new IndexPresenter(getActivity(), this);
 
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         hotItemAdapter = new IndexBookAdapter(null);
         recyclerView.setAdapter(hotItemAdapter);
 

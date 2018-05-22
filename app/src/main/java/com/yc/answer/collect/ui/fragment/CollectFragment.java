@@ -47,8 +47,6 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     TextView tvCollectCount;
     @BindView(R.id.stateView)
     StateView stateView;
-    @BindView(R.id.ll_container)
-    LinearLayout llContainer;
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.common_tv_title)
@@ -74,7 +72,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         ivBack.setVisibility(View.GONE);
         commonTvTitle.setText("我的收藏");
 
-        collectRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        collectRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         indexBookAdapter = new IndexBookAdapter(null);
         collectRecyclerView.setAdapter(indexBookAdapter);
         collectRecyclerView.addItemDecoration(new MyDecoration(10, 10));

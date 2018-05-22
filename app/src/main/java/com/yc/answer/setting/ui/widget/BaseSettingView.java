@@ -92,6 +92,10 @@ public class BaseSettingView extends BaseView {
         this.extraText = text;
     }
 
+    public void setExtraColor(int extraColor){
+        tvExtra.setTextColor(extraColor);
+    }
+
     public String getExtraText() {
         return extraText;
     }

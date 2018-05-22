@@ -1,6 +1,5 @@
 package com.yc.answer.setting.ui.activity;
 
-import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,7 +9,6 @@ import com.yc.answer.R;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 

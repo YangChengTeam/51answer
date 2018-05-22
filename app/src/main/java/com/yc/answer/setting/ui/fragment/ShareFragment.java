@@ -10,7 +10,9 @@ import com.kk.share.UMShareImpl;
 import com.kk.utils.LogUtil;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.R;
+import com.yc.answer.constant.SpConstant;
 import com.yc.answer.setting.contract.ShareContract;
 import com.yc.answer.setting.model.bean.ShareInfo;
 import com.yc.answer.setting.presenter.SharePresenter;
@@ -89,9 +91,7 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
 
             loadingView.dismiss();
             ToastUtils.showCenterToast(mContext, "分享成功");
-//            if (onShareItemClickListener != null) {
-//                onShareItemClickListener.onShareSuccess();
-//            }
+            RxSPTool.putBoolean(mContext, SpConstant.SHARE_SUCCESS, true);
             if (mShareInfo != null && !TextUtils.isEmpty(mShareInfo.getBook_id())) {
                 mPresenter.share(mShareInfo.getBook_id());
             }
@@ -151,20 +151,10 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
 
     }
 
-    private OnShareItemClickListener onShareItemClickListener;
 
-    public OnShareItemClickListener getOnShareItemClickListener() {
-        return onShareItemClickListener;
-    }
+    @Override
+    public void showSuccess() {
 
-    public void setOnShareItemClickListener(OnShareItemClickListener onShareItemClickListener) {
-        this.onShareItemClickListener = onShareItemClickListener;
-    }
-
-    public interface OnShareItemClickListener {
-        void onClick(View view);
-
-        void onShareSuccess();
     }
 
 

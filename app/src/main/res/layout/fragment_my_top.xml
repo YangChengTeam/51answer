@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="270dp">
+    android:layout_height="250dp"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/toolbarWarpper"
@@ -24,31 +25,75 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:src="@mipmap/default_avatar" />
+                android:src="@mipmap/default_not_login" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_not_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_5"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/get_qq"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_login_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/t40dp"
+                        android:layout_marginTop="@dimen/distance_10"
+                        android:background="@drawable/login_corner_bg"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:text="@string/login_register"
+                        android:textColor="@color/red_f14343" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_15"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_ivatar"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_nickname"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@mipmap/small_phone"
+                        android:drawablePadding="@dimen/distance_5"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp"
+                        tools:text="13223546987" />
+
+                </LinearLayout>
+
+            </FrameLayout>
 
 
-            <TextView
-                android:id="@+id/tv_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_ivatar"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/distance_15"
-                android:textColor="#ffffff"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_nickname"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@mipmap/small_phone"
-                android:drawablePadding="@dimen/distance_5"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                tools:text="13223546987" />
         </LinearLayout>
     </FrameLayout>
 
@@ -56,7 +101,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/distance_10">
+        android:layout_marginBottom="@dimen/distance_10"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/ll_primary_school"
@@ -108,5 +154,30 @@
         </LinearLayout>
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom">
 
-</android.support.design.widget.CoordinatorLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0.00"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/t24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/look_detail"
+            android:textColor="@color/red_f14343" />
+    </RelativeLayout>
+
+
+</LinearLayout>

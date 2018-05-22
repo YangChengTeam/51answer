@@ -25,9 +25,10 @@ import com.yc.answer.index.presenter.AnswerDetailPresenter;
 import com.yc.answer.index.ui.adapter.AnswerDetailAdapter;
 import com.yc.answer.index.ui.fragment.AnswerTintFragment;
 import com.yc.answer.index.ui.fragment.DeleteTintFragment;
+import com.yc.answer.index.ui.fragment.ShareFragment;
 import com.yc.answer.setting.model.bean.ShareInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
-import com.yc.answer.setting.ui.fragment.ShareFragment;
+
 import com.yc.answer.utils.RxDownloadManager;
 import com.yc.answer.utils.ToastUtils;
 import com.yc.answer.utils.UserInfoHelper;
@@ -39,7 +40,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
@@ -201,13 +201,18 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             public void call(Void aVoid) {
                 if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
                     ShareFragment shareFragment = new ShareFragment();
-                    ShareInfo shareInfo = new ShareInfo();
-                    if (bookInfo != null) {
-                        shareInfo.setTitle(bookInfo.getName());
-                        shareInfo.setContent(bookInfo.getShare_content());
-                        shareInfo.setBook_id(bookId);
-                    }
-                    shareFragment.setShareInfo(shareInfo);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("bookInfo", bookInfo);
+
+                    shareFragment.setArguments(bundle);
+//                    ShareInfo shareInfo = new ShareInfo();
+//                    if (bookInfo != null) {
+//                        shareInfo.setTitle(bookInfo.getName());
+//                        shareInfo.setContent(bookInfo.getShare_content());
+//                        shareInfo.setBook_id(bookId);
+////                        shareInfo.setUrl(bookInfo.getCover_img());
+//                    }
+//                    shareFragment.setShareInfo(shareInfo);
                     shareFragment.show(getSupportFragmentManager(), null);
                 }
             }

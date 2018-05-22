@@ -49,6 +49,7 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
             public void onNext(ResultInfo<String> stringResultInfo) {
                 if (stringResultInfo != null && stringResultInfo.code == HttpConfig.STATUS_OK) {
                     RxBus.get().post(BusAction.SHARE_SUCCESS, "share_success");
+                    mView.showSuccess();
                 }
             }
         });

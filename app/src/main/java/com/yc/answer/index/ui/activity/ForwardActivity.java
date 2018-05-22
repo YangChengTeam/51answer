@@ -32,7 +32,7 @@ public class ForwardActivity extends BaseActivity {
     @Override
     public void init() {
 
-        commonTvTitle.setText(getString(R.string.forword_explain));
+        commonTvTitle.setText(getString(R.string.forward_explain));
         tvTips.setText("小技巧");
         RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override

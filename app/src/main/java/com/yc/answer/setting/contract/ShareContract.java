@@ -1,7 +1,5 @@
 package com.yc.answer.setting.contract;
 
-import com.yc.answer.setting.model.bean.ShareInfo;
-
 import yc.com.base.IPresenter;
 import yc.com.base.IView;
 
@@ -12,6 +10,8 @@ import yc.com.base.IView;
 public interface ShareContract {
 
     interface View extends IView {
+
+        void showSuccess();
 
     }
 

@@ -35,15 +35,8 @@
         <item name="android:windowExitAnimation">@anim/tdown</item>
     </style>
 
-    <declare-styleable name="StateView">
-        <attr name="gravity" format="enum">
-            <enum name="Top" value="1" />
-            <enum name="Left" value="2" />
-            <enum name="Right" value="3" />
-            <enum name="Bottom" value="4" />
-            <enum name="Center" value="5" />
-        </attr>
 
-    </declare-styleable>
+
+
 
 </resources>

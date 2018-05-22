@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
+        <!--     app:layout_scrollFlags="scroll|enterAlwaysCollapsed"-->
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -34,18 +35,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_f5f5f5"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/distance_10"
+
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10">
+
+                <com.yc.answer.setting.ui.widget.BaseIncomeView
+                    android:id="@+id/baseShareIncomeView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:name="分享赚钱"
+                    app:pic="@mipmap/share_income" />
+
+                <com.yc.answer.setting.ui.widget.BaseIncomeView
+                    android:id="@+id/baseReputationIncomeView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:name="好评赚钱"
+                    app:pic="@mipmap/reputation_income" />
+
+                <com.yc.answer.setting.ui.widget.BaseIncomeView
+                    android:id="@+id/baseInvitationIncomeView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:name="邀请码"
+                    app:pic="@mipmap/invitation_code" />
+
+                <com.yc.answer.setting.ui.widget.BaseIncomeView
+                    android:id="@+id/baseDepositIncomeView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:name="申请提现"
+                    app:pic="@mipmap/deposit" />
+
+            </LinearLayout>
 
             <com.yc.answer.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_wx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_10"
                 app:icon="@mipmap/setting_wx"
                 app:title="@string/care_wx_number" />
 
@@ -62,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/distance_10"
+                android:visibility="gone"
                 app:icon="@mipmap/setting_net"
                 app:title="@string/answer_net" />
 
@@ -78,7 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/distance_20"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/distance_15"
                 android:text="51答案免责声明" />
         </LinearLayout>
 
