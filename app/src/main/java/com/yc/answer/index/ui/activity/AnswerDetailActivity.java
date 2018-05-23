@@ -1,5 +1,6 @@
 package com.yc.answer.index.ui.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,7 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
+import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.R;
 import com.yc.answer.base.StateView;
@@ -457,5 +459,10 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         getData(true);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
 
 }

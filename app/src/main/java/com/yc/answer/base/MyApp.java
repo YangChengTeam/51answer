@@ -61,7 +61,8 @@ public class MyApp extends MultiDexApplication {
         UMGameAgent.setPlayerLevel(1);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         PlatformConfig.setWeixin("wxf80e368f5707d8ab", "a65d2fddc3571674ea037db01223e845");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setQQZone("1106835074", "pg67YjCG7F9O1LFn");
+
 //        Config.DEBUG = true;
         UMShareAPI.get(this);
 

@@ -144,6 +144,11 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         indexBookAdapter.loadMoreEnd();
     }
 
+    @Override
+    public void showTintInfo(String tint) {
+        stateView.showNoData(smartRefreshLayout, tint);
+    }
+
 
     public void getData(boolean isRefresh) {
 

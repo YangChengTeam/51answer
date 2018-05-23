@@ -19,6 +19,8 @@ public interface CollectContract {
         void showCollectList(BookInfoWrapper data);
 
         void showEnd();
+
+        void showTintInfo(String s);
     }
 
     interface Presenter extends IPresenter {

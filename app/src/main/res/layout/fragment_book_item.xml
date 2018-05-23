@@ -43,7 +43,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:lineSpacingExtra="@dimen/distance_5"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_12" />
         </FrameLayout>

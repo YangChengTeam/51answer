@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public abstract class BaseBottomSheetDialogFragment<P extends BasePresenter> ext
     public void onStart() {
         super.onStart();
         Window window = getDialog().getWindow();
+
         WindowManager.LayoutParams windowParams = window.getAttributes();
         //这里设置透明度
         windowParams.dimAmount = 0.5f;
@@ -51,6 +53,8 @@ public abstract class BaseBottomSheetDialogFragment<P extends BasePresenter> ext
         window.setAttributes(windowParams);
         window.setWindowAnimations(R.style.share_anim);
     }
+
+
 
 
     @Override

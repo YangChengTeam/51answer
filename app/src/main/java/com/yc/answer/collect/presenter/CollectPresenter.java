@@ -54,11 +54,13 @@ public class CollectPresenter extends BasePresenter<CollectEngine, CollectContra
                         mView.showCollectList(bookInfoWrapperResultInfo.data);
                     } else {
                         if (bookInfoWrapperResultInfo.code == HttpStatus.TOKEN_EXPIRED) {
-                            ToastUtils.showCenterToast(mContext, "请先登录");
+//                            ToastUtils.showCenterToast(mContext, "请先登录");
+                            mView.showTintInfo("查看已收藏书籍，需要先登录");
+                            return;
                         }
                         if (page == 1) {
                             mView.showNoData();
-                        }else {
+                        } else {
                             mView.showEnd();
                         }
 

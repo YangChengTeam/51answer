@@ -10,8 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -24,7 +24,6 @@ import com.yc.answer.R;
 import com.yc.answer.collect.ui.fragment.CollectFragment;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.index.ui.activity.ScanTintActivity;
-import com.yc.answer.index.ui.fragment.IndexFragment;
 import com.yc.answer.index.ui.fragment.IndexFragmentNew;
 import com.yc.answer.setting.ui.fragment.MyFragment;
 import com.yc.answer.utils.ActivityScanHelper;
@@ -39,6 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
+import yc.com.base.StatusBarUtil;
 
 
 public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener, BaseBottomView.onTabSelectedListener {
@@ -54,6 +54,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     ImageView mIvCodeTint;
     @BindView(R.id.main_base_bottom_view)
     BaseBottomView mainBaseBottomView;
+    @BindView(R.id.container)
+    RelativeLayout container;
     private List<Fragment> mList;
 
 
@@ -147,6 +149,12 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     }
 
+    /**
+     * Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,
+     * Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
+     * Manifest.permission.SET_DEBUG_APP,
+     * Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS
+     */
     private void applyPermission() {
         RxPermissionsTool.
                 with(this).
@@ -205,12 +213,17 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
 
-    private void initBottomView(){
+    private void initBottomView() {
         mainBaseBottomView.setTabSelectedListener(this);
     }
 
     @Override
     public void onTabSelect(int position) {
 
+    }
+
+    @Override
+    protected void setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
     }
 }

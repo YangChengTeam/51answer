@@ -53,6 +53,8 @@ android {
             keyPassword "123456"
         }
     }
+
+
 }
 
 dependencies {
@@ -99,3 +101,4 @@ dependencies {
 repositories {
     mavenCentral()
 }
+

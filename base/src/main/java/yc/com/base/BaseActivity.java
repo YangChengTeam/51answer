@@ -1,14 +1,9 @@
 package yc.com.base;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
@@ -16,6 +11,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.vondear.rxtools.RxLogTool;
 
 import butterknife.ButterKnife;
+import primary.answer.yc.com.base.R;
 
 /**
  * Created by wanglin  on 2018/3/6 10:14.
@@ -23,12 +19,12 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IView, IDialog {
 
+
     protected P mPresenter;
     protected BaseLoadingView baseLoadingView;
     protected Handler mHandler;
     private MyRunnable taskRunnable;
 
-    private int statusColor = Color.TRANSPARENT;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,22 +42,21 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         baseLoadingView = new BaseLoadingView(this);
         mHandler = new Handler();
         //顶部透明
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getStatusColor());
-        }
+        setStatusBar();
+        overridePendingTransition(R.anim.activity_enter, R.anim.activity_exit);
 
         init();
+    }
+
+    protected void setStatusBar() {
+        StatusBarUtil.setTranslucentForImageView(this, null);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
+
         MobclickAgent.onResume(this);
         if (EmptyUtils.isNotEmpty(mPresenter)) {
             mPresenter.subscribe();
@@ -132,13 +127,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
      */
     private int totalTime = 60;
 
-    public int getStatusColor() {
-        return statusColor;
-    }
-
-    public void setStatusColor(int statusColor) {
-        this.statusColor = statusColor;
-    }
 
     private class MyRunnable implements Runnable {
         TextView mTv;
@@ -175,4 +163,5 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 //        textView.setTextColor(CommonUtils.getColor(R.color.white));
 //        textView.setBackgroundResource(R.drawable.bg_btn_get_code_true);
     }
+
 }

@@ -10,7 +10,7 @@ public class BaseNetConstant {
 
     private static String DEBUG_URL = "http://";
 
-    private static String BASE_URL = "http://answer.bshu.com/v1/";
+    private static String BASE_URL = "https://answer.bshu.com/v1/";
 
     public static String getBaseUrl() {
         return IS_DEBUG ? DEBUG_URL : BASE_URL;

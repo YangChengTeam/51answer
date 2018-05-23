@@ -30,8 +30,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
         RxBus.get().register(this);
         if (rootView == null) {
-            rootView = inflater.inflate(getLayoutId(), container, false);
-
+            rootView = LayoutInflater.from(getActivity()).inflate(getLayoutId(), container, false);
         }
         try {
             ButterKnife.bind(this, rootView);

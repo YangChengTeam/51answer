@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
+import yc.com.base.StatusBarUtil;
 
 /**
  * Created by wanglin  on 2018/3/15 14:11.
@@ -131,5 +132,8 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void setStatusBar() {
+        StatusBarUtil.setTransparentForWindow(this);
+    }
 }

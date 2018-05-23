@@ -1,5 +1,6 @@
 package yc.com.base;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -26,7 +27,8 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
 
     protected P mPresenter;
     private View rootView;
-
+    protected BaseLoadingView loadingView;
+    protected BaseActivity mContext;
 
     @Nullable
     @Override
@@ -37,7 +39,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
         if (rootView == null) {
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
             rootView = inflater.inflate(getLayoutId(), container, false);
-
+            loadingView = new BaseLoadingView(getActivity());
 //            window.setLayout((int) (RxDeviceTool.getScreenWidth(getActivity()) * getWidth()), getHeight());//这2行,和上面的一样,注意顺序就行;
             window.setWindowAnimations(getAnimationId());
         }
@@ -53,6 +55,12 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
 
         return rootView;
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = (BaseActivity) context;
     }
 
     @Override
