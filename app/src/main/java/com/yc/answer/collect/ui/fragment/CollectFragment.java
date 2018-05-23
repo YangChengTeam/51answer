@@ -3,6 +3,7 @@ package com.yc.answer.collect.ui.fragment;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -19,6 +20,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.vondear.rxtools.RxImageTool;
 import com.yc.answer.R;
 import com.yc.answer.base.StateView;
 import com.yc.answer.collect.contract.CollectContract;
@@ -43,8 +45,6 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
 
     @BindView(R.id.collect_recyclerView)
     RecyclerView collectRecyclerView;
-    @BindView(R.id.tv_collect_count)
-    TextView tvCollectCount;
     @BindView(R.id.stateView)
     StateView stateView;
     @BindView(R.id.iv_back)
@@ -59,7 +59,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
 
     private int page = 1;
     private int limit = 15;
-
+    private TextView tvCollectCount;
 
     @Override
     public int getLayoutId() {
@@ -68,6 +68,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
 
     @Override
     public void init() {
+
         mPresenter = new CollectPresenter(getActivity(), this);
         ivBack.setVisibility(View.GONE);
         commonTvTitle.setText("我的收藏");
@@ -77,10 +78,18 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         collectRecyclerView.setAdapter(indexBookAdapter);
         collectRecyclerView.addItemDecoration(new MyDecoration(10, 10));
 
+        addHeaderView();
+
         initListener();
         initRefresh();
         getData(false);
 
+    }
+
+    private void addHeaderView() {
+        View headerView = View.inflate(getActivity(), R.layout.collect_header_view, null);
+        tvCollectCount = headerView.findViewById(R.id.tv_header_view);
+        indexBookAdapter.addHeaderView(headerView);
     }
 
     private void initListener() {

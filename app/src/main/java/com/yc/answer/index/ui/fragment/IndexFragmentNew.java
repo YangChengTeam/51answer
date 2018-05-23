@@ -1,12 +1,17 @@
 package com.yc.answer.index.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -41,8 +46,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
+import yc.com.base.StatusBarUtil;
 
 /**
  * Created by wanglin  on 2018/2/27 14:43.
@@ -70,6 +78,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.ll_upload)
     LinearLayout llUpload;
+    @BindView(R.id.view)
+    View view;
 
 
     private IndexBookAdapter hotItemAdapter;
@@ -82,8 +92,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void init() {
+        setStatusBar();
         mPresenter = new IndexPresenter(getActivity(), this);
-
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         hotItemAdapter = new IndexBookAdapter(null);
@@ -95,6 +105,14 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         initRefresh();
         initListener();
     }
+
+    private void setStatusBar() {
+        CollapsingToolbarLayout.LayoutParams layoutParams = (CollapsingToolbarLayout.LayoutParams) view.getLayoutParams();
+        layoutParams.height = StatusBarUtil.getStatusBarHeight(getActivity());
+        view.setLayoutParams(layoutParams);
+        view.setBackgroundColor(Color.argb(30, 0, 0, 0));
+    }
+
 
     private void initListener() {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {

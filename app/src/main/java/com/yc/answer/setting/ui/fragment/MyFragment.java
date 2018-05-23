@@ -56,6 +56,7 @@ import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
+import yc.com.base.StatusBarUtil;
 
 
 /**

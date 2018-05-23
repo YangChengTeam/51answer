@@ -73,11 +73,12 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), mList);
+
+
         mMainViewPager.setAdapter(mainAdapter); //视图加载适配器
         mMainViewPager.addOnPageChangeListener(this);
         mMainViewPager.setOffscreenPageLimit(2);
         mMainViewPager.setCurrentItem(0);
-
 
         mainBottomNavigationBar.setMode(BottomNavigationBar.MODE_DEFAULT);
         mainBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
@@ -224,6 +225,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     protected void setStatusBar() {
-        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
+        StatusBarUtil.setTranslucentForImageViewInFragment(this, null);
     }
 }

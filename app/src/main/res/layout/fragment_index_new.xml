@@ -33,6 +33,10 @@
                     app:indicator_width="6dp"
                     app:layout_collapseMode="pin" />
 
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </android.support.design.widget.CollapsingToolbarLayout>
 
             <android.support.v7.widget.Toolbar

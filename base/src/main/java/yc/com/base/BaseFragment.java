@@ -37,8 +37,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         } catch (Exception e) {
             RxLogTool.e("-->:初始化失败 :" + e.getMessage());
         }
-
-
         init();
 
         return rootView;

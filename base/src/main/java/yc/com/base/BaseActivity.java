@@ -42,14 +42,15 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         baseLoadingView = new BaseLoadingView(this);
         mHandler = new Handler();
         //顶部透明
-        setStatusBar();
-        overridePendingTransition(R.anim.activity_enter, R.anim.activity_exit);
 
+        overridePendingTransition(R.anim.activity_enter, R.anim.activity_exit);
         init();
+        setStatusBar();
     }
 
     protected void setStatusBar() {
         StatusBarUtil.setTranslucentForImageView(this, null);
+
     }
 
 

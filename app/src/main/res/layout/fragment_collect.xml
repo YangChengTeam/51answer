@@ -16,29 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_container"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/collect_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:orientation="vertical"
             android:paddingBottom="@dimen/t10dp"
-            android:paddingLeft="@dimen/t12dp"
-            android:paddingTop="@dimen/t10dp">
-
-            <TextView
-                android:id="@+id/tv_collect_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_16" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/collect_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10" />
-        </LinearLayout>
+            android:paddingLeft="@dimen/t12dp" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>
