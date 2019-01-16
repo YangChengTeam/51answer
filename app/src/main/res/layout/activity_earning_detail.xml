@@ -7,7 +7,7 @@
 
     <include layout="@layout/common_top_view" />
 
-    <com.yc.answer.base.StateView
+    <com.yc.ac.base.StateView
         android:id="@+id/stateView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
          />
 
-    <com.yc.answer.setting.ui.widget.BaseSettingView
+    <com.yc.ac.setting.ui.widget.BaseSettingView
         android:id="@+id/baseSettingView_new_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:show_extra="true"
         app:title="上传新书得Q币" />
 
-    <com.yc.answer.setting.ui.widget.BaseSettingView
+    <com.yc.ac.setting.ui.widget.BaseSettingView
         android:id="@+id/baseSettingView_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         app:show_extra="true"
         app:title="分享好友或朋友圈得Q币" />
 
-    <com.yc.answer.setting.ui.widget.BaseSettingView
+    <com.yc.ac.setting.ui.widget.BaseSettingView
         android:id="@+id/baseSettingView_market"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:show_extra="true"
         app:title="应用市场好评得Q币" />
 
-    <com.yc.answer.setting.ui.widget.BaseSettingView
+    <com.yc.ac.setting.ui.widget.BaseSettingView
         android:id="@+id/baseSettingView_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

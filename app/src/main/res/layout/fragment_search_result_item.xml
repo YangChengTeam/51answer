@@ -91,7 +91,7 @@
             </LinearLayout>
 
 
-            <com.yc.answer.index.ui.widget.MyRecyclerView
+            <com.yc.ac.index.ui.widget.MyRecyclerView
                 android:id="@+id/tag_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

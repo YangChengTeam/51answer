@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/t10dp"
     android:paddingTop="@dimen/t15dp">
 
-    <com.yc.answer.index.ui.widget.SelectGradeView
+    <com.yc.ac.index.ui.widget.SelectGradeView
         android:id="@+id/selectSmallView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:select_name="@string/small_school"
         app:select_name_color="@color/gray_aaa" />
 
-    <com.yc.answer.index.ui.widget.SelectGradeView
+    <com.yc.ac.index.ui.widget.SelectGradeView
         android:id="@+id/selectMiddleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         app:select_name="@string/middle_school"
         app:select_name_color="@color/gray_aaa" />
 
-    <com.yc.answer.index.ui.widget.SelectGradeView
+    <com.yc.ac.index.ui.widget.SelectGradeView
         android:id="@+id/selectHighView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

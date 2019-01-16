@@ -47,7 +47,7 @@
                 android:padding="@dimen/distance_10"
                 app:layout_collapseMode="pin">
 
-                <com.yc.answer.index.ui.widget.BaseSearchView
+                <com.yc.ac.index.ui.widget.BaseSearchView
                     android:id="@+id/baseSearchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <com.yc.answer.base.BaseBookView
+                        <com.yc.ac.base.BaseBookView
                             android:id="@+id/baseBookView_first"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -133,7 +133,7 @@
                         android:layout_marginLeft="@dimen/t40dp"
                         android:layout_weight="1">
 
-                        <com.yc.answer.base.BaseBookView
+                        <com.yc.ac.base.BaseBookView
                             android:id="@+id/baseBookView_second"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />

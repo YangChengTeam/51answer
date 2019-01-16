@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.yc.answer.setting.ui.widget.BaseSettingView
+    <com.yc.ac.setting.ui.widget.BaseSettingView
         android:id="@+id/baseSettingView_new_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/t10dp"
     android:paddingTop="@dimen/t15dp">
 
-    <com.yc.answer.index.ui.widget.SelectGradeView
+    <com.yc.ac.index.ui.widget.SelectGradeView
         android:id="@+id/selectGradeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

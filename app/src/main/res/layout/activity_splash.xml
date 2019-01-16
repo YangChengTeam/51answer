@@ -38,19 +38,19 @@
             android:layout_marginTop="160dp"
             android:orientation="vertical">
 
-            <com.yc.answer.index.ui.widget.SelectGradeView
+            <com.yc.ac.index.ui.widget.SelectGradeView
                 android:id="@+id/smallGradeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:select_name="小学" />
 
-            <com.yc.answer.index.ui.widget.SelectGradeView
+            <com.yc.ac.index.ui.widget.SelectGradeView
                 android:id="@+id/middleGradeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:select_name="初中" />
 
-            <com.yc.answer.index.ui.widget.SelectGradeView
+            <com.yc.ac.index.ui.widget.SelectGradeView
                 android:id="@+id/seniorGradeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

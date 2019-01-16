@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.yc.answer.base.BaseBottomTab
+        <com.yc.ac.base.BaseBottomTab
             android:id="@+id/index_tab"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -27,7 +27,7 @@
             app:unselect_icon="@mipmap/index_unselect"
             app:unselect_textColor="@color/gray_bfbfbf" />
 
-        <com.yc.answer.base.BaseBottomTab
+        <com.yc.ac.base.BaseBottomTab
             android:id="@+id/collect_tab"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -39,7 +39,7 @@
             app:unselect_icon="@mipmap/collect_unselect"
             app:unselect_textColor="@color/gray_bfbfbf" />
 
-        <com.yc.answer.base.BaseBottomTab
+        <com.yc.ac.base.BaseBottomTab
             android:id="@+id/my_tab"
             android:layout_width="0dp"
             android:layout_height="match_parent"
