@@ -92,7 +92,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void init() {
-        setStatusBar();
+//        setStatusBar();
         mPresenter = new IndexPresenter(getActivity(), this);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
@@ -194,7 +194,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
                 Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
 
                 intent.putExtra("bookName", bookInfo.getName());
-                intent.putExtra("bookId", bookInfo.getId());
+                intent.putExtra("bookId", bookInfo.getBookId());
                 startActivity(intent);
 
             }

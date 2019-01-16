@@ -60,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:fillViewport="true"
             android:paddingBottom="@dimen/t15dp"
             android:paddingLeft="@dimen/t15dp"
             android:paddingTop="@dimen/distance_15"
@@ -172,36 +173,54 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_10" />
+                    android:layout_marginTop="@dimen/distance_15" />
 
-                <LinearLayout
-                    android:id="@+id/ll_upload"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/t40dp"
-                    android:layout_marginRight="@dimen/distance_15"
-                    android:layout_marginTop="@dimen/t30dp"
-                    android:background="@drawable/upload_answer_bg"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/upload_answer" />
 
                     <TextView
+                        android:id="@+id/tv_tint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/upload_answer"
-                        android:textColor="@color/red_f14343"
-                        android:textSize="@dimen/text_16" />
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="更多答案可以直接搜索书名"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/t12sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/q"
-                        android:textColor="@color/red_f14343"
-                        android:textSize="@dimen/text_12" />
-                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_upload"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/t40dp"
+                        android:layout_above="@id/tv_tint"
+                        android:layout_marginBottom="@dimen/t8dp"
+                        android:layout_marginRight="@dimen/distance_15"
+                        android:background="@drawable/upload_answer_bg"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/upload_answer" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/upload_answer"
+                            android:textColor="@color/red_f14343"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/q"
+                            android:textColor="@color/red_f14343"
+                            android:textSize="@dimen/text_12" />
+                    </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

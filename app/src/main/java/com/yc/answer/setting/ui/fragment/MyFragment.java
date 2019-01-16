@@ -4,6 +4,8 @@ package com.yc.answer.setting.ui.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
@@ -29,15 +32,21 @@ import com.yc.answer.R;
 import com.yc.answer.base.WebActivity;
 import com.yc.answer.constant.BusAction;
 import com.yc.answer.constant.SpConstant;
+import com.yc.answer.index.ui.widget.MyDecoration;
 import com.yc.answer.setting.contract.MyContract;
+import com.yc.answer.setting.model.bean.QbInfo;
+import com.yc.answer.setting.model.bean.TaskListInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.setting.presenter.MyPresenter;
 import com.yc.answer.setting.ui.activity.BindPhoneActivity;
 import com.yc.answer.setting.ui.activity.EarningsDetailActivity;
 import com.yc.answer.setting.ui.activity.InvitationActivity;
+import com.yc.answer.setting.ui.activity.InvitationFriendActicity;
 import com.yc.answer.setting.ui.activity.LoginGroupActivity;
 import com.yc.answer.setting.ui.activity.SettingActivity;
 import com.yc.answer.setting.ui.activity.StatementActivity;
+import com.yc.answer.setting.ui.activity.UploadBookIntroduceActivity;
+import com.yc.answer.setting.ui.adapter.TaskListAdapter;
 import com.yc.answer.setting.ui.widget.BaseIncomeView;
 import com.yc.answer.setting.ui.widget.BaseSettingView;
 import com.yc.answer.setting.ui.widget.FollowWeiXinPopupWindow;
@@ -48,6 +57,8 @@ import com.yc.answer.utils.ToastUtils;
 import com.yc.answer.utils.UserInfoHelper;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -56,7 +67,8 @@ import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
-import yc.com.base.StatusBarUtil;
+
+import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 
 /**
@@ -106,6 +118,12 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     BaseIncomeView baseDepositIncomeView;
     @BindView(R.id.tv_detail)
     TextView tvDetail;
+    @BindView(R.id.tv_qb)
+    TextView tvQb;
+    @BindView(R.id.earning_recyclerView)
+    RecyclerView earningRecyclerView;
+
+    private TaskListAdapter taskListAdapter;
 
     private long startTime;
 
@@ -117,8 +135,15 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     @Override
     public void init() {
         mPresenter = new MyPresenter(getActivity(), this);
-        initListener();
 
+        earningRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        taskListAdapter = new TaskListAdapter(null);
+
+        earningRecyclerView.setAdapter(taskListAdapter);
+
+        earningRecyclerView.addItemDecoration(new MyDecoration(10));
+
+        initListener();
 
     }
 
@@ -223,16 +248,21 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         RxView.clicks(baseShareIncomeView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                //分享赚钱
-                ShareFragment shareFragment = new ShareFragment();
-                shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                shareFragment.show(getFragmentManager(), null);
+
+                if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                    //分享赚钱
+                    ShareFragment shareFragment = new ShareFragment();
+                    shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
+                    shareFragment.setIsShareMoney(true);
+                    shareFragment.show(getFragmentManager(), null);
+                }
 
             }
         });
         RxView.clicks(baseReputationIncomeView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
+
                 startTime = System.currentTimeMillis();
                 //好评赚钱
                 try {
@@ -266,7 +296,41 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         RxView.clicks(tvDetail).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), EarningsDetailActivity.class));
+//                startActivity(new Intent(getActivity(), EarningsDetailActivity.class));
+                //申请提现
+                ApplyDepositFragment applyDepositFragment = new ApplyDepositFragment();
+                applyDepositFragment.show(getFragmentManager(), "");
+            }
+        });
+
+        taskListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                TaskListInfo taskListInfo = taskListAdapter.getItem(position);
+                if (taskListInfo != null && !TextUtils.isEmpty(taskListInfo.getName())) {
+                    if (taskListInfo.getName().contains("邀请")) {
+                        startActivity(new Intent(getActivity(), InvitationFriendActicity.class));
+                    } else if (taskListInfo.getName().contains("好评")) {
+                        startTime = System.currentTimeMillis();
+                        //好评赚钱
+                        try {
+                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
+                        }
+                    } else if (taskListInfo.getName().contains("分享")) {
+                        ShareFragment shareFragment = new ShareFragment();
+                        shareFragment.setIsShareMoney(true);
+                        shareFragment.show(getActivity().getSupportFragmentManager(), "");
+                    } else if (taskListInfo.getName().contains("上传")) {
+                        startActivity(new Intent(getActivity(), UploadBookIntroduceActivity.class));
+                    }
+
+                }
             }
         });
 
@@ -311,6 +375,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             ivAvatar.setImageResource(R.mipmap.default_not_login);
             llNotLogin.setVisibility(View.VISIBLE);
             llLogin.setVisibility(View.GONE);
+            tvQb.setText(String.valueOf("0.00"));
 
         }
     }
@@ -337,8 +402,21 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             tvPhone.setText(userInfo.getMobile());
             tvPhone.setVisibility(View.VISIBLE);
         }
+        mPresenter.getQbInfo();
 
 
+    }
+
+    @Override
+    public void showQbInfo(QbInfo info) {
+        BigDecimal bd = new BigDecimal(info.qb);
+
+        tvQb.setText(String.valueOf(bd.setScale(2)));
+    }
+
+    @Override
+    public void showTaskList(List<TaskListInfo> list) {
+        taskListAdapter.setNewData(list);
     }
 
 
@@ -354,6 +432,17 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         mPresenter.uploadFile(file, path.substring(path.lastIndexOf("/") + 1));
     }
 
+    @Subscribe(
+            thread = EventThread.MAIN_THREAD,
+            tags = {
+                    @Tag(BusAction.SHARE_MONEY_SUCCESS)
+            }
+    )
+    public void shareMoneySuccess(String result) {
+        mPresenter.getQbInfo();
+        mPresenter.getTaskInfoList(true);
+    }
+
     @Override
     public void showLoadingDialog(String mess) {
         ((BaseActivity) getActivity()).showLoadingDialog(mess);
@@ -367,11 +456,13 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     @Override
     public void onResume() {
         super.onResume();
-        if (startTime > 0) {
+        if (startTime > 0 && !RxSPTool.getBoolean(getActivity(), SpConstant.OPEN_MARKET)) {
             if ((System.currentTimeMillis() - startTime) / 1000 >= 5) {
                 //跳到应用市场
-                RxSPTool.putBoolean(getActivity(), SpConstant.OPEN_MARKET, true);
+                mPresenter.comment(UserInfoHelper.getUId());
             }
         }
     }
+
+
 }

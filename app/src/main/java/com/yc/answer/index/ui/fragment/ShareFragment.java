@@ -49,7 +49,7 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
     ImageView ivQq;
     @BindView(R.id.iv_wx)
     ImageView ivWx;
-    Unbinder unbinder;
+
     @BindView(R.id.iv_code)
     ImageView ivCode;
     @BindView(R.id.ll_share)
@@ -93,7 +93,7 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
                             getDialog().getWindow().getDecorView().setDrawingCacheEnabled(true);
                             Bitmap bmp = getDialog().getWindow().getDecorView().getDrawingCache();
                             mShareInfo = new ShareInfo();
-                            mShareInfo.setBook_id(bookInfo.getId());
+                            mShareInfo.setBook_id(bookInfo.getBookId());
                             mShareInfo.setBitmap(bmp);
                             shareInfo(finalI);
                         }
@@ -135,7 +135,7 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
             ToastUtils.showCenterToast(mContext, "分享成功");
 
             if (mShareInfo != null && !TextUtils.isEmpty(mShareInfo.getBook_id())) {
-                mPresenter.share(mShareInfo.getBook_id());
+                mPresenter.share(mShareInfo);
             }
 
         }

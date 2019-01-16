@@ -162,11 +162,13 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         RxView.clicks(rlCollect).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-
-                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-                    isCollectClick = true;
+                isCollectClick = true;
+                if (UserInfoHelper.isLogin()) {
                     mPresenter.favoriteAnswer(bookInfo);
+                } else {
+                    mPresenter.saveBook(bookInfo);
                 }
+
 
             }
         });
@@ -174,39 +176,39 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         RxView.clicks(rlDownload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-                    if (judgeIsDownload()) {//已经下载
-                        DeleteTintFragment deleteTintFragment = new DeleteTintFragment();
-                        deleteTintFragment.show(getSupportFragmentManager(), "delete");
-                        deleteTintFragment.setOnConfirmListener(new DeleteTintFragment.onConfirmListener() {
-                            @Override
-                            public void onConfirm() {
-                                deleteBook();
-                            }
-                        });
-                    } else {
-                        if (bookInfo != null && bookInfo.getAccess() == 0) {
-                            ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
-                            return;
+//                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
+                if (judgeIsDownload()) {//已经下载
+                    DeleteTintFragment deleteTintFragment = new DeleteTintFragment();
+                    deleteTintFragment.show(getSupportFragmentManager(), "delete");
+                    deleteTintFragment.setOnConfirmListener(new DeleteTintFragment.onConfirmListener() {
+                        @Override
+                        public void onConfirm() {
+                            deleteBook();
                         }
-                        if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
-                            RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getId());
-                        }
+                    });
+                } else {
+                    if (bookInfo != null && bookInfo.getAccess() == 0) {
+                        ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
+                        return;
                     }
-
+                    if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
+                        RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
+                    }
                 }
+
             }
+//            }
         });
 
         RxView.clicks(rlShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-                    ShareFragment shareFragment = new ShareFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("bookInfo", bookInfo);
+//                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
+                ShareFragment shareFragment = new ShareFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("bookInfo", bookInfo);
 
-                    shareFragment.setArguments(bundle);
+                shareFragment.setArguments(bundle);
 //                    ShareInfo shareInfo = new ShareInfo();
 //                    if (bookInfo != null) {
 //                        shareInfo.setTitle(bookInfo.getName());
@@ -215,9 +217,9 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 ////                        shareInfo.setUrl(bookInfo.getCover_img());
 //                    }
 //                    shareFragment.setShareInfo(shareInfo);
-                    shareFragment.show(getSupportFragmentManager(), null);
-                }
+                shareFragment.show(getSupportFragmentManager(), null);
             }
+//            }
         });
 
     }
@@ -385,7 +387,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                 }
             }
         }
-
 
         return flag;
 

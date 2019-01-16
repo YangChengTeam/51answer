@@ -4,17 +4,33 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Transient;
+
 /**
  * Created by wanglin  on 2018/3/15 14:56.
  */
 
+@Entity
 public class ShareInfo implements Parcelable {
+    @Id(assignable = true)
+    private long id;
     private String url;
     private String title;
     private String content;
     private String img;// 分享图片;
     private String book_id;
+    @Transient
     private Bitmap bitmap;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUrl() {
         return url;

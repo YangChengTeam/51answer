@@ -163,7 +163,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
                 BookInfo bookInfo = itemAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
                 intent.putExtra("bookName", bookInfo.getName());
-                intent.putExtra("bookId", bookInfo.getId());
+                intent.putExtra("bookId", bookInfo.getBookId());
                 startActivity(intent);
             }
         });

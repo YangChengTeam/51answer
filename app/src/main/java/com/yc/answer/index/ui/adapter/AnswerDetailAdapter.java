@@ -60,7 +60,7 @@ public class AnswerDetailAdapter extends PagerAdapter {
 
         final PhotoView scaleImageView = view.findViewById(R.id.xImageView);
 
-        Glide.with(mContext).load(path).apply(new RequestOptions()
+        Glide.with(mContext).asBitmap().load(path).apply(new RequestOptions()
                 .placeholder(R.mipmap.big_placeholder).error(R.mipmap.big_placeholder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true).centerInside()).thumbnail(0.1f).into(scaleImageView);
         container.addView(view);
 

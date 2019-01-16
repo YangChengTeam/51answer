@@ -3,13 +3,12 @@ package com.yc.answer.collect.ui.fragment;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,7 +19,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.vondear.rxtools.RxImageTool;
 import com.yc.answer.R;
 import com.yc.answer.base.StateView;
 import com.yc.answer.collect.contract.CollectContract;
@@ -32,6 +30,7 @@ import com.yc.answer.index.ui.activity.AnswerDetailActivity;
 import com.yc.answer.index.ui.adapter.IndexBookAdapter;
 import com.yc.answer.index.ui.widget.MyDecoration;
 import com.yc.answer.setting.model.bean.UserInfo;
+import com.yc.answer.utils.UserInfoHelper;
 
 import butterknife.BindView;
 import yc.com.base.BaseFragment;
@@ -106,7 +105,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 BookInfo bookInfo = (BookInfo) adapter.getItem(position);
                 Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                intent.putExtra("bookId", bookInfo.getId());
+                intent.putExtra("bookId", bookInfo.getBookId());
                 intent.putExtra("bookName", bookInfo.getName());
                 startActivity(intent);
             }
@@ -154,8 +153,14 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     }
 
     @Override
-    public void showTintInfo(String tint) {
-        stateView.showNoData(smartRefreshLayout, tint);
+    public void showTintInfo(CharSequence tint) {
+
+        stateView.showNoData(smartRefreshLayout, tint, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserInfoHelper.isGoToLogin(getActivity());
+            }
+        });
     }
 
 

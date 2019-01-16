@@ -6,16 +6,17 @@ import android.support.multidex.MultiDexApplication;
 
 import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
-import com.kk.share.UMShareImpl;
 import com.tencent.bugly.Bugly;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.game.UMGameAgent;
-import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxTool;
+import com.yc.answer.BuildConfig;
+import com.yc.answer.MyObjectBox;
 import com.yc.answer.R;
 import com.yc.answer.index.listener.GlidePauseOnScrollListener;
+
 import com.yc.answer.index.ui.widget.GlideImageLoader;
 import com.yc.answer.utils.UserInfoHelper;
 
@@ -25,19 +26,20 @@ import java.util.Map;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
-import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
+import io.objectbox.BoxStore;
+import io.objectbox.android.AndroidObjectBrowser;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-
-import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Created by wanglin  on 2018/2/27 11:15.
  */
 
 public class MyApp extends MultiDexApplication {
+
+    private static BoxStore boxStore;
 
     @Override
     public void onCreate() {
@@ -51,8 +53,16 @@ public class MyApp extends MultiDexApplication {
         });
 
         Bugly.init(getApplicationContext(), "af5788360b", false);
+        boxStore = MyObjectBox.builder().androidContext(MyApp.this).build();
+        if (BuildConfig.DEBUG) {
+            new AndroidObjectBrowser(boxStore).start(this);
+        }
     }
 
+
+    public static BoxStore getBoxStore() {
+        return boxStore;
+    }
 
     private void init() {
         RxTool.init(this);
@@ -60,12 +70,11 @@ public class MyApp extends MultiDexApplication {
         UMGameAgent.init(this);
         UMGameAgent.setPlayerLevel(1);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-        PlatformConfig.setWeixin("wxf80e368f5707d8ab", "a65d2fddc3571674ea037db01223e845");
-        PlatformConfig.setQQZone("1106835074", "pg67YjCG7F9O1LFn");
+        PlatformConfig.setWeixin("wx622cbf19fcb00f29", "4aa67b15c55411749dddfbad0cd66798");
+        PlatformConfig.setQQZone("1108013607", "2mun88jc6IlVjy1A");
 
 //        Config.DEBUG = true;
         UMShareAPI.get(this);
-
 
         //全局信息初始化
 
@@ -99,11 +108,11 @@ public class MyApp extends MultiDexApplication {
     private void initGalleryFinal() {
 
         ThemeConfig theme = new ThemeConfig.Builder()
-                .setTitleBarBgColor(Color.rgb(228,50,50))//标题栏背景颜色
-                .setFabNornalColor(Color.rgb(228,50,50))//确定按钮Noimal状态
-                .setFabPressedColor(Color.rgb(228,60,60))//确定按钮Pressed状态
+                .setTitleBarBgColor(Color.rgb(228, 50, 50))//标题栏背景颜色
+                .setFabNornalColor(Color.rgb(228, 50, 50))//确定按钮Noimal状态
+                .setFabPressedColor(Color.rgb(228, 60, 60))//确定按钮Pressed状态
                 .setCheckNornalColor(Color.rgb(204, 204, 204))
-                .setCheckSelectedColor(Color.rgb(228,50,50))//选择框选中颜色
+                .setCheckSelectedColor(Color.rgb(228, 50, 50))//选择框选中颜色
                 .setIconBack(R.mipmap.back)//返回按钮
                 .build();
         //初始化图片选择器

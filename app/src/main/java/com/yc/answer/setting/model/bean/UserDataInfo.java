@@ -14,6 +14,7 @@ public class UserDataInfo {
 
     private String accessToken;
 
+
     public UserDataInfo(){
         super();
     }
@@ -81,4 +82,5 @@ public class UserDataInfo {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+
 }

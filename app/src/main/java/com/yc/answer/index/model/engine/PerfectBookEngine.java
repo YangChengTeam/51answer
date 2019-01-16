@@ -26,7 +26,7 @@ public class PerfectBookEngine extends BaseEngine {
 
     public Observable<ResultInfo<String>> perfectBookInfo(BookInfo bookInfo) {
         Map<String, String> params = new HashMap<>();
-        params.put("id", bookInfo.getId());
+        params.put("id", bookInfo.getBookId());
         params.put("cover_img", bookInfo.getCover_img());
         params.put("answer_list", JSON.toJSONString(bookInfo.getAnswer_list()));
         params.put("name", bookInfo.getName());

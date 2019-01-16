@@ -101,7 +101,7 @@ public class SearchResultFragment extends BaseFragment<BookPresenter> implements
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 BookInfo bookInfo = (BookInfo) adapter.getItem(position);
                 Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                intent.putExtra("bookId", bookInfo.getId());
+                intent.putExtra("bookId", bookInfo.getBookId());
                 intent.putExtra("bookName", bookInfo.getName());
                 startActivity(intent);
             }

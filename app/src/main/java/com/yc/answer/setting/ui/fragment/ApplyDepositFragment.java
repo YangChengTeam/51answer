@@ -40,7 +40,7 @@ public class ApplyDepositFragment extends BaseDialogFragment {
             @Override
             public void call(Void aVoid) {
                 //todo 这里跳到那暂不知道
-                startActivity(new Intent(getActivity(), EarningsDetailActivity.class));
+//                startActivity(new Intent(getActivity(), EarningsDetailActivity.class));
                 dismiss();
             }
         });

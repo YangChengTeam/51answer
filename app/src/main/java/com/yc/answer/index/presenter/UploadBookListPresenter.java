@@ -48,14 +48,22 @@ public class UploadBookListPresenter extends BasePresenter<UploadBookListEngine,
 
             @Override
             public void onNext(ResultInfo<BookInfoWrapper> listResultInfo) {
-                if (listResultInfo != null && listResultInfo.code == HttpConfig.STATUS_OK && listResultInfo.data != null) {
-                    if (listResultInfo.data.getLists() != null && listResultInfo.data.getLists().size() > 0) {
-                        mView.showUploadBookList(listResultInfo.data.getLists());
-                        mView.hide();
+                if (listResultInfo != null) {
+                    if (listResultInfo.code == HttpConfig.STATUS_OK && listResultInfo.data != null) {
+                        if (listResultInfo.data.getLists() != null && listResultInfo.data.getLists().size() > 0) {
+                            mView.showUploadBookList(listResultInfo.data.getLists());
+                            mView.hide();
+                        } else {
+                            if (page == 1)
+                                mView.showNoData();
+                        }
                     } else {
-                        if (page == 1)
+                        if (page == 1) {
                             mView.showNoData();
+                        }
                     }
+
+
                 } else {
                     if (page == 1)
                         mView.showNoNet();

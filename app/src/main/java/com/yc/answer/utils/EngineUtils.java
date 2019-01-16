@@ -1,6 +1,7 @@
 package com.yc.answer.utils;
 
 import android.content.Context;
+import android.content.MutableContextWrapper;
 import android.text.TextUtils;
 import android.view.TextureView;
 
@@ -12,7 +13,9 @@ import com.kk.securityhttp.net.entry.UpFileInfo;
 import com.yc.answer.constant.NetConstant;
 import com.yc.answer.index.model.bean.BookInfo;
 import com.yc.answer.index.model.bean.BookInfoWrapper;
+import com.yc.answer.setting.model.bean.QbInfoWrapper;
 import com.yc.answer.setting.model.bean.ShareInfo;
+import com.yc.answer.setting.model.bean.TaskLisInfoWrapper;
 import com.yc.answer.setting.model.bean.UploadInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
 
@@ -195,6 +198,49 @@ public class EngineUtils {
             headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
         return HttpCoreEngin.get(context).rxpost(NetConstant.user_share_url, new TypeReference<ResultInfo<ShareInfo>>() {
         }.getType(), null, headers, false, false, false);
+    }
+
+    /**
+     * 好评
+     *
+     * @return
+     */
+    public static Observable<ResultInfo<String>> comment(Context context, String userid) {
+        Map<String, String> headers = new HashMap<>();
+        if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
+            headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
+        return HttpCoreEngin.get(context).rxpost(NetConstant.task_good_comment_url, new TypeReference<ResultInfo<String>>() {
+                }.getType(),
+                null,headers, false, false, false);
+    }
+
+
+    /**
+     * 获取Q币数量
+     *
+     * @param context
+     * @return
+     */
+    public static Observable<ResultInfo<QbInfoWrapper>> getQbInfo(Context context) {
+
+        Map<String, String> headers = new HashMap<>();
+        if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
+            headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
+        return HttpCoreEngin.get(context).rxpost(NetConstant.user_qb_url, new TypeReference<ResultInfo<QbInfoWrapper>>() {
+                }.getType(),
+                null, headers, false, false, false);
+    }
+
+
+    public static Observable<ResultInfo<TaskLisInfoWrapper>> getTaskInfoList(Context context) {
+
+        Map<String, String> headers = new HashMap<>();
+        if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
+            headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
+
+        return HttpCoreEngin.get(context).rxpost(NetConstant.task_list_url, new TypeReference<ResultInfo<TaskLisInfoWrapper>>() {
+        }.getType(), null,headers, false, false, false);
+
     }
 
 }

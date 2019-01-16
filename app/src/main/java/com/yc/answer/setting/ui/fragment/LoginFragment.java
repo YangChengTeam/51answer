@@ -1,6 +1,9 @@
 package com.yc.answer.setting.ui.fragment;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -13,13 +16,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
+import com.hwangjr.rxbus.thread.EventThread;
 import com.yc.answer.R;
+import com.yc.answer.constant.BusAction;
 import com.yc.answer.setting.contract.LoginContract;
 import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.setting.presenter.LoginPresenter;
 import com.yc.answer.setting.ui.activity.LoginGroupActivity;
 import com.yc.answer.utils.ToastUtils;
 import com.yc.answer.utils.UserInfoHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import yc.com.base.BaseFragment;
@@ -50,6 +62,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
 
     private Animation mInputAnimation;
     private LoginGroupActivity mLoginGroupActivity;
+    private List<Fragment> fragmentList;
 
     @Override
     public void onAttach(Context context) {
@@ -64,13 +77,43 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
 
     @Override
     public void init() {
+        fragmentList = new ArrayList<>();
+
+        fragmentList.add(new LoginPhoneFragment());
+        fragmentList.add(new LoginCodeFragment());
+
         initViews();
+    }
+
+    /**
+     * 叠加界面
+     *
+     * @param centerTitle 中间标题
+     */
+    public void addReplaceFragment(int position, String centerTitle) {
+
+        FragmentManager supportFragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+
+
+        for (Fragment fragment : fragmentList) {
+            if (fragment.isAdded()) {
+                fragmentTransaction.hide(fragment);
+            }
+
+        }
+
+        fragmentTransaction.add(R.id.login_container, fragmentList.get(position), "");
+        fragmentTransaction.addToBackStack(centerTitle);
+        fragmentTransaction.commit();
     }
 
 
     protected void initViews() {
 
         mPresenter = new LoginPresenter(getActivity(), this);
+
+        addReplaceFragment(0, "phone");
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +168,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         if (null != etAccount && null != etPassword) {
             String account = etAccount.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
-            mPresenter.login(account, password);
+            mPresenter.login(account, password,"");
 
         }
     }
@@ -216,6 +259,8 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     }
 
 
+
+
     public void showAccountResult(UserInfo data, String tint) {
         if (null != data && !TextUtils.isEmpty(data.getId())) {
             if (TextUtils.equals(getString(R.string.login), tint)) {
@@ -242,6 +287,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         if (null != mLoginGroupActivity)
             mLoginGroupActivity.dismissDialog();
     }
+
 
     @Override
     public void finish() {

@@ -88,7 +88,8 @@ public class StateView extends BaseView {
 
     }
 
-    public void showNoData(View contentView, String message) {
+
+    public void showNoData(View contentView, CharSequence message, final OnClickListener listener) {
         mContentView = contentView;
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ivLoading.getLayoutParams();
         layoutParams.width = RxImageTool.dp2px(344 / 3);
@@ -98,6 +99,17 @@ public class StateView extends BaseView {
         tvMess.setText(message);
         mContentView.setVisibility(GONE);
         ivLoading.setVisibility(GONE);
+        RxView.clicks(rlContainer).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                if (listener != null) listener.onClick(rlContainer);
+            }
+        });
+
+    }
+
+    public void showNoData(View contentView, String message) {
+        showNoData(contentView, message, null);
 
     }
 
@@ -126,7 +138,8 @@ public class StateView extends BaseView {
         RxView.clicks(rlContainer).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                onClickListener.onClick(rlContainer);
+                if (onClickListener != null)
+                    onClickListener.onClick(rlContainer);
             }
         });
     }

@@ -69,7 +69,7 @@ public class SelectGradeView extends BaseView {
     public void setContents(List<String> mContents) {
         final SelectGradeViewAdapter gradeViewAdapter = new SelectGradeViewAdapter(mContents);
         recyclerViewSelect.setAdapter(gradeViewAdapter);
-        recyclerViewSelect.addItemDecoration(new MyDecoration(RxImageTool.dip2px(5)));
+        recyclerViewSelect.addItemDecoration(new MyDecoration(RxImageTool.dip2px(7)));
         gradeViewAdapter.setNewData(mContents);
         gradeViewAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

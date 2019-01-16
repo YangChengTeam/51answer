@@ -127,7 +127,7 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
             ToastUtils.showCenterToast(mContext, "收藏的答案为空");
             return;
         }
-        Subscription subscription = mEngine.favoriteAnswer(bookInfo.getId()).subscribe(new Subscriber<ResultInfo<String>>() {
+        Subscription subscription = mEngine.favoriteAnswer(bookInfo.getBookId()).subscribe(new Subscriber<ResultInfo<String>>() {
             @Override
             public void onCompleted() {
 

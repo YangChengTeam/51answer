@@ -1,13 +1,19 @@
 package com.yc.answer.setting.model.engine;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.view.TextureView;
 
 import com.alibaba.fastjson.TypeReference;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.engin.HttpCoreEngin;
+import com.kk.utils.ToastUtil;
 import com.yc.answer.base.BaseEngine;
 import com.yc.answer.constant.NetConstant;
 import com.yc.answer.setting.model.bean.ShareInfo;
+import com.yc.answer.utils.UserInfoHelper;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +38,16 @@ public class ShareEngine extends BaseEngine {
 
         return HttpCoreEngin.get(mContext).rxpost(NetConstant.book_share_url, new TypeReference<ResultInfo<String>>() {
         }.getType(), params, getHeaders(), false, false, false);
+
+    }
+
+
+    public Observable<ResultInfo<String>> shareMoney() {
+        Map<String, String> headers = new HashMap<>();
+        if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
+            headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
+        return HttpCoreEngin.get(mContext).rxpost(NetConstant.task_share_reward_url, new TypeReference<ResultInfo<String>>() {
+        }.getType(), null, headers, false, false, false);
 
     }
 }

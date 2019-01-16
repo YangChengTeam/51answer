@@ -53,8 +53,8 @@
                         android:layout_marginTop="@dimen/distance_10"
                         android:background="@drawable/login_corner_bg"
                         android:gravity="center"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:paddingRight="@dimen/dp_10"
+                        android:paddingLeft="@dimen/t20dp"
+                        android:paddingRight="@dimen/t20dp"
                         android:text="@string/login_register"
                         android:textColor="@color/red_f14343" />
                 </LinearLayout>
@@ -160,6 +160,7 @@
         android:layout_gravity="bottom">
 
         <TextView
+            android:id="@+id/tv_qb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

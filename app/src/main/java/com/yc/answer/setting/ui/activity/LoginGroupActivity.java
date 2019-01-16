@@ -68,6 +68,7 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
     public static final String REGISTER = "register";
     public static final String FIND_PWD = "find_pwd";
 
+    public static final String LOGIN_PHONE="login_phone";
 
     @Override
     public int getLayoutId() {
@@ -341,6 +342,7 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
             finish();
             return;
         }
+
         //栈顶存在两个
         if (getSupportFragmentManager().getBackStackEntryCount() == 2 && !LoginGroupActivity.this.isFinishing()) {
             tvTitle.setText("登录");

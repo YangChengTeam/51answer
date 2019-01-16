@@ -7,7 +7,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        app:elevation="0dp">
 
         <!--     app:layout_scrollFlags="scroll|enterAlwaysCollapsed"-->
         <android.support.design.widget.CollapsingToolbarLayout
@@ -35,14 +36,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_f5f5f5"
-
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/distance_10"
-
+            android:layout_marginTop="@dimen/distance_5"
             android:orientation="vertical">
 
             <LinearLayout
@@ -50,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
+                android:paddingTop="@dimen/dp_10"
+                android:visibility="gone">
 
                 <com.yc.answer.setting.ui.widget.BaseIncomeView
                     android:id="@+id/baseShareIncomeView"
@@ -73,6 +73,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     app:name="邀请码"
                     app:pic="@mipmap/invitation_code" />
 
@@ -86,36 +87,52 @@
 
             </LinearLayout>
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_wx"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
-                app:icon="@mipmap/setting_wx"
-                app:title="@string/care_wx_number" />
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_share"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
-                app:icon="@mipmap/setting_share"
-                app:title="@string/share_friend" />
+                <com.yc.answer.setting.ui.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_wx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_10"
+                    app:icon="@mipmap/setting_wx"
+                    app:title="@string/care_wx_number" />
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_net"
+                <com.yc.answer.setting.ui.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_10"
+                    app:icon="@mipmap/setting_share"
+                    app:title="@string/share_friend" />
+
+                <com.yc.answer.setting.ui.widget.BaseSettingView
+                    android:id="@+id/baseSettingView_net"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_10"
+                    android:visibility="gone"
+                    app:icon="@mipmap/setting_net"
+                    app:title="@string/answer_net" />
+
+
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/earning_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
-                android:visibility="gone"
-                app:icon="@mipmap/setting_net"
-                app:title="@string/answer_net" />
+                android:layout_height="match_parent" />
 
             <com.yc.answer.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
+                android:layout_marginTop="-5dp"
                 app:icon="@mipmap/setting_setting"
                 app:title="@string/setting" />
 
@@ -126,6 +143,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/distance_15"
+                android:visibility="gone"
                 android:text="51答案免责声明" />
         </LinearLayout>
 

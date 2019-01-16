@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">51答案</string>
+    <string name="app_name">答案圈</string>
 
     <string name="datum_update">资料持续更新中</string>
     <string name="after_class_answer">课后答案</string>
@@ -87,10 +87,12 @@
     <string name="get_qq">注册登录上传新书领取Q币</string>
 
     <string name="login_register">登录/注册</string>
-    <string name="look_detail">查看明细</string>
+    <string name="look_detail">提现</string>
     <string name="invitation_code">填写好友的邀请码</string>
     <string name="input_invitation_code">请输入邀请码</string>
     <string name="simple_invitation_code">填写邀请码</string>
+    <string name="verifycode_login">验证码登录</string>
+    <string name="get_code">获取验证码</string>
 
     <string-array name="small_grade">
         <item>一年级</item>

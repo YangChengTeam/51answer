@@ -17,6 +17,7 @@ import com.yc.answer.setting.contract.ShareContract;
 import com.yc.answer.setting.model.bean.ShareInfo;
 import com.yc.answer.setting.presenter.SharePresenter;
 import com.yc.answer.utils.ToastUtils;
+import com.yc.answer.utils.UserInfoHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,12 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
     TextView tvCancelShare;
 
     private ShareInfo mShareInfo;
+    private boolean mIsShareMoney;
 
+
+    public void setIsShareMoney(boolean isShareMoney) {
+        this.mIsShareMoney = isShareMoney;
+    }
 
     @Override
     public int getLayoutId() {
@@ -92,8 +98,14 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
             loadingView.dismiss();
             ToastUtils.showCenterToast(mContext, "分享成功");
             RxSPTool.putBoolean(mContext, SpConstant.SHARE_SUCCESS, true);
-            if (mShareInfo != null && !TextUtils.isEmpty(mShareInfo.getBook_id())) {
-                mPresenter.share(mShareInfo.getBook_id());
+            if (mShareInfo != null) {
+                if (mIsShareMoney) {
+                    mPresenter.shareMoney();
+                } else {
+                    if (!TextUtils.isEmpty(mShareInfo.getBook_id())) {
+                        mPresenter.share(mShareInfo);
+                    }
+                }
             }
 
 

@@ -3,9 +3,15 @@ package com.yc.answer.setting.ui.activity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.ToastUtil;
 import com.yc.answer.R;
+import com.yc.answer.utils.ToastUtils;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
 /**
@@ -35,7 +41,17 @@ public class InvitationFriendActicity extends BaseActivity {
             }
         }
         tvInvitationCode.setText(sb.toString());
+        initListener();
 
+    }
+
+    private void initListener() {
+        RxView.clicks(ivInvitationBtn).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                ToastUtils.showCenterToast(InvitationFriendActicity.this, "该功能正在完善中");
+            }
+        });
     }
 
 

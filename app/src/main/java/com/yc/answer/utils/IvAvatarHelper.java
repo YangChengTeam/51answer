@@ -29,8 +29,8 @@ public class IvAvatarHelper {
         switch (requestCode) {
             case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                 if (resultCode == RESULT_OK) {
-//                    RxPhotoTool.cropImage(MainActivity.this,data.getData() );// 裁剪图片
-                    initUCrop(activity, data.getData());
+                    RxPhotoTool.cropImage(activity,data.getData() );// 裁剪图片
+//                    initUCrop(activity, data.getData());
                 }
 
                 break;

@@ -1,6 +1,7 @@
 package com.yc.answer.setting.model.engine;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.alibaba.fastjson.TypeReference;
 import com.kk.securityhttp.domain.ResultInfo;
@@ -47,11 +48,13 @@ public class LoginGroupEngine extends BaseEngine {
      * @param password
      * @return
      */
-    public Observable<ResultInfo<TokenInfo>> login(String mobile, String password) {
+    public Observable<ResultInfo<TokenInfo>> login(String mobile, String password, String code) {
         Map<String, String> params = new HashMap<>();
         params.put("mobile", mobile);
-        params.put("password", password);
-
+        if (!TextUtils.isEmpty(password))
+            params.put("password", password);
+        if (!TextUtils.isEmpty(code))
+            params.put("code", code);
         return HttpCoreEngin.get(mContext).rxpost(NetConstant.user_login_url, new TypeReference<ResultInfo<TokenInfo>>() {
         }.getType(), params, false, false, false);
 

@@ -12,7 +12,6 @@ public interface ShareContract {
     interface View extends IView {
 
         void showSuccess();
-
     }
 
 

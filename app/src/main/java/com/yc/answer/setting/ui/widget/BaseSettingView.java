@@ -92,7 +92,12 @@ public class BaseSettingView extends BaseView {
         this.extraText = text;
     }
 
-    public void setExtraColor(int extraColor){
+    public void setTitle(CharSequence mTitle) {
+        this.mTitle = mTitle;
+        tvTitle.setText(mTitle);
+    }
+
+    public void setExtraColor(int extraColor) {
         tvExtra.setTextColor(extraColor);
     }
 

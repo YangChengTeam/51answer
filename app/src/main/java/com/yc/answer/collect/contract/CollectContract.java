@@ -20,7 +20,7 @@ public interface CollectContract {
 
         void showEnd();
 
-        void showTintInfo(String s);
+        void showTintInfo(CharSequence spanned);
     }
 
     interface Presenter extends IPresenter {

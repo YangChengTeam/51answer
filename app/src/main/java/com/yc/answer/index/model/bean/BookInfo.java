@@ -8,12 +8,22 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Index;
+import io.objectbox.annotation.Transient;
+
 /**
  * Created by wanglin private String on 2018/3/8 09;//01.
  */
-
+@Entity
 public class BookInfo implements Parcelable {
-    private String id;// 书本ID
+
+    @Id(assignable = true)
+    private long id;
+    @Index
+    @JSONField(name = "id")
+    private String bookId;// 书本ID
     private String name;// 书本名称
     private String cover_img;// 封面图片
     private String year;// 年份
@@ -31,6 +41,7 @@ public class BookInfo implements Parcelable {
 
     private int access;// 用户是否private String有权访问 0;// 无授权；1;// 有授权
     private int favorite;// 用户private String是否收藏 0;// 未收藏；1;// 已收藏
+    @Transient
     private List<VersionDetailInfo> flag;// [
     @JSONField(name = "check")
     private int state;//审核状态 1 拒绝 0 通过
@@ -39,18 +50,26 @@ public class BookInfo implements Parcelable {
 
     private String author;// 作者
     private String time;// 日期 2018-03-07
-
+    @Transient
     private List<String> answer_list;
 
     private String cover_id;//临时书本id
     private String answer_img;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 
     public String getName() {
@@ -245,6 +264,7 @@ public class BookInfo implements Parcelable {
         this.answer_img = answer_img;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -252,7 +272,7 @@ public class BookInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
+        dest.writeString(this.bookId);
         dest.writeString(this.name);
         dest.writeString(this.cover_img);
         dest.writeString(this.year);
@@ -269,18 +289,21 @@ public class BookInfo implements Parcelable {
         dest.writeString(this.pv_num);
         dest.writeInt(this.access);
         dest.writeInt(this.favorite);
-        dest.writeInt(state);
+        dest.writeList(this.flag);
+        dest.writeInt(this.state);
         dest.writeString(this.share_content);
         dest.writeString(this.author);
         dest.writeString(this.time);
         dest.writeStringList(this.answer_list);
+        dest.writeString(this.cover_id);
+        dest.writeString(this.answer_img);
     }
 
     public BookInfo() {
     }
 
     protected BookInfo(Parcel in) {
-        this.id = in.readString();
+        this.bookId = in.readString();
         this.name = in.readString();
         this.cover_img = in.readString();
         this.year = in.readString();
@@ -297,12 +320,15 @@ public class BookInfo implements Parcelable {
         this.pv_num = in.readString();
         this.access = in.readInt();
         this.favorite = in.readInt();
-        this.state = in.readInt();
+        this.flag = new ArrayList<VersionDetailInfo>();
         in.readList(this.flag, VersionDetailInfo.class.getClassLoader());
+        this.state = in.readInt();
         this.share_content = in.readString();
         this.author = in.readString();
         this.time = in.readString();
         this.answer_list = in.createStringArrayList();
+        this.cover_id = in.readString();
+        this.answer_img = in.readString();
     }
 
     public static final Parcelable.Creator<BookInfo> CREATOR = new Parcelable.Creator<BookInfo>() {
@@ -320,7 +346,7 @@ public class BookInfo implements Parcelable {
     @Override
     public String toString() {
         return "BookInfo{" +
-                "id='" + id + '\'' +
+                "bookId='" + bookId + '\'' +
                 ", name='" + name + '\'' +
                 ", cover_img='" + cover_img + '\'' +
                 ", year='" + year + '\'' +
@@ -343,6 +369,8 @@ public class BookInfo implements Parcelable {
                 ", author='" + author + '\'' +
                 ", time='" + time + '\'' +
                 ", answer_list=" + answer_list +
+                ", cover_id='" + cover_id + '\'' +
+                ", answer_img='" + answer_img + '\'' +
                 '}';
     }
 }

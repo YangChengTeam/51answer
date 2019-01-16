@@ -8,6 +8,8 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.yc.answer.R;
 import com.yc.answer.index.ui.activity.UploadAnswerActivity;
 import com.yc.answer.index.ui.activity.UploadBookActivity;
+import com.yc.answer.setting.ui.fragment.ShareFragment;
+import com.yc.answer.utils.ShareInfoHelper;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +39,15 @@ public class UploadBookIntroduceActivity extends BaseActivity {
         RxView.clicks(btnUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-           startActivity(new Intent(UploadBookIntroduceActivity.this, UploadBookActivity.class));
+                startActivity(new Intent(UploadBookIntroduceActivity.this, UploadBookActivity.class));
+            }
+        });
+        RxView.clicks(btnShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                ShareFragment shareFragment = new ShareFragment();
+                shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
+                shareFragment.show(getSupportFragmentManager(), "");
             }
         });
     }

@@ -43,4 +43,8 @@ public class SpConstant {
     public static final String OPEN_MARKET = "open_market";
 
     public static final String SHARE_SUCCESS = "share_success";
+
+    public static final String FAVORITE_ANSWERS="favorite_answers";
+
+
 }

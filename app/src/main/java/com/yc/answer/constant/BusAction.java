@@ -18,4 +18,8 @@ public class BusAction {
     public static final String SHARE_SUCCESS = "share_success";
 
     public static final String FINISH = "finish";
+
+    public static final String SHARE_MONEY_SUCCESS = "share_money_success";
+
+    public static final String LOGIN_CODE="login_code";
 }

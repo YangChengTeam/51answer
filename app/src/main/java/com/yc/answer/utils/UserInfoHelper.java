@@ -16,6 +16,7 @@ import com.yc.answer.constant.HttpStatus;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.setting.ui.activity.LoginGroupActivity;
+import com.yc.answer.setting.ui.activity.LoginGroupActivityNew;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -93,14 +94,13 @@ public class UserInfoHelper {
         } catch (Exception e) {
             RxLogTool.e("error->" + e);
         }
-
         return mToken;
     }
 
 
     public static boolean isGoToLogin(Activity activity) {
         if (!isLogin()) {
-            activity.startActivity(new Intent(activity, LoginGroupActivity.class));
+            activity.startActivity(new Intent(activity, LoginGroupActivityNew.class));
             activity.overridePendingTransition(R.anim.menu_enter, 0);
             return true;
         }
@@ -145,7 +145,6 @@ public class UserInfoHelper {
 
     public static void login(final Context context) {
         if (TextUtils.isEmpty(getToken())) return;
-
         EngineUtils.getUserInfo(context, getToken()).subscribe(new Subscriber<ResultInfo<UserInfo>>() {
             @Override
             public void onCompleted() {
@@ -185,5 +184,8 @@ public class UserInfoHelper {
     public static boolean isLogin() {
         return getUserInfo() != null;
     }
+
+
+
 
 }

@@ -39,8 +39,8 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
     }
 
 
-    public void register(String moble, String password, String code) {
-        if (TextUtils.isEmpty(moble)) {
+    public void register(String mobile, String password, String code) {
+        if (TextUtils.isEmpty(mobile)) {
             mView.showErrorAccount();
             ToastUtils.showCenterToast(mContext, "手机号码不能为空");
             return;
@@ -58,7 +58,7 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             return;
         }
         mView.showLoadingDialog("注册中，请稍候...");
-        Subscription subscription = mEngine.register(moble, code, password).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
+        Subscription subscription = mEngine.register(mobile, code, password).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
             @Override
             public void onCompleted() {
 
@@ -151,17 +151,11 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
         mSubscriptions.add(subscription);
     }
 
-    public void login(String mobile, String password) {
-
+    public void login(String mobile, String password, String code) {
 
         if (TextUtils.isEmpty(mobile)) {
             ToastUtils.showCenterToast(mContext, "手机号不能为空");
             mView.showErrorAccount();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showCenterToast(mContext, "密码不能为空");
-            mView.showErrorPassword();
             return;
         }
         if (!UIUtils.isPhoneNumber(mobile)) {
@@ -169,8 +163,14 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             mView.showErrorAccount();
             return;
         }
+        if (TextUtils.isEmpty(password) && TextUtils.isEmpty(code)) {
+            ToastUtils.showCenterToast(mContext, "密码或验证码不能为空");
+            mView.showErrorPassword();
+            return;
+        }
+
         mView.showLoadingDialog("登录中，请稍候...");
-        Subscription subscription = mEngine.login(mobile, password).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
+        Subscription subscription = mEngine.login(mobile, password, code).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
             @Override
             public void onCompleted() {
 
@@ -236,6 +236,7 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
                     if (stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
                         ToastUtils.showCenterToast(mContext, stringResultInfo.data);
                         mView.showAccountResult(UserInfoHelper.getUserInfo(), mContext.getString(R.string.reset_password));
+                        mView.finish();
                     } else {
                         ToastUtils.showCenterToast(mContext, stringResultInfo.message);
                     }
@@ -249,7 +250,7 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
 
     public void snsLogin(UserDataInfo userDataInfo) {
 
-        Subscription subscription = mEngine.snsLogin(userDataInfo.getAccessToken(), userDataInfo.getOpenid(), userDataInfo.getNickname(), userDataInfo.getIconUrl()).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
+        Subscription subscription = mEngine.snsLogin(userDataInfo.getAccessToken(), userDataInfo.getLoginType(), userDataInfo.getNickname(), userDataInfo.getIconUrl()).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
             @Override
             public void onCompleted() {
 

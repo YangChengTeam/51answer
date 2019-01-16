@@ -32,9 +32,9 @@
             android:id="@+id/ll_other_login_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/t20dp"
             android:layout_weight="0"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -82,7 +82,8 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     android:layout_weight="1"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?attr/selectableItemBackground"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -99,10 +100,10 @@
                     android:background="?attr/selectableItemBackground">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/t34dp"
+                        android:layout_height="@dimen/t34dp"
                         android:layout_centerInParent="true"
-                        android:src="@mipmap/wx" />
+                        android:src="@mipmap/wx_share" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -113,10 +114,10 @@
                     android:background="?attr/selectableItemBackground">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/t34dp"
+                        android:layout_height="@dimen/t34dp"
                         android:layout_centerInParent="true"
-                        android:src="@mipmap/qq" />
+                        android:src="@mipmap/qq_share" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -164,7 +165,8 @@
                 android:layout_alignParentRight="true"
                 android:padding="11dp"
                 android:text="注册"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
 

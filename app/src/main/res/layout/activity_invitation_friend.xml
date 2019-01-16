@@ -39,14 +39,12 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="130dp"
                 android:src="@mipmap/invitation_friend_btn" />
-
         </FrameLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/invitation_friend_rule" />
-
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

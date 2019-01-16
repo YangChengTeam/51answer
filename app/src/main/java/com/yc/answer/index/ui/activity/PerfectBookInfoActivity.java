@@ -112,7 +112,7 @@ public class PerfectBookInfoActivity extends BaseActivity<PerfectBookPresenter> 
             public void call(Void aVoid) {
                 // TODO: 2018/4/23 上传书籍相关信息
                 BookInfo bookInfo = new BookInfo();
-                bookInfo.setId(bookId);
+                bookInfo.setBookId(bookId);
                 bookInfo.setCover_img(coverImg);
                 bookInfo.setAnswer_list(anserList);
                 bookInfo.setGrade(baseGradeView.getExtraText());

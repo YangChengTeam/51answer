@@ -153,6 +153,10 @@
             android:name=".setting.ui.activity.UploadBookIntroduceActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.ui.activity.LoginGroupActivityNew"
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"

@@ -125,4 +125,23 @@ public interface NetConstant {
      * 用户反馈
      */
     String user_img_feedback_url = BaseNetConstant.getBaseUrl() + "user_img/feedback";
+
+    /**
+     * 用户任务列表
+     */
+    String task_list_url = BaseNetConstant.getBaseUrl() + "task/task_list";
+    /**
+     * 分享获取任务奖励
+     */
+    String task_share_reward_url = BaseNetConstant.getBaseUrl() + "task/share_reward";
+
+    /**
+     * 好评获取奖励
+     */
+    String task_good_comment_url = BaseNetConstant.getBaseUrl() + "task/good_comment";
+
+    /**
+     * 获取Q币
+     */
+    String user_qb_url = BaseNetConstant.getBaseUrl() + "user/qb";
 }

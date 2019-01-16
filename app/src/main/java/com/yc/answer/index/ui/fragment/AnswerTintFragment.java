@@ -41,11 +41,11 @@ public class AnswerTintFragment extends BaseDialogFragment {
             @Override
             public void call(Void aVoid) {
                 //todo分享
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    ShareFragment shareFragment = new ShareFragment();
-                    shareFragment.setShareInfo(shareInfo);
-                    shareFragment.show(getFragmentManager(), null);
-                }
+//                if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                ShareFragment shareFragment = new ShareFragment();
+                shareFragment.setShareInfo(shareInfo);
+                shareFragment.show(getFragmentManager(), null);
+//                }
                 dismiss();
             }
         });
@@ -65,8 +65,6 @@ public class AnswerTintFragment extends BaseDialogFragment {
     public int getHeight() {
         return ViewGroup.LayoutParams.WRAP_CONTENT;
     }
-
-
 
 
 }

@@ -40,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/scan_black" />
+            android:src="@mipmap/scan_black"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <TextView

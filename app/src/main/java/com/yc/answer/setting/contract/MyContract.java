@@ -1,6 +1,10 @@
 package com.yc.answer.setting.contract;
 
+import com.yc.answer.setting.model.bean.QbInfo;
+import com.yc.answer.setting.model.bean.TaskListInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
+
+import java.util.List;
 
 import yc.com.base.IDialog;
 import yc.com.base.IPresenter;
@@ -15,6 +19,10 @@ public interface MyContract {
         void showNotLogin(String b);
 
         void showUserInfo(UserInfo userInfo);
+
+        void showQbInfo(QbInfo info);
+
+        void showTaskList(List<TaskListInfo> list);
     }
 
     interface Presenter extends IPresenter {
