@@ -93,6 +93,7 @@
     <string name="simple_invitation_code">填写邀请码</string>
     <string name="verifycode_login">验证码登录</string>
     <string name="get_code">获取验证码</string>
+    <string name="click_to_skip"> 点击跳过 %d</string>
 
     <string-array name="small_grade">
         <item>一年级</item>

@@ -84,9 +84,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding:rxbinding-design:+'
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
     compile 'com.umeng.analytics:analytics:latest.integration'
-
     compile 'com.androidkun:XTabLayout:1.0.9'
-
     implementation 'com.google.android:flexbox:0.3.2'
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.yalantis:ucrop:2.2.0'
@@ -95,8 +93,7 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-1'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-1'
-//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
+    //    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile('com.github.bumptech.glide:glide:4.6.1') {
         exclude group: "com.android.support"
 
@@ -107,11 +104,11 @@ dependencies {
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.2'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     implementation 'com.android.support:cardview-v7:26.1.0'
-//    compile "io.objectbox:objectbox-android:$objectboxVersion"
-//    annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
-//    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
-//    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
-
+    //    compile "io.objectbox:objectbox-android:$objectboxVersion"
+    //    annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
+    //    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
+    //    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
+    implementation files('libs/GDTUnionSDK.4.19.574.min.jar')
 }
 repositories {
     mavenCentral()
