@@ -138,7 +138,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
         @Override
         public void run() {
-            mTv.setText(totalTime + "秒后重试");
+            mTv.setText(totalTime + "秒");
             totalTime--;
             if (totalTime < 0) {
                 //还原

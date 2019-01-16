@@ -74,12 +74,12 @@ public class CacheUtils {
     }
 
     private static String makeBaseDir(Context context) {
-        String pathname;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            pathname = Environment.getExternalStorageDirectory() + "/" + context.getPackageName();
-        } else {
-            pathname = context.getExternalCacheDir() + "/" + context.getPackageName();
-        }
+        String pathname = context.getExternalCacheDir() + "/" + context.getPackageName();
+//        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+//            pathname = Environment.getExternalStorageDirectory() + "/" + context.getPackageName();
+//        } else {
+//            pathname = context.getExternalCacheDir() + "/" + context.getPackageName();
+//        }
 
         File dir = new File(pathname);
         if (!dir.exists()) {
