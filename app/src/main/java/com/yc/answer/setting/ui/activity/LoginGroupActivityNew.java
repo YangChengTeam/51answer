@@ -134,7 +134,7 @@ public class LoginGroupActivityNew extends BaseActivity<LoginPresenter> implemen
         reWeibo.setOnClickListener(onClickListener);
         addReplaceFragment(LOGIN_PHONE, "登录", "注册");//初始化默认登录界面
         tvOtherLoginTips.setText("快捷登录");
-        showOthreLoginView(true);
+        showOthreLoginView(false);
     }
 
     /**

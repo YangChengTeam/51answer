@@ -6,4 +6,6 @@ package com.yc.answer.base;
 public class Constant {
     public static final String TENCENT_ADV_ID = "1108040759";
     public static final String SPLASH_ADV_ID = "4040153027990254";
+    public static final String BANNER_ADV_ID = "2090559097290268";
+    public static final String NATIVE_ADV_ID = "9000157170912765";
 }

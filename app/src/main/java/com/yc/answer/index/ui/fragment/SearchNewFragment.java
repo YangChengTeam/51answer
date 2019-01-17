@@ -1,13 +1,10 @@
 package com.yc.answer.index.ui.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -19,9 +16,10 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.LogUtil;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.R;
+import com.yc.answer.base.Constant;
 import com.yc.answer.base.StateView;
 import com.yc.answer.constant.BusAction;
 import com.yc.answer.constant.SpConstant;
@@ -34,21 +32,25 @@ import com.yc.answer.index.ui.adapter.SearchResultItemAdapter;
 import com.yc.answer.index.ui.widget.FilterPopWindowNew;
 import com.yc.answer.utils.UserInfoHelper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
+import yc.com.tencent_adv.AdvDispatchManager;
+import yc.com.tencent_adv.AdvType;
+import yc.com.tencent_adv.OnAdvStateListener;
 
 /**
  * Created by wanglin  on 2018/3/10 10:09.
  */
 
-public class SearchNewFragment extends BaseFragment<BookConditionPresenter> implements BookConditionContract.View {
-
+public class SearchNewFragment extends BaseFragment<BookConditionPresenter> implements BookConditionContract.View, OnAdvStateListener {
 
     @BindView(R.id.tv_grade)
     TextView tvGrade;
@@ -100,6 +102,12 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     private SearchResultItemAdapter itemAdapter;
     private TextView textView;
 
+    public static final int AD_COUNT = 2;// 加载广告的条数，取值范围为[1, 10]
+    private static final String TAG = "SearchNewFragment";
+
+    public static int FIRST_AD_POSITION = 2; // 第一条广告的位置
+    public static int SECOND_AD_POSITION = 8; // 第一条广告的位置
+    private HashMap<NativeExpressADView, Integer> mAdViewPositionMap = new HashMap<>();
 
     @Override
     public int getLayoutId() {
@@ -135,6 +143,11 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         initView();
         initAdapter();
         initListener();
+        List<Integer> positions = new ArrayList<>();
+        positions.add(FIRST_AD_POSITION);
+        positions.add(SECOND_AD_POSITION);
+        AdvDispatchManager.getManager().init(getActivity(), AdvType.ORIGIN_PIC, null, null, Constant.TENCENT_ADV_ID, Constant.NATIVE_ADV_ID, AD_COUNT, positions, this);
+
     }
 
     private void initView() {
@@ -150,6 +163,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         getData();
     }
 
+
     private void initListener() {
         itemAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -157,6 +171,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
                 getData();
             }
         }, searchRecyclerView);
+
         itemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -173,7 +188,11 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
                 textView = (TextView) view;
-                mPresenter.favoriteAnswer((BookInfo) adapter.getItem(position));
+                if (UserInfoHelper.isLogin()) {
+                    mPresenter.favoriteAnswer((BookInfo) adapter.getItem(position));
+                } else {
+                    mPresenter.saveBook((BookInfo) adapter.getItem(position));
+                }
             }
         });
         RxView.clicks(llGrade).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
@@ -260,7 +279,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
     private void initAdapter() {
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemAdapter = new SearchResultItemAdapter(null);
+        itemAdapter = new SearchResultItemAdapter(null, mAdViewPositionMap);
         searchRecyclerView.setAdapter(itemAdapter);
 
     }
@@ -346,6 +365,49 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         RxSPTool.putString(getActivity(), SpConstant.SELECT_SUBJECT, subject);
         RxSPTool.putString(getActivity(), SpConstant.SELECT_PART, part);
         RxSPTool.putString(getActivity(), SpConstant.SELECT_VERSION, version);
+
+        for (Map.Entry<NativeExpressADView, Integer> nativeExpressADViewIntegerEntry : mAdViewPositionMap.entrySet()) {
+            if (nativeExpressADViewIntegerEntry != null)
+                nativeExpressADViewIntegerEntry.getKey().destroy();
+        }
     }
+
+
+    @Override
+    public void onShow() {
+
+    }
+
+    @Override
+    public void onDismiss(long delayTime) {
+
+    }
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
+        for (Map.Entry<NativeExpressADView, Integer> nativeExpressADView : mDatas.entrySet()) {
+
+            mAdViewPositionMap.put(nativeExpressADView.getKey(), nativeExpressADView.getValue());
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.setItemType(BookInfo.ADV);
+            bookInfo.setView(nativeExpressADView.getKey());
+
+            itemAdapter.addADViewToPosition(nativeExpressADView.getValue(), bookInfo);
+        }
+    }
+
+    @Override
+    public void onNativeExpressDismiss(NativeExpressADView nativeExpressADView) {
+        if (itemAdapter != null) {
+            int removedPosition = mAdViewPositionMap.get(nativeExpressADView);
+            itemAdapter.removeADView(removedPosition, nativeExpressADView);
+        }
+    }
+
 
 }

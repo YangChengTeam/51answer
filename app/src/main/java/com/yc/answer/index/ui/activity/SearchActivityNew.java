@@ -2,6 +2,7 @@ package com.yc.answer.index.ui.activity;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.InputType;
@@ -21,9 +22,13 @@ import com.baidu.location.LocationClientOption;
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.kk.utils.LogUtil;
+import com.qq.e.ads.cfg.MultiProcessFlag;
+import com.qq.e.ads.nativ.ADSize;
+import com.qq.e.ads.nativ.NativeExpressAD;
 import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxKeyboardTool;
 import com.yc.answer.R;
+import com.yc.answer.base.Constant;
 import com.yc.answer.index.contract.SearchContract;
 import com.yc.answer.index.presenter.SearchPresenter;
 import com.yc.answer.index.ui.adapter.AutoCompleteAdapter;
@@ -38,6 +43,7 @@ import butterknife.BindView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
+import yc.com.tencent_adv.AdvDispatchManager;
 
 /**
  * Created by wanglin  on 2018/3/9 20:08.
@@ -58,7 +64,6 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
     TextView btnSearch;
     @BindView(R.id.container)
     FrameLayout container;
-
 
 
     private String code;
@@ -85,7 +90,7 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
         mPresenter = new SearchPresenter(this, this);
 
         searchNewFragment = new SearchNewFragment();
-        replaceFragment( code);
+        replaceFragment(code);
 
 //        SpanUtils.setEditTextHintSize(etSearch);
         mLocationClient = new LocationClient(getApplicationContext());
@@ -96,6 +101,7 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
 
         initListener();
     }
+
 
     private void initListener() {
         RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
@@ -285,5 +291,11 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
             int errorCode = location.getLocType();
             //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

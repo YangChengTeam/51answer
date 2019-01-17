@@ -4,9 +4,11 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.annotation.Transient;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
+
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by wanglin  on 2018/3/15 14:56.
@@ -14,7 +16,7 @@ import io.objectbox.annotation.Transient;
 
 @Entity
 public class ShareInfo implements Parcelable {
-    @Id(assignable = true)
+    @Id()
     private long id;
     private String url;
     private String title;
@@ -106,6 +108,17 @@ public class ShareInfo implements Parcelable {
         this.img = in.readString();
         this.book_id = in.readString();
         this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+    }
+
+    @Generated(hash = 1593741889)
+    public ShareInfo(long id, String url, String title, String content, String img,
+            String book_id) {
+        this.id = id;
+        this.url = url;
+        this.title = title;
+        this.content = content;
+        this.img = img;
+        this.book_id = book_id;
     }
 
     public static final Creator<ShareInfo> CREATOR = new Creator<ShareInfo>() {

@@ -9,10 +9,9 @@ import com.yc.answer.base.MyApp;
 import com.yc.answer.constant.BusAction;
 import com.yc.answer.setting.contract.ShareContract;
 import com.yc.answer.setting.model.bean.ShareInfo;
-import com.yc.answer.setting.model.bean.ShareInfo_;
+import com.yc.answer.setting.model.bean.ShareInfoDao;
 import com.yc.answer.setting.model.engine.ShareEngine;
 
-import io.objectbox.Box;
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
@@ -22,9 +21,12 @@ import yc.com.base.BasePresenter;
  */
 
 public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.View> implements ShareContract.Presenter {
+    private ShareInfoDao shareInfoDao;
+
     public SharePresenter(Context context, ShareContract.View view) {
         super(context, view);
         mEngine = new ShareEngine(context);
+        shareInfoDao = MyApp.getDaoSession().getShareInfoDao();
     }
 
     @Override
@@ -88,18 +90,18 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
     }
 
     private boolean queryShareBook(ShareInfo shareInfo) {
-        Box<ShareInfo> bookBox = MyApp.getBoxStore().boxFor(ShareInfo.class);
-        ShareInfo result = bookBox.query().equal(ShareInfo_.book_id, shareInfo.getBook_id()).build().findFirst();
+
+
+        ShareInfo result = shareInfoDao.queryBuilder().where(ShareInfoDao.Properties.Book_id.eq(shareInfo.getBook_id())).build().unique();
         return result != null;
 
     }
 
 
     private void saveShare(ShareInfo shareInfo) {
-        Box<ShareInfo> bookBox = MyApp.getBoxStore().boxFor(ShareInfo.class);
 
         if (!queryShareBook(shareInfo)) {
-            bookBox.put(shareInfo);
+            shareInfoDao.insert(shareInfo);
         }
     }
 

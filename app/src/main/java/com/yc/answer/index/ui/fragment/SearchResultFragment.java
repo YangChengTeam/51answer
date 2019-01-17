@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.yc.answer.R;
 import com.yc.answer.base.StateView;
 import com.yc.answer.index.contract.BookContract;
@@ -24,6 +25,7 @@ import com.yc.answer.index.ui.activity.AnswerDetailActivity;
 import com.yc.answer.index.ui.adapter.SearchResultItemAdapter;
 import com.yc.answer.index.ui.widget.FilterPopwindow;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -63,7 +65,7 @@ public class SearchResultFragment extends BaseFragment<BookPresenter> implements
     private int limit = 20;
     private SearchResultItemAdapter itemAdapter;
     private String code;
-
+    private HashMap<NativeExpressADView, Integer> mAdViewPositionMap = new HashMap<>();
     @Override
     public int getLayoutId() {
         return R.layout.fragment_search_result;
@@ -120,7 +122,7 @@ public class SearchResultFragment extends BaseFragment<BookPresenter> implements
 
     private void initAdapter() {
         resultRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemAdapter = new SearchResultItemAdapter(null);
+        itemAdapter = new SearchResultItemAdapter(null,mAdViewPositionMap);
         resultRecyclerView.setAdapter(itemAdapter);
 
     }

@@ -2,28 +2,28 @@ package com.yc.answer.index.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vondear.rxtools.RxImageTool;
 import com.yc.answer.R;
-import com.yc.answer.base.BaseBookView;
+import com.yc.answer.base.Constant;
+import com.yc.answer.base.TencentAdvManager;
 import com.yc.answer.base.WebActivity;
 import com.yc.answer.index.contract.IndexContract;
 import com.yc.answer.index.model.bean.BookInfo;
@@ -43,20 +43,22 @@ import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.base.StatusBarUtil;
+import yc.com.tencent_adv.AdvDispatchManager;
+import yc.com.tencent_adv.AdvType;
+import yc.com.tencent_adv.OnAdvStateListener;
 
 /**
  * Created by wanglin  on 2018/2/27 14:43.
  */
 
-public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements IndexContract.View {
+public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements IndexContract.View, OnAdvStateListener {
 
 
     @BindView(R.id.banner)
@@ -80,6 +82,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     LinearLayout llUpload;
     @BindView(R.id.view)
     View view;
+    @BindView(R.id.bottomContainer)
+    FrameLayout bottomContainer;
 
 
     private IndexBookAdapter hotItemAdapter;
@@ -95,6 +99,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 //        setStatusBar();
         mPresenter = new IndexPresenter(getActivity(), this);
 
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         hotItemAdapter = new IndexBookAdapter(null);
         recyclerView.setAdapter(hotItemAdapter);
@@ -102,6 +107,9 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         recyclerView.addItemDecoration(new MyDecoration(10, 10));
 
         banner.setFocusable(false);
+
+        TencentAdvManager.showBannerAdv(getActivity(), bottomContainer, Constant.BANNER_ADV_ID);
+        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER,bottomContainer,null,Constant.TENCENT_ADV_ID,Constant.BANNER_ADV_ID,this);
         initRefresh();
         initListener();
     }
@@ -309,4 +317,28 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     }
 
 
+    @Override
+    public void onShow() {
+
+    }
+
+    @Override
+    public void onDismiss(long delayTime) {
+
+    }
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onNativeExpressDismiss(NativeExpressADView view) {
+
+    }
+
+    @Override
+    public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
+
+    }
 }

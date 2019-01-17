@@ -12,13 +12,15 @@ import com.umeng.analytics.game.UMGameAgent;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxTool;
-import com.yc.answer.BuildConfig;
-import com.yc.answer.MyObjectBox;
 import com.yc.answer.R;
 import com.yc.answer.index.listener.GlidePauseOnScrollListener;
-
+import com.yc.answer.index.model.bean.DaoMaster;
+import com.yc.answer.index.model.bean.DaoSession;
 import com.yc.answer.index.ui.widget.GlideImageLoader;
 import com.yc.answer.utils.UserInfoHelper;
+
+import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +29,6 @@ import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
-import io.objectbox.BoxStore;
-import io.objectbox.android.AndroidObjectBrowser;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -39,7 +39,7 @@ import rx.schedulers.Schedulers;
 
 public class MyApp extends MultiDexApplication {
 
-    private static BoxStore boxStore;
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
@@ -53,15 +53,21 @@ public class MyApp extends MultiDexApplication {
         });
 
         Bugly.init(getApplicationContext(), "af5788360b", false);
-        boxStore = MyObjectBox.builder().androidContext(MyApp.this).build();
-        if (BuildConfig.DEBUG) {
-            new AndroidObjectBrowser(boxStore).start(this);
-        }
+
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "answer-db", null);
+        Database db = helper.getWritableDb();
+        DaoMaster daoMaster = new DaoMaster(db);
+        daoSession = daoMaster.newSession();
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
+
+
     }
 
 
-    public static BoxStore getBoxStore() {
-        return boxStore;
+    public static DaoSession getDaoSession() {
+        return daoSession;
     }
 
     private void init() {
@@ -70,7 +76,7 @@ public class MyApp extends MultiDexApplication {
         UMGameAgent.init(this);
         UMGameAgent.setPlayerLevel(1);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-        PlatformConfig.setWeixin("wx622cbf19fcb00f29", "4aa67b15c55411749dddfbad0cd66798");
+        PlatformConfig.setWeixin("wxf80e368f5707d8ab", "133811fd0a1c77d289731fdbd56a786b");
         PlatformConfig.setQQZone("1108013607", "2mun88jc6IlVjy1A");
 
 //        Config.DEBUG = true;

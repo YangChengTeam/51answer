@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
+import yc.com.tencent_adv.AdvDispatchManager;
 
 
 public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener, BaseBottomView.onTabSelectedListener {
@@ -175,6 +176,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             }
 
         }
+
+        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
