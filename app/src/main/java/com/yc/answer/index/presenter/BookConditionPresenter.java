@@ -7,7 +7,6 @@ import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.LogUtil;
 import com.vondear.rxtools.RxNetTool;
-import com.yc.ac.index.model.bean.BookInfoDao;
 import com.yc.answer.base.MyApp;
 import com.yc.answer.constant.BusAction;
 import com.yc.answer.index.contract.BookConditionContract;
