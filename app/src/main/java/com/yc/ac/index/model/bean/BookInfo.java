@@ -13,6 +13,8 @@ import org.greenrobot.greendao.annotation.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by wanglin private String on 2018/3/8 09;//01.
  */
@@ -55,6 +57,7 @@ public class BookInfo implements Parcelable {
 
     private String cover_id;//临时书本id
     private String answer_img;
+    private long saveTime;
 
     public long getId() {
         return id;
@@ -265,6 +268,14 @@ public class BookInfo implements Parcelable {
     }
 
 
+    public long getSaveTime() {
+        return saveTime;
+    }
+
+    public void setSaveTime(long saveTime) {
+        this.saveTime = saveTime;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -329,6 +340,38 @@ public class BookInfo implements Parcelable {
         this.answer_list = in.createStringArrayList();
         this.cover_id = in.readString();
         this.answer_img = in.readString();
+    }
+
+    @Generated(hash = 329383499)
+    public BookInfo(long id, String bookId, String name, String cover_img, String year, String version,
+            String period, String part_type, String grade, String subject, String press, String code, int is_del,
+            String sort, String share_num, String pv_num, int access, int favorite, int state,
+            String share_content, String author, String time, String cover_id, String answer_img, long saveTime) {
+        this.id = id;
+        this.bookId = bookId;
+        this.name = name;
+        this.cover_img = cover_img;
+        this.year = year;
+        this.version = version;
+        this.period = period;
+        this.part_type = part_type;
+        this.grade = grade;
+        this.subject = subject;
+        this.press = press;
+        this.code = code;
+        this.is_del = is_del;
+        this.sort = sort;
+        this.share_num = share_num;
+        this.pv_num = pv_num;
+        this.access = access;
+        this.favorite = favorite;
+        this.state = state;
+        this.share_content = share_content;
+        this.author = author;
+        this.time = time;
+        this.cover_id = cover_id;
+        this.answer_img = answer_img;
+        this.saveTime = saveTime;
     }
 
     public static final Parcelable.Creator<BookInfo> CREATOR = new Parcelable.Creator<BookInfo>() {

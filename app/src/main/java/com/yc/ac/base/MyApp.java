@@ -1,5 +1,6 @@
 package com.yc.ac.base;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.multidex.MultiDexApplication;
@@ -12,13 +13,14 @@ import com.umeng.analytics.game.UMGameAgent;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxTool;
-import com.yc.ac.BuildConfig;
-import com.yc.ac.MyObjectBox;
 import com.yc.ac.R;
 import com.yc.ac.index.listener.GlidePauseOnScrollListener;
-
+import com.yc.ac.index.model.bean.DaoMaster;
+import com.yc.ac.index.model.bean.DaoSession;
 import com.yc.ac.index.ui.widget.GlideImageLoader;
 import com.yc.ac.utils.UserInfoHelper;
+
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +29,6 @@ import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
-import io.objectbox.BoxStore;
-import io.objectbox.android.AndroidObjectBrowser;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -39,7 +39,8 @@ import rx.schedulers.Schedulers;
 
 public class MyApp extends MultiDexApplication {
 
-    private static BoxStore boxStore;
+
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
@@ -55,15 +56,18 @@ public class MyApp extends MultiDexApplication {
         Bugly.init(getApplicationContext(), "af5788360b", false);
 
 
-        boxStore = MyObjectBox.builder().androidContext(MyApp.this).build();
-        if (BuildConfig.DEBUG) {
-            new AndroidObjectBrowser(boxStore).start(this);
-        }
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "answer-circle-db", null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster dm = new DaoMaster(db);
+
+        daoSession = dm.newSession();
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
     }
 
 
-    public static BoxStore getBoxStore() {
-        return boxStore;
+    public static DaoSession getDaoSession() {
+        return daoSession;
     }
 
     private void init() {

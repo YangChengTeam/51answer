@@ -10,11 +10,11 @@ import com.yc.ac.collect.contract.CollectContract;
 import com.yc.ac.collect.model.engine.CollectEngine;
 import com.yc.ac.constant.HttpStatus;
 import com.yc.ac.index.model.bean.BookInfo;
+import com.yc.ac.index.model.bean.BookInfoDao;
 import com.yc.ac.index.model.bean.BookInfoWrapper;
 
 import java.util.List;
 
-import io.objectbox.Box;
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
@@ -94,13 +94,10 @@ public class CollectPresenter extends BasePresenter<CollectEngine, CollectContra
 
     private List<BookInfo> queryCollectBooks() {
 
-        Box<BookInfo> bookIBox = MyApp.getBoxStore().boxFor(BookInfo.class);
+        BookInfoDao infoDao = MyApp.getDaoSession().getBookInfoDao();
 
 
-        List<BookInfo> bookInfos = bookIBox.query().build().find();
-
-//
-        return bookInfos;
+        return infoDao.queryBuilder().orderDesc(BookInfoDao.Properties.SaveTime).build().list();
 
     }
 }

@@ -11,14 +11,13 @@ import com.yc.ac.base.MyApp;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.index.contract.AnswerDetailContract;
 import com.yc.ac.index.model.bean.BookInfo;
-import com.yc.ac.index.model.bean.BookInfo_;
+import com.yc.ac.index.model.bean.BookInfoDao;
 import com.yc.ac.index.model.engine.AnswerDetailEngine;
 import com.yc.ac.setting.model.bean.ShareInfo;
-import com.yc.ac.setting.model.bean.ShareInfo_;
+import com.yc.ac.setting.model.bean.ShareInfoDao;
 import com.yc.ac.utils.EngineUtils;
 import com.yc.ac.utils.ToastUtils;
 
-import io.objectbox.Box;
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
@@ -28,10 +27,13 @@ import yc.com.base.BasePresenter;
  */
 
 public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, AnswerDetailContract.View> implements AnswerDetailContract.Presenter {
+    private BookInfoDao infoDao;
+
     public AnswerDetailPresenter(Context context, AnswerDetailContract.View view) {
         super(context, view);
         mEngine = new AnswerDetailEngine(context);
 
+        infoDao = MyApp.getDaoSession().getBookInfoDao();
     }
 
     @Override
@@ -132,15 +134,16 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
         }
 
         boolean isCollect;
-        Box<BookInfo> bookBox = MyApp.getBoxStore().boxFor(BookInfo.class);
+
         if (queryBook(bookInfo)) {
             //删除
-            bookBox.remove(bookInfo);
+            infoDao.delete(bookInfo);
             bookInfo.setFavorite(0);
             isCollect = false;
         } else {
             //保存
-            bookBox.put(bookInfo);
+            bookInfo.setSaveTime(System.currentTimeMillis());
+            infoDao.insert(bookInfo);
             bookInfo.setFavorite(1);
             isCollect = true;
         }
@@ -151,14 +154,14 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
 
 
     private boolean queryBook(BookInfo bookInfo) {
-        Box<BookInfo> bookBox = MyApp.getBoxStore().boxFor(BookInfo.class);
-        BookInfo result = bookBox.query().equal(BookInfo_.bookId, bookInfo.getBookId()).build().findFirst();
+
+        BookInfo result = infoDao.queryBuilder().where(BookInfoDao.Properties.BookId.eq(bookInfo.getBookId())).build().unique();
         return result != null;
     }
 
     private boolean queryShareBook(String bookId) {
-        Box<ShareInfo> bookBox = MyApp.getBoxStore().boxFor(ShareInfo.class);
-        ShareInfo result = bookBox.query().equal(ShareInfo_.book_id, bookId).build().findFirst();
+        ShareInfoDao shareInfoDao = MyApp.getDaoSession().getShareInfoDao();
+        ShareInfo result = shareInfoDao.queryBuilder().where(ShareInfoDao.Properties.Book_id.eq(bookId)).build().unique();
         return result != null;
     }
 

@@ -6,9 +6,11 @@ import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.vondear.rxtools.RxNetTool;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.index.contract.BookConditionContract;
 import com.yc.ac.index.model.bean.BookInfo;
+import com.yc.ac.index.model.bean.BookInfoDao;
 import com.yc.ac.index.model.bean.BookInfoWrapper;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 import com.yc.ac.index.model.engine.BookConditionEngine;
@@ -27,9 +29,12 @@ import yc.com.base.BasePresenter;
  */
 
 public class BookConditionPresenter extends BasePresenter<BookConditionEngine, BookConditionContract.View> implements BookConditionContract.Presenter {
+    private BookInfoDao infoDao;
+
     public BookConditionPresenter(Context context, BookConditionContract.View view) {
         super(context, view);
         mEngine = new BookConditionEngine(context);
+        infoDao = MyApp.getDaoSession().getBookInfoDao();
     }
 
     @Override
@@ -158,5 +163,19 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
             }
         });
         mSubscriptions.add(subscription);
+    }
+
+    
+    private void createBookDatas(List<BookInfo> bookInfos){
+        if (bookInfos==null) return;
+
+        for (int i = 0; i < bookInfos.size(); i++) {
+            
+        }
+        
+    }
+
+    public List<BookInfo> getLocalBooks() {
+        return infoDao.queryBuilder().build().list();
     }
 }

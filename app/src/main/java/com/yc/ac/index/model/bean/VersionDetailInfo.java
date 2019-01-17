@@ -1,7 +1,5 @@
 package com.yc.ac.index.model.bean;
 
-import io.objectbox.annotation.Entity;
-
 /**
  * Created by wanglin  on 2018/3/7 17:18.
  */

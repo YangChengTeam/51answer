@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Transient;
+import org.greenrobot.greendao.annotation.Generated;
 
 
 /**
@@ -107,6 +108,17 @@ public class ShareInfo implements Parcelable {
         this.img = in.readString();
         this.book_id = in.readString();
         this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+    }
+
+    @Generated(hash = 1593741889)
+    public ShareInfo(long id, String url, String title, String content, String img,
+            String book_id) {
+        this.id = id;
+        this.url = url;
+        this.title = title;
+        this.content = content;
+        this.img = img;
+        this.book_id = book_id;
     }
 
     public static final Creator<ShareInfo> CREATOR = new Creator<ShareInfo>() {
