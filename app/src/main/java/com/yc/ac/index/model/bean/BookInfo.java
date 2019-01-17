@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
+import org.greenrobot.greendao.annotation.Transient;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.annotation.Index;
-import io.objectbox.annotation.Transient;
 
 /**
  * Created by wanglin private String on 2018/3/8 09;//01.
@@ -19,7 +19,7 @@ import io.objectbox.annotation.Transient;
 @Entity
 public class BookInfo implements Parcelable {
 
-    @Id(assignable = true)
+    @Id
     private long id;
     @Index
     @JSONField(name = "id")

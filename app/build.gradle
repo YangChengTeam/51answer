@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'kotlin-android'
-apply plugin: 'io.objectbox' // apply last
+//apply plugin: 'io.objectbox' // apply last
 //apply plugin: 'kotlin-kapt'
 //apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion 26
@@ -107,6 +107,7 @@ dependencies {
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.2'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation "org.greenrobot:greendao:$greendao_version"
 //    compile "io.objectbox:objectbox-android:$objectboxVersion"
 //    annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
 //    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"

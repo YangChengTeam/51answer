@@ -53,6 +53,8 @@ public class MyApp extends MultiDexApplication {
         });
 
         Bugly.init(getApplicationContext(), "af5788360b", false);
+
+
         boxStore = MyObjectBox.builder().androidContext(MyApp.this).build();
         if (BuildConfig.DEBUG) {
             new AndroidObjectBrowser(boxStore).start(this);
