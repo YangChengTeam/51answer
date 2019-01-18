@@ -94,7 +94,7 @@ public class LoginGroupEngine extends BaseEngine {
         params.put("face", face);
         params.put("user_id", UserInfoHelper.isLogin() ? UserInfoHelper.getUserInfo().getId() : "0");
         return HttpCoreEngin.get(mContext).rxpost(NetConstant.user_sns_url, new TypeReference<ResultInfo<TokenInfo>>() {
-        }.getType(), params, true, true, true);
+        }.getType(), params, false, false, false);
 
     }
 

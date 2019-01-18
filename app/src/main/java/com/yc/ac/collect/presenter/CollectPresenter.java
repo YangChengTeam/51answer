@@ -82,6 +82,15 @@ public class CollectPresenter extends BasePresenter<CollectEngine, CollectContra
 
                     }
                 } else {
+                    List<BookInfo> bookInfos = queryCollectBooks();
+                    if (bookInfos != null && bookInfos.size() > 0) {
+                        BookInfoWrapper wrapper = new BookInfoWrapper();
+                        wrapper.setCount(bookInfos.size());
+                        wrapper.setLists(bookInfos);
+                        mView.hide();
+                        mView.showCollectList(wrapper);
+                        return;
+                    }
                     if (page == 1) mView.showNoNet();
                 }
             }
@@ -95,7 +104,6 @@ public class CollectPresenter extends BasePresenter<CollectEngine, CollectContra
     private List<BookInfo> queryCollectBooks() {
 
         BookInfoDao infoDao = MyApp.getDaoSession().getBookInfoDao();
-
 
         return infoDao.queryBuilder().orderDesc(BookInfoDao.Properties.SaveTime).build().list();
 

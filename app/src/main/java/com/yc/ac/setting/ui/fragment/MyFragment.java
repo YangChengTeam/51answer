@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
@@ -290,6 +291,35 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
                 //申请提现
                 ApplyDepositFragment applyDepositFragment = new ApplyDepositFragment();
                 applyDepositFragment.show(getFragmentManager(), "");
+            }
+        });
+
+        taskListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+                    startActivity(new Intent(getActivity(), InvitationActivity.class));
+                } else if (position == 1) {
+                    startTime = System.currentTimeMillis();
+                    //好评赚钱
+                    try {
+                        Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
+                    }
+                } else if (position == 2) {
+                    //分享赚钱
+                    ShareFragment shareFragment = new ShareFragment();
+                    shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
+                    shareFragment.setIsShareMoney(true);
+                    shareFragment.show(getFragmentManager(), null);
+                } else if (position == 3) {
+
+                }
             }
         });
 
