@@ -3,14 +3,11 @@ package com.yc.ac.setting.ui.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,11 +16,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.LogUtil;
 import com.kk.utils.ToastUtil;
 import com.vondear.rxtools.RxPhotoTool;
 import com.vondear.rxtools.RxSPTool;
@@ -39,13 +36,10 @@ import com.yc.ac.setting.model.bean.TaskListInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.MyPresenter;
 import com.yc.ac.setting.ui.activity.BindPhoneActivity;
-import com.yc.ac.setting.ui.activity.EarningsDetailActivity;
 import com.yc.ac.setting.ui.activity.InvitationActivity;
-import com.yc.ac.setting.ui.activity.InvitationFriendActicity;
 import com.yc.ac.setting.ui.activity.LoginGroupActivity;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.activity.StatementActivity;
-import com.yc.ac.setting.ui.activity.UploadBookIntroduceActivity;
 import com.yc.ac.setting.ui.adapter.TaskListAdapter;
 import com.yc.ac.setting.ui.widget.BaseIncomeView;
 import com.yc.ac.setting.ui.widget.BaseSettingView;
@@ -62,13 +56,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
-
-import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 
 /**
@@ -303,37 +293,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
 
-        taskListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                TaskListInfo taskListInfo = taskListAdapter.getItem(position);
-                if (taskListInfo != null && !TextUtils.isEmpty(taskListInfo.getName())) {
-                    if (taskListInfo.getName().contains("邀请")) {
-                        startActivity(new Intent(getActivity(), InvitationFriendActicity.class));
-                    } else if (taskListInfo.getName().contains("好评")) {
-                        startTime = System.currentTimeMillis();
-                        //好评赚钱
-                        try {
-                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
-                        }
-                    } else if (taskListInfo.getName().contains("分享")) {
-                        ShareFragment shareFragment = new ShareFragment();
-                        shareFragment.setIsShareMoney(true);
-                        shareFragment.show(getActivity().getSupportFragmentManager(), "");
-                    } else if (taskListInfo.getName().contains("上传")) {
-                        startActivity(new Intent(getActivity(), UploadBookIntroduceActivity.class));
-                    }
-
-                }
-            }
-        });
-
 
     }
 
@@ -416,6 +375,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
 
     @Override
     public void showTaskList(List<TaskListInfo> list) {
+        LogUtil.msg("desp: list " + list.size());
         taskListAdapter.setNewData(list);
     }
 

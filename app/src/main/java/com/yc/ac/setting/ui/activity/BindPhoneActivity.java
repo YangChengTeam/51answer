@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -29,7 +30,7 @@ import yc.com.base.BaseActivity;
 
 public class BindPhoneActivity extends BaseActivity<BindPhonePresenter> implements BindPhoneContract.View {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.et_account)

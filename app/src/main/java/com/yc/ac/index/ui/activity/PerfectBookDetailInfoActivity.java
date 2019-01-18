@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -33,7 +34,7 @@ import yc.com.base.BaseActivity;
 
 public class PerfectBookDetailInfoActivity extends BaseActivity {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.tv_ok)

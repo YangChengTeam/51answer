@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -45,7 +46,7 @@ import yc.com.base.BaseActivity;
 
 public class EarningsDetailActivity extends BaseActivity<TaskListPresenter> implements TaskListContract.View {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.baseSettingView_new_book)

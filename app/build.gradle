@@ -77,7 +77,7 @@ dependencies {
     implementation project(':share')
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.jakewharton.rxbinding:rxbinding:+'
     implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:+'

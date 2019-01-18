@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -36,7 +37,7 @@ import yc.com.base.BaseActivity;
 
 public class UploadBookActivity extends BaseActivity<UploadPresenter> implements UploadContract.View {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
 

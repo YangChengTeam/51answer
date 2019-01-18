@@ -9,6 +9,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -47,7 +48,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     @BindView(R.id.stateView)
     StateView stateView;
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.smartRefreshLayout)

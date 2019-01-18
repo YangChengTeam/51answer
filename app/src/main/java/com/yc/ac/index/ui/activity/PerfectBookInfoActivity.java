@@ -3,6 +3,7 @@ package com.yc.ac.index.ui.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -29,7 +30,7 @@ import yc.com.base.BaseActivity;
 
 public class PerfectBookInfoActivity extends BaseActivity<PerfectBookPresenter> implements PerfectBookContract.View {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.baseBookView)

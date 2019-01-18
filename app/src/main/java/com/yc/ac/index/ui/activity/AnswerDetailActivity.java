@@ -55,7 +55,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
 
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.stateView)

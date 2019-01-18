@@ -54,7 +54,7 @@ import yc.com.base.BaseActivity;
 
 public class SearchCodeActivity extends BaseActivity<SearchPresenter> implements SearchContract.View {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
 
     @BindView(R.id.et_search)
     AppCompatAutoCompleteTextView etSearch;

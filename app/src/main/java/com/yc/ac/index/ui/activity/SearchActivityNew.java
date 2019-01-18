@@ -45,7 +45,7 @@ import yc.com.base.BaseActivity;
 
 public class SearchActivityNew extends BaseActivity<SearchPresenter> implements SearchContract.View {
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.iv_search)
     ImageView ivSearch;
     @BindView(R.id.et_search)

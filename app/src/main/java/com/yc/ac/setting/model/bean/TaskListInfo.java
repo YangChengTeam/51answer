@@ -1,7 +1,5 @@
 package com.yc.ac.setting.model.bean;
 
-import java.util.List;
-
 /**
  * Created by wanglin  on 2018/9/13 17:43.
  */

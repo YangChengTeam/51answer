@@ -1,6 +1,7 @@
 package com.yc.ac.index.ui.activity;
 
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -20,7 +21,7 @@ public class ScanTintActivity extends BaseActivity {
     @BindView(R.id.iv_bg)
     ImageView ivBg;
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.iv_know)
