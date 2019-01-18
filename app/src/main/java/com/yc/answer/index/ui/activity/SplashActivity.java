@@ -1,29 +1,16 @@
 package com.yc.answer.index.ui.activity;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.qq.e.ads.nativ.NativeExpressADView;
-import com.qq.e.ads.splash.SplashAD;
-import com.qq.e.ads.splash.SplashADListener;
-import com.qq.e.comm.util.AdError;
 import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxSPTool;
@@ -33,15 +20,11 @@ import com.yc.answer.base.MainActivity;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.index.ui.widget.SelectGradeView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
 import yc.com.tencent_adv.AdvDispatchManager;
