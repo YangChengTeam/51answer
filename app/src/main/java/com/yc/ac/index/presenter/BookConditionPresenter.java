@@ -5,6 +5,7 @@ import android.content.Context;
 import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.kk.utils.LogUtil;
 import com.vondear.rxtools.RxNetTool;
 import com.yc.ac.base.MyApp;
 import com.yc.ac.constant.BusAction;
@@ -108,7 +109,8 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
                 if (bookInfoWrapperResultInfo != null && bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK) {
                     if (bookInfoWrapperResultInfo.data != null && bookInfoWrapperResultInfo.data.getLists() != null) {
                         mView.hide();
-                        mView.showBookInfoList(bookInfoWrapperResultInfo.data.getLists());
+//                        mView.showBookInfoList(bookInfoWrapperResultInfo.data.getLists());
+                        createBookData(bookInfoWrapperResultInfo.data.getLists());
                     } else {
                         if (page == 1)
                             mView.showNoData();
@@ -165,17 +167,62 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
         mSubscriptions.add(subscription);
     }
 
-    
-    private void createBookDatas(List<BookInfo> bookInfos){
-        if (bookInfos==null) return;
 
-        for (int i = 0; i < bookInfos.size(); i++) {
-            
+    private void createBookData(List<BookInfo> bookInfoList) {
+        if (bookInfoList == null) return;
+        for (BookInfo bookInfo : bookInfoList) {
+
+            List<BookInfo> localBooks = getLocalBooks();
+            if (localBooks != null) {
+                for (BookInfo localBook : localBooks) {
+                    if (localBook.getBookId().equals(bookInfo.getBookId())) {
+                        bookInfo.setFavorite(1);
+                        break;
+                    }
+                }
+            }
+            try {
+                bookInfo.setId(Long.parseLong(bookInfo.getBookId()));
+            } catch (Exception e) {
+                LogUtil.msg("error:  " + e.getMessage());
+            }
+//            bookInfo.setItemType(BookInfo.CONTENT);
         }
-        
+        mView.showBookInfoList(bookInfoList);
+
     }
 
-    public List<BookInfo> getLocalBooks() {
+    public void saveBook(BookInfo bookInfo) {
+        if (bookInfo == null) {
+            ToastUtils.showCenterToast(mContext, "收藏的答案为空");
+            return;
+        }
+
+        boolean isCollect;
+
+        if (queryBook(bookInfo)) {
+            //删除
+            infoDao.delete(bookInfo);
+            bookInfo.setFavorite(0);
+            isCollect = false;
+        } else {
+            //保存
+            bookInfo.setSaveTime(System.currentTimeMillis());
+            infoDao.insert(bookInfo);
+            bookInfo.setFavorite(1);
+            isCollect = true;
+        }
+        mView.showFavoriteResult(isCollect);
+        RxBus.get().post(BusAction.COLLECT, "list");
+
+    }
+
+    private boolean queryBook(BookInfo bookInfo) {
+        BookInfo result = infoDao.queryBuilder().where(BookInfoDao.Properties.BookId.eq(bookInfo.getBookId())).build().unique();
+        return result != null;
+    }
+
+    private List<BookInfo> getLocalBooks() {
         return infoDao.queryBuilder().build().list();
     }
 }

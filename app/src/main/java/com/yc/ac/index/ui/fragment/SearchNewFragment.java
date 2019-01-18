@@ -173,7 +173,11 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
                 textView = (TextView) view;
-                mPresenter.favoriteAnswer((BookInfo) adapter.getItem(position));
+                if (UserInfoHelper.isLogin()) {
+                    mPresenter.favoriteAnswer((BookInfo) adapter.getItem(position));
+                } else {
+                    mPresenter.saveBook((BookInfo) adapter.getItem(position));
+                }
             }
         });
         RxView.clicks(llGrade).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
