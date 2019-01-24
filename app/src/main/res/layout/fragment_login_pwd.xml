@@ -15,7 +15,7 @@
             style="@style/LoginEditTextInputStyle"
             android:layout_weight="1"
             android:hint="请输入密码登录"
-            android:inputType="number|textMultiLine"
+            android:inputType="textPassword"
             android:maxLength="11" />
 
         <ImageView

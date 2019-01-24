@@ -3,11 +3,14 @@ package com.yc.ac.setting.ui.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -27,6 +30,7 @@ import com.vondear.rxtools.RxPhotoTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.view.dialog.RxDialogEditSureCancel;
 import com.yc.ac.R;
+import com.yc.ac.base.StateView;
 import com.yc.ac.base.WebActivity;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.constant.SpConstant;
@@ -38,9 +42,11 @@ import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.MyPresenter;
 import com.yc.ac.setting.ui.activity.BindPhoneActivity;
 import com.yc.ac.setting.ui.activity.InvitationActivity;
+import com.yc.ac.setting.ui.activity.InvitationFriendActicity;
 import com.yc.ac.setting.ui.activity.LoginGroupActivity;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.activity.StatementActivity;
+import com.yc.ac.setting.ui.activity.UploadBookIntroduceActivity;
 import com.yc.ac.setting.ui.adapter.TaskListAdapter;
 import com.yc.ac.setting.ui.widget.BaseIncomeView;
 import com.yc.ac.setting.ui.widget.BaseSettingView;
@@ -57,9 +63,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
+
+import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 
 /**
@@ -79,12 +89,8 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     LinearLayout llHead;
     @BindView(R.id.toolbarWarpper)
     FrameLayout toolbarWarpper;
-    @BindView(R.id.baseSettingView_wx)
-    BaseSettingView baseSettingViewWx;
-    @BindView(R.id.baseSettingView_share)
-    BaseSettingView baseSettingViewShare;
-    @BindView(R.id.baseSettingView_net)
-    BaseSettingView baseSettingViewNet;
+
+
     @BindView(R.id.baseSettingView_setting)
     BaseSettingView baseSettingViewSetting;
     @BindView(R.id.ll_primary_school)
@@ -99,20 +105,16 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     LinearLayout llNotLogin;
     @BindView(R.id.ll_login)
     LinearLayout llLogin;
-    @BindView(R.id.baseShareIncomeView)
-    BaseIncomeView baseShareIncomeView;
-    @BindView(R.id.baseReputationIncomeView)
-    BaseIncomeView baseReputationIncomeView;
-    @BindView(R.id.baseInvitationIncomeView)
-    BaseIncomeView baseInvitationIncomeView;
-    @BindView(R.id.baseDepositIncomeView)
-    BaseIncomeView baseDepositIncomeView;
+
     @BindView(R.id.tv_detail)
     TextView tvDetail;
     @BindView(R.id.tv_qb)
     TextView tvQb;
     @BindView(R.id.earning_recyclerView)
     RecyclerView earningRecyclerView;
+    @BindView(R.id.stateView)
+    StateView stateView;
+
 
     private TaskListAdapter taskListAdapter;
 
@@ -139,17 +141,13 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     }
 
     private void initListener() {
-        RxView.clicks(baseSettingViewWx).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), LoginGroupActivity.class));
-            }
-        });
+
 
         RxView.clicks(baseSettingViewSetting).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), SettingActivity.class));
+                if (!UserInfoHelper.isGoToLogin(getActivity()))
+                    startActivity(new Intent(getActivity(), SettingActivity.class));
             }
         });
 
@@ -188,13 +186,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
 
-        RxView.clicks(baseSettingViewWx).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                FollowWeiXinPopupWindow followWeiXinPopupWindow = new FollowWeiXinPopupWindow(getActivity());
-                followWeiXinPopupWindow.show();
-            }
-        });
 
         RxView.clicks(llPrimarySchool).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
@@ -212,23 +203,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
 
-        RxView.clicks(baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                ShareFragment shareFragment = new ShareFragment();
-                shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                shareFragment.show(getFragmentManager(), null);
-            }
-        });
-
-        RxView.clicks(baseSettingViewNet).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", "http://m.upkao.com/zk/");
-                startActivity(intent);
-            }
-        });
 
         RxView.clicks(tvStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
@@ -236,54 +210,8 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
                 startActivity(new Intent(getActivity(), StatementActivity.class));
             }
         });
-        RxView.clicks(baseShareIncomeView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
 
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    //分享赚钱
-                    ShareFragment shareFragment = new ShareFragment();
-                    shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                    shareFragment.setIsShareMoney(true);
-                    shareFragment.show(getFragmentManager(), null);
-                }
 
-            }
-        });
-        RxView.clicks(baseReputationIncomeView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-
-                startTime = System.currentTimeMillis();
-                //好评赚钱
-                try {
-                    Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
-                }
-            }
-        });
-        RxView.clicks(baseInvitationIncomeView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                //邀请码
-//if (UserInfoHelper.isGoToLogin(getActivity())){}
-                startActivity(new Intent(getActivity(), InvitationActivity.class));
-            }
-        });
-
-        RxView.clicks(baseDepositIncomeView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                //申请提现
-                ApplyDepositFragment applyDepositFragment = new ApplyDepositFragment();
-                applyDepositFragment.show(getFragmentManager(), "");
-            }
-        });
         RxView.clicks(tvDetail).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -294,36 +222,36 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
 
-        taskListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        taskListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (position == 0) {
-                    startActivity(new Intent(getActivity(), InvitationActivity.class));
-                } else if (position == 1) {
-                    startTime = System.currentTimeMillis();
-                    //好评赚钱
-                    try {
-                        Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                TaskListInfo taskListInfo = taskListAdapter.getItem(position);
+                if (taskListInfo != null && !TextUtils.isEmpty(taskListInfo.getName())) {
+                    if (taskListInfo.getName().contains("邀请")) {
+                        startActivity(new Intent(getActivity(), InvitationFriendActicity.class));
+                    } else if (taskListInfo.getName().contains("好评")) {
+                        startTime = System.currentTimeMillis();
+                        //好评赚钱
+                        try {
+                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
+                        }
+                    } else if (taskListInfo.getName().contains("分享")) {
+                        ShareFragment shareFragment = new ShareFragment();
+                        shareFragment.setIsShareMoney(true);
+                        shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
+                        shareFragment.show(getActivity().getSupportFragmentManager(), "");
+                    } else if (taskListInfo.getName().contains("上传")) {
+                        startActivity(new Intent(getActivity(), UploadBookIntroduceActivity.class));
                     }
-                } else if (position == 2) {
-                    //分享赚钱
-                    ShareFragment shareFragment = new ShareFragment();
-                    shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                    shareFragment.setIsShareMoney(true);
-                    shareFragment.show(getFragmentManager(), null);
-                } else if (position == 3) {
-
                 }
             }
         });
-
-
     }
 
     private void showDioloag() {
@@ -455,4 +383,23 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     }
 
 
+    @Override
+    public void hide() {
+        stateView.hide();
+    }
+
+    @Override
+    public void showNoData() {
+        stateView.showNoData(earningRecyclerView);
+    }
+
+    @Override
+    public void showNoNet() {
+        stateView.showNoNet(earningRecyclerView, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getTaskInfoList(true);
+            }
+        });
+    }
 }

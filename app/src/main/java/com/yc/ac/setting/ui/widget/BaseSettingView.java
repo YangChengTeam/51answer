@@ -98,7 +98,6 @@ public class BaseSettingView extends BaseView {
     }
 
     public void setExtraColor(int extraColor) {
-//        this.
         tvExtra.setTextColor(extraColor);
     }
 

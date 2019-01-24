@@ -27,6 +27,8 @@ import com.yc.ac.index.ui.adapter.UploadAnswerAdapter;
 import com.yc.ac.index.ui.fragment.PhotoFragment;
 import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.model.bean.UploadInfo;
+import com.yc.ac.utils.GlideHelper;
+import com.yc.ac.utils.IvAvatarHelper;
 import com.yc.ac.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -153,11 +155,13 @@ public class UploadAnswerActivity extends BaseActivity<UploadPresenter> implemen
     }
 
     private void choseCamera() {
-        FunctionConfig config = new FunctionConfig.Builder()
-                .setMutiSelectMaxSize(16)
-                .build();
-        //带配置
-        GalleryFinal.openCamera(100, config, mOnHanlderResultCallback);
+//        FunctionConfig config = new FunctionConfig.Builder()
+//                .setMutiSelectMaxSize(16)
+//                .build();
+//        //带配置
+//        GalleryFinal.openCamera(100, config, mOnHanlderResultCallback);
+
+        RxPhotoTool.openCameraImage(this);
     }
 
     private void chosePhoto() {
@@ -200,5 +204,33 @@ public class UploadAnswerActivity extends BaseActivity<UploadPresenter> implemen
             })
     public void finishSelf(String finish) {
         finish();
+    }
+
+    private String path;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+
+            case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
+                if (resultCode == RESULT_OK) {
+                    /* data.getExtras().get("data");*/
+//                    RxPhotoTool.cropImage(ActivityUser.this, RxPhotoTool.imageUriFromCamera);// 裁剪图片
+                    IvAvatarHelper.initUCrop(UploadAnswerActivity.this, RxPhotoTool.imageUriFromCamera);
+                }
+
+                break;
+
+            case UCrop.REQUEST_CROP://UCrop裁剪之后的处理
+                if (resultCode == RESULT_OK) {
+                    Uri resultUri = UCrop.getOutput(data);
+                    path = RxPhotoTool.getImageAbsolutePath(UploadAnswerActivity.this, resultUri);
+                    mPresenter.getOssInfo(path, "answer", bookId);
+//                    GlideImageLoader.loadImage(UploadBookIntroduceActivity.this, path, ivYourCover, R.mipmap.add_cover);
+                }
+                break;
+        }
+
     }
 }

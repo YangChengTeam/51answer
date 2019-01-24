@@ -20,7 +20,6 @@ public class GlideHelper {
         options.placeholder(placeHolder).error(placeHolder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true);
         if (isCenterCrop) {
             options.centerCrop();
-
         }
         Glide.with(context).load(path).apply(options).thumbnail(0.1f).into(imageView);
     }

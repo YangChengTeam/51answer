@@ -44,7 +44,9 @@ public class SpConstant {
 
     public static final String SHARE_SUCCESS = "share_success";
 
-    public static final String FAVORITE_ANSWERS="favorite_answers";
+    public static final String FAVORITE_ANSWERS = "favorite_answers";
+
+    public static final String TASK_INFOS = "task_infos";
 
 
 }

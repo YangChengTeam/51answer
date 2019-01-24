@@ -10,6 +10,7 @@ import com.yc.ac.index.ui.activity.UploadAnswerActivity;
 import com.yc.ac.index.ui.activity.UploadBookActivity;
 import com.yc.ac.setting.ui.fragment.ShareFragment;
 import com.yc.ac.utils.ShareInfoHelper;
+import com.yc.ac.utils.UserInfoHelper;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +40,8 @@ public class UploadBookIntroduceActivity extends BaseActivity {
         RxView.clicks(btnUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                startActivity(new Intent(UploadBookIntroduceActivity.this, UploadBookActivity.class));
+                if (!UserInfoHelper.isGoToLogin(UploadBookIntroduceActivity.this))
+                    startActivity(new Intent(UploadBookIntroduceActivity.this, UploadBookActivity.class));
             }
         });
         RxView.clicks(btnShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {

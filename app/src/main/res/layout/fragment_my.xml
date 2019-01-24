@@ -45,87 +45,21 @@
             android:layout_marginTop="@dimen/distance_5"
             android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10"
-                android:visibility="gone">
+                android:minHeight="150dp">
 
-                <com.yc.ac.setting.ui.widget.BaseIncomeView
-                    android:id="@+id/baseShareIncomeView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:name="分享赚钱"
-                    app:pic="@mipmap/share_income" />
-
-                <com.yc.ac.setting.ui.widget.BaseIncomeView
-                    android:id="@+id/baseReputationIncomeView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:name="好评赚钱"
-                    app:pic="@mipmap/reputation_income" />
-
-                <com.yc.ac.setting.ui.widget.BaseIncomeView
-                    android:id="@+id/baseInvitationIncomeView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:name="邀请码"
-                    app:pic="@mipmap/invitation_code" />
-
-                <com.yc.ac.setting.ui.widget.BaseIncomeView
-                    android:id="@+id/baseDepositIncomeView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:name="申请提现"
-                    app:pic="@mipmap/deposit" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <com.yc.ac.setting.ui.widget.BaseSettingView
-                    android:id="@+id/baseSettingView_wx"
+                <com.yc.ac.base.StateView
+                    android:id="@+id/stateView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_10"
-                    app:icon="@mipmap/setting_wx"
-                    app:title="@string/care_wx_number" />
+                    android:layout_height="match_parent" />
 
-                <com.yc.ac.setting.ui.widget.BaseSettingView
-                    android:id="@+id/baseSettingView_share"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/earning_recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_10"
-                    app:icon="@mipmap/setting_share"
-                    app:title="@string/share_friend" />
-
-                <com.yc.ac.setting.ui.widget.BaseSettingView
-                    android:id="@+id/baseSettingView_net"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_10"
-                    android:visibility="gone"
-                    app:icon="@mipmap/setting_net"
-                    app:title="@string/answer_net" />
-
-
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/earning_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
 
             <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_setting"

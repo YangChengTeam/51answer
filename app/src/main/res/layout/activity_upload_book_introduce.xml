@@ -1,93 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_top" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_second" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_top" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_third" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_second" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_four" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_third" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_five" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_four" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_six" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_five" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_seven" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_six" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/upload_book_eight" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_seven" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/upload_book_eight" />
+
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/upload_book_nine" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/distance_5"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10">
 
-                <Button
-                    android:id="@+id/btn_share"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/t40dp"
-                    android:layout_marginRight="@dimen/distance_5"
-                    android:layout_weight="1"
-                    android:background="@drawable/blue_cirlcle_bg"
-                    android:text="通知好友"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btn_upload"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/t40dp"
-                    android:layout_marginLeft="@dimen/distance_5"
-                    android:layout_weight="1"
-                    android:background="@drawable/red_cirlcle_bg"
-                    android:text="上传答案"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-        </FrameLayout>
+        </LinearLayout>
 
 
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/distance_5"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10">
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/t40dp"
+            android:layout_marginRight="@dimen/distance_5"
+            android:layout_weight="1"
+            android:background="@drawable/blue_cirlcle_bg"
+            android:text="通知好友"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/t40dp"
+            android:layout_marginLeft="@dimen/distance_5"
+            android:layout_weight="1"
+            android:background="@drawable/red_cirlcle_bg"
+            android:text="上传答案"
+            android:textColor="@color/white" />
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

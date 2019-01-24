@@ -2,8 +2,12 @@ package com.yc.ac.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 
 import com.hwangjr.rxbus.RxBus;
 import com.vondear.rxtools.RxPhotoTool;
@@ -29,17 +33,18 @@ public class IvAvatarHelper {
         switch (requestCode) {
             case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                 if (resultCode == RESULT_OK) {
-                    RxPhotoTool.cropImage(activity,data.getData() );// 裁剪图片
+                    RxPhotoTool.cropImage(activity, data.getData(),RxPhotoTool.GET_IMAGE_FROM_PHONE);// 裁剪图片
 //                    initUCrop(activity, data.getData());
                 }
 
                 break;
             case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                 if (resultCode == RESULT_OK) {
-                   /* data.getExtras().get("data");*/
-//                    RxPhotoTool.cropImage(ActivityUser.this, RxPhotoTool.imageUriFromCamera);// 裁剪图片
-                    initUCrop(activity, RxPhotoTool.imageUriFromCamera);
+
+                    RxPhotoTool.cropImage(activity, RxPhotoTool.imageUriFromCamera,RxPhotoTool.GET_IMAGE_BY_CAMERA);// 裁剪图片
                 }
+
+//                    initUCrop(activity, RxPhotoTool.imageUriFromCamera);
 
                 break;
             case RxPhotoTool.CROP_IMAGE://普通裁剪后的处理
@@ -97,7 +102,7 @@ public class IvAvatarHelper {
 
         UCrop.of(uri, destinationUri)
                 .withAspectRatio(1, 1)
-                .withMaxResultSize(1000, 1000)
+                .withMaxResultSize(500, 500)
                 .withOptions(options)
                 .start(activity);
     }

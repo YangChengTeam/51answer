@@ -1,7 +1,9 @@
 package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,6 +18,7 @@ import com.vondear.rxtools.RxActivityTool;
 import com.vondear.rxtools.RxPhotoTool;
 import com.yalantis.ucrop.UCrop;
 import com.yc.ac.R;
+import com.yc.ac.base.MainActivity;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.index.contract.UploadContract;
 import com.yc.ac.index.model.bean.BookInfo;
@@ -105,14 +108,14 @@ public class UploadBookActivity extends BaseActivity<UploadPresenter> implements
         switch (requestCode) {
             case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                 if (resultCode == RESULT_OK) {
-//                    RxPhotoTool.cropImage(MainActivity.this,data.getData() );// 裁剪图片
+//                    RxPhotoTool.cropImage(UploadBookActivity.this, data.getData(), RxPhotoTool.GET_IMAGE_FROM_PHONE);// 裁剪图片
                     IvAvatarHelper.initUCrop(UploadBookActivity.this, data.getData());
                 }
 
                 break;
             case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                 if (resultCode == RESULT_OK) {
-                   /* data.getExtras().get("data");*/
+                    /* data.getExtras().get("data");*/
 //                    RxPhotoTool.cropImage(ActivityUser.this, RxPhotoTool.imageUriFromCamera);// 裁剪图片
                     IvAvatarHelper.initUCrop(UploadBookActivity.this, RxPhotoTool.imageUriFromCamera);
                 }
@@ -122,6 +125,7 @@ public class UploadBookActivity extends BaseActivity<UploadPresenter> implements
                 path = RxPhotoTool.getImageAbsolutePath(UploadBookActivity.this, RxPhotoTool.cropImageUri);
 
                 GlideHelper.loadImage(UploadBookActivity.this, path, ivYourCover, R.mipmap.add_cover);
+                mPresenter.getOssInfo(path, "cover", "");
                 break;
 
             case UCrop.REQUEST_CROP://UCrop裁剪之后的处理

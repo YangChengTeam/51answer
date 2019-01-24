@@ -128,11 +128,11 @@ public class StateView extends BaseView {
         setVisibility(View.VISIBLE);
         mContentView.setVisibility(View.GONE);
         tvMess.setText(message);
-        ivLoading.setVisibility(VISIBLE);
+        ivLoading.setVisibility(GONE);
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.override(RxImageTool.dp2px(256 / 3), RxImageTool.dp2px(256 / 3));
 
-        Glide.with(this).load(R.mipmap.base_no_wifi).apply(requestOptions).into(ivLoading);
+//        Glide.with(this).load(R.mipmap.base_no_wifi).apply(requestOptions).into(ivLoading);
 
 
         RxView.clicks(rlContainer).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {

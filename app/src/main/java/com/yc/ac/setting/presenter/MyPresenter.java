@@ -3,6 +3,7 @@ package com.yc.ac.setting.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.TypeReference;
 import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
@@ -15,6 +16,7 @@ import com.yc.ac.setting.contract.MyContract;
 import com.yc.ac.setting.model.bean.QbInfoWrapper;
 import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.TaskLisInfoWrapper;
+import com.yc.ac.setting.model.bean.TaskListInfo;
 import com.yc.ac.setting.model.bean.UploadInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.utils.EngineUtils;
@@ -23,10 +25,12 @@ import com.yc.ac.utils.ToastUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.io.File;
+import java.util.List;
 
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
+import yc.com.base.CommonInfoHelper;
 import yc.com.base.UIUtils;
 
 /**
@@ -199,8 +203,27 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
         mSubscriptions.add(subscription);
     }
 
+    private boolean has_data = false;
 
     public void getTaskInfoList(final boolean isReload) {
+
+        CommonInfoHelper.getO(mContext, SpConstant.TASK_INFOS, new TypeReference<List<TaskListInfo>>() {
+        }.getType(), new CommonInfoHelper.onParseListener<List<TaskListInfo>>() {
+
+            @Override
+            public void onParse(List<TaskListInfo> o) {
+                if (o != null) {
+                    mView.hide();
+                    has_data = true;
+                    mView.showTaskList(o);
+                }
+            }
+
+            @Override
+            public void onFail(String json) {
+
+            }
+        });
 
         Subscription subscription = EngineUtils.getTaskInfoList(mContext).subscribe(new Subscriber<ResultInfo<TaskLisInfoWrapper>>() {
             @Override
@@ -211,7 +234,8 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
             @Override
             public void onError(Throwable e) {
 //                if (!isReload)
-//                    mView.showNoNet();
+                if (!has_data)
+                    mView.showNoNet();
             }
 
             @Override
@@ -219,16 +243,18 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
                 if (taskLisInfoWrapperResultInfo != null) {
 
                     if (taskLisInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && taskLisInfoWrapperResultInfo.data != null) {
-//                        mView.hide();
-                        mView.showTaskList(taskLisInfoWrapperResultInfo.data.getList());
+                        mView.hide();
+                        List<TaskListInfo> taskListInfos = taskLisInfoWrapperResultInfo.data.getList();
+                        CommonInfoHelper.setO(mContext, taskListInfos, SpConstant.TASK_INFOS);
+                        mView.showTaskList(taskListInfos);
                     } else {
-//                        if (!isReload)
-//                            mView.showNoData();
-                        ToastUtils.showCenterToast(mContext, taskLisInfoWrapperResultInfo.message);
+                        if (!has_data)
+                            mView.showNoData();
+//                        ToastUtils.showCenterToast(mContext, taskLisInfoWrapperResultInfo.message);
                     }
                 } else {
-//                    if (!isReload)
-//                        mView.showNoNet();
+                    if (!has_data)
+                        mView.showNoNet();
                     ToastUtils.showCenterToast(mContext, HttpConfig.NET_ERROR);
                 }
             }
@@ -236,4 +262,6 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
 
         mSubscriptions.add(subscription);
     }
+
+
 }

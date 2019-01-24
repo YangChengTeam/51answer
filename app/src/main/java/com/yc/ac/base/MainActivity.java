@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -157,13 +158,14 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
      * Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS
      */
     private void applyPermission() {
-        RxPermissionsTool.
-                with(this).
-                addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
-                addPermission(Manifest.permission.CAMERA).
-                addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
-                addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
-                initPermission();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+            RxPermissionsTool.
+                    with(this).
+                    addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
+                    addPermission(Manifest.permission.CAMERA).
+                    addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
+                    addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
+                    initPermission();
     }
 
     @Override

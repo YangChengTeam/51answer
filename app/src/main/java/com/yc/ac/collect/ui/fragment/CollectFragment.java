@@ -2,12 +2,14 @@ package com.yc.ac.collect.ui.fragment;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.Spanned;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,10 +18,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
+import com.jakewharton.rxbinding.view.RxView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yc.ac.R;
 import com.yc.ac.base.StateView;
 import com.yc.ac.collect.contract.CollectContract;
@@ -33,7 +39,12 @@ import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.utils.UserInfoHelper;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 
 /**
@@ -53,6 +64,10 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     TextView commonTvTitle;
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.iv_photograph)
+    ImageView ivPhotograph;
+    @BindView(R.id.iv_word)
+    ImageView ivWord;
 
 
     private IndexBookAdapter indexBookAdapter;
@@ -111,9 +126,32 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
                 startActivity(intent);
             }
         });
+        RxView.clicks(ivPhotograph).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                switchSmallProcedure("wx622cbf19fcb00f29", "gh_ae8f66b61fcb");
+            }
+        });
+
+        RxView.clicks(ivWord).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                switchSmallProcedure("wx622cbf19fcb00f29", "gh_85f8523be35e");
+            }
+        });
 
     }
 
+
+    private void switchSmallProcedure(String appId, String originId) {
+        IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
+
+        WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+        req.userName = originId; // 填小程序原始id
+//                    req.path = path;                  //拉起小程序页面的可带参路径，不填默认拉起小程序首页
+        req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
+        api.sendReq(req);
+    }
 
     @Override
     public void showCollectList(BookInfoWrapper data) {
@@ -188,7 +226,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
 
     @Override
     public void showNoNet() {
-        stateView.showNoNet(smartRefreshLayout, new View.OnClickListener() {
+        stateView.showNoNet(smartRefreshLayout, "在首页搜索需要的书籍\n点击进入收藏即可哦", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getData(false);
@@ -229,4 +267,6 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
             }
         });
     }
+
+
 }
