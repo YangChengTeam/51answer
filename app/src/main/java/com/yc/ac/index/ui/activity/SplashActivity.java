@@ -57,18 +57,22 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void init() {
-        if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
-            rlSelectGrade.setVisibility(View.GONE);
-            iv.setVisibility(View.VISIBLE);
-            switchActivity();
 
-        } else {
-            RxSPTool.putBoolean(this, SpConstant.IS_FIRST_OPEN, true);
-            rlSelectGrade.setVisibility(View.VISIBLE);
-            iv.setVisibility(View.GONE);
-        }
-        initSelectView();
-        initListener();
+        rlSelectGrade.setVisibility(View.GONE);
+        iv.setVisibility(View.VISIBLE);
+        switchActivity();
+//        if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
+//            rlSelectGrade.setVisibility(View.GONE);
+//            iv.setVisibility(View.VISIBLE);
+//            switchActivity();
+//
+//        } else {
+//            RxSPTool.putBoolean(this, SpConstant.IS_FIRST_OPEN, true);
+//            rlSelectGrade.setVisibility(View.VISIBLE);
+//            iv.setVisibility(View.GONE);
+//        }
+//        initSelectView();
+//        initListener();
     }
 
     private void switchActivity() {
