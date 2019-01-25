@@ -13,4 +13,6 @@ public interface OnRxScanerListener {
     void onFail(String type, String message);
 
     void onInput();
+
+    void onHelpClick();
 }
