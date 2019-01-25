@@ -10,19 +10,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.vondear.rxtools.view.RxToast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static com.vondear.rxtools.RxFileTool.getDataColumn;
@@ -32,7 +43,6 @@ import static com.vondear.rxtools.RxFileTool.isGooglePhotosUri;
 import static com.vondear.rxtools.RxFileTool.isMediaDocument;
 
 /**
- *
  * @author vondear
  * @date 2016/1/24
  */
@@ -43,6 +53,8 @@ public class RxPhotoTool {
     public static final int CROP_IMAGE = 5003;
     public static Uri imageUriFromCamera;
     public static Uri cropImageUri;
+
+    private static final String TAG = "RxPhotoTool";
 
     public static void openCameraImage(final Activity activity) {
         imageUriFromCamera = createImagePathUri(activity);
@@ -67,9 +79,13 @@ public class RxPhotoTool {
     }
 
     public static void openLocalImage(final Activity activity) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        activity.startActivityForResult(intent, GET_IMAGE_FROM_PHONE);
+
+        Intent intent = new Intent(Intent.ACTION_PICK); // 打开相册
+        intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
         activity.startActivityForResult(intent, GET_IMAGE_FROM_PHONE);
     }
 
@@ -80,8 +96,8 @@ public class RxPhotoTool {
         fragment.startActivityForResult(intent, GET_IMAGE_FROM_PHONE);
     }
 
-    public static void cropImage(Activity activity, Uri srcUri) {
-        cropImageUri = createImagePathUri(activity);
+    public static void cropImage(Activity activity, Uri srcUri, int type) {
+
 
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(srcUri, "image/*");
@@ -108,11 +124,32 @@ public class RxPhotoTool {
 
         // return-data为true时,会直接返回bitmap数据,但是大图裁剪时会出现问题,推荐下面为false时的方式
         // return-data为false时,不会返回bitmap,但需要指定一个MediaStore.EXTRA_OUTPUT保存图片uri
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropImageUri);
+
         intent.putExtra("return-data", true);
 
+        if (GET_IMAGE_BY_CAMERA == type) {
+
+            cropImageUri = createImagePathUri(activity);
+
+        } else if (GET_IMAGE_FROM_PHONE == type) {
+            String status = Environment.getExternalStorageState();
+
+            String cropTempName;
+            if (status.equals(Environment.MEDIA_MOUNTED)) {// 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
+                cropTempName = Environment.getExternalStorageDirectory().getPath()
+                        + "/" + System.currentTimeMillis() + "_crop_temp.jpg";
+            } else {
+                cropTempName = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() +
+                        File.separator + System.currentTimeMillis() + "_crop_temp.jpg";
+            }
+            cropImageUri = Uri.fromFile(new File(cropTempName));
+        }
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropImageUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         activity.startActivityForResult(intent, CROP_IMAGE);
     }
+
 
     public static void cropImage(Fragment fragment, Uri srcUri) {
         cropImageUri = createImagePathUri(fragment.getContext());
@@ -143,10 +180,11 @@ public class RxPhotoTool {
         // return-data为true时,会直接返回bitmap数据,但是大图裁剪时会出现问题,推荐下面为false时的方式
         // return-data为false时,不会返回bitmap,但需要指定一个MediaStore.EXTRA_OUTPUT保存图片uri
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cropImageUri);
-        intent.putExtra("return-data", true);
+        intent.putExtra("return-data", false);
 
         fragment.startActivityForResult(intent, CROP_IMAGE);
     }
+
 
     /**
      * 创建一条图片地址uri,用于保存拍照后的照片
@@ -154,7 +192,8 @@ public class RxPhotoTool {
      * @param context
      * @return 图片的uri
      */
-    public static Uri createImagePathUri(final Context context) {
+
+    private static Uri createImagePathUri(final Context context) {
         final Uri[] imageFilePath = {null};
 
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -162,25 +201,41 @@ public class RxPhotoTool {
             imageFilePath[0] = Uri.parse("");
             RxToast.error("请先获取写入SDCard权限");
         } else {
+            //拍照前保存一条uri的地址
             String status = Environment.getExternalStorageState();
             SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);
             long time = System.currentTimeMillis();
             String imageName = timeFormatter.format(new Date(time));
-            // ContentValues是我们希望这条记录被创建时包含的数据信息
-            ContentValues values = new ContentValues(3);
-            values.put(MediaStore.Images.Media.DISPLAY_NAME, imageName);
-            values.put(MediaStore.Images.Media.DATE_TAKEN, time);
-            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            String fileName;
+            String parentPath;
 
             if (status.equals(Environment.MEDIA_MOUNTED)) {// 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
-                imageFilePath[0] = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                parentPath = Environment.getExternalStorageDirectory().getPath();
             } else {
-                imageFilePath[0] = context.getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, values);
+                parentPath = context.getExternalCacheDir().getPath();
             }
+
+            fileName = parentPath + File.separator + imageName + ".png";
+            imageFilePath[0] = getUriForFile(context, new File(fileName));
         }
 
-        Log.i("", "生成的照片输出路径：" + imageFilePath[0].toString());
+        Log.i(TAG, "生成的照片输出路径：" + imageFilePath[0].toString());
         return imageFilePath[0];
+    }
+
+    private static Uri getUriForFile(Context context, File file) {
+        if (context == null || file == null) {
+            throw new NullPointerException();
+        }
+        Uri uri;
+
+        //判断是否是AndroidN以及更高的版本
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//如果SDK版本>=24，即：Build.VERSION.SDK_INT >= 24
+            uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        return uri;
     }
 
 

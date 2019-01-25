@@ -1785,6 +1785,7 @@ public class RxFileTool {
 
     /**
      * 将文件转换成uri(支持7.0)
+     *
      * @param mContext
      * @param file
      * @return
@@ -1936,6 +1937,7 @@ public class RxFileTool {
     }
 
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+
         Cursor cursor = null;
         String column = MediaStore.Images.Media.DATA;
         String[] projection = {column};
@@ -1949,6 +1951,7 @@ public class RxFileTool {
             if (cursor != null)
                 cursor.close();
         }
+//        }
         return null;
     }
 

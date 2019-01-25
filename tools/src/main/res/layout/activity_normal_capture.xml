@@ -66,10 +66,10 @@
             android:layout_marginBottom="@dimen/t23dp"
             android:drawableLeft="@drawable/capture_no_find"
             android:drawablePadding="@dimen/t5dp"
+            android:onClick="btn"
             android:text="找不到？"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/t14sp"
-            android:visibility="gone" />
+            android:textSize="@dimen/t14sp" />
     </LinearLayout>
 
     <RelativeLayout

@@ -260,6 +260,10 @@ public class ActivityScanerCodeNew extends ActivityBase {
             if (mScanerListener != null) {
                 mScanerListener.onInput();
             }
+        } else if (viewId == R.id.help_iv) {
+            if (mScanerListener != null) {
+                mScanerListener.onHelpClick();
+            }
         }
     }
 
