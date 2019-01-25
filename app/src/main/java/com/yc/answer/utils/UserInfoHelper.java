@@ -12,8 +12,10 @@ import com.vondear.rxtools.RxLogTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 import com.yc.answer.R;
+import com.yc.answer.base.Constant;
 import com.yc.answer.constant.HttpStatus;
 import com.yc.answer.constant.SpConstant;
+import com.yc.answer.index.model.bean.AdvInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.setting.ui.activity.LoginGroupActivity;
 import com.yc.answer.setting.ui.activity.LoginGroupActivityNew;
@@ -186,6 +188,27 @@ public class UserInfoHelper {
     }
 
 
+    public static void getAdvInfo(final Context context) {
+        EngineUtils.getAdvInfo(context).subscribe(new Subscriber<ResultInfo<AdvInfo>>() {
+            @Override
+            public void onCompleted() {
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<AdvInfo> advInfoResultInfo) {
+                if (advInfoResultInfo != null && advInfoResultInfo.code == HttpConfig.STATUS_OK && advInfoResultInfo.data != null) {
+                    AdvInfo advInfo = advInfoResultInfo.data;
+
+                    RxSPTool.putString(context, Constant.ADV_INFO, JSON.toJSONString(advInfo));
+                }
+            }
+        });
+    }
 
 }

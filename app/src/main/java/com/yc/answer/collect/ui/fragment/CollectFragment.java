@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
+import com.kk.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -60,6 +61,8 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     private int limit = 15;
     private TextView tvCollectCount;
 
+    private static final String TAG = "CollectFragment";
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_collect;
@@ -82,6 +85,8 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         initListener();
         initRefresh();
         getData(false);
+
+        LogUtil.msg("tag  " + TAG);
 
     }
 

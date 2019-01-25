@@ -11,6 +11,7 @@ import com.kk.securityhttp.engin.HttpCoreEngin;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.securityhttp.net.entry.UpFileInfo;
 import com.yc.answer.constant.NetConstant;
+import com.yc.answer.index.model.bean.AdvInfo;
 import com.yc.answer.index.model.bean.BookInfo;
 import com.yc.answer.index.model.bean.BookInfoWrapper;
 import com.yc.answer.setting.model.bean.QbInfoWrapper;
@@ -241,6 +242,16 @@ public class EngineUtils {
         return HttpCoreEngin.get(context).rxpost(NetConstant.task_list_url, new TypeReference<ResultInfo<TaskLisInfoWrapper>>() {
         }.getType(), null,headers, false, false, false);
 
+    }
+
+
+    public static Observable<ResultInfo<AdvInfo>> getAdvInfo(Context context){
+        Map<String, String> headers = new HashMap<>();
+        if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
+            headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
+
+        return HttpCoreEngin.get(context).rxpost(NetConstant.adv_url, new TypeReference<ResultInfo<AdvInfo>>() {
+        }.getType(), null,headers, false, false, false);
     }
 
 }

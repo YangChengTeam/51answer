@@ -104,6 +104,7 @@ public class MyApp extends MultiDexApplication {
             params.put("app_version", GoagalInfo.get().packageInfo.versionCode + "");
         }
         HttpConfig.setDefaultParams(params);
+        UserInfoHelper.getAdvInfo(this);
 
     }
 

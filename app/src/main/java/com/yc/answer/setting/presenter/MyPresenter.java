@@ -3,18 +3,21 @@ package com.yc.answer.setting.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.TypeReference;
 import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.ToastUtil;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.answer.base.BaseEngine;
+import com.yc.answer.base.Constant;
 import com.yc.answer.constant.BusAction;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.setting.contract.MyContract;
 import com.yc.answer.setting.model.bean.QbInfoWrapper;
 import com.yc.answer.setting.model.bean.ShareInfo;
 import com.yc.answer.setting.model.bean.TaskLisInfoWrapper;
+import com.yc.answer.setting.model.bean.TaskListInfo;
 import com.yc.answer.setting.model.bean.UploadInfo;
 import com.yc.answer.setting.model.bean.UserInfo;
 import com.yc.answer.utils.EngineUtils;
@@ -23,10 +26,12 @@ import com.yc.answer.utils.ToastUtils;
 import com.yc.answer.utils.UserInfoHelper;
 
 import java.io.File;
+import java.util.List;
 
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
+import yc.com.base.CommonInfoHelper;
 import yc.com.base.UIUtils;
 
 /**
@@ -202,6 +207,22 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
 
     public void getTaskInfoList(final boolean isReload) {
 
+        CommonInfoHelper.getO(mContext, Constant.TASK_INFOS, new TypeReference<List<TaskListInfo>>() {
+        }.getType(), new CommonInfoHelper.onParseListener<List<TaskListInfo>>() {
+            @Override
+            public void onParse(List<TaskListInfo> o) {
+                if (o != null) {
+                    mView.showTaskList(o);
+                }
+            }
+
+            @Override
+            public void onFail(String json) {
+
+            }
+        });
+
+
         Subscription subscription = EngineUtils.getTaskInfoList(mContext).subscribe(new Subscriber<ResultInfo<TaskLisInfoWrapper>>() {
             @Override
             public void onCompleted() {
@@ -221,6 +242,7 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
                     if (taskLisInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && taskLisInfoWrapperResultInfo.data != null) {
 //                        mView.hide();
                         mView.showTaskList(taskLisInfoWrapperResultInfo.data.getList());
+                        CommonInfoHelper.setO(mContext, taskLisInfoWrapperResultInfo.data.getList(), Constant.TASK_INFOS);
                     } else {
 //                        if (!isReload)
 //                            mView.showNoData();

@@ -1,7 +1,13 @@
 package com.yc.answer.index.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
@@ -23,8 +30,10 @@ import com.yc.answer.index.ui.widget.SelectGradeView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
 import yc.com.tencent_adv.AdvDispatchManager;
@@ -65,6 +74,9 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
 
     @Override
     public void init() {
+
+//        setInstallPermission();
+
         if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
             rlSelectGrade.setVisibility(View.GONE);
             iv.setVisibility(View.VISIBLE);
@@ -76,7 +88,6 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
             iv.setVisibility(View.GONE);
         }
         initSelectView();
-
     }
 
     private void switchActivity(long delay) {
@@ -113,17 +124,16 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
         middleGradeView.setContents(Arrays.asList(getResources().getStringArray(R.array.middle_grade)));
         seniorGradeView.setContents(Arrays.asList(getResources().getStringArray(R.array.senior_grade)));
 
-//        smallGradeView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                smallGradeView.click(0);
-//                RxSPTool.putString(SplashActivity.this, SpConstant.SELECT_GRADE, smallGrades.get(0));
-//                switchActivity();
-//            }
-//        });
+
         setSelectState(smallGradeView);
         setSelectState(middleGradeView);
         setSelectState(seniorGradeView);
+        RxView.clicks(tvSkip).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                switchActivity(Time);
+            }
+        });
 
     }
 
@@ -202,6 +212,52 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    /**
+     * 8.0以上系统设置安装未知来源权限
+     */
+    public void setInstallPermission() {
+        boolean haveInstallPermission;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //先判断是否有安装未知来源应用的权限
+            haveInstallPermission = getPackageManager().canRequestPackageInstalls();
+            if (!haveInstallPermission) {
+
+                //                            //此方法需要API>=26才能使用
+
+                new AlertDialog.Builder(this).setTitle("提示").setMessage("请允许安装未知应用权限").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            toInstallPermissionSettingIntent();
+                        }
+                    }
+                }).show();
+                return;
+            }
+        }
+    }
+
+    private static int INSTALL_PERMISS_CODE = 10000;
+
+    /**
+     * 开启安装未知来源权限
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void toInstallPermissionSettingIntent() {
+        Uri packageURI = Uri.parse("package:" + getPackageName());
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+        startActivityForResult(intent, INSTALL_PERMISS_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == INSTALL_PERMISS_CODE) {
+//            Toast.makeText(this, "安装应用", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

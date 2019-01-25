@@ -68,8 +68,6 @@ import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
 
-import static com.umeng.socialize.utils.ContextUtil.getPackageName;
-
 
 /**
  * Created by wanglin  on 2018/3/7 13:53.
@@ -314,7 +312,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
                         startTime = System.currentTimeMillis();
                         //好评赚钱
                         try {
-                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                            Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);

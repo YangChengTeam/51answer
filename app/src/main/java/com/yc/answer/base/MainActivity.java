@@ -3,15 +3,22 @@ package com.yc.answer.base;
 import android.Manifest;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -25,6 +32,7 @@ import com.yc.answer.collect.ui.fragment.CollectFragment;
 import com.yc.answer.constant.SpConstant;
 import com.yc.answer.index.ui.activity.ScanTintActivity;
 import com.yc.answer.index.ui.fragment.IndexFragmentNew;
+import com.yc.answer.index.ui.fragment.MainAdvFragment;
 import com.yc.answer.setting.ui.fragment.MyFragment;
 import com.yc.answer.utils.ActivityScanHelper;
 import com.yc.answer.utils.IvAvatarHelper;
@@ -70,6 +78,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mList = new ArrayList<>();
         mList.add(new IndexFragmentNew());
         mList.add(new CollectFragment());
+        mList.add(new MainAdvFragment());
         mList.add(new MyFragment());
 
 
@@ -78,15 +87,16 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
         mMainViewPager.setAdapter(mainAdapter); //视图加载适配器
         mMainViewPager.addOnPageChangeListener(this);
-        mMainViewPager.setOffscreenPageLimit(2);
+        mMainViewPager.setOffscreenPageLimit(3);
         mMainViewPager.setCurrentItem(0);
 
-        mainBottomNavigationBar.setMode(BottomNavigationBar.MODE_DEFAULT);
+        mainBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         mainBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
 //        mainBottomNavigationBar.setBarBackgroundColor(android.R.color.transparent);
 
         mainBottomNavigationBar.addItem((new BottomNavigationItem(R.mipmap.index_select, getString(R.string.main_index)).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.index_unselect))).setInActiveColorResource(R.color.gray_bfbfbf).setActiveColorResource(R.color.red_f14343))
                 .addItem((new BottomNavigationItem(R.mipmap.collect_select, getString(R.string.main_collect)).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.collect_unselect))).setInActiveColorResource(R.color.gray_bfbfbf).setActiveColorResource(R.color.red_f14343))
+                .addItem((new BottomNavigationItem(R.mipmap.main_tab_my_selected, getString(R.string.main1vs1)).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.main_tab_task))).setInActiveColorResource(R.color.gray_bfbfbf).setActiveColorResource(R.color.red_f14343))
                 .addItem((new BottomNavigationItem(R.mipmap.my_select, getString(R.string.main_my)).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.my_unselect))).setInActiveColorResource(R.color.gray_bfbfbf).setActiveColorResource(R.color.red_f14343))
                 .setFirstSelectedPosition(0)
                 .initialise();
@@ -157,13 +167,15 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
      * Manifest.permission.SET_DEBUG_APP,
      * Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS
      */
+
     private void applyPermission() {
         RxPermissionsTool.
                 with(this).
-                addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
                 addPermission(Manifest.permission.CAMERA).
-                addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
-                addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
+                addPermission(Manifest.permission.ACCESS_NETWORK_STATE).
+                addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .addPermission(Manifest.permission.READ_PHONE_STATE)
+                .addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
                 initPermission();
     }
 
@@ -177,7 +189,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
         }
 
-        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -185,6 +197,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         IvAvatarHelper.onActivityResult(this, requestCode, resultCode, data);
+
     }
 
     @Override
@@ -230,4 +243,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     protected void setStatusBar() {
         StatusBarUtil.setTranslucentForImageViewInFragment(this, null);
     }
+
+
 }

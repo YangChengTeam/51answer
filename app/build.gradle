@@ -12,8 +12,8 @@ android {
         applicationId "com.yc.answer"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 3
-        versionName "2.0"
+        versionCode 4
+        versionName "2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -70,6 +70,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:26.1.0'
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -110,7 +111,8 @@ dependencies {
     //    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     //    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
 
-    compile 'com.wl.tencent-adv:tencent-adv:2.0'
+    compile 'com.wl.tencent-adv:tencent-adv:3.0'
+
 
 }
 repositories {

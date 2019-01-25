@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.LogUtil;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -88,6 +89,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     private IndexBookAdapter hotItemAdapter;
 
+    private static final String TAG = "IndexFragmentNew";
 
     @Override
     public int getLayoutId() {
@@ -112,6 +114,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER,bottomContainer,null,Constant.TENCENT_ADV_ID,Constant.BANNER_ADV_ID,this);
         initRefresh();
         initListener();
+        LogUtil.msg("tag  " + TAG);
     }
 
     private void setStatusBar() {

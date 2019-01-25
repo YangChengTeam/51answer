@@ -29,7 +29,7 @@ public class IvAvatarHelper {
         switch (requestCode) {
             case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                 if (resultCode == RESULT_OK) {
-                    RxPhotoTool.cropImage(activity,data.getData() );// 裁剪图片
+                    RxPhotoTool.cropImage(activity,data.getData(),RxPhotoTool.GET_IMAGE_FROM_PHONE );// 裁剪图片
 //                    initUCrop(activity, data.getData());
                 }
 
@@ -97,7 +97,7 @@ public class IvAvatarHelper {
 
         UCrop.of(uri, destinationUri)
                 .withAspectRatio(1, 1)
-                .withMaxResultSize(1000, 1000)
+                .withMaxResultSize(300, 300)
                 .withOptions(options)
                 .start(activity);
     }
