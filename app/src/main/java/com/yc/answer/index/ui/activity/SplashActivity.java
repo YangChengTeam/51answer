@@ -77,10 +77,10 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
 
 //        setInstallPermission();
 
+        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Constant.TENCENT_ADV_ID, Constant.SPLASH_ADV_ID, this);
         if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
             rlSelectGrade.setVisibility(View.GONE);
             iv.setVisibility(View.VISIBLE);
-            AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Constant.TENCENT_ADV_ID, Constant.SPLASH_ADV_ID, this);
 
         } else {
             RxSPTool.putBoolean(this, SpConstant.IS_FIRST_OPEN, true);
@@ -212,7 +212,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /**
@@ -226,7 +226,6 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
             if (!haveInstallPermission) {
 
                 //                            //此方法需要API>=26才能使用
-
                 new AlertDialog.Builder(this).setTitle("提示").setMessage("请允许安装未知应用权限").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -186,10 +186,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             for (String permission : permissions) {
                 LogUtil.msg("TAG: " + permission);
             }
-
         }
 
-//        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
