@@ -2,49 +2,29 @@ package com.yc.ac.index.ui.activity;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.jakewharton.rxbinding.view.RxView;
-import com.jakewharton.rxbinding.widget.RxTextView;
-import com.kk.utils.LogUtil;
-import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxKeyboardTool;
-import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
-import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.SearchContract;
 import com.yc.ac.index.presenter.SearchPresenter;
-import com.yc.ac.index.ui.adapter.AutoCompleteAdapter;
 import com.yc.ac.index.ui.fragment.SearchCodeFragment;
-import com.yc.ac.index.ui.fragment.SearchConditionFragment;
-import com.yc.ac.index.ui.fragment.SearchResultFragment;
 import com.yc.ac.utils.ActivityScanHelper;
-import com.yc.ac.utils.SearchHistoryHelper;
 import com.yc.ac.utils.ToastUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
@@ -54,15 +34,15 @@ import yc.com.base.BaseActivity;
 
 public class SearchCodeActivity extends BaseActivity<SearchPresenter> implements SearchContract.View {
     @BindView(R.id.iv_back)
-    RelativeLayout ivBack;
+    ImageView ivBack;
 
-    @BindView(R.id.et_search)
-    AppCompatAutoCompleteTextView etSearch;
+
     @BindView(R.id.iv_scan)
     ImageView ivScan;
     @BindView(R.id.btn_search)
     TextView btnSearch;
 
+    AppCompatAutoCompleteTextView etSearch;
 
     @Override
     public int getLayoutId() {
@@ -71,7 +51,7 @@ public class SearchCodeActivity extends BaseActivity<SearchPresenter> implements
 
     @Override
     public void init() {
-
+        etSearch = findViewById(R.id.et_search);
 
         etSearch.setInputType(InputType.TYPE_CLASS_NUMBER);
         etSearch.setHint("请输入书籍条形码");

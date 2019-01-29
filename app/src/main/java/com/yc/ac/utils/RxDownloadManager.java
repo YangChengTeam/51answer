@@ -9,7 +9,8 @@ import android.provider.MediaStore;
 
 import com.hwangjr.rxbus.RxBus;
 import com.kk.utils.LogUtil;
-import com.umeng.socialize.sina.helper.MD5;
+
+import com.kk.utils.security.Md5;
 import com.yc.ac.constant.BusAction;
 
 import java.io.File;
@@ -134,7 +135,7 @@ public class RxDownloadManager {
     }
 
     private String getFileName(String path) {
-        String name = MD5.hexdigest(path);
+        String name = Md5.md5(path);
         if (path.lastIndexOf("/") != -1) {
             name = path.substring(path.lastIndexOf("/") + 1);
         }

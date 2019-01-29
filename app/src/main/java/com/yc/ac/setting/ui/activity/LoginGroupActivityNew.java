@@ -246,6 +246,8 @@ public class LoginGroupActivityNew extends BaseActivity<LoginPresenter> implemen
         } else {
             UMShareAPI.get(LoginGroupActivityNew.this).doOauthVerify(LoginGroupActivityNew.this, media, LoginAuthListener);//用户授权登录
         }
+
+
     }
 
 

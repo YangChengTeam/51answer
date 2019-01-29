@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hwangjr.rxbus.RxBus;
-
 import com.kk.utils.LogUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -27,10 +25,7 @@ import com.yc.ac.setting.ui.fragment.LoginFragment;
 import com.yc.ac.setting.ui.fragment.LoginRegisterFragment;
 import com.yc.ac.utils.ToastUtils;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;

@@ -83,14 +83,16 @@ public class WebActivity extends BaseActivity {
         webSettings.setBlockNetworkImage(false);//设置是否加载网络图片 true 为不加载 false 为加载
 
         webView.loadUrl(url);
-
-        loadingDialog.show("正在加载");
+        if (loadingDialog != null && !isDestroyed())
+            loadingDialog.show("正在加载");
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if (!isGoback)
-                    loadingDialog.show("已加载" + newProgress + "%...");
+                if (!isGoback) {
+                    if (loadingDialog != null && !isDestroyed())
+                        loadingDialog.show("已加载" + newProgress + "%...");
+                }
 
             }
 
@@ -101,7 +103,8 @@ public class WebActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
 //                view.loadUrl(url);
-                loadingDialog.dismiss();
+                if (loadingDialog != null)
+                    loadingDialog.dismiss();
                 isGoback = false;
             }
 

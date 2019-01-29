@@ -10,6 +10,7 @@ import com.kk.securityhttp.net.contains.HttpConfig;
 import com.tencent.bugly.Bugly;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.game.UMGameAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxTool;
@@ -55,7 +56,6 @@ public class MyApp extends MultiDexApplication {
 
         Bugly.init(getApplicationContext(), "af5788360b", false);
 
-
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "answer-circle-db", null);
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster dm = new DaoMaster(db);
@@ -72,15 +72,26 @@ public class MyApp extends MultiDexApplication {
 
     private void init() {
         RxTool.init(this);
+
+        //友盟统计
         UMGameAgent.setDebugMode(false);
         UMGameAgent.init(this);
         UMGameAgent.setPlayerLevel(1);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+
+        UMConfigure.init(this, "5c3ea2e5b465f59e50001540", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看
+        //http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+        UMConfigure.setLogEnabled(false);
+
         PlatformConfig.setWeixin("wx622cbf19fcb00f29", "4aa67b15c55411749dddfbad0cd66798");
         PlatformConfig.setQQZone("1108013607", "2mun88jc6IlVjy1A");
+        //初始化友盟SDK
+        UMShareAPI.get(this);//初始化sd
 
 //        Config.DEBUG = true;
-        UMShareAPI.get(this);
+
 
         //全局信息初始化
 
