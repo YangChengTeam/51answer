@@ -31,7 +31,6 @@ import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.view.dialog.RxDialogEditSureCancel;
 import com.yc.ac.R;
 import com.yc.ac.base.StateView;
-import com.yc.ac.base.WebActivity;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.ui.widget.MyDecoration;
@@ -41,16 +40,12 @@ import com.yc.ac.setting.model.bean.TaskListInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.MyPresenter;
 import com.yc.ac.setting.ui.activity.BindPhoneActivity;
-import com.yc.ac.setting.ui.activity.InvitationActivity;
 import com.yc.ac.setting.ui.activity.InvitationFriendActicity;
-import com.yc.ac.setting.ui.activity.LoginGroupActivity;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.activity.StatementActivity;
 import com.yc.ac.setting.ui.activity.UploadBookIntroduceActivity;
 import com.yc.ac.setting.ui.adapter.TaskListAdapter;
-import com.yc.ac.setting.ui.widget.BaseIncomeView;
 import com.yc.ac.setting.ui.widget.BaseSettingView;
-import com.yc.ac.setting.ui.widget.FollowWeiXinPopupWindow;
 import com.yc.ac.utils.ActivityUtils;
 import com.yc.ac.utils.QQUtils;
 import com.yc.ac.utils.ShareInfoHelper;
@@ -114,6 +109,8 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     RecyclerView earningRecyclerView;
     @BindView(R.id.stateView)
     StateView stateView;
+    @BindView(R.id.baseSettingView_service)
+    BaseSettingView baseSettingViewService;
 
 
     private TaskListAdapter taskListAdapter;
@@ -222,6 +219,13 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
 
+        RxView.clicks(baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                joinQQ("1872935735");
+            }
+        });
+
         taskListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -253,6 +257,22 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
     }
+
+
+    /**
+     * 跳转QQ聊天界面
+     */
+    public void joinQQ(String qqNum) {
+        try {
+            //第二种方式：可以跳转到添加好友，如果qq号是好友了，直接聊天
+            String url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qqNum;//uin是发送过去的qq号码
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtil.toast2(getActivity(), "请检查是否安装QQ");
+        }
+    }
+
 
     private void showDioloag() {
         final RxDialogEditSureCancel rxDialogEditSureCancel = new RxDialogEditSureCancel(getActivity());//提示弹窗
@@ -402,4 +422,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             }
         });
     }
+
+
 }

@@ -69,6 +69,15 @@
                 app:icon="@mipmap/setting_setting"
                 app:title="@string/setting" />
 
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:icon="@mipmap/setting_service"
+                app:show_extra="false"
+                app:title="联系QQ：1872935735" />
+
             <TextView
                 android:id="@+id/tv_statement"
                 android:layout_width="wrap_content"
