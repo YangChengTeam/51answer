@@ -2,14 +2,18 @@ package com.yc.answer.index.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -23,8 +27,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vondear.rxtools.RxImageTool;
 import com.yc.answer.R;
+import com.yc.answer.base.BaseBookView;
 import com.yc.answer.base.Constant;
-import com.yc.answer.base.TencentAdvManager;
 import com.yc.answer.base.WebActivity;
 import com.yc.answer.index.contract.IndexContract;
 import com.yc.answer.index.model.bean.BookInfo;
@@ -48,6 +52,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.base.StatusBarUtil;
@@ -85,6 +91,14 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     View view;
     @BindView(R.id.bottomContainer)
     FrameLayout bottomContainer;
+    @BindView(R.id.baseBookView_first)
+    BaseBookView baseBookViewFirst;
+    @BindView(R.id.baseBookView_second)
+    BaseBookView baseBookViewSecond;
+    @BindView(R.id.iv_bottombanner_close)
+    ImageView ivBottombannerClose;
+    @BindView(R.id.rl_bottombanner)
+    RelativeLayout rlBottombanner;
 
 
     private IndexBookAdapter hotItemAdapter;
@@ -110,8 +124,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
         banner.setFocusable(false);
 
-        TencentAdvManager.showBannerAdv(getActivity(), bottomContainer, Constant.BANNER_ADV_ID);
-        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER,bottomContainer,null,Constant.TENCENT_ADV_ID,Constant.BANNER_ADV_ID,this);
+//        TencentAdvManager.showBannerAdv(getActivity(), bottomContainer, Constant.BANNER_ADV_ID);
+        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, bottomContainer, null, Constant.TENCENT_ADV_ID, Constant.BANNER_ADV_ID, this);
         initRefresh();
         initListener();
         LogUtil.msg("tag  " + TAG);
@@ -229,6 +243,12 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
                 }
             }
         });
+        RxView.clicks(ivBottombannerClose).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                rlBottombanner.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -324,7 +344,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void onShow() {
-
+        ivBottombannerClose.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -346,4 +366,6 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
 
     }
+
+
 }

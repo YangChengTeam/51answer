@@ -73,8 +73,8 @@
                 <RelativeLayout
                     android:id="@+id/rl_tab"
                     android:layout_width="match_parent"
-                    android:paddingLeft="@dimen/t15dp"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/t15dp"
                     android:paddingRight="@dimen/t15dp">
 
                     <TextView
@@ -226,11 +226,26 @@
                     </LinearLayout>
                 </RelativeLayout>
 
-                <FrameLayout
-                    android:id="@+id/bottomContainer"
+                <RelativeLayout
+                android:id="@+id/rl_bottombanner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
 
+                    <FrameLayout
+                        android:id="@+id/bottomContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/iv_bottombanner_close"
+                        android:layout_width="@dimen/t15dp"
+                        android:layout_height="@dimen/t15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/t5dp"
+                        android:layout_marginTop="@dimen/t5dp"
+                        android:src="@mipmap/banner_close"
+                        android:visibility="gone" />
+                </RelativeLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>

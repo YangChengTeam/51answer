@@ -111,7 +111,7 @@ dependencies {
     //    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     //    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
 
-    compile 'com.wl.tencent-adv:tencent-adv:3.0'
+    compile 'com.wl.tencent-adv:tencent-adv:4.0'
 
 
 }
