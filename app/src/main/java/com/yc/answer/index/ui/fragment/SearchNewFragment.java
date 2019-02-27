@@ -324,6 +324,12 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     }
 
     @Override
+    public void showHomeworkGuide() {
+        HomeworkGuideFragment homeworkGuideFragment = new HomeworkGuideFragment();
+        homeworkGuideFragment.show(getChildFragmentManager(), "");
+    }
+
+    @Override
     public void hide() {
         stateView.hide();
     }

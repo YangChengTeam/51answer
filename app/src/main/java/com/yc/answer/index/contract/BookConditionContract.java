@@ -24,6 +24,8 @@ public interface BookConditionContract {
         void showBookInfoList(List<BookInfo> lists);
 
         void showFavoriteResult(boolean isCollect);
+
+        void showHomeworkGuide();
     }
 
     interface Presenter extends IPresenter {

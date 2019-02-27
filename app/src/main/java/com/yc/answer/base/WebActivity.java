@@ -1,23 +1,24 @@
 package com.yc.answer.base;
 
-import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.utils.LogUtil;
 import com.yc.answer.R;
+import com.yc.answer.index.ui.widget.CommonWebView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,9 +37,11 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.common_tv_title)
     TextView commonTvTitle;
     @BindView(R.id.webView)
-    WebView webView;
+    CommonWebView webView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    private LoadingDialog loadingDialog;
+    //    private LoadingDialog loadingDialog;
     private String url;
 
     @Override
@@ -49,7 +52,7 @@ public class WebActivity extends BaseActivity {
     @Override
     public void init() {
         url = getIntent().getStringExtra("url");
-        loadingDialog = new LoadingDialog(this);
+//        loadingDialog = new LoadingDialog(this);
         commonTvTitle.setText("");
         RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
@@ -64,50 +67,41 @@ public class WebActivity extends BaseActivity {
 
     private void initWebView(String url) {
 
-        final WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
 
-        //设置自适应屏幕，两者合用
-        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-
-//        webView.addJavascriptInterface(new JavascriptInterface(), "HTML");
-
-        //其他细节操作
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存 //优先使用缓存:
-        webSettings.setAllowFileAccess(true); //设置可以访问文件
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
-        webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
-        webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-        webSettings.setBlockNetworkImage(false);//设置是否加载网络图片 true 为不加载 false 为加载
-
+        progressBar.setMax(100);
         webView.loadUrl(url);
 
-        loadingDialog.show("正在加载");
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public void onProgressChanged(WebView view, int newProgress) {
+            public void onProgressChanged(WebView view, final int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if (!isGoback)
-                    loadingDialog.show("已加载" + newProgress + "%...");
-
+                if (!isGoback) {
+                    if (mHandler == null)
+                        mHandler = new Handler(Looper.getMainLooper());
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (progressBar.getVisibility() == ProgressBar.GONE) {
+                                progressBar.setVisibility(ProgressBar.VISIBLE);
+                            }
+                            progressBar.setProgress(newProgress);
+                            progressBar.postInvalidate();
+                            if (newProgress == 100) {
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }
             }
-
-
         });
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onPageFinished(WebView view, String url) {
 //                view.loadUrl(url);
-                loadingDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 isGoback = false;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-
             }
 
 
@@ -129,11 +123,11 @@ public class WebActivity extends BaseActivity {
                 }
                 view.loadUrl(url);
                 return false;
+
+
             }
         });
-
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -147,5 +141,4 @@ public class WebActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
 
     }
-
 }

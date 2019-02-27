@@ -187,6 +187,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
     @Override
     public void onShow() {
         iv.setVisibility(View.GONE);
+        skipView.setVisibility(View.VISIBLE);
     }
 
     @Override

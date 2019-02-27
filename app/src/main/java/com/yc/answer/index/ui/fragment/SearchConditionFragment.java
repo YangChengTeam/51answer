@@ -133,6 +133,12 @@ public class SearchConditionFragment extends BaseFragment<BookConditionPresenter
 
     }
 
+    @Override
+    public void showHomeworkGuide() {
+        HomeworkGuideFragment homeworkGuideFragment = new HomeworkGuideFragment();
+        homeworkGuideFragment.show(getChildFragmentManager(), "");
+    }
+
 
     private void setHistoryList() {
         historyItemAdapter.setNewData(SearchHistoryHelper.getHistoryList());

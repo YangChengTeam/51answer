@@ -6,7 +6,14 @@
 
     <include layout="@layout/common_top_view" />
 
-    <WebView
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/t5dp"
+        android:progressDrawable="@drawable/seekbar_progress_bg" />
+
+    <com.yc.answer.index.ui.widget.CommonWebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

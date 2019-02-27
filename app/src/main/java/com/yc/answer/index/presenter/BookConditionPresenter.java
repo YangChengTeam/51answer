@@ -107,14 +107,18 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
 
             @Override
             public void onNext(ResultInfo<BookInfoWrapper> bookInfoWrapperResultInfo) {
-                if (bookInfoWrapperResultInfo != null && bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK) {
-                    if (bookInfoWrapperResultInfo.data != null && bookInfoWrapperResultInfo.data.getLists() != null) {
+                if (bookInfoWrapperResultInfo != null) {
+                    if (bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.data != null && bookInfoWrapperResultInfo.data.getLists() != null) {
                         mView.hide();
 //                        mView.showBookInfoList(bookInfoWrapperResultInfo.data.getLists());
                         createBookData(bookInfoWrapperResultInfo.data.getLists());
                     } else {
                         if (page == 1)
                             mView.showNoData();
+                        if (bookInfoWrapperResultInfo.code == 0) {
+                            mView.showHomeworkGuide();
+                        }
+
                     }
                 } else {
                     if (page == 1)

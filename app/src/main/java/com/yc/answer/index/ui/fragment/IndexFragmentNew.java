@@ -163,6 +163,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 //                filterPopwindow.showAsDropDown(rlTab);
                 Intent intent = new Intent(getActivity(), SearchActivityNew.class);
                 startActivity(intent);
+
+
             }
         });
 

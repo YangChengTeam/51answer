@@ -59,12 +59,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     BottomNavigationBar mainBottomNavigationBar;
     @BindView(R.id.floatingActionButton)
     FloatingActionButton floatingActionButton;
-    @BindView(R.id.iv_code_tint)
-    ImageView mIvCodeTint;
+
     @BindView(R.id.main_base_bottom_view)
     BaseBottomView mainBaseBottomView;
-    @BindView(R.id.container)
-    RelativeLayout container;
+
     private List<Fragment> mList;
 
 
