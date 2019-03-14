@@ -78,14 +78,16 @@ dependencies {
     implementation project(':share')
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.jakewharton.rxbinding:rxbinding:+'
-    implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:+'
-    implementation 'com.jakewharton.rxbinding:rxbinding-design:+'
-    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+    implementation 'com.jakewharton.rxbinding:rxbinding:1.0.1'
+    implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.1'
+    implementation 'com.jakewharton.rxbinding:rxbinding-design:1.0.1'
+//    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+//    compile 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.androidkun:XTabLayout:1.0.9'
+//    compile 'com.androidkun:XTabLayout:1.0.9'
+    compile 'com.androidkun:XTabLayout:1.1.4'
     implementation 'com.google.android:flexbox:0.3.2'
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.yalantis:ucrop:2.2.0'
@@ -112,10 +114,13 @@ dependencies {
     //    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
 
     compile 'com.wl.tencent-adv:tencent-adv:4.0'
-
+    compile(name: 'bottom-navigation-bar-2.1.0', ext: 'aar')
 
 }
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'   // aar目录
+    }
 }
 

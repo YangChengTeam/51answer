@@ -125,7 +125,7 @@ public class UploadPresenter extends BasePresenter<UploadBookEngine, UploadContr
                     final ResultInfo<BookInfo> resultInfo = JSON.parseObject(body, new TypeReference<ResultInfo<BookInfo>>() {
                     }.getType());
                     if (resultInfo != null && resultInfo.code == HttpConfig.STATUS_OK && resultInfo.data != null) {
-                        LogUtil.msg("success: " + resultInfo.data.toString());
+//                        LogUtil.msg("success: " + resultInfo.data.toString());
                         UIUtils.post(new Runnable() {
                             @Override
                             public void run() {

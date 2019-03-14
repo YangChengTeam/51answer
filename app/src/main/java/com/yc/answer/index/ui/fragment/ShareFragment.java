@@ -94,7 +94,8 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
                             Bitmap bmp = getDialog().getWindow().getDecorView().getDrawingCache();
                             mShareInfo = new ShareInfo();
                             mShareInfo.setBook_id(bookInfo.getBookId());
-                            mShareInfo.setBitmap(bmp);
+                            if (bmp != null)
+                                mShareInfo.setBitmap(bmp);
                             shareInfo(finalI);
                         }
                     }, 500);
