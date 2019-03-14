@@ -1,0 +1,139 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+	package
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:3:5-34
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:1-62:12
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:6:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:7:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:8:5-76
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:8:22-73
+uses-permission#android.permission.CALL_PHONE
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:9:5-69
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:9:22-66
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:12:5-75
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:12:22-72
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:13:5-81
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:13:22-78
+uses-permission#android.permission.VIBRATE
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:15:5-66
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:15:22-63
+uses-permission#android.permission.FLASHLIGHT
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:17:5-69
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:17:22-66
+uses-permission#android.permission.CAMERA
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:19:5-65
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:19:22-62
+uses-feature#android.hardware.camera
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:21:5-60
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:21:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:23:5-70
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:23:19-67
+application
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:26:5-60:19
+	android:supportsRtl
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:29:9-35
+	android:label
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:28:9-41
+	android:allowBackup
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:27:9-35
+activity#com.vondear.rxtools.activity.ActivityWebView
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:30:9-34:20
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:30:19-78
+intent-filter#category:name:android.intent.category.DEFAULT
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:31:13-33:29
+category#android.intent.category.DEFAULT
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:32:17-76
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:32:27-73
+activity#com.vondear.rxtools.activity.ActivityBase
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:35:9-87
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:35:19-75
+activity#com.vondear.rxtools.activity.ActivityScanerCode
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:36:9-38:61
+	android:screenOrientation
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:38:13-49
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:37:13-75
+activity#com.vondear.rxtools.activity.ActivityScanerCodeNew
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:39:9-41:52
+	android:screenOrientation
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:41:13-49
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:40:13-78
+activity#com.vondear.rxtools.activity.ActivityCodeTool
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:42:9-91
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:42:19-79
+provider#android.support.v4.content.FileProvider
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:50:9-58:20
+	android:grantUriPermissions
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:54:13-47
+	android:authorities
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:52:13-60
+	android:exported
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:53:13-37
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:51:13-67
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:55:13-57:54
+	android:resource
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:57:17-51
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:56:17-67
+uses-sdk
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml

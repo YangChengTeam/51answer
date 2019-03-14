@@ -42,11 +42,11 @@ public class ActivityScanHelper {
                 RxActivityTool.finishAllActivity();
             }
 
-            @Override
-            public void onHelpClick() {
-                context.startActivity(new Intent(context, ScanTintActivity.class));
-                ((Activity) context).finish();
-            }
+//            @Override
+//            public void onHelpClick() {
+//                context.startActivity(new Intent(context, ScanTintActivity.class));
+//                ((Activity) context).finish();
+//            }
         });
         context.startActivity(intent);
     }
