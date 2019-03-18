@@ -48,10 +48,10 @@ public class BookPresenter extends BasePresenter<IndexBookEngine, BookContract.V
             public void onNext(ResultInfo<BookInfoWrapper> bookInfoWrapperResultInfo) {
 
                 if (bookInfoWrapperResultInfo != null) {
-                    if (bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.data != null && bookInfoWrapperResultInfo.data.getLists() != null) {
+                    if (bookInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.getData() != null && bookInfoWrapperResultInfo.getData().getLists() != null) {
 
                         mView.hide();
-                        mView.showBookList(bookInfoWrapperResultInfo.data);
+                        mView.showBookList(bookInfoWrapperResultInfo.getData());
 
                     } else {
                         if (page == 1) {

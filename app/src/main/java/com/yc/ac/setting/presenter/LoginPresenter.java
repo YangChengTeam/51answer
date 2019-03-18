@@ -72,12 +72,12 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             @Override
             public void onNext(ResultInfo<TokenInfo> stringResultInfo) {
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
-                        UserInfoHelper.setToken(stringResultInfo.data.getToken());
-                        getUserInfo(stringResultInfo.data.getToken());
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
+                        UserInfoHelper.setToken(stringResultInfo.getData().getToken());
+                        getUserInfo(stringResultInfo.getData().getToken());
                     } else {
                         mView.dismissDialog();
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
                     }
                 }
             }
@@ -103,9 +103,9 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             @Override
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
-                if (userInfoResultInfo != null && userInfoResultInfo.code == HttpConfig.STATUS_OK && userInfoResultInfo.data != null) {
-                    UserInfoHelper.setUserInfo(userInfoResultInfo.data);
-                    RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.data);
+                if (userInfoResultInfo != null && userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
+                    UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                    RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                     mView.finish();
                 }
             }
@@ -140,10 +140,10 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             @Override
             public void onNext(ResultInfo<String> stringResultInfo) {
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.data);
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getData());
                     } else {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
                     }
                 }
             }
@@ -185,12 +185,12 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             public void onNext(ResultInfo<TokenInfo> tokenInfoResultInfo) {
                 mView.dismissDialog();
                 if (tokenInfoResultInfo != null) {
-                    if (tokenInfoResultInfo.code == HttpConfig.STATUS_OK && tokenInfoResultInfo.data != null) {
-                        UserInfoHelper.setToken(tokenInfoResultInfo.data.getToken());
-                        getUserInfo(tokenInfoResultInfo.data.getToken());
+                    if (tokenInfoResultInfo.getCode() == HttpConfig.STATUS_OK && tokenInfoResultInfo.getData() != null) {
+                        UserInfoHelper.setToken(tokenInfoResultInfo.getData().getToken());
+                        getUserInfo(tokenInfoResultInfo.getData().getToken());
 
                     } else {
-                        ToastUtils.showCenterToast(mContext, tokenInfoResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, tokenInfoResultInfo.getMsg());
                     }
                 } else {
                     ToastUtils.showCenterToast(mContext, HttpConfig.NET_ERROR);
@@ -233,12 +233,12 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             public void onNext(ResultInfo<String> stringResultInfo) {
                 mView.dismissDialog();
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.data);
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getData());
                         mView.showAccountResult(UserInfoHelper.getUserInfo(), mContext.getString(R.string.reset_password));
                         mView.finish();
                     } else {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
                     }
                 }
             }
@@ -263,9 +263,9 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
 
             @Override
             public void onNext(ResultInfo<TokenInfo> tokenInfoResultInfo) {
-                if (tokenInfoResultInfo != null && tokenInfoResultInfo.code == HttpConfig.STATUS_OK && tokenInfoResultInfo.data != null) {
-                    UserInfoHelper.setToken(tokenInfoResultInfo.data.getToken());
-                    getUserInfo(tokenInfoResultInfo.data.getToken());
+                if (tokenInfoResultInfo != null && tokenInfoResultInfo.getCode() == HttpConfig.STATUS_OK && tokenInfoResultInfo.getData() != null) {
+                    UserInfoHelper.setToken(tokenInfoResultInfo.getData().getToken());
+                    getUserInfo(tokenInfoResultInfo.getData().getToken());
                 }
             }
         });

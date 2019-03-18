@@ -11,6 +11,7 @@ import com.hwangjr.rxbus.RxBus;
 import com.kk.utils.LogUtil;
 
 import com.kk.utils.security.Md5;
+import com.yc.ac.R;
 import com.yc.ac.constant.BusAction;
 
 import java.io.File;
@@ -89,7 +90,7 @@ public class RxDownloadManager {
         @Override
         public void run() {
             downLoadImg(mPath, mFileName);
-            LogUtil.msg("TAG: " + Thread.currentThread().getName());
+//            LogUtil.msg("TAG: " + Thread.currentThread().getName());
         }
 
 
@@ -115,7 +116,7 @@ public class RxDownloadManager {
                 fileOutputStream.write(buffer, 0, bufferLength);
             }
 
-            MediaStore.Images.Media.insertImage(mContext.getContentResolver(), file.getAbsolutePath(), name, "51答案");
+            MediaStore.Images.Media.insertImage(mContext.getContentResolver(), file.getAbsolutePath(), name, mContext.getString(R.string.app_name));
             // 最后通知图库更新
             mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
 

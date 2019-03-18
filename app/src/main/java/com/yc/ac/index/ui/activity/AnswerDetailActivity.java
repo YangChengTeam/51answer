@@ -1,13 +1,15 @@
 package com.yc.ac.index.ui.activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.LogUtil;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
@@ -28,9 +31,9 @@ import com.yc.ac.index.ui.adapter.AnswerDetailAdapter;
 import com.yc.ac.index.ui.fragment.AnswerTintFragment;
 import com.yc.ac.index.ui.fragment.DeleteTintFragment;
 import com.yc.ac.index.ui.fragment.ShareFragment;
+import com.yc.ac.setting.model.bean.BrowserInfo;
 import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
-
 import com.yc.ac.utils.RxDownloadManager;
 import com.yc.ac.utils.ToastUtils;
 import com.yc.ac.utils.UserInfoHelper;
@@ -105,6 +108,15 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         return R.layout.activity_book_answer_detail;
     }
 
+
+    public static void startActivity(Context context, String bookName, String bookId) {
+        Intent intent = new Intent(context, AnswerDetailActivity.class);
+        intent.putExtra("bookName", bookName);
+        intent.putExtra("bookId", bookId);
+        context.startActivity(intent);
+    }
+
+
     @Override
     public void init() {
         if (getIntent() != null) {
@@ -112,7 +124,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 //            bookInfo = getIntent().getParcelableExtra("bookInfo");
 
             String bookName = getIntent().getStringExtra("bookName");
-//                    getIntent().getStringExtra("bookId");
             bookId = getIntent().getStringExtra("bookId");
 
             commonTvTitle.setText(bookName);
@@ -127,6 +138,8 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         getData(false);
         initListener();
     }
+
+    private int browserPage = 1;//浏览的页数
 
     private void setCollectDrawable(boolean isCollect) {
 
@@ -187,10 +200,10 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                         }
                     });
                 } else {
-                    if (bookInfo != null && bookInfo.getAccess() == 0) {
-                        ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
-                        return;
-                    }
+//                    if (bookInfo != null && bookInfo.getAccess() == 0) {
+//                        ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
+//                        return;
+//                    }
                     if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
                         RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
                     }
@@ -242,7 +255,8 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     private void initView(BookInfo data, boolean isReload) {
         if (data != null) {
             setCollectDrawable(data.getFavorite() == 1);
-            downLoadUrlList = addNewData(data.getAnswer_list());
+//            downLoadUrlList = addNewData(data.getAnswer_list());
+            downLoadUrlList = data.getAnswer_list();
             tvShare.setText(data.getAccess() == 1 ? getString(R.string.shared) : getString(R.string.share));
 
             if (!isReload)
@@ -326,6 +340,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                     return;
 
                 }
+                browserPage = position + 1;
                 oldPos = position;
                 tvCurrentPage.setText(String.valueOf(position + 1));
             }
@@ -443,6 +458,25 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     protected void onDestroy() {
         super.onDestroy();
         RxSPTool.putInt(this, bookId, oldPos);
+        saveBrowserData();
+    }
+
+
+    private void saveBrowserData() {
+        BrowserInfo browserInfo = new BrowserInfo();
+        if (bookInfo != null) {
+            browserInfo.setBookId(bookInfo.getBookId());
+            browserInfo.setCover_img(bookInfo.getCover_img());
+            browserInfo.setGrade(bookInfo.getGrade());
+            browserInfo.setName(bookInfo.getName());
+            browserInfo.setPart_type(bookInfo.getPart_type());
+            browserInfo.setPeriod(bookInfo.getPeriod());
+            browserInfo.setPress(bookInfo.getPress());
+            browserInfo.setSubject(bookInfo.getSubject());
+            browserInfo.setVersion(bookInfo.getVersion());
+            browserInfo.setYear(bookInfo.getYear());
+            mPresenter.saveBrowserInfo(browserInfo, browserPage);
+        }
     }
 
     @Subscribe(thread = EventThread.MAIN_THREAD,
@@ -465,5 +499,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
+
 
 }

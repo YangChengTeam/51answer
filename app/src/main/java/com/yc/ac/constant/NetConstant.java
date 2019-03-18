@@ -144,4 +144,13 @@ public interface NetConstant {
      * 获取Q币
      */
     String user_qb_url = BaseNetConstant.getBaseUrl() + "user/qb";
+    /**
+     * 首页tag标签
+     */
+    String index_tag_url = BaseNetConstant.getBaseUrl() + "tag/index";
+
+    /**
+     * 首页专题
+     */
+    String index_zt_url = BaseNetConstant.getBaseUrl() + "zt/index";
 }

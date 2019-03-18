@@ -124,12 +124,12 @@ public class UploadPresenter extends BasePresenter<UploadBookEngine, UploadContr
                 try {
                     final ResultInfo<BookInfo> resultInfo = JSON.parseObject(body, new TypeReference<ResultInfo<BookInfo>>() {
                     }.getType());
-                    if (resultInfo != null && resultInfo.code == HttpConfig.STATUS_OK && resultInfo.data != null) {
-                        LogUtil.msg("success: " + resultInfo.data.toString());
+                    if (resultInfo != null && resultInfo.getCode() == HttpConfig.STATUS_OK && resultInfo.getData() != null) {
+                        LogUtil.msg("success: " + resultInfo.getData().toString());
                         UIUtils.post(new Runnable() {
                             @Override
                             public void run() {
-                                mView.showUploadResult(resultInfo.data);
+                                mView.showUploadResult(resultInfo.getData());
                             }
                         });
                     } else {

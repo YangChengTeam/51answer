@@ -54,9 +54,9 @@ public class CollectPresenter extends BasePresenter<CollectEngine, CollectContra
             @Override
             public void onNext(ResultInfo<BookInfoWrapper> bookInfoWrapperResultInfo) {
                 if (bookInfoWrapperResultInfo != null) {
-                    if (bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.data != null && bookInfoWrapperResultInfo.data.getLists() != null) {
+                    if (bookInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.getData() != null && bookInfoWrapperResultInfo.getData().getLists() != null) {
                         mView.hide();
-                        mView.showCollectList(bookInfoWrapperResultInfo.data);
+                        mView.showCollectList(bookInfoWrapperResultInfo.getData());
                     } else {
                         List<BookInfo> bookInfos = queryCollectBooks();
                         if (bookInfos != null && bookInfos.size() > 0) {
@@ -68,7 +68,7 @@ public class CollectPresenter extends BasePresenter<CollectEngine, CollectContra
                             return;
                         }
 
-                        if (bookInfoWrapperResultInfo.code == HttpStatus.TOKEN_EXPIRED) {
+                        if (bookInfoWrapperResultInfo.getCode() == HttpStatus.TOKEN_EXPIRED) {
 //                            ToastUtils.showCenterToast(mContext, "请先登录");
 
                             mView.showTintInfo(Html.fromHtml("查看已收藏书籍，请先<font color=\"#FF0000\">登录</font>"));

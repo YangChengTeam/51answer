@@ -56,9 +56,9 @@ public class TaskListPresenter extends BasePresenter<TaskListEngine, TaskListCon
             public void onNext(ResultInfo<TaskLisInfoWrapper> taskLisInfoWrapperResultInfo) {
                 if (taskLisInfoWrapperResultInfo != null) {
 
-                    if (taskLisInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && taskLisInfoWrapperResultInfo.data != null) {
+                    if (taskLisInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && taskLisInfoWrapperResultInfo.getData() != null) {
                         mView.hide();
-                        mView.showTaskList(taskLisInfoWrapperResultInfo.data.getList());
+                        mView.showTaskList(taskLisInfoWrapperResultInfo.getData().getList());
                     } else {
                         if (!isReload)
                             mView.showNoData();
@@ -89,14 +89,14 @@ public class TaskListPresenter extends BasePresenter<TaskListEngine, TaskListCon
             @Override
             public void onNext(final ResultInfo<String> stringResultInfo) {
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK) {
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
                         RxSPTool.putBoolean(mContext, SpConstant.OPEN_MARKET, true);
                         getTaskInfoList(true);
                     } else {
                         UIUtils.post(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtil.toast2(mContext, stringResultInfo.message);
+                                ToastUtil.toast2(mContext, stringResultInfo.getMsg());
                             }
                         });
 

@@ -5,11 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppTheme.Main" parent="AppTheme">
-
+        <item name="colorAccent">@color/white</item>
     </style>
 
     <!--登录输入框-->

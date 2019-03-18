@@ -1,14 +1,16 @@
 package com.yc.ac.index.ui.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,6 +23,7 @@ import com.baidu.location.LocationClientOption;
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.kk.utils.LogUtil;
+import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxKeyboardTool;
 import com.yc.ac.R;
@@ -35,6 +38,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
@@ -58,10 +62,12 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
     TextView btnSearch;
     @BindView(R.id.container)
     FrameLayout container;
-
+    @BindView(R.id.et_input_content)
+    EditText etInputContent;
 
 
     private String code;
+    private String name;
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
 
@@ -76,16 +82,22 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
     @Override
     public void init() {
 
-        if (getIntent() != null) {
-
-            code = getIntent().getStringExtra("code");
+        Intent intent = getIntent();
+        if (intent != null) {
+//            if (!TextUtils.isEmpty(intent.getStringExtra("code")))
+            code = intent.getStringExtra("code");
+//            if (!TextUtils.isEmpty(intent.getStringExtra("name"))) {
+            name = intent.getStringExtra("name");
+//            }
         }
 
 
         mPresenter = new SearchPresenter(this, this);
 
         searchNewFragment = new SearchNewFragment();
-        replaceFragment( code);
+
+        replaceFragment(code, name);
+
 
 //        SpanUtils.setEditTextHintSize(etSearch);
         mLocationClient = new LocationClient(getApplicationContext());
@@ -107,7 +119,8 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
         RxView.clicks(btnSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                String inputText = etSearch.getText().toString().trim();
+//                String inputText = etSearch.getText().toString().trim();
+                String inputText = etInputContent.getText().toString().trim();
                 if (TextUtils.isEmpty(inputText)) {
                     ToastUtils.showCenterToast(SearchActivityNew.this, "请输入相关书籍名称");
                     return;
@@ -127,30 +140,30 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
                 finish();
             }
         });
-        RxView.clicks(etSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+        RxView.clicks(etInputContent).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                etSearch.setFocusable(true);
-                etSearch.setFocusableInTouchMode(true);
-                etSearch.requestFocus();
-                RxKeyboardTool.showSoftInput(SearchActivityNew.this, etSearch);
+                etInputContent.setFocusable(true);
+                etInputContent.setFocusableInTouchMode(true);
+                etInputContent.requestFocus();
+                RxKeyboardTool.showSoftInput(SearchActivityNew.this, etInputContent);
             }
         });
 
-        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etInputContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 isFoucusable = hasFocus;
                 if (hasFocus) {
-                    mPresenter.searchTips(((AutoCompleteTextView) v).getText().toString().trim());
+                    mPresenter.searchTips(((EditText) v).getText().toString().trim());
                 }
             }
         });
     }
 
     private void search(String inputText) {
-        etSearch.dismissDropDown();
-        etSearch.setFocusable(false);
+//        etSearch.dismissDropDown();
+        etInputContent.setFocusable(false);
         RxKeyboardTool.hideSoftInput(SearchActivityNew.this);
         if (searchNewFragment != null) {
             searchNewFragment.setName(inputText);
@@ -159,12 +172,15 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
     }
 
 
-    public void replaceFragment(String code) {
+    public void replaceFragment(String code, String name) {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         Bundle bundle = new Bundle();
-        bundle.putString("code", code);
+        if (!TextUtils.isEmpty(code))
+            bundle.putString("code", code);
+        if (!TextUtils.isEmpty(name))
+            bundle.putString("name", name);
         searchNewFragment.setArguments(bundle);
 
         ft.add(R.id.container, searchNewFragment);
@@ -175,7 +191,7 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
 
     private void initAutoTextView() {
 
-        RxTextView.textChanges(etSearch)
+        RxTextView.textChanges(etInputContent)
                 .debounce(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<CharSequence>() {
                     @Override
@@ -247,12 +263,12 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
     @Override
     public void showSearchTips(List<String> data) {
         etSearch.setDropDownHorizontalOffset(-RxImageTool.dp2px(75));
-
-//        etSearch.setDropDownWidth(RxDeviceTool.getScreenWidth(this) - RxImageTool.dip2px(btnSearch.getMeasuredWidth() + 30));
+//
+        etSearch.setDropDownWidth(RxDeviceTool.getScreenWidth(this) - RxImageTool.dip2px(btnSearch.getMeasuredWidth() + 30));
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 //
 //                android.R.layout.simple_dropdown_item_1line, list);
-
+//
         AutoCompleteAdapter adapter = new AutoCompleteAdapter(this, data);
         etSearch.setAdapter(adapter);
         etSearch.showDropDown();

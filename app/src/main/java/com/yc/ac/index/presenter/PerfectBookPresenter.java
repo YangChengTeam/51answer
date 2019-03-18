@@ -46,8 +46,8 @@ public class PerfectBookPresenter extends BasePresenter<PerfectBookEngine, Perfe
             @Override
             public void onNext(ResultInfo<String> bookInfoResultInfo) {
                 mView.dismissDialog();
-                if (bookInfoResultInfo != null && bookInfoResultInfo.code == HttpConfig.STATUS_OK) {
-                    ToastUtils.showCenterToast(mContext, bookInfoResultInfo.message);
+                if (bookInfoResultInfo != null && bookInfoResultInfo.getCode() == HttpConfig.STATUS_OK) {
+                    ToastUtils.showCenterToast(mContext, bookInfoResultInfo.getMsg());
                     RxBus.get().post(BusAction.FINISH,"finish");
                     mView.finish();
                 }

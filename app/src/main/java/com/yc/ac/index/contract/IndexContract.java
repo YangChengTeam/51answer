@@ -2,6 +2,7 @@ package com.yc.ac.index.contract;
 
 
 import com.yc.ac.index.model.bean.BookInfo;
+import com.yc.ac.index.model.bean.TagInfo;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public interface IndexContract {
         void showHotBooks(List<BookInfo> lists);
 
         void showConditionList(List<String> data);
+
+        void showTagInfos(List<TagInfo> data);
+
+        void showZtInfos(List<TagInfo> list);
     }
 
     interface Presenter extends IPresenter {

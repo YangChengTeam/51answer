@@ -18,13 +18,13 @@ public class ResultInfoHelper {
             return;
         }
 
-        if (resultInfo.code == HttpConfig.STATUS_OK) {
+        if (resultInfo.getCode() == HttpConfig.STATUS_OK) {
             callback.reulstInfoOk();
-        } else if (resultInfo.code == HttpStatus.TOKEN_EXPIRED) {
+        } else if (resultInfo.getCode() == HttpStatus.TOKEN_EXPIRED) {
             UserInfoHelper.setToken("");
             UserInfoHelper.setUserInfo(null);
         } else {
-            callback.resultInfoNotOk(getMessage(resultInfo.message, HttpConfig.SERVICE_ERROR));
+            callback.resultInfoNotOk(getMessage(resultInfo.getMsg(), HttpConfig.SERVICE_ERROR));
         }
     }
 

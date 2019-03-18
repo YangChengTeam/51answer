@@ -84,7 +84,6 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     LinearLayout llTopGuide;
     @BindView(R.id.rl_feedback)
     RelativeLayout rlFeedback;
-    Unbinder unbinder;
 
 
     private String grade;//年级
@@ -131,6 +130,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
         mPresenter = new BookConditionPresenter(getActivity(), this);
         code = getArguments().getString("code");
+        mName = getArguments().getString("name");
 
         initView();
         initAdapter();
@@ -161,10 +161,10 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 BookInfo bookInfo = itemAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                intent.putExtra("bookName", bookInfo.getName());
-                intent.putExtra("bookId", bookInfo.getBookId());
-                startActivity(intent);
+                if (bookInfo != null) {
+                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
+                }
+
             }
         });
 
@@ -318,7 +318,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         stateView.showNoNet(searchRecyclerView, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.loadData(true);
+                getData();
             }
         });
     }

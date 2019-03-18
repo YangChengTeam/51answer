@@ -61,9 +61,9 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
             @Override
             public void onNext(ResultInfo<List<String>> listResultInfo) {
                 if (listResultInfo != null) {
-                    if (listResultInfo.code == HttpConfig.STATUS_OK && listResultInfo.data != null) {
+                    if (listResultInfo.getCode() == HttpConfig.STATUS_OK && listResultInfo.getData() != null) {
                         mView.hide();
-                        mView.showConditionList(listResultInfo.data);
+                        mView.showConditionList(listResultInfo.getData());
                     } else {
                         mView.showNoData();
                     }
@@ -106,11 +106,11 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
 
             @Override
             public void onNext(ResultInfo<BookInfoWrapper> bookInfoWrapperResultInfo) {
-                if (bookInfoWrapperResultInfo != null && bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK) {
-                    if (bookInfoWrapperResultInfo.data != null && bookInfoWrapperResultInfo.data.getLists() != null) {
+                if (bookInfoWrapperResultInfo != null && bookInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK) {
+                    if (bookInfoWrapperResultInfo.getData() != null && bookInfoWrapperResultInfo.getData().getLists() != null) {
                         mView.hide();
-//                        mView.showBookInfoList(bookInfoWrapperResultInfo.data.getLists());
-                        createBookData(bookInfoWrapperResultInfo.data.getLists());
+//                        mView.showBookInfoList(bookInfoWrapperResultInfo.getData().getLists());
+                        createBookData(bookInfoWrapperResultInfo.getData().getLists());
                     } else {
                         if (page == 1)
                             mView.showNoData();
@@ -149,14 +149,14 @@ public class BookConditionPresenter extends BasePresenter<BookConditionEngine, B
             public void onNext(ResultInfo<String> stringResultInfo) {
                 boolean isCollect = bookInfo.getFavorite() == 1;
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
                         isCollect = !isCollect;
                         mView.showFavoriteResult(isCollect);
                         bookInfo.setFavorite(isCollect ? 1 : 0);
                         RxBus.get().post(BusAction.COLLECT, "list");
                         ToastUtils.showCenterToast(mContext, (isCollect ? "收藏" : "取消收藏") + "成功");
                     } else {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
                     }
 
                 } else {

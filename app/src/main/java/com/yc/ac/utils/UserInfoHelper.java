@@ -164,9 +164,9 @@ public class UserInfoHelper {
             @Override
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 if (userInfoResultInfo != null) {
-                    if (userInfoResultInfo.code == HttpConfig.STATUS_OK && userInfoResultInfo.data != null) {
-                        setUserInfo(userInfoResultInfo.data);
-                    } else if (userInfoResultInfo.code == HttpStatus.TOKEN_EXPIRED) {
+                    if (userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
+                        setUserInfo(userInfoResultInfo.getData());
+                    } else if (userInfoResultInfo.getCode() == HttpStatus.TOKEN_EXPIRED) {
                         setUserInfo(null);
                         setToken("");
                     }

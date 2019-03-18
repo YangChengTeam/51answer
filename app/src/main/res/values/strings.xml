@@ -1,14 +1,7 @@
 <resources>
     <string name="app_name">答案圈</string>
 
-    <string name="datum_update">资料持续更新中</string>
-    <string name="after_class_answer">课后答案</string>
-    <string name="school">学校</string>
-    <string name="final_exam">期末考试</string>
-    <string name="search_answer">求答案</string>
     <string name="seek">搜索</string>
-    <string name="contact_service">联系客服</string>
-    <string name="hot_answer">热门答案</string>
     <string name="no_data">暂无数据</string>
 
     <string name="main_index">首页</string>
@@ -24,13 +17,9 @@
     <string name="reset">返回</string>
     <string name="confirm">确认</string>
 
-    <string name="collect_count">共收藏 "<font color="#FF0000"> %d</font>" 个</string>
     <string name="primary_school_qq">小学答案QQ群</string>
     <string name="middle_school_qq">中学答案QQ群</string>
     <string name="setting">设置</string>
-    <string name="care_wx_number">关注微信公众号</string>
-    <string name="share_friend">分享好友</string>
-    <string name="answer_net">51答案网站</string>
     <string name="change_avtor">修改图像</string>
     <string name="phone">手机号</string>
     <string name="clear_cache">清除缓存</string>
@@ -43,7 +32,6 @@
     <string name="download">下载</string>
     <string name="share">分享</string>
     <string name="all">全部</string>
-    <string name="not_login">还没有登录，点击立即登录</string>
     <string name="login">登录</string>
     <string name="reset_password">找回密码</string>
     <string name="setting_follow_title">关注公众号</string>
@@ -59,10 +47,7 @@
     <string name="wx_circle">朋友圈</string>
     <string name="qq">QQ</string>
     <string name="share_cancel">取消分享</string>
-    <string name="exit">退出</string>
     <string name="is_exit">是否退出%s？</string>
-    <string name="hot_book">热门书籍</string>
-    <string name="hot_recommand">热门推荐</string>
     <string name="collect_cancel">取消收藏</string>
     <string name="scan_tint">扫码提示</string>
     <string name="shared">已分享</string>
@@ -93,6 +78,15 @@
     <string name="simple_invitation_code">填写邀请码</string>
     <string name="verifycode_login">验证码登录</string>
     <string name="get_code">获取验证码</string>
+    <string name="hot_tag">热门标签</string>
+    <string name="hot_dissertation">热门专题</string>
+    <string name="upload_book_get_coin">上传新书得Q币</string>
+    <string name="market_favorable_reception">应用市场好评得Q币</string>
+    <string name="share_get_coin">分享好友或者朋友圈得Q币</string>
+    <string name="invite_get_coin">邀请好友免费得Q币</string>
+    <string name="browser_record">浏览记录</string>
+    <string name="last_browser_page">上次看到了第%1$d页</string>
+
 
     <string-array name="small_grade">
         <item>一年级</item>

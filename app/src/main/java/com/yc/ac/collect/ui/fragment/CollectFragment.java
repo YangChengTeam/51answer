@@ -1,15 +1,11 @@
 package com.yc.ac.collect.ui.fragment;
 
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,8 +38,6 @@ import com.yc.ac.utils.UserInfoHelper;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 
@@ -120,10 +114,9 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 BookInfo bookInfo = (BookInfo) adapter.getItem(position);
-                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                intent.putExtra("bookId", bookInfo.getBookId());
-                intent.putExtra("bookName", bookInfo.getName());
-                startActivity(intent);
+                if (bookInfo != null) {
+                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
+                }
             }
         });
         RxView.clicks(ivPhotograph).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {

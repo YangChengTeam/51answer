@@ -1,6 +1,5 @@
 package com.yc.ac.index.ui.fragment;
 
-import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -60,10 +59,10 @@ public class IndexBookFragment extends BaseFragment<BookPresenter> implements Bo
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 BookInfo bookInfo = (BookInfo) adapter.getItem(position);
-                Intent intent = new Intent(getActivity(), AnswerDetailActivity.class);
-                intent.putExtra("bookId", bookInfo.getBookId());
-                intent.putExtra("bookName", bookInfo.getName());
-                startActivity(intent);
+                if (bookInfo!=null){
+                    AnswerDetailActivity.startActivity(getActivity(),bookInfo.getName(),bookInfo.getBookId());
+                }
+
             }
         });
 

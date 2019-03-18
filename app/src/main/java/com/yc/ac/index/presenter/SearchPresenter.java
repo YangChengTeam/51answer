@@ -47,8 +47,8 @@ public class SearchPresenter extends BasePresenter<SearchEngine, SearchContract.
 
             @Override
             public void onNext(ResultInfo<List<String>> listResultInfo) {
-                if (listResultInfo != null && listResultInfo.code == HttpConfig.STATUS_OK && listResultInfo.data != null && listResultInfo.data.size() > 0) {
-                    mView.showSearchTips(listResultInfo.data);
+                if (listResultInfo != null && listResultInfo.getCode() == HttpConfig.STATUS_OK && listResultInfo.getData() != null && listResultInfo.getData().size() > 0) {
+                    mView.showSearchTips(listResultInfo.getData());
                 }
             }
         });

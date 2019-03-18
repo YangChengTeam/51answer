@@ -81,6 +81,26 @@
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:textCursorDrawable="@drawable/et_cursor_bg"
+                        android:textSize="@dimen/text_14"
+                        android:visibility="gone" />
+
+
+                    <EditText
+                        android:id="@+id/et_input_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/distance_5"
+                        android:layout_marginRight="@dimen/distance_5"
+                        android:layout_toLeftOf="@id/iv_scan"
+                        android:layout_toRightOf="@id/iv_search"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:hint="@string/input_book_name"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textCursorDrawable="@drawable/et_cursor_bg"
                         android:textSize="@dimen/text_14" />
 
 

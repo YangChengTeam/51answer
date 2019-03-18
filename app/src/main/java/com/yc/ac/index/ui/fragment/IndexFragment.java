@@ -26,6 +26,7 @@ import com.yc.ac.base.WebActivity;
 import com.yc.ac.index.contract.IndexContract;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.SlideInfo;
+import com.yc.ac.index.model.bean.TagInfo;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 import com.yc.ac.index.presenter.IndexPresenter;
 import com.yc.ac.index.ui.activity.SearchActivity;
@@ -191,6 +192,16 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
 
     @Override
     public void showConditionList(List<String> data) {
+
+    }
+
+    @Override
+    public void showTagInfos(List<TagInfo> data) {
+
+    }
+
+    @Override
+    public void showZtInfos(List<TagInfo> list) {
 
     }
 

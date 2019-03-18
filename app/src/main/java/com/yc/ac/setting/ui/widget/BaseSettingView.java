@@ -27,6 +27,7 @@ import yc.com.base.BaseView;
  */
 
 public class BaseSettingView extends BaseView {
+
     @BindView(R.id.iv_icon)
     ImageView ivIcon;
     @BindView(R.id.tv_title)
@@ -46,6 +47,8 @@ public class BaseSettingView extends BaseView {
     private CharSequence mTitle;
     private float mTitleSize;
     private boolean isShowExtra;
+    private boolean isShowIconExtra;
+    private CharSequence mTag;
 
 
     public BaseSettingView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -58,6 +61,8 @@ public class BaseSettingView extends BaseView {
 
             mTitleSize = ta.getDimension(R.styleable.BaseSettingView_titleSize, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
             isShowExtra = ta.getBoolean(R.styleable.BaseSettingView_show_extra, false);
+            isShowIconExtra = ta.getBoolean(R.styleable.BaseSettingView_show_icon_extra, false);
+            mTag = ta.getString(R.styleable.BaseSettingView_tag);
 
             setClickable(true);
             if (mDrawable != null) {
@@ -66,8 +71,13 @@ public class BaseSettingView extends BaseView {
             if (!TextUtils.isEmpty(mTitle))
                 tvTitle.setText(mTitle);
             tvTitle.getPaint().setTextSize(mTitleSize);
-            flExtra.setVisibility(isShowExtra ? VISIBLE : GONE);
-            ivIcon.setVisibility(isShowExtra ? GONE : VISIBLE);
+            if (isShowIconExtra) {
+                flExtra.setVisibility(VISIBLE);
+                ivIcon.setVisibility(VISIBLE);
+            } else {
+                flExtra.setVisibility(isShowExtra ? VISIBLE : GONE);
+                ivIcon.setVisibility(isShowExtra ? GONE : VISIBLE);
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 rlContainer.setBackgroundResource(R.drawable.btn_ripper_bg);
@@ -95,6 +105,11 @@ public class BaseSettingView extends BaseView {
     public void setTitle(CharSequence mTitle) {
         this.mTitle = mTitle;
         tvTitle.setText(mTitle);
+    }
+
+
+    public CharSequence getTag() {
+        return mTag;
     }
 
     public void setExtraColor(int extraColor) {

@@ -63,12 +63,12 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneEngine, BindPhone
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
                 if (userInfoResultInfo != null) {
-                    if (userInfoResultInfo.code == HttpConfig.STATUS_OK && userInfoResultInfo.data != null) {
-                        UserInfoHelper.setUserInfo(userInfoResultInfo.data);
-                        RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.data);
+                    if (userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
+                        UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                        RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                         mView.finish();
                     } else {
-                        ToastUtils.showCenterToast(mContext, userInfoResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, userInfoResultInfo.getMsg());
                     }
                 }
             }
@@ -104,12 +104,12 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneEngine, BindPhone
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
                 if (userInfoResultInfo != null) {
-                    if (userInfoResultInfo.code == HttpConfig.STATUS_OK && userInfoResultInfo.data != null) {
-                        UserInfoHelper.setUserInfo(userInfoResultInfo.data);
-                        RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.data);
+                    if (userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
+                        UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                        RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                         mView.finish();
                     } else {
-                        ToastUtils.showCenterToast(mContext, userInfoResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, userInfoResultInfo.getMsg());
                     }
                 }
             }
@@ -144,10 +144,10 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneEngine, BindPhone
             @Override
             public void onNext(ResultInfo<String> stringResultInfo) {
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.data);
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getData());
                     } else {
-                        ToastUtils.showCenterToast(mContext, stringResultInfo.message);
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
                     }
                 }
             }

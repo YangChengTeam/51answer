@@ -45,7 +45,7 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
     @Override
     public void loadData(boolean isForceUI, boolean isLoadingUI) {
         if (!isForceUI) return;
-        getTaskInfoList(false);
+        getTaskInfoList();
         getUserInfo();
         getShareInfo();
         getQbInfo();
@@ -83,8 +83,8 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
 
             @Override
             public void onNext(final ResultInfo<UploadInfo> uploadInfoResultInfo) {
-                if (uploadInfoResultInfo != null && uploadInfoResultInfo.code == HttpConfig.STATUS_OK && uploadInfoResultInfo.data != null) {
-                    updateInfo("", uploadInfoResultInfo.data.url, "");
+                if (uploadInfoResultInfo != null && uploadInfoResultInfo.getCode() == HttpConfig.STATUS_OK && uploadInfoResultInfo.getData() != null) {
+                    updateInfo("", uploadInfoResultInfo.getData().url, "");
                 }
             }
         });
@@ -111,9 +111,9 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
             @Override
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
-                if (userInfoResultInfo != null && userInfoResultInfo.code == HttpConfig.STATUS_OK && userInfoResultInfo.data != null) {
-                    UserInfoHelper.setUserInfo(userInfoResultInfo.data);
-                    RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.data);
+                if (userInfoResultInfo != null && userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
+                    UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                    RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                 }
             }
         });
@@ -135,8 +135,8 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
 
             @Override
             public void onNext(ResultInfo<ShareInfo> shareInfoResultInfo) {
-                if (shareInfoResultInfo != null && shareInfoResultInfo.code == HttpConfig.STATUS_OK && shareInfoResultInfo.data != null) {
-                    ShareInfoHelper.setShareInfo(shareInfoResultInfo.data);
+                if (shareInfoResultInfo != null && shareInfoResultInfo.getCode() == HttpConfig.STATUS_OK && shareInfoResultInfo.getData() != null) {
+                    ShareInfoHelper.setShareInfo(shareInfoResultInfo.getData());
                 }
             }
         });
@@ -159,7 +159,7 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
             @Override
             public void onNext(final ResultInfo<String> stringResultInfo) {
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK) {
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
                         RxSPTool.putBoolean(mContext, SpConstant.OPEN_MARKET, true);
                         getQbInfo();
                     }
@@ -194,8 +194,8 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
 
             @Override
             public void onNext(ResultInfo<QbInfoWrapper> qbInfoWrapperResultInfo) {
-                if (qbInfoWrapperResultInfo != null && qbInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && qbInfoWrapperResultInfo.data != null) {
-                    mView.showQbInfo(qbInfoWrapperResultInfo.data.getInfo());
+                if (qbInfoWrapperResultInfo != null && qbInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && qbInfoWrapperResultInfo.getData() != null) {
+                    mView.showQbInfo(qbInfoWrapperResultInfo.getData().getInfo());
                 }
             }
         });
@@ -203,27 +203,8 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
         mSubscriptions.add(subscription);
     }
 
-    private boolean has_data = false;
 
-    public void getTaskInfoList(final boolean isReload) {
-
-        CommonInfoHelper.getO(mContext, SpConstant.TASK_INFOS, new TypeReference<List<TaskListInfo>>() {
-        }.getType(), new CommonInfoHelper.onParseListener<List<TaskListInfo>>() {
-
-            @Override
-            public void onParse(List<TaskListInfo> o) {
-                if (o != null) {
-                    mView.hide();
-                    has_data = true;
-                    mView.showTaskList(o);
-                }
-            }
-
-            @Override
-            public void onFail(String json) {
-
-            }
-        });
+    public void getTaskInfoList() {
 
         Subscription subscription = EngineUtils.getTaskInfoList(mContext).subscribe(new Subscriber<ResultInfo<TaskLisInfoWrapper>>() {
             @Override
@@ -233,28 +214,26 @@ public class MyPresenter extends BasePresenter<BaseEngine, MyContract.View> impl
 
             @Override
             public void onError(Throwable e) {
-//                if (!isReload)
-                if (!has_data)
-                    mView.showNoNet();
+//                if (!has_data)
+                mView.showNoNet();
             }
 
             @Override
             public void onNext(ResultInfo<TaskLisInfoWrapper> taskLisInfoWrapperResultInfo) {
                 if (taskLisInfoWrapperResultInfo != null) {
 
-                    if (taskLisInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && taskLisInfoWrapperResultInfo.data != null) {
+                    if (taskLisInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && taskLisInfoWrapperResultInfo.getData() != null) {
                         mView.hide();
-                        List<TaskListInfo> taskListInfos = taskLisInfoWrapperResultInfo.data.getList();
+                        List<TaskListInfo> taskListInfos = taskLisInfoWrapperResultInfo.getData().getList();
                         CommonInfoHelper.setO(mContext, taskListInfos, SpConstant.TASK_INFOS);
                         mView.showTaskList(taskListInfos);
                     } else {
-                        if (!has_data)
-                            mView.showNoData();
-//                        ToastUtils.showCenterToast(mContext, taskLisInfoWrapperResultInfo.message);
+//                        if (!has_data)
+                        mView.showNoData();
                     }
                 } else {
-                    if (!has_data)
-                        mView.showNoNet();
+//                    if (!has_data)
+                    mView.showNoNet();
                     ToastUtils.showCenterToast(mContext, HttpConfig.NET_ERROR);
                 }
             }

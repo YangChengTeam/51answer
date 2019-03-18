@@ -12,11 +12,14 @@ android {
         applicationId "com.yc.ac"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+        flavorDimensions 'default'//这句不能少
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng"]
+
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -63,7 +66,43 @@ android {
             keyPassword "123456"
         }
     }
+//多渠道打包支持
+    productFlavors {
+        app_online {//默认的
+        }
+        Tencent {//投放应用宝市场
+            //     manifestPlaceholders = [UMENG_CHANNEL_VALUE: Tencent]
+        }
+        Baidu {//投放百度市场
+        }
+        Wandoujia {//投放豌豆荚市场
+        }
+        Zhushou {//投放91助手
+        }
+        Qihoo {//投放360助手市场
+        }
+        Vivo {//投放vivo市场
+        }
+        Oppo {//投放oppo市场
+        }
+        Xiaomi {//投放小米市场
+        }
+        Meizu {//投放魅族市场
+        }
+        Huawei {//投放华为应用市场
+        }
+        Lenovo {//投放联想市场
+        }
+        Gionee {//投放金立市场
+        }
+        Anzhi {//安智应用市场
+        }
 
+    }
+    //注意我注释掉的，可以去掉注释，那样的话，下面这句就可以不用了
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
 
 }
 

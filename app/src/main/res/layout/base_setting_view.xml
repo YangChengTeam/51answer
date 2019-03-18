@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/distance_5"
+            android:textColor="@color/gray_999"
             android:gravity="center"
             android:paddingLeft="@dimen/distance_5"
             tools:text="3.89MB" />

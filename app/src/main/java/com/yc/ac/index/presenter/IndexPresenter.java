@@ -6,12 +6,16 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.TypeReference;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.kk.utils.LogUtil;
 import com.vondear.rxtools.RxSPTool;
+import com.yc.ac.constant.HttpStatus;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.IndexContract;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.BookInfoWrapper;
 import com.yc.ac.index.model.bean.SlideInfo;
+import com.yc.ac.index.model.bean.TagInfo;
+import com.yc.ac.index.model.bean.TagInfoWrapper;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 import com.yc.ac.index.model.bean.VersionInfo;
 import com.yc.ac.index.model.engine.IndexEngine;
@@ -77,9 +81,9 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
 
             @Override
             public void onNext(ResultInfo<List<SlideInfo>> listResultInfo) {
-                if (listResultInfo != null && listResultInfo.code == HttpConfig.STATUS_OK && listResultInfo.data != null) {
-                    CommonInfoHelper.setO(mContext, listResultInfo.data, SpConstant.SLIDE_INFO);
-                    showImagList(listResultInfo.data);
+                if (listResultInfo != null && listResultInfo.getCode() == HttpConfig.STATUS_OK && listResultInfo.getData() != null) {
+                    CommonInfoHelper.setO(mContext, listResultInfo.getData(), SpConstant.SLIDE_INFO);
+                    showImagList(listResultInfo.getData());
                 }
             }
         });
@@ -125,10 +129,9 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
 
             @Override
             public void onNext(ResultInfo<VersionInfo> resultInfoResultInfo) {
-                if (resultInfoResultInfo != null && resultInfoResultInfo.code == HttpConfig.STATUS_OK && resultInfoResultInfo.data != null) {
-                    showNewData(resultInfoResultInfo.data);
-                    CommonInfoHelper.setO(mContext, resultInfoResultInfo.data, SpConstant.INDEX_VERSION);
-
+                if (resultInfoResultInfo != null && resultInfoResultInfo.getCode() == HttpConfig.STATUS_OK && resultInfoResultInfo.getData() != null) {
+                    showNewData(resultInfoResultInfo.getData());
+                    CommonInfoHelper.setO(mContext, resultInfoResultInfo.getData(), SpConstant.INDEX_VERSION);
                 } else {
                     getCacheVersion();
                 }
@@ -208,9 +211,9 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
 
             @Override
             public void onNext(ResultInfo<BookInfoWrapper> bookInfoWrapperResultInfo) {
-                if (bookInfoWrapperResultInfo != null && bookInfoWrapperResultInfo.code == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.data != null) {
-                    mView.showHotBooks(bookInfoWrapperResultInfo.data.getLists());
-                    CommonInfoHelper.setO(mContext, bookInfoWrapperResultInfo.data.getLists(), SpConstant.HOT_BOOK);
+                if (bookInfoWrapperResultInfo != null && bookInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && bookInfoWrapperResultInfo.getData() != null) {
+                    mView.showHotBooks(bookInfoWrapperResultInfo.getData().getLists());
+                    CommonInfoHelper.setO(mContext, bookInfoWrapperResultInfo.getData().getLists(), SpConstant.HOT_BOOK);
                 }
             }
         });
@@ -247,10 +250,57 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
 
             @Override
             public void onNext(ResultInfo<List<String>> listResultInfo) {
-                if (listResultInfo != null && listResultInfo.code == HttpConfig.STATUS_OK && listResultInfo.data != null) {
+                if (listResultInfo != null && listResultInfo.getCode() == HttpConfig.STATUS_OK && listResultInfo.getData() != null) {
 
-                    mView.showConditionList(listResultInfo.data);
-                    CommonInfoHelper.setO(mContext, listResultInfo.data, SpConstant.HOT_RECOMMOND);
+                    mView.showConditionList(listResultInfo.getData());
+                    CommonInfoHelper.setO(mContext, listResultInfo.getData(), SpConstant.HOT_RECOMMOND);
+                }
+            }
+        });
+        mSubscriptions.add(subscription);
+    }
+
+    public void getTagInfos() {
+        Subscription subscription = mEngine.getTagInfos().subscribe(new Subscriber<ResultInfo<TagInfoWrapper>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<TagInfoWrapper> tagInfoWrapperResultInfo) {
+                if (tagInfoWrapperResultInfo != null && tagInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && tagInfoWrapperResultInfo.getData()
+                        != null) {
+                    List<TagInfo> list = tagInfoWrapperResultInfo.getData().getList();
+                    mView.showTagInfos(list);
+                }
+            }
+        });
+        mSubscriptions.add(subscription);
+    }
+
+
+    public void getZtInfos() {
+        Subscription subscription = mEngine.getZtInfos().subscribe(new Subscriber<ResultInfo<TagInfoWrapper>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<TagInfoWrapper> tagInfoWrapperResultInfo) {
+                if (tagInfoWrapperResultInfo != null && tagInfoWrapperResultInfo.getCode() == HttpConfig.STATUS_OK && tagInfoWrapperResultInfo.getData() != null) {
+                    mView.showZtInfos(tagInfoWrapperResultInfo.getData().getList());
                 }
             }
         });

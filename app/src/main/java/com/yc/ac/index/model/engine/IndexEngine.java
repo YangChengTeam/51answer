@@ -12,6 +12,8 @@ import com.yc.ac.base.BaseEngine;
 import com.yc.ac.constant.NetConstant;
 import com.yc.ac.index.model.bean.BookInfoWrapper;
 import com.yc.ac.index.model.bean.SlideInfo;
+import com.yc.ac.index.model.bean.TagInfo;
+import com.yc.ac.index.model.bean.TagInfoWrapper;
 import com.yc.ac.index.model.bean.VersionInfo;
 
 import java.util.ArrayList;
@@ -53,5 +55,17 @@ public class IndexEngine extends BaseEngine {
         }.getType(), null, getHeaders(), false, false, false);
     }
 
+
+    public Observable<ResultInfo<TagInfoWrapper>> getTagInfos() {
+        return HttpCoreEngin.get(mContext).rxpost(NetConstant.index_tag_url, new TypeReference<ResultInfo<TagInfoWrapper>>() {
+        }.getType(), null, getHeaders(), false, false, false);
+
+
+    }
+
+    public Observable<ResultInfo<TagInfoWrapper>> getZtInfos() {
+        return HttpCoreEngin.get(mContext).rxpost(NetConstant.index_zt_url, new TypeReference<ResultInfo<TagInfoWrapper>>() {
+        }.getType(), null, getHeaders(), false, false, false);
+    }
 
 }

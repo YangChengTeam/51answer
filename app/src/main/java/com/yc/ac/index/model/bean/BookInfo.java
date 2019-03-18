@@ -331,7 +331,7 @@ public class BookInfo implements Parcelable {
         this.pv_num = in.readString();
         this.access = in.readInt();
         this.favorite = in.readInt();
-        this.flag = new ArrayList<VersionDetailInfo>();
+        this.flag = new ArrayList<>();
         in.readList(this.flag, VersionDetailInfo.class.getClassLoader());
         this.state = in.readInt();
         this.share_content = in.readString();

@@ -70,8 +70,8 @@ public class SettingPresenter extends BasePresenter<SettingEngine, SettingContra
 
             @Override
             public void onNext(final ResultInfo<UploadInfo> uploadInfoResultInfo) {
-                if (uploadInfoResultInfo != null && uploadInfoResultInfo.code == HttpConfig.STATUS_OK && uploadInfoResultInfo.data != null) {
-                    updateInfo("", uploadInfoResultInfo.data.url, "");
+                if (uploadInfoResultInfo != null && uploadInfoResultInfo.getCode() == HttpConfig.STATUS_OK && uploadInfoResultInfo.getData() != null) {
+                    updateInfo("", uploadInfoResultInfo.getData().url, "");
                 }
             }
         });
@@ -98,9 +98,9 @@ public class SettingPresenter extends BasePresenter<SettingEngine, SettingContra
             @Override
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
-                if (userInfoResultInfo != null && userInfoResultInfo.code == HttpConfig.STATUS_OK && userInfoResultInfo.data != null) {
-                    UserInfoHelper.setUserInfo(userInfoResultInfo.data);
-                    RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.data);
+                if (userInfoResultInfo != null && userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
+                    UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                    RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                 }
             }
         });

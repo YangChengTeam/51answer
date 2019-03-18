@@ -1,14 +1,17 @@
 package com.yc.ac.base;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,12 +21,12 @@ import com.yc.ac.R;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
@@ -38,9 +41,18 @@ public class WebActivity extends BaseActivity {
     TextView commonTvTitle;
     @BindView(R.id.webView)
     WebView webView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    private LoadingDialog loadingDialog;
     private String url;
+
+    public static void startActivity(Context context, String url, String title) {
+        Intent intent = new Intent(context, WebActivity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("title", title);
+        context.startActivity(intent);
+
+    }
 
     @Override
     public int getLayoutId() {
@@ -50,8 +62,9 @@ public class WebActivity extends BaseActivity {
     @Override
     public void init() {
         url = getIntent().getStringExtra("url");
-        loadingDialog = new LoadingDialog(this);
-        commonTvTitle.setText("");
+        String title = getIntent().getStringExtra("title");
+
+        commonTvTitle.setText(title);
         RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -83,15 +96,15 @@ public class WebActivity extends BaseActivity {
         webSettings.setBlockNetworkImage(false);//设置是否加载网络图片 true 为不加载 false 为加载
 
         webView.loadUrl(url);
-        if (loadingDialog != null && !isDestroyed())
-            loadingDialog.show("正在加载");
+
+        progressBar.setMax(100);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (!isGoback) {
-                    if (loadingDialog != null && !isDestroyed())
-                        loadingDialog.show("已加载" + newProgress + "%...");
+
+                    progressBar.setProgress(newProgress);
                 }
 
             }
@@ -102,9 +115,10 @@ public class WebActivity extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-//                view.loadUrl(url);
-                if (loadingDialog != null)
-                    loadingDialog.dismiss();
+
+                if (progressBar.getVisibility() == View.VISIBLE) {
+                    progressBar.setVisibility(View.GONE);
+                }
                 isGoback = false;
             }
 
@@ -141,13 +155,13 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (!TextUtils.isEmpty(url) && url.startsWith("http://m.upkao.com/zk/")) {
-            if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
-                webView.goBack();
-                isGoback = true;
-                return true;
-            }
+//        if (!TextUtils.isEmpty(url) && url.startsWith("http://m.upkao.com/zk/")) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            webView.goBack();
+            isGoback = true;
+            return true;
         }
+//        }
         return super.onKeyDown(keyCode, event);
 
     }

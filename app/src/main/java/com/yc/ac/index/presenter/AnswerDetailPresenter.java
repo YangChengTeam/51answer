@@ -7,16 +7,23 @@ import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.LogUtil;
 import com.vondear.rxtools.RxNetTool;
+import com.vondear.rxtools.RxTimeTool;
 import com.yc.ac.base.MyApp;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.index.contract.AnswerDetailContract;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.BookInfoDao;
 import com.yc.ac.index.model.engine.AnswerDetailEngine;
+import com.yc.ac.setting.model.bean.BrowserInfo;
+import com.yc.ac.setting.model.bean.BrowserInfoDao;
 import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.ShareInfoDao;
 import com.yc.ac.utils.EngineUtils;
 import com.yc.ac.utils.ToastUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -28,12 +35,14 @@ import yc.com.base.BasePresenter;
 
 public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, AnswerDetailContract.View> implements AnswerDetailContract.Presenter {
     private BookInfoDao infoDao;
+    private BrowserInfoDao browserInfoDao;
 
     public AnswerDetailPresenter(Context context, AnswerDetailContract.View view) {
         super(context, view);
         mEngine = new AnswerDetailEngine(context);
 
         infoDao = MyApp.getDaoSession().getBookInfoDao();
+        browserInfoDao = MyApp.getDaoSession().getBrowserInfoDao();
     }
 
     @Override
@@ -61,9 +70,9 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
             @Override
             public void onNext(ResultInfo<BookInfo> bookInfoResultInfo) {
                 if (bookInfoResultInfo != null) {
-                    if (bookInfoResultInfo.code == HttpConfig.STATUS_OK && bookInfoResultInfo.data != null) {
+                    if (bookInfoResultInfo.getCode() == HttpConfig.STATUS_OK && bookInfoResultInfo.getData() != null) {
                         mView.hide();
-                        BookInfo bookInfo = bookInfoResultInfo.data;
+                        BookInfo bookInfo = bookInfoResultInfo.getData();
                         try {
                             bookInfo.setId(Long.parseLong(bookInfo.getBookId()));
                         } catch (Exception e) {
@@ -115,9 +124,9 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
             @Override
             public void onNext(ResultInfo<String> stringResultInfo) {
                 boolean isCollect = bookInfo.getFavorite() == 1;
-                if (stringResultInfo != null && stringResultInfo.code == HttpConfig.STATUS_OK && stringResultInfo.data != null) {
+                if (stringResultInfo != null && stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
                     isCollect = !isCollect;
-                    mView.showFavoriteResult(stringResultInfo.data, isCollect);
+                    mView.showFavoriteResult(stringResultInfo.getData(), isCollect);
                     bookInfo.setFavorite(isCollect ? 1 : 0);
                     RxBus.get().post(BusAction.COLLECT, "collect");
                 }
@@ -165,5 +174,33 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
         return result != null;
     }
 
+
+    public void saveBrowserInfo(BrowserInfo browserInfo, int page) {
+        if (browserInfo == null) return;
+        long currentTime = System.currentTimeMillis();
+        String time = RxTimeTool.date2String(new Date(currentTime), new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()));
+
+
+        BrowserInfo queryBrowserInfo = queryBrowserInfo(browserInfo.getBookId());
+
+        if (queryBrowserInfo != null) {
+            queryBrowserInfo.setSaveTime(currentTime);
+            queryBrowserInfo.setLastPage(page);
+            browserInfoDao.update(queryBrowserInfo);
+        } else {
+            browserInfo.setBrowserTime(time);
+            browserInfo.setLastPage(page);
+            browserInfo.setSaveTime(currentTime);
+            browserInfoDao.insert(browserInfo);
+        }
+
+
+    }
+
+    private BrowserInfo queryBrowserInfo(String bookId) {
+        long currentTime = System.currentTimeMillis();
+        String time = RxTimeTool.date2String(new Date(currentTime), new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()));
+        return browserInfoDao.queryBuilder().where(BrowserInfoDao.Properties.BookId.eq(bookId)).where(BrowserInfoDao.Properties.BrowserTime.eq(time)).build().unique();
+    }
 
 }

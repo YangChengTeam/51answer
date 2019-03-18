@@ -52,7 +52,7 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
 
             @Override
             public void onNext(ResultInfo<String> stringResultInfo) {
-                if (stringResultInfo != null && stringResultInfo.code == HttpConfig.STATUS_OK) {
+                if (stringResultInfo != null && stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
                     RxBus.get().post(BusAction.SHARE_SUCCESS, "share_success");
                 } else {
                     saveShare(shareInfo);
@@ -80,7 +80,7 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
             @Override
             public void onNext(final ResultInfo<String> stringResultInfo) {
                 if (stringResultInfo != null) {
-                    if (stringResultInfo.code == HttpConfig.STATUS_OK) {
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
                         RxBus.get().post(BusAction.SHARE_MONEY_SUCCESS, "success");
                     }
                 }
