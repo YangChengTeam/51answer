@@ -1,13 +1,10 @@
 package com.yc.ac.index.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,8 +25,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 
@@ -119,7 +114,7 @@ public class SearchResultFragment extends BaseFragment<BookPresenter> implements
 
     private void initAdapter() {
         resultRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemAdapter = new SearchResultItemAdapter(null);
+        itemAdapter = new SearchResultItemAdapter(null,null);
         resultRecyclerView.setAdapter(itemAdapter);
 
     }

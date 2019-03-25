@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.qq.e.ads.nativ.NativeExpressADView;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
@@ -19,7 +21,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by wanglin private String on 2018/3/8 09;//01.
  */
 @Entity
-public class BookInfo implements Parcelable {
+public class BookInfo implements Parcelable, MultiItemEntity {
 
     @Id
     private long id;
@@ -58,6 +60,16 @@ public class BookInfo implements Parcelable {
     private String cover_id;//临时书本id
     private String answer_img;
     private long saveTime;
+    @Transient
+    public static final int ADV = 1;
+    @Transient
+    public static final int CONTENT = 2;
+    @Transient
+    private int itemType = CONTENT;
+
+    @Transient
+    private NativeExpressADView view;
+
 
     public long getId() {
         return id;
@@ -344,9 +356,9 @@ public class BookInfo implements Parcelable {
 
     @Generated(hash = 329383499)
     public BookInfo(long id, String bookId, String name, String cover_img, String year, String version,
-            String period, String part_type, String grade, String subject, String press, String code, int is_del,
-            String sort, String share_num, String pv_num, int access, int favorite, int state,
-            String share_content, String author, String time, String cover_id, String answer_img, long saveTime) {
+                    String period, String part_type, String grade, String subject, String press, String code, int is_del,
+                    String sort, String share_num, String pv_num, int access, int favorite, int state,
+                    String share_content, String author, String time, String cover_id, String answer_img, long saveTime) {
         this.id = id;
         this.bookId = bookId;
         this.name = name;
@@ -415,5 +427,23 @@ public class BookInfo implements Parcelable {
                 ", cover_id='" + cover_id + '\'' +
                 ", answer_img='" + answer_img + '\'' +
                 '}';
+    }
+
+
+    public void setItemType(int itemType) {
+        this.itemType = itemType;
+    }
+
+    public NativeExpressADView getView() {
+        return view;
+    }
+
+    public void setView(NativeExpressADView view) {
+        this.view = view;
+    }
+
+    @Override
+    public int getItemType() {
+        return itemType;
     }
 }
