@@ -148,6 +148,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation "org.greenrobot:greendao:$greendao_version"
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    api 'com.wl.tencent-adv:tencent-adv:4.0'
 //    compile "io.objectbox:objectbox-android:$objectboxVersion"
 //    annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
 //    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"

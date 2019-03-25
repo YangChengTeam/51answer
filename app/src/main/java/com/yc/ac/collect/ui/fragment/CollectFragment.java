@@ -1,11 +1,15 @@
 package com.yc.ac.collect.ui.fragment;
 
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +27,7 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yc.ac.R;
+import com.yc.ac.base.Config;
 import com.yc.ac.base.StateView;
 import com.yc.ac.collect.contract.CollectContract;
 import com.yc.ac.collect.presenter.CollectPresenter;
@@ -38,8 +43,12 @@ import com.yc.ac.utils.UserInfoHelper;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
+import yc.com.tencent_adv.AdvDispatchManager;
+import yc.com.tencent_adv.AdvType;
 
 /**
  * Created by wanglin  on 2018/3/7 13:53.
@@ -62,6 +71,8 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     ImageView ivPhotograph;
     @BindView(R.id.iv_word)
     ImageView ivWord;
+    @BindView(R.id.topContainer)
+    FrameLayout topContainer;
 
 
     private IndexBookAdapter indexBookAdapter;
@@ -92,6 +103,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         initListener();
         initRefresh();
         getData(false);
+        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, topContainer, null, Config.tencent_media_id, Config.tencent_top_banner_id, null);
 
     }
 
@@ -260,6 +272,5 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
             }
         });
     }
-
 
 }

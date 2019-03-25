@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,13 +21,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.LogUtil;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.vondear.rxtools.RxImageTool;
 import com.yc.ac.R;
+import com.yc.ac.base.Config;
 import com.yc.ac.base.WebActivity;
 import com.yc.ac.index.contract.IndexContract;
 import com.yc.ac.index.model.bean.BookInfo;
@@ -49,6 +50,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -57,6 +59,9 @@ import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.base.StatusBarUtil;
+import yc.com.tencent_adv.AdvDispatchManager;
+import yc.com.tencent_adv.AdvType;
+import yc.com.tencent_adv.OnAdvStateListener;
 
 /**
  * Created by wanglin  on 2018/2/27 14:43.
@@ -100,6 +105,9 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     ImageView ivIndexShare;
     @BindView(R.id.iv_index_search)
     ImageView ivIndexSearch;
+    @BindView(R.id.bottomContainer)
+    FrameLayout bottomContainer;
+
 
 
     private IndexTagAdapter tagAdapter;
@@ -133,7 +141,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         banner.setFocusable(false);
         initRefresh();
         initListener();
-
+        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER,bottomContainer,null, Config.tencent_media_id,Config.tencent_bottom_banner_id,null);
     }
 
     private void setStatusBar() {
@@ -387,6 +395,5 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         mPresenter.getTagInfos();
         mPresenter.getZtInfos();
     }
-
 
 }

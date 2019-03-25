@@ -2,25 +2,29 @@ package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
+import com.yc.ac.base.Config;
 import com.yc.ac.base.MainActivity;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.ui.widget.SelectGradeView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -28,12 +32,15 @@ import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
+import yc.com.tencent_adv.AdvDispatchManager;
+import yc.com.tencent_adv.AdvType;
+import yc.com.tencent_adv.OnAdvStateListener;
 
 /**
  * Created by wanglin  on 2018/3/15 14:11.
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements OnAdvStateListener {
 
     @BindView(R.id.iv)
     ImageView iv;
@@ -49,6 +56,12 @@ public class SplashActivity extends BaseActivity {
     TextView tvSkip;
     @BindView(R.id.rl_select_grade)
     RelativeLayout rlSelectGrade;
+    @BindView(R.id.splash_container)
+    FrameLayout splashContainer;
+    @BindView(R.id.skip_view)
+    TextView skipView;
+
+    private final int Time = 1000;
 
     @Override
     public int getLayoutId() {
@@ -59,8 +72,12 @@ public class SplashActivity extends BaseActivity {
     public void init() {
 
         rlSelectGrade.setVisibility(View.GONE);
-        iv.setVisibility(View.VISIBLE);
-        switchActivity();
+//        iv.setVisibility(View.VISIBLE);
+
+        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Config.tencent_media_id, Config.tencent_splash_id, this);
+
+
+//        switchActivity();
 //        if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
 //            rlSelectGrade.setVisibility(View.GONE);
 //            iv.setVisibility(View.VISIBLE);
@@ -75,21 +92,21 @@ public class SplashActivity extends BaseActivity {
 //        initListener();
     }
 
-    private void switchActivity() {
+    private void switchActivity(long delayTime) {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        }, 1000);
+        }, delayTime);
     }
 
     private void initListener() {
         RxView.clicks(tvSkip).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                switchActivity();
+                switchActivity(Time);
             }
         });
     }
@@ -130,7 +147,7 @@ public class SplashActivity extends BaseActivity {
                 smallGradeView.clearSelect();
                 view.click(position);
                 RxSPTool.putString(SplashActivity.this, SpConstant.SELECT_GRADE, data);
-                switchActivity();
+                switchActivity(Time);
             }
         });
 
@@ -139,5 +156,50 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void setStatusBar() {
         StatusBarUtil.setTransparentForWindow(this);
+    }
+
+
+    @Override
+    public void onShow() {
+        iv.setVisibility(View.GONE);
+        skipView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDismiss(long delayTime) {
+        switchActivity(delayTime);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AdvDispatchManager.getManager().onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AdvDispatchManager.getManager().onResume();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onNativeExpressDismiss(NativeExpressADView view) {
+
+    }
+
+    @Override
+    public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
+
     }
 }

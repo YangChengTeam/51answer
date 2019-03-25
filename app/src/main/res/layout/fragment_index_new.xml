@@ -214,6 +214,12 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/t12sp" />
 
+                <FrameLayout
+                    android:id="@+id/bottomContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/t10dp" />
+
 
             </LinearLayout>
 

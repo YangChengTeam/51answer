@@ -200,10 +200,10 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                         }
                     });
                 } else {
-//                    if (bookInfo != null && bookInfo.getAccess() == 0) {
-//                        ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
-//                        return;
-//                    }
+                    if (bookInfo != null && bookInfo.getAccess() == 0) {
+                        ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
+                        return;
+                    }
                     if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
                         RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
                     }
