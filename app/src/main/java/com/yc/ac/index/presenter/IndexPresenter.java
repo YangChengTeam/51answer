@@ -44,7 +44,7 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
     public void loadData(boolean forceUpdate, boolean showLoadingUI) {
         if (!forceUpdate) return;
 //        getSlideInfo("home");
-//        getVersionList();
+        getVersionList();
 //        getConditionList();
 //        getHotBooks("2");
 

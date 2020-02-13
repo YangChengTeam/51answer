@@ -2,9 +2,6 @@ package com.yc.ac.setting.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,17 +20,17 @@ import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.LoginPresenter;
 import com.yc.ac.setting.ui.fragment.ForgetPwdCodeFragment;
 import com.yc.ac.setting.ui.fragment.LoginCodeFragment;
-import com.yc.ac.setting.ui.fragment.LoginEditPasswordFragment;
-import com.yc.ac.setting.ui.fragment.LoginFragment;
 import com.yc.ac.setting.ui.fragment.LoginNewPwdFragment;
 import com.yc.ac.setting.ui.fragment.LoginPhoneFragment;
 import com.yc.ac.setting.ui.fragment.LoginPwdFragment;
-import com.yc.ac.setting.ui.fragment.LoginRegisterFragment;
 import com.yc.ac.utils.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import yc.com.base.BaseActivity;
 

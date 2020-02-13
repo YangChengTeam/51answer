@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +20,8 @@ import com.vondear.rxtools.view.colorpicker.OnColorSelectedListener;
 import com.vondear.rxtools.view.colorpicker.renderer.ColorWheelRenderer;
 import com.vondear.rxtools.view.colorpicker.slider.AlphaSlider;
 import com.vondear.rxtools.view.colorpicker.slider.LightnessSlider;
+
+import androidx.appcompat.app.AlertDialog;
 
 
 /**

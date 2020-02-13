@@ -1,19 +1,14 @@
 package com.yc.ac.collect.ui.fragment;
 
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
@@ -40,21 +35,27 @@ import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.utils.UserInfoHelper;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.tencent_adv.AdvDispatchManager;
 import yc.com.tencent_adv.AdvType;
+import yc.com.toutiao_adv.OnAdvStateListener;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/3/7 13:53.
  */
 
-public class CollectFragment extends BaseFragment<CollectPresenter> implements CollectContract.View {
+public class CollectFragment extends BaseFragment<CollectPresenter> implements CollectContract.View, OnAdvStateListener {
 
 
     @BindView(R.id.collect_recyclerView)
@@ -103,7 +104,8 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         initListener();
         initRefresh();
         getData(false);
-        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, topContainer, null, Config.tencent_media_id, Config.tencent_top_banner_id, null);
+//        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, topContainer, null, Config.tencent_media_id, Config.tencent_top_banner_id, null);
+        TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, topContainer, Config.toutiao_banner2_id, 0, null, null, 0, null, 0, this);
 
     }
 
@@ -272,5 +274,37 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
             }
         });
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        TTAdDispatchManager.getManager().onDestroy();
+    }
+
+    @Override
+    public void loadSuccess() {
+
+    }
+
+    @Override
+    public void loadFailed() {
+
+    }
+
+    @Override
+    public void clickAD() {
+
+    }
+
+    @Override
+    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
+
+    }
+
+    @Override
+    public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
+    }
+
 
 }

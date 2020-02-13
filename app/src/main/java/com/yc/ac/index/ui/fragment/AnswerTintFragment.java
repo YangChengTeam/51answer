@@ -1,16 +1,19 @@
 package com.yc.ac.index.ui.fragment;
 
+import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.yc.ac.R;
+import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.setting.model.bean.ShareInfo;
-import com.yc.ac.setting.ui.fragment.ShareFragment;
+
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseDialogFragment;
@@ -22,7 +25,7 @@ import yc.com.base.BaseDialogFragment;
 public class AnswerTintFragment extends BaseDialogFragment {
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
-    private ShareInfo shareInfo;
+    private BookInfo bookInfo;
 
 
     @Override
@@ -34,20 +37,26 @@ public class AnswerTintFragment extends BaseDialogFragment {
     public void init() {
 
         if (getArguments() != null) {
-            shareInfo = getArguments().getParcelable("share");
+            bookInfo = getArguments().getParcelable("bookInfo");
 
         }
-        RxView.clicks(tvConfirm).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                //todo分享
-//                if (!UserInfoHelper.isGoToLogin(getActivity())) {
+        RxView.clicks(tvConfirm).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            //todo分享
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
                 ShareFragment shareFragment = new ShareFragment();
-                shareFragment.setShareInfo(shareInfo);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("bookInfo", bookInfo);
+
+                shareFragment.setArguments(bundle);
+
                 shareFragment.show(getFragmentManager(), null);
-//                }
-                dismiss();
+
+//            if (confirmListener != null) {
+//                confirmListener.onConfirm();
+//            }
             }
+            dismiss();
         });
     }
 
@@ -64,6 +73,16 @@ public class AnswerTintFragment extends BaseDialogFragment {
     @Override
     public int getHeight() {
         return ViewGroup.LayoutParams.WRAP_CONTENT;
+    }
+
+    private OnConfirmListener confirmListener;
+
+    public void setConfirmListener(OnConfirmListener confirmListener) {
+        this.confirmListener = confirmListener;
+    }
+
+    public interface OnConfirmListener {
+        void onConfirm();
     }
 
 

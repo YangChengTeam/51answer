@@ -3,8 +3,6 @@ package com.yc.ac.setting.ui.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -13,6 +11,8 @@ import android.widget.TextView;
 
 import com.yc.ac.R;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import yc.com.base.BaseView;
 

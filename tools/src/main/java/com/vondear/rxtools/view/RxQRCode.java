@@ -1,7 +1,6 @@
 package com.vondear.rxtools.view;
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
@@ -11,6 +10,8 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.Hashtable;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author vondear

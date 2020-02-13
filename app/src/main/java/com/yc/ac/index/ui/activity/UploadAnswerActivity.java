@@ -2,11 +2,8 @@ package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,7 +12,6 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.LogUtil;
 import com.vondear.rxtools.RxPhotoTool;
 import com.yalantis.ucrop.UCrop;
 import com.yc.ac.R;
@@ -26,16 +22,15 @@ import com.yc.ac.index.presenter.UploadPresenter;
 import com.yc.ac.index.ui.adapter.UploadAnswerAdapter;
 import com.yc.ac.index.ui.fragment.PhotoFragment;
 import com.yc.ac.index.ui.widget.MyDecoration;
-import com.yc.ac.setting.model.bean.UploadInfo;
-import com.yc.ac.utils.GlideHelper;
 import com.yc.ac.utils.IvAvatarHelper;
 import com.yc.ac.utils.ToastUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;

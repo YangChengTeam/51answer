@@ -7,7 +7,7 @@
 
     <include layout="@layout/common_top_view" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -65,5 +65,5 @@ jkdlj2008@163.com
 请确保您上传的复印件清晰无污损，并提交所需的全部材料，若提交的材料不完整或无法识别内容，我将无法处理您的反馈。" />
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

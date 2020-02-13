@@ -82,24 +82,21 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
             View view = shareItemViews.get(i);
             view.setTag(i);
             final int finalI = i;
-            RxView.clicks(view).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-                @Override
-                public void call(Void aVoid) {
-                    llShare.setVisibility(View.GONE);
-                    ivCode.setVisibility(View.VISIBLE);
-                    ivCode.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getDialog().getWindow().getDecorView().setDrawingCacheEnabled(true);
-                            Bitmap bmp = getDialog().getWindow().getDecorView().getDrawingCache();
-                            mShareInfo = new ShareInfo();
-                            mShareInfo.setBook_id(bookInfo.getBookId());
-                            mShareInfo.setBitmap(bmp);
-                            shareInfo(finalI);
-                        }
-                    }, 500);
+            RxView.clicks(view).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+                llShare.setVisibility(View.GONE);
+                ivCode.setVisibility(View.VISIBLE);
+                ivCode.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getDialog().getWindow().getDecorView().setDrawingCacheEnabled(true);
+                        Bitmap bmp = getDialog().getWindow().getDecorView().getDrawingCache();
+                        mShareInfo = new ShareInfo();
+                        mShareInfo.setBook_id(bookInfo.getBookId());
+                        mShareInfo.setBitmap(bmp);
+                        shareInfo(finalI);
+                    }
+                }, 500);
 
-                }
             });
         }
 

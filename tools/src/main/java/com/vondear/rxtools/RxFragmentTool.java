@@ -1,13 +1,13 @@
 package com.vondear.rxtools;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
- *
  * @author vondear
  * @date 2016/12/26
  */
@@ -30,7 +30,7 @@ public class RxFragmentTool {
     /**
      * v4包下的使用
      * 动态的使用Fragment
-     *
+     * <p>
      * 在布局文件中使用 FrameLayout 标签
      *
      * @param fragmentActivity
@@ -47,7 +47,7 @@ public class RxFragmentTool {
     /**
      * android.app.Activity下的使用
      * 动态的使用Fragment
-     *
+     * <p>
      * 在布局文件中使用 FrameLayout 标签
      *
      * @param activity

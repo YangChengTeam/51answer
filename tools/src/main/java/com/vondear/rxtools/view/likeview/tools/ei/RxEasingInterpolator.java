@@ -1,7 +1,8 @@
 package com.vondear.rxtools.view.likeview.tools.ei;
 
 import android.animation.TimeInterpolator;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author vondear

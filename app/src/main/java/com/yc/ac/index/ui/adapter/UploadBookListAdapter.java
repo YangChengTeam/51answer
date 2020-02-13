@@ -1,7 +1,5 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,6 +10,8 @@ import com.yc.ac.utils.GlideHelper;
 import com.yc.ac.utils.SubjectHelper;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2018/4/23 12:47.

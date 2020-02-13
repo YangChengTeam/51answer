@@ -1,8 +1,5 @@
 package com.yc.ac.setting.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.kk.utils.LogUtil;
@@ -11,6 +8,9 @@ import com.yc.ac.setting.model.bean.TaskListInfo;
 import com.yc.ac.setting.ui.widget.BaseSettingView;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 
 /**

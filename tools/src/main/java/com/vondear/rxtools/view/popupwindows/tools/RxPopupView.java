@@ -1,7 +1,6 @@
 package com.vondear.rxtools.view.popupwindows.tools;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
 import android.text.Spannable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import com.vondear.rxtools.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 /**
  * @author Vondear

@@ -1,8 +1,6 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
+
 import android.util.SparseArray;
 import android.widget.TextView;
 
@@ -10,10 +8,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
-import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 /**
  * Created by wanglin  on 2018/3/8 16:21.

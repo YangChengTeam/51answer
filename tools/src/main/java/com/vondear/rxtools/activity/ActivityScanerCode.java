@@ -12,8 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -21,7 +19,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -35,7 +32,6 @@ import com.vondear.rxtools.RxDataTool;
 import com.vondear.rxtools.RxPhotoTool;
 import com.vondear.rxtools.RxQrBarTool;
 import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
 import com.vondear.rxtools.interfaces.OnRxScanerListener;
 import com.vondear.rxtools.module.scaner.CameraManager;
 import com.vondear.rxtools.module.scaner.CaptureActivityHandler;
@@ -45,6 +41,9 @@ import com.vondear.rxtools.view.dialog.RxDialogSure;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author vondear

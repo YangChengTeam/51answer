@@ -1,8 +1,6 @@
 package com.yc.ac.index.ui.fragment;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +9,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
@@ -39,18 +38,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.tencent_adv.AdvDispatchManager;
 import yc.com.tencent_adv.AdvType;
 import yc.com.tencent_adv.OnAdvStateListener;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/3/10 10:09.
  */
 
-public class SearchNewFragment extends BaseFragment<BookConditionPresenter> implements BookConditionContract.View, OnAdvStateListener {
+public class SearchNewFragment extends BaseFragment<BookConditionPresenter> implements BookConditionContract.View, OnAdvStateListener, yc.com.toutiao_adv.OnAdvStateListener {
 
 
     @BindView(R.id.tv_grade)
@@ -108,7 +111,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
     public static int FIRST_AD_POSITION = 3; // 第一条广告的位置
     public static int SECOND_AD_POSITION = 10; // 第一条广告的位置
-    private HashMap<NativeExpressADView, Integer> mAdViewPositionMap = new HashMap<>();
+    private HashMap<TTNativeExpressAd, Integer> mAdViewPositionMap = new HashMap<>();
 
     @Override
     public int getLayoutId() {
@@ -148,7 +151,8 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         List<Integer> positions = new ArrayList<>();
         positions.add(FIRST_AD_POSITION);
         positions.add(SECOND_AD_POSITION);
-        AdvDispatchManager.getManager().init(getActivity(), AdvType.ORIGIN_PIC, null, null, Config.tencent_media_id, Config.tencent_native_id, AD_COUNT, positions, this);
+//        AdvDispatchManager.getManager().init(getActivity(), AdvType.ORIGIN_PIC, null, null, Config.tencent_media_id, Config.tencent_native_id, AD_COUNT, positions, this);
+        TTAdDispatchManager.getManager().init(getActivity(), TTAdType.NATIVE_EXPRESS, null, Config.toutiao_native_id, AD_COUNT, positions, null, 0, null, 0, this);
     }
 
     private void initView() {
@@ -165,21 +169,13 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     }
 
     private void initListener() {
-        itemAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                getData();
+        itemAdapter.setOnLoadMoreListener(() -> getData(), searchRecyclerView);
+        itemAdapter.setOnItemClickListener((adapter, view, position) -> {
+            BookInfo bookInfo = itemAdapter.getItem(position);
+            if (bookInfo != null) {
+                AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
             }
-        }, searchRecyclerView);
-        itemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                BookInfo bookInfo = itemAdapter.getItem(position);
-                if (bookInfo != null) {
-                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
-                }
 
-            }
         });
 
         itemAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -251,27 +247,19 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         final FilterPopWindowNew popWindow = new FilterPopWindowNew(getActivity(), name);
         popWindow.showAsDropDown(llTopGuide);
         iv.setImageResource(R.mipmap.search_up);
-        popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                iv.setImageResource(R.mipmap.search_down);
-            }
-        });
-        popWindow.setOnPopClickListener(new FilterPopWindowNew.OnPopClickListener() {
-            @Override
-            public void onPopClick(String popName) {
-                popWindow.dismiss();
-                tv.setText(popName);
-                grade = tvGrade.getText().toString();
-                subject = tvSubject.getText().toString();
-                part = tvPart.getText().toString();
-                version = tvVersion.getText().toString();
-                page = 1;
-                code = "";
-                mName = "";
-                getData();
+        popWindow.setOnDismissListener(() -> iv.setImageResource(R.mipmap.search_down));
+        popWindow.setOnPopClickListener(popName -> {
+            popWindow.dismiss();
+            tv.setText(popName);
+            grade = tvGrade.getText().toString();
+            subject = tvSubject.getText().toString();
+            part = tvPart.getText().toString();
+            version = tvVersion.getText().toString();
+            page = 1;
+            code = "";
+            mName = "";
+            getData();
 
-            }
         });
 
     }
@@ -329,12 +317,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
     @Override
     public void showNoNet() {
-        stateView.showNoNet(searchRecyclerView, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getData();
-            }
-        });
+        stateView.showNoNet(searchRecyclerView, v -> getData());
     }
 
     @Override
@@ -364,6 +347,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         RxSPTool.putString(getActivity(), SpConstant.SELECT_SUBJECT, subject);
         RxSPTool.putString(getActivity(), SpConstant.SELECT_PART, part);
         RxSPTool.putString(getActivity(), SpConstant.SELECT_VERSION, version);
+        TTAdDispatchManager.getManager().onDestroy();
     }
 
     @Override
@@ -383,16 +367,33 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
     @Override
     public void onNativeExpressDismiss(NativeExpressADView nativeExpressADView) {
-        if (itemAdapter != null) {
-            int removedPosition = mAdViewPositionMap.get(nativeExpressADView);
-            itemAdapter.removeADView(removedPosition, nativeExpressADView);
-        }
+
     }
 
     @Override
     public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
+
+    }
+
+    @Override
+    public void loadSuccess() {
+
+    }
+
+    @Override
+    public void loadFailed() {
+
+    }
+
+    @Override
+    public void clickAD() {
+
+    }
+
+    @Override
+    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
         LogUtil.msg("size: " + mDatas.size());
-        for (Map.Entry<NativeExpressADView, Integer> nativeExpressADView : mDatas.entrySet()) {
+        for (Map.Entry<TTNativeExpressAd, Integer> nativeExpressADView : mDatas.entrySet()) {
 
             mAdViewPositionMap.put(nativeExpressADView.getKey(), nativeExpressADView.getValue());
             BookInfo bookInfo = new BookInfo();
@@ -402,4 +403,14 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
             itemAdapter.addADViewToPosition(nativeExpressADView.getValue(), bookInfo);
         }
     }
+
+    @Override
+    public void onNativeExpressDismiss(TTNativeExpressAd ad) {
+        if (itemAdapter != null) {
+            int removedPosition = mAdViewPositionMap.get(ad);
+            itemAdapter.removeADView(removedPosition, ad);
+        }
+    }
+
+
 }

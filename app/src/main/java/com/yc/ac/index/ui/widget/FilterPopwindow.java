@@ -2,8 +2,6 @@ package com.yc.ac.index.ui.widget;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -21,6 +19,8 @@ import com.yc.ac.index.ui.adapter.FilterItemDetailAdapter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BasePopwindow;

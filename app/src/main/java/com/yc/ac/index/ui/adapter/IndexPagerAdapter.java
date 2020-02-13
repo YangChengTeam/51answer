@@ -1,15 +1,13 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 
 import java.util.List;
 
-import javax.xml.parsers.FactoryConfigurationError;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * Created by wanglin  on 2018/3/7 18:41.

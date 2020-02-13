@@ -1,1 +1,1 @@
-include ':app', ':share', ':rxbus', ':tools', ':photoview', ':base'
+include ':app', ':share', ':rxbus', ':tools', ':photoview', ':base', ':toutiao-adv'

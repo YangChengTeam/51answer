@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_qian">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,13 +57,13 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
-                    android:paddingBottom="@dimen/t5dp"
                     android:paddingTop="@dimen/status_bar_height"
+                    android:paddingBottom="@dimen/t5dp"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -108,14 +108,14 @@
                             android:src="@mipmap/base_index_search" />
 
                     </RelativeLayout>
-                </android.support.v7.widget.Toolbar>
-            </android.support.design.widget.CollapsingToolbarLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/commonScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -128,9 +128,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/t15dp"
                 android:paddingLeft="@dimen/t15dp"
-                android:paddingTop="@dimen/distance_10">
+                android:paddingTop="@dimen/distance_10"
+                android:paddingBottom="@dimen/t15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                         android:textStyle="bold" />
 
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/hot_recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                 </RelativeLayout>
 
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
             </LinearLayout>
 
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -236,8 +236,8 @@
                 android:layout_height="@dimen/t40dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/t8dp"
                 android:layout_marginRight="@dimen/distance_15"
+                android:layout_marginBottom="@dimen/t8dp"
                 android:background="@drawable/upload_answer_bg"
                 android:gravity="center">
 
@@ -261,5 +261,5 @@
                     android:textSize="@dimen/text_12" />
             </LinearLayout>
         </RelativeLayout>
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

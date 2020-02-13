@@ -182,7 +182,7 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             }
 
             @Override
-            public void onNext(ResultInfo<TokenInfo> tokenInfoResultInfo) {
+            public void onNext(final ResultInfo<TokenInfo> tokenInfoResultInfo) {
                 mView.dismissDialog();
                 if (tokenInfoResultInfo != null) {
                     if (tokenInfoResultInfo.getCode() == HttpConfig.STATUS_OK && tokenInfoResultInfo.getData() != null) {

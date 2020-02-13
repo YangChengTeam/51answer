@@ -3,7 +3,6 @@ package com.yc.ac.base;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.multidex.MultiDexApplication;
 
 import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
@@ -26,6 +25,7 @@ import org.greenrobot.greendao.query.QueryBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.multidex.MultiDexApplication;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -33,6 +33,8 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdManagerHolder;
 
 /**
  * Created by wanglin  on 2018/2/27 11:15.
@@ -55,6 +57,8 @@ public class MyApp extends MultiDexApplication {
         });
 
         Bugly.init(getApplicationContext(), "af5788360b", false);
+
+        TTAdManagerHolder.init(this, Config.toutiao_ad_id);
 
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "answer-circle-db", null);
         SQLiteDatabase db = helper.getWritableDatabase();

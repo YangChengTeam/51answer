@@ -1,6 +1,5 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -9,6 +8,8 @@ import com.yc.ac.R;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2018/3/9 20:21.

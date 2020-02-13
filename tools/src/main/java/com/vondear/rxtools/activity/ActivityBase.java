@@ -3,12 +3,12 @@ package com.vondear.rxtools.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 
 import com.google.zxing.Result;
 import com.vondear.rxtools.RxActivityTool;
-import com.vondear.rxtools.module.scaner.CameraManager;
 import com.vondear.rxtools.module.scaner.CaptureActivityHandler;
+
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * @author vondear

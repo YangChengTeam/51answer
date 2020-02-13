@@ -26,22 +26,14 @@ public class BrowserEngine extends BaseEngine {
     }
 
     public Observable<List<BrowserInfo>> getBrowserInfos(final int page, final int pageSize) {
-        return Observable.just("").subscribeOn(Schedulers.io()).map(new Func1<String, List<BrowserInfo>>() {
-            @Override
-            public List<BrowserInfo> call(String s) {
-                return browserInfoDao.queryBuilder().orderDesc(BrowserInfoDao.Properties.SaveTime).limit(pageSize).offset((page - 1) * pageSize).list();
-            }
-        }).observeOn(AndroidSchedulers.mainThread());
+        return Observable.just("").subscribeOn(Schedulers.io()).map(s -> browserInfoDao.queryBuilder().orderDesc(BrowserInfoDao.Properties.SaveTime).limit(pageSize).offset((page - 1) * pageSize).list()).observeOn(AndroidSchedulers.mainThread());
 
     }
 
     public Observable<Void> deleteBrowserInfos(final BrowserInfo browserInfo) {
-        return Observable.just("").subscribeOn(Schedulers.io()).map(new Func1<String, Void>() {
-            @Override
-            public Void call(String s) {
-                browserInfoDao.delete(browserInfo);
-                return null;
-            }
+        return Observable.just("").subscribeOn(Schedulers.io()).map((Func1<String, Void>) s -> {
+            browserInfoDao.delete(browserInfo);
+            return null;
         }).observeOn(AndroidSchedulers.mainThread());
 
 

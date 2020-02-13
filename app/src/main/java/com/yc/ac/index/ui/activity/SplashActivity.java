@@ -1,16 +1,14 @@
 package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.jakewharton.rxbinding.view.RxView;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxDeviceTool;
@@ -27,20 +25,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
 import yc.com.tencent_adv.AdvDispatchManager;
 import yc.com.tencent_adv.AdvType;
 import yc.com.tencent_adv.OnAdvStateListener;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/3/15 14:11.
  */
 
-public class SplashActivity extends BaseActivity implements OnAdvStateListener {
+public class SplashActivity extends BaseActivity implements OnAdvStateListener, yc.com.toutiao_adv.OnAdvStateListener {
 
     @BindView(R.id.iv)
     ImageView iv;
@@ -74,8 +74,8 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
         rlSelectGrade.setVisibility(View.GONE);
 //        iv.setVisibility(View.VISIBLE);
 
-        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Config.tencent_media_id, Config.tencent_splash_id, this);
-
+//        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Config.tencent_media_id, Config.tencent_splash_id, this);
+        TTAdDispatchManager.getManager().init(this, TTAdType.SPLASH, splashContainer, Config.toutiao_splash_id, 0,null, null, 0, null, 0, this);
 
 //        switchActivity();
 //        if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
@@ -173,13 +173,15 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
     @Override
     protected void onPause() {
         super.onPause();
-        AdvDispatchManager.getManager().onPause();
+//        AdvDispatchManager.getManager().onPause();
+        TTAdDispatchManager.getManager().onStop();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        AdvDispatchManager.getManager().onResume();
+//        AdvDispatchManager.getManager().onResume();
+        TTAdDispatchManager.getManager().onResume();
     }
 
     @Override
@@ -202,4 +204,32 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener {
     public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
 
     }
+
+    @Override
+    public void loadSuccess() {
+        switchActivity(0);
+    }
+
+    @Override
+    public void loadFailed() {
+        switchActivity(0);
+
+    }
+
+    @Override
+    public void clickAD() {
+        switchActivity(0);
+    }
+
+    @Override
+    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
+
+    }
+
+    @Override
+    public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
+    }
+
+
 }

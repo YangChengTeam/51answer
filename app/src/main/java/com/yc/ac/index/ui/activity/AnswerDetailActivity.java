@@ -1,27 +1,25 @@
 package com.yc.ac.index.ui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bytedance.sdk.openadsdk.TTAdConstant;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.google.android.material.tabs.TabLayout;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
-import com.kk.utils.LogUtil;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
+import com.yc.ac.base.Config;
 import com.yc.ac.base.StateView;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.index.contract.AnswerDetailContract;
@@ -42,19 +40,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
 import yc.com.base.FileUtils;
+import yc.com.toutiao_adv.OnAdvStateListener;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/3/12 10:58.
  */
 
-public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> implements AnswerDetailContract.View {
+public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> implements AnswerDetailContract.View, OnAdvStateListener {
 
 
     @BindView(R.id.iv_back)
@@ -102,6 +106,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     private List<String> downLoadUrlList;
     private String bookId;
 
+    private boolean isNeedReadVideo = true;
 
     @Override
     public int getLayoutId() {
@@ -164,64 +169,47 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     private void initListener() {
 
-        RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                finish();
+        RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> finish());
+
+
+        RxView.clicks(rlCollect).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            isCollectClick = true;
+            if (UserInfoHelper.isLogin()) {
+                mPresenter.favoriteAnswer(bookInfo);
+            } else {
+                mPresenter.saveBook(bookInfo);
             }
+
+
         });
 
-
-        RxView.clicks(rlCollect).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                isCollectClick = true;
-                if (UserInfoHelper.isLogin()) {
-                    mPresenter.favoriteAnswer(bookInfo);
-                } else {
-                    mPresenter.saveBook(bookInfo);
-                }
-
-
-            }
-        });
-
-        RxView.clicks(rlDownload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        //            }
+        RxView.clicks(rlDownload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-                if (judgeIsDownload()) {//已经下载
-                    DeleteTintFragment deleteTintFragment = new DeleteTintFragment();
-                    deleteTintFragment.show(getSupportFragmentManager(), "delete");
-                    deleteTintFragment.setOnConfirmListener(new DeleteTintFragment.onConfirmListener() {
-                        @Override
-                        public void onConfirm() {
-                            deleteBook();
-                        }
-                    });
-                } else {
-                    if (bookInfo != null && bookInfo.getAccess() == 0) {
-                        ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
-                        return;
-                    }
-                    if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
-                        RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
-                    }
+            if (judgeIsDownload()) {//已经下载
+                DeleteTintFragment deleteTintFragment = new DeleteTintFragment();
+                deleteTintFragment.show(getSupportFragmentManager(), "delete");
+                deleteTintFragment.setOnConfirmListener(() -> deleteBook());
+            } else {
+                if (bookInfo != null && bookInfo.getAccess() == 0) {
+                    ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
+                    return;
                 }
-
+                if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
+                    RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
+                }
             }
-//            }
+
         });
 
-        RxView.clicks(rlShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        //            }
+        RxView.clicks(rlShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-                ShareFragment shareFragment = new ShareFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("bookInfo", bookInfo);
+            ShareFragment shareFragment = new ShareFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("bookInfo", bookInfo);
 
-                shareFragment.setArguments(bundle);
+            shareFragment.setArguments(bundle);
 //                    ShareInfo shareInfo = new ShareInfo();
 //                    if (bookInfo != null) {
 //                        shareInfo.setTitle(bookInfo.getName());
@@ -230,9 +218,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 ////                        shareInfo.setUrl(bookInfo.getCover_img());
 //                    }
 //                    shareFragment.setShareInfo(shareInfo);
-                shareFragment.show(getSupportFragmentManager(), null);
-            }
-//            }
+            shareFragment.show(getSupportFragmentManager(), null);
         });
 
     }
@@ -248,6 +234,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         commonTvTitle.setText(data.getName());
         if (data.getAnswer_list() != null) {
             bookInfo = data;
+            saveBrowserData();
             initView(data, isReload);
         }
     }
@@ -287,12 +274,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             if ((bookInfo != null && bookInfo.getAccess() == 1) || oldPos <= 3) {
                 mViewpager.setCurrentItem(oldPos);
                 tvCurrentPage.setText(String.valueOf(oldPos + 1));
-                tabLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        tabLayout.setScrollPosition(oldPos, 0f, true);
-                    }
-                });
+                tabLayout.post(() -> tabLayout.setScrollPosition(oldPos, 0f, true));
             }
         }
         answerDetailAdapter.setOnViewClickListener(new AnswerDetailAdapter.onViewClickListener() {
@@ -323,18 +305,19 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             @Override
             public void onPageSelected(int position) {
 
-
-                if (position >= 3 && !isShare(bookInfo)) {
+//!isShare(bookInfo) ||
+                if (position >= 3 && !isShare(bookInfo)) {//isNeedReadVideo
 
                     AnswerTintFragment answerTintFragment = new AnswerTintFragment();
 
-                    ShareInfo shareInfo = new ShareInfo();
-                    shareInfo.setBook_id(bookId);
+//                    ShareInfo shareInfo = new ShareInfo();
+//                    shareInfo.setBook_id(bookId);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("share", shareInfo);
+                    bundle.putParcelable("bookInfo", bookInfo);
                     answerTintFragment.setArguments(bundle);
 
                     answerTintFragment.show(getSupportFragmentManager(), "");
+                    answerTintFragment.setConfirmListener(() -> TTAdDispatchManager.getManager().init(AnswerDetailActivity.this, TTAdType.REWARD_VIDEO, null, Config.toutiao_reward_id, 0, null, "解锁看答案", 1, UserInfoHelper.getUId(), TTAdConstant.VERTICAL, AnswerDetailActivity.this));
                     mViewpager.setCurrentItem(oldPos);
 
                     return;
@@ -435,12 +418,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             stateView.hide();
             return;
         }
-        stateView.showNoNet(llContainer, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getData(false);
-            }
-        });
+        stateView.showNoNet(llContainer, v -> getData(false));
     }
 
     @Override
@@ -454,11 +432,12 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     }
 
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         RxSPTool.putInt(this, bookId, oldPos);
-        saveBrowserData();
+//        saveBrowserData();
     }
 
 
@@ -498,6 +477,32 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void loadSuccess() {
+
+    }
+
+    @Override
+    public void loadFailed() {
+
+    }
+
+    @Override
+    public void clickAD() {
+        isNeedReadVideo = false;
+    }
+
+    @Override
+    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
+
+    }
+
+    @Override
+    public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
     }
 
 

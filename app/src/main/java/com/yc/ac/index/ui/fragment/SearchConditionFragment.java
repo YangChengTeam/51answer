@@ -1,7 +1,5 @@
 package com.yc.ac.index.ui.fragment;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +22,7 @@ import com.yc.ac.utils.SearchHistoryHelper;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;

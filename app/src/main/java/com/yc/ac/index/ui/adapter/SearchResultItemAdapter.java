@@ -1,9 +1,5 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -12,29 +8,26 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.kk.utils.LogUtil;
-import com.qq.e.ads.nativ.NativeExpressADView;
 import com.yc.ac.R;
 import com.yc.ac.index.model.bean.BookInfo;
-import com.yc.ac.index.model.bean.VersionDetailInfo;
-import com.yc.ac.index.ui.widget.MyRecyclerView;
 import com.yc.ac.utils.SubjectHelper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2018/3/10 10:56.
  */
 
 public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo, BaseViewHolder> {
-    private HashMap<NativeExpressADView, Integer> mAdViewPositionMap;
+    private HashMap<TTNativeExpressAd, Integer> mAdViewPositionMap;
 
-    public SearchResultItemAdapter(@Nullable List<BookInfo> data, HashMap<NativeExpressADView, Integer> adViewPositionMap) {
+    public SearchResultItemAdapter(@Nullable List<BookInfo> data, HashMap<TTNativeExpressAd, Integer> adViewPositionMap) {
         super(data);
         this.mAdViewPositionMap = adViewPositionMap;
         addItemType(BookInfo.ADV, R.layout.item_express_ad);
@@ -49,7 +42,7 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
     }
 
     // 移除NativeExpressADView的时候是一条一条移除的
-    public void removeADView(int position, NativeExpressADView adView) {
+    public void removeADView(int position, TTNativeExpressAd adView) {
         mData.remove(position);
         notifyItemRemoved(position); // position为adView在当前列表中的位置
     }
@@ -58,7 +51,7 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
     protected void convert(BaseViewHolder helper, BookInfo item) {
         switch (helper.getItemViewType()) {
             case BookInfo.ADV:
-                final NativeExpressADView adView = item.getView();
+                final TTNativeExpressAd adView = item.getView();
 
                 mAdViewPositionMap.put(adView, helper.getAdapterPosition()); // 广告在列表中的位置是可以被更新的
                 FrameLayout container = helper.getView(R.id.express_ad_container);
@@ -71,11 +64,11 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
                     container.removeAllViews();
                 }
 
-                if (adView.getParent() != null) {
-                    ((ViewGroup) adView.getParent()).removeView(adView);
+                if (adView.getExpressAdView().getParent() != null) {
+                    ((ViewGroup) adView.getExpressAdView().getParent()).removeView(adView.getExpressAdView());
                 }
-                adView.render(); // 调用render方法后sdk才会开始展示广告
-                container.addView(adView);
+//                nativeExpressAd.render(); // 调用render方法后sdk才会开始展示广告
+                container.addView(adView.getExpressAdView());
                 break;
             case BookInfo.CONTENT:
                 helper.setText(R.id.tv_book_title, item.getName()).setText(R.id.tv_grade, item.getGrade())
@@ -89,8 +82,6 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
                 SubjectHelper.setSubject(helper, item, R.id.iv_subject);
                 break;
         }
-
-
 
 
 //        List<VersionDetailInfo> flag = item.getFlag();

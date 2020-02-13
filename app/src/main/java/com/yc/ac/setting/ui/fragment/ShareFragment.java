@@ -1,5 +1,6 @@
 package com.yc.ac.setting.ui.fragment;
 
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -145,7 +146,7 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
         String title = "作业必杀技，拯救水深火热中的父母！（看完眼泪都笑出来，附不传之秘）";
         String url = "http://mp.weixin.qq.com/s/YYp1jP8oiOmLFnuLJqUplg";
         String desc = "51答案APP汇总全国各地中小学生各科各年级试卷、教辅、练习册、作业答案等学习内容，为学生们提供不同思路的题目讲解及答案，覆盖了义务教育一到九年级所有课程科目。为家长检查作业提供答案服务，为中小学生提供了一个汇总答案，讨论，学习知识的交流分享平台。";
-
+        Bitmap bitmap = null;
         if (mShareInfo != null) {
             if (!TextUtils.isEmpty(mShareInfo.getUrl())) {
                 url = mShareInfo.getUrl();
@@ -156,10 +157,17 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
             if (!TextUtils.isEmpty(mShareInfo.getContent())) {
                 desc = mShareInfo.getContent();
             }
+            if (mShareInfo.getBitmap() != null) {
+                bitmap = mShareInfo.getBitmap();
+            }
 
         }
         dismiss();
-        UMShareImpl.get().setCallback(mContext, umShareListener).shareUrl(title, url, desc, R.mipmap.logo, getShareMedia(tag + ""));
+        if (bitmap != null) {
+            UMShareImpl.get().setCallback(mContext, umShareListener).shareImage("share", bitmap, getShareMedia(tag + ""));
+        } else {
+            UMShareImpl.get().setCallback(mContext, umShareListener).shareUrl(title, url, desc, R.mipmap.logo, getShareMedia(tag + ""));
+        }
 
     }
 

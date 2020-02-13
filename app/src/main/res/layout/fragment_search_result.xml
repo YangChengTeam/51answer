@@ -21,8 +21,8 @@
             android:id="@+id/rl_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/distance_5"
             android:layout_marginTop="@dimen/distance_5"
+            android:layout_marginBottom="@dimen/distance_5"
             android:padding="@dimen/distance_10">
 
             <TextView
@@ -48,7 +48,7 @@
             android:layout_height="@dimen/distance_05"
             android:background="@color/gray_555555" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/result_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

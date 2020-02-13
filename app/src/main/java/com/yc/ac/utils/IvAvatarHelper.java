@@ -2,12 +2,7 @@ package com.yc.ac.utils;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.text.TextUtils;
 
 import com.hwangjr.rxbus.RxBus;
 import com.vondear.rxtools.RxPhotoTool;
@@ -20,6 +15,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.core.app.ActivityCompat;
 
 import static android.app.Activity.RESULT_OK;
 

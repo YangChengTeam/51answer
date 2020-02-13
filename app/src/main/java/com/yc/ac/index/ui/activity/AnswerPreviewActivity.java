@@ -1,7 +1,5 @@
 package com.yc.ac.index.ui.activity;
 
-import android.support.v4.content.ContextCompat;
-
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.yc.ac.R;
@@ -9,6 +7,7 @@ import com.yc.ac.utils.GlideHelper;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;

@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hot_search" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hot_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     android:textSize="@dimen/text_12" />
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/history_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

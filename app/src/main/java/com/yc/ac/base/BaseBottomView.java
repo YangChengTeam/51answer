@@ -1,13 +1,12 @@
 package com.yc.ac.base;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.yc.ac.R;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.OnClick;
 import yc.com.base.BaseView;

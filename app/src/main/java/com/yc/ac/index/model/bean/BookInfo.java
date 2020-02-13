@@ -2,8 +2,10 @@ package com.yc.ac.index.model.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.View;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.qq.e.ads.nativ.NativeExpressADView;
 
@@ -68,7 +70,7 @@ public class BookInfo implements Parcelable, MultiItemEntity {
     private int itemType = CONTENT;
 
     @Transient
-    private NativeExpressADView view;
+    private TTNativeExpressAd view;
 
 
     public long getId() {
@@ -434,11 +436,11 @@ public class BookInfo implements Parcelable, MultiItemEntity {
         this.itemType = itemType;
     }
 
-    public NativeExpressADView getView() {
+    public TTNativeExpressAd getView() {
         return view;
     }
 
-    public void setView(NativeExpressADView view) {
+    public void setView(TTNativeExpressAd view) {
         this.view = view;
     }
 

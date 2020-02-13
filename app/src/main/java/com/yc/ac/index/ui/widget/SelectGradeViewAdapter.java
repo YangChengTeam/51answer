@@ -1,14 +1,12 @@
 package com.yc.ac.index.ui.widget;
 
-import android.support.annotation.Nullable;
-import android.util.SparseArray;
-import android.view.View;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yc.ac.R;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2018/4/18 13:55.

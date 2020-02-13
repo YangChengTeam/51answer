@@ -1,14 +1,10 @@
 package com.yc.ac.setting.ui.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,9 +19,8 @@ import com.yc.ac.setting.ui.activity.LoginGroupActivityNew;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 

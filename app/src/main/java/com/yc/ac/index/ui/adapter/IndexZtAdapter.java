@@ -1,6 +1,5 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -10,6 +9,8 @@ import com.yc.ac.index.model.bean.TagInfo;
 import com.yc.ac.utils.GlideHelper;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2019/3/15 18:14.

@@ -1,7 +1,6 @@
 package com.vondear.rxtools;
 
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
@@ -19,6 +18,8 @@ import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
+
+import androidx.annotation.Nullable;
 
 import static com.vondear.rxtools.RxConstTool.BYTE;
 import static com.vondear.rxtools.RxConstTool.GB;

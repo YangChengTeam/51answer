@@ -7,10 +7,11 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
-import android.support.annotation.Nullable;
 
 import com.vondear.rxtools.RxLocationTool;
 import com.vondear.rxtools.view.RxToast;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author vondear

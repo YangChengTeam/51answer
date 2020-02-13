@@ -1,8 +1,6 @@
 package com.yc.ac.index.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,6 +22,8 @@ import com.yc.ac.index.ui.widget.FilterPopwindow;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;

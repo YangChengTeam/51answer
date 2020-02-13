@@ -1,6 +1,6 @@
 package com.vondear.rxtools.view.likeview.tools.ei;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author vondear

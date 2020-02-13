@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Outline;
 import android.graphics.Point;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -16,6 +15,8 @@ import com.vondear.rxtools.RxAnimationTool;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author vondear

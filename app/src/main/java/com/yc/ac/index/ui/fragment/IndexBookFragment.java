@@ -1,7 +1,5 @@
 package com.yc.ac.index.ui.fragment;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,6 +13,8 @@ import com.yc.ac.index.ui.activity.AnswerDetailActivity;
 import com.yc.ac.index.ui.adapter.IndexBookAdapter;
 import com.yc.ac.index.ui.widget.MyDecoration;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import yc.com.base.BaseFragment;
 

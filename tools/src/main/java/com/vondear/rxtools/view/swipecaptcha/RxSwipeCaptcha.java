@@ -18,7 +18,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -27,13 +26,16 @@ import com.vondear.rxtools.R;
 
 import java.util.Random;
 
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+
 /**
  * @author Vondear.
  * 介绍：仿斗鱼滑动验证码View
  * @date 更新时间： 2017/08/24.
  */
 
-public class RxSwipeCaptcha extends android.support.v7.widget.AppCompatImageView {
+public class RxSwipeCaptcha extends AppCompatImageView {
     private final String TAG = RxSwipeCaptcha.class.getName();
     //控件的宽高
     protected int mWidth;

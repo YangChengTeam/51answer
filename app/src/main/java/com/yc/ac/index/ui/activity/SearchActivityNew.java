@@ -3,13 +3,7 @@ package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -37,10 +31,10 @@ import com.yc.ac.utils.ToastUtils;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
 /**
@@ -110,53 +104,36 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
     }
 
     private void initListener() {
-        RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                finish();
-            }
-        });
-        RxView.clicks(btnSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> finish());
+        RxView.clicks(btnSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //                String inputText = etSearch.getText().toString().trim();
-                String inputText = etInputContent.getText().toString().trim();
-                if (TextUtils.isEmpty(inputText)) {
-                    ToastUtils.showCenterToast(SearchActivityNew.this, "请输入相关书籍名称");
-                    return;
-                }
-
-                search(inputText);
-
-
+            String inputText = etInputContent.getText().toString().trim();
+            if (TextUtils.isEmpty(inputText)) {
+                ToastUtils.showCenterToast(SearchActivityNew.this, "请输入相关书籍名称");
+                return;
             }
+
+            search(inputText);
+
+
         });
 
-        RxView.clicks(ivScan).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        RxView.clicks(ivScan).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 
-                ActivityScanHelper.startScanerCode(SearchActivityNew.this);
-                finish();
-            }
+            ActivityScanHelper.startScanerCode(SearchActivityNew.this);
+            finish();
         });
-        RxView.clicks(etInputContent).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                etInputContent.setFocusable(true);
-                etInputContent.setFocusableInTouchMode(true);
-                etInputContent.requestFocus();
-                RxKeyboardTool.showSoftInput(SearchActivityNew.this, etInputContent);
-            }
+        RxView.clicks(etInputContent).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            etInputContent.setFocusable(true);
+            etInputContent.setFocusableInTouchMode(true);
+            etInputContent.requestFocus();
+            RxKeyboardTool.showSoftInput(SearchActivityNew.this, etInputContent);
         });
 
-        etInputContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                isFoucusable = hasFocus;
-                if (hasFocus) {
-                    mPresenter.searchTips(((EditText) v).getText().toString().trim());
-                }
+        etInputContent.setOnFocusChangeListener((v, hasFocus) -> {
+            isFoucusable = hasFocus;
+            if (hasFocus) {
+                mPresenter.searchTips(((EditText) v).getText().toString().trim());
             }
         });
     }
@@ -193,12 +170,9 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
 
         RxTextView.textChanges(etInputContent)
                 .debounce(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<CharSequence>() {
-                    @Override
-                    public void call(CharSequence charSequence) {
-                        if (isFoucusable) {
-                            mPresenter.searchTips(charSequence.toString().trim());
-                        }
+                .subscribe(charSequence -> {
+                    if (isFoucusable) {
+                        mPresenter.searchTips(charSequence.toString().trim());
                     }
                 });
 
@@ -272,12 +246,7 @@ public class SearchActivityNew extends BaseActivity<SearchPresenter> implements 
         AutoCompleteAdapter adapter = new AutoCompleteAdapter(this, data);
         etSearch.setAdapter(adapter);
         etSearch.showDropDown();
-        etSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                search(etSearch.getText().toString().trim());
-            }
-        });
+        etSearch.setOnItemClickListener((parent, view, position, id) -> search(etSearch.getText().toString().trim()));
 
     }
 

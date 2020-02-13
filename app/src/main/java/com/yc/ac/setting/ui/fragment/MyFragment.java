@@ -2,9 +2,8 @@ package com.yc.ac.setting.ui.fragment;
 
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -26,14 +25,17 @@ import com.vondear.rxtools.view.dialog.RxDialogEditSureCancel;
 import com.yc.ac.R;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.constant.SpConstant;
+
 import com.yc.ac.setting.contract.MyContract;
 import com.yc.ac.setting.model.bean.QbInfo;
+import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.TaskListInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.MyPresenter;
 import com.yc.ac.setting.ui.activity.BindPhoneActivity;
 import com.yc.ac.setting.ui.activity.BrowserActivity;
 import com.yc.ac.setting.ui.activity.InvitationFriendActicity;
+import com.yc.ac.setting.ui.activity.PrivacyStatementActivity;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.activity.StatementActivity;
 import com.yc.ac.setting.ui.activity.UploadBookIntroduceActivity;
@@ -50,6 +52,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
@@ -107,6 +111,8 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     BaseSettingView baseSettingViewInvite;
     @BindView(R.id.baseSettingView_browser)
     BaseSettingView baseSettingViewBrowser;
+    @BindView(R.id.baseSettingView_privacy_statement)
+    BaseSettingView baseSettingViewPrivacyStatement;
 
     private long startTime;
 
@@ -136,140 +142,88 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     private void initListener() {
 
 
-        RxView.clicks(baseSettingViewSetting).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity()))
-                    startActivity(new Intent(getActivity(), SettingActivity.class));
-            }
+        RxView.clicks(baseSettingViewSetting).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity()))
+                startActivity(new Intent(getActivity(), SettingActivity.class));
         });
 
-        RxView.clicks(tvNickname).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {//设置昵称
-                    showDioloag();
-                }
+        RxView.clicks(tvNickname).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {//设置昵称
+                showDioloag();
             }
         });
-        RxView.clicks(ivAvatar).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {//更改图像
-                    RxPhotoTool.openLocalImage(getActivity());
-                }
+        RxView.clicks(ivAvatar).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {//更改图像
+                RxPhotoTool.openLocalImage(getActivity());
             }
         });
-        RxView.clicks(tvPhone).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {//更改手机号
-                    Intent intent = new Intent(getActivity(), BindPhoneActivity.class);
-                    intent.putExtra("flag", "修改");
-                    startActivity(intent);
-                }
+        RxView.clicks(tvPhone).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {//更改手机号
+                Intent intent = new Intent(getActivity(), BindPhoneActivity.class);
+                intent.putExtra("flag", "修改");
+                startActivity(intent);
             }
         });
-        RxView.clicks(tvLoginRegister).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    //登录成功
-                }
+        RxView.clicks(tvLoginRegister).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                //登录成功
             }
         });
 
 
-        RxView.clicks(llPrimarySchool).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        RxView.clicks(llPrimarySchool).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> QQUtils.joinQQZhongXueGroup(getActivity(), "VPvV6KlVsB5sROLTwoQlk-eD6MZSAXYw"));
 
-                QQUtils.joinQQZhongXueGroup(getActivity(), "VPvV6KlVsB5sROLTwoQlk-eD6MZSAXYw");
-            }
-        });
-
-        RxView.clicks(llMiddleSchool).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-
-                QQUtils.joinQQZhongXueGroup(getActivity(), "Ik1JY_oz-loc2r9OxDsVcUobxD-PmS9K");
-            }
-        });
+        RxView.clicks(llMiddleSchool).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> QQUtils.joinQQZhongXueGroup(getActivity(), "Ik1JY_oz-loc2r9OxDsVcUobxD-PmS9K"));
 
 
-        RxView.clicks(tvStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), StatementActivity.class));
-            }
-        });
+        RxView.clicks(tvStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), StatementActivity.class)));
 
 
-        RxView.clicks(tvDetail).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        RxView.clicks(tvDetail).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //                startActivity(new Intent(getActivity(), EarningsDetailActivity.class));
-                //申请提现
-                ApplyDepositFragment applyDepositFragment = new ApplyDepositFragment();
-                applyDepositFragment.show(getFragmentManager(), "");
+            //申请提现
+            ApplyDepositFragment applyDepositFragment = new ApplyDepositFragment();
+            applyDepositFragment.show(getFragmentManager(), "");
+        });
+
+        RxView.clicks(baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> joinQQ("1872935735"));
+
+        RxView.clicks(baseSettingViewNewBook).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            //上传新书
+            startActivity(new Intent(getActivity(), UploadBookIntroduceActivity.class));
+        });
+
+        RxView.clicks(baseSettingViewMarket).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            startTime = System.currentTimeMillis();
+            //好评赚钱
+            try {
+                Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
             }
         });
 
-        RxView.clicks(baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                joinQQ("1872935735");
-            }
+        RxView.clicks(baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            ShareFragment shareFragment = new ShareFragment();
+
+
+            shareFragment.setIsShareMoney(true);
+            ShareInfo shareInfo = ShareInfoHelper.getShareInfo();
+            shareInfo.setBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.share_pic));
+            shareFragment.setShareInfo(shareInfo);
+
+
+            shareFragment.show(getActivity().getSupportFragmentManager(), "");
         });
 
-        RxView.clicks(baseSettingViewNewBook).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                //上传新书
-                startActivity(new Intent(getActivity(), UploadBookIntroduceActivity.class));
-            }
-        });
+        RxView.clicks(baseSettingViewInvite).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), InvitationFriendActicity.class)));
 
-        RxView.clicks(baseSettingViewMarket).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startTime = System.currentTimeMillis();
-                //好评赚钱
-                try {
-                    Uri uri = Uri.parse("market://details?id=" + getPackageName());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
-                }
-            }
-        });
-
-        RxView.clicks(baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                ShareFragment shareFragment = new ShareFragment();
-                shareFragment.setIsShareMoney(true);
-                shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                shareFragment.show(getActivity().getSupportFragmentManager(), "");
-            }
-        });
-
-        RxView.clicks(baseSettingViewInvite).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), InvitationFriendActicity.class));
-            }
-        });
-
-        RxView.clicks(baseSettingViewBrowser).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), BrowserActivity.class));
-            }
-        });
+        RxView.clicks(baseSettingViewBrowser).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), BrowserActivity.class)));
+        RxView.clicks(baseSettingViewPrivacyStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), PrivacyStatementActivity.class)));
     }
 
 

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:elevation="0dp">
 
         <!--     app:layout_scrollFlags="scroll|enterAlwaysCollapsed"-->
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -28,11 +28,11 @@
             <include layout="@layout/fragment_my_top" />
 
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_f5f5f5"
@@ -115,6 +115,15 @@
                 app:title="联系QQ：1872935735" />
 
             <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_privacy_statement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/t10dp"
+                app:icon="@mipmap/seting_privacy"
+                app:show_extra="false"
+                app:title="  隐私政策" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,13 +137,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/distance_15"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:text="51答案免责声明"
                 android:visibility="gone" />
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

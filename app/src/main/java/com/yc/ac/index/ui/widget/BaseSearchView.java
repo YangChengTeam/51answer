@@ -1,24 +1,19 @@
 package com.yc.ac.index.ui.widget;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
-import com.yc.ac.base.MainActivity;
-import com.yc.ac.constant.SpConstant;
-import com.yc.ac.index.ui.activity.ScanTintActivity;
 import com.yc.ac.utils.ActivityScanHelper;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseView;

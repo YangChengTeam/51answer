@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitEnd"
-            android:src="@mipmap/share_bottom_bg"
+            android:src="@mipmap/share_bottom_new_bg"
             android:visibility="gone" />
 
         <LinearLayout

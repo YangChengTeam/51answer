@@ -2,13 +2,9 @@ package com.yc.ac.index.ui.activity;
 
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -24,6 +20,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;

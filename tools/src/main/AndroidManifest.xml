@@ -48,7 +48,7 @@
         <!--resource：中的@xml/file_paths是我们接下来要添加的文件-->
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

@@ -5,8 +5,10 @@
     android:layout_height="@dimen/t30dp"
     android:background="@drawable/hot_item_bg"
     android:clickable="true"
+    android:ellipsize="end"
     android:focusable="true"
     android:gravity="center"
+    android:singleLine="true"
     android:text="高考答案"
     android:textColor="@color/gray_555555" />
 

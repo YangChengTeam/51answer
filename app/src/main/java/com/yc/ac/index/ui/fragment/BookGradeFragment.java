@@ -1,16 +1,12 @@
 package com.yc.ac.index.ui.fragment;
 
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.ViewTreeObserver;
 
-import com.kk.utils.LogUtil;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 import com.yc.ac.index.ui.activity.PerfectBookDetailInfoActivity;
-import com.yc.ac.index.ui.adapter.BookInfoItemAdapter;
 import com.yc.ac.index.ui.widget.SelectGradeView;
 
 import java.util.ArrayList;

@@ -1,12 +1,13 @@
 package com.yc.ac.index.ui.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 
 import com.yc.ac.R;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by wanglin  on 2018/3/20 11:29.

@@ -1,7 +1,6 @@
 package com.vondear.rxtools.view.dialog;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,8 @@ import android.widget.TextView;
 
 import com.vondear.rxtools.R;
 import com.vondear.rxtools.RxPhotoTool;
+
+import androidx.fragment.app.Fragment;
 
 
 /**

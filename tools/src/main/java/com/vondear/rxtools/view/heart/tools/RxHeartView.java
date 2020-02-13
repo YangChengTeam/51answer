@@ -27,11 +27,13 @@ import android.util.AttributeSet;
 
 import com.vondear.rxtools.R;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 
 /**
  * @author vondear
  */
-public class RxHeartView extends android.support.v7.widget.AppCompatImageView {
+public class RxHeartView extends AppCompatImageView {
 
     private static final Paint sPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     private static final Canvas sCanvas = new Canvas();

@@ -1,7 +1,5 @@
 package com.yc.ac.setting.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.util.SparseArray;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,6 +9,8 @@ import com.yc.ac.setting.model.bean.BrowserInfo;
 import com.yc.ac.utils.GlideHelper;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2019/3/15 10:51.

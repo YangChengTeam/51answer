@@ -1,15 +1,14 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.vondear.rxtools.RxDeviceTool;
 import com.yc.ac.R;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2018/3/9 20:21.

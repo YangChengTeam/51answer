@@ -2,33 +2,27 @@ package com.yc.ac.index.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.jakewharton.rxbinding.view.RxView;
-import com.qq.e.ads.nativ.NativeExpressADView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
 import com.yc.ac.base.WebActivity;
+import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.IndexContract;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.SlideInfo;
@@ -47,27 +41,28 @@ import com.yc.ac.setting.ui.fragment.ShareFragment;
 import com.yc.ac.utils.ShareInfoHelper;
 import com.yc.ac.utils.UserInfoHelper;
 import com.youth.banner.Banner;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.base.StatusBarUtil;
-import yc.com.tencent_adv.AdvDispatchManager;
-import yc.com.tencent_adv.AdvType;
-import yc.com.tencent_adv.OnAdvStateListener;
+import yc.com.toutiao_adv.OnAdvStateListener;
+import yc.com.toutiao_adv.TTAdDispatchManager;
+import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/2/27 14:43.
  */
 
-public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements IndexContract.View {
+public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements IndexContract.View, OnAdvStateListener {
 
 
     @BindView(R.id.banner)
@@ -109,7 +104,6 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     FrameLayout bottomContainer;
 
 
-
     private IndexTagAdapter tagAdapter;
     private IndexZtAdapter indexZtAdapter;
 
@@ -125,7 +119,10 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 //        StatusBarUtil.setStatusTextColor1(true, getActivity());
         mPresenter = new IndexPresenter(getActivity(), this);
 
-
+        if (!RxSPTool.getBoolean(getActivity(), SpConstant.INDEX_DIALOG)) {
+            IndexDialogFragment indexDialogFragment = new IndexDialogFragment();
+            indexDialogFragment.show(getChildFragmentManager(), "");
+        }
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 //        hotItemAdapter = new IndexBookAdapter(null);
         indexZtAdapter = new IndexZtAdapter(null);
@@ -141,7 +138,8 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         banner.setFocusable(false);
         initRefresh();
         initListener();
-        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER,bottomContainer,null, Config.tencent_media_id,Config.tencent_bottom_banner_id,null);
+//        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, bottomContainer, null, Config.tencent_media_id, Config.tencent_bottom_banner_id, null);
+        TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, bottomContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
     }
 
     private void setStatusBar() {
@@ -154,98 +152,78 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     private void initListener() {
 
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
 
 //                int appBarHeight = appBarLayout.getHeight() - RxImageTool.dp2px(130);
 //                LogUtil.msg("verticalOffset:  " + verticalOffset + "  appBarHeight: " + appBarHeight);
 
-                //verticalOffset  当前偏移量 appBarLayout.getTotalScrollRange() 最大高度 便宜值
-                int offset = Math.abs(verticalOffset); //目的是将负数转换为绝对正数；
-                if (offset > 0) {
-                    //标题栏的渐变
-                    toolbar.setVisibility(View.VISIBLE);
-                    toolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.gray_qian)
-                            , Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
-                } else {
-                    toolbar.setVisibility(View.GONE);
-                }
+            //verticalOffset  当前偏移量 appBarLayout.getTotalScrollRange() 最大高度 便宜值
+            int offset = Math.abs(verticalOffset); //目的是将负数转换为绝对正数；
+            if (offset > 0) {
+                //标题栏的渐变
+                toolbar.setVisibility(View.VISIBLE);
+                toolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.gray_qian)
+                        , Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
+            } else {
+                toolbar.setVisibility(View.GONE);
+            }
 
+            /**
+             * 当前最大高度偏移值除以2 在减去已偏移值 获取浮动 先显示在隐藏
+             */
+            if (offset < appBarLayout.getTotalScrollRange() / 2) {
+                toolbar.setTitle("");
+                float alpha = (appBarLayout.getTotalScrollRange() / 2 - offset * 1.0f) / (appBarLayout.getTotalScrollRange() / 2);
+                toolbar.setAlpha(alpha);
+                rlContainer.setAlpha(alpha);
+                indexIvLogo.setAlpha(alpha);
                 /**
-                 * 当前最大高度偏移值除以2 在减去已偏移值 获取浮动 先显示在隐藏
+                 * 从最低浮动开始渐显 当前 offset就是  appBarLayout.getTotalScrollRange() / 2
+                 * 所以 offset - appBarLayout.getTotalScrollRange() / 2
                  */
-                if (offset < appBarLayout.getTotalScrollRange() / 2) {
-                    toolbar.setTitle("");
-                    float alpha = (appBarLayout.getTotalScrollRange() / 2 - offset * 1.0f) / (appBarLayout.getTotalScrollRange() / 2);
-                    toolbar.setAlpha(alpha);
-                    rlContainer.setAlpha(alpha);
-                    indexIvLogo.setAlpha(alpha);
-                    /**
-                     * 从最低浮动开始渐显 当前 offset就是  appBarLayout.getTotalScrollRange() / 2
-                     * 所以 offset - appBarLayout.getTotalScrollRange() / 2
-                     */
-                } else if (offset > appBarLayout.getTotalScrollRange() / 2) {
-                    float floate = (offset - appBarLayout.getTotalScrollRange() / 2) * 1.0f / (appBarLayout.getTotalScrollRange() / 2);
-                    toolbar.setAlpha(floate);
-                    rlContainer.setAlpha(floate);
-                    indexIvLogo.setAlpha(floate);
-                }
+            } else if (offset > appBarLayout.getTotalScrollRange() / 2) {
+                float floate = (offset - appBarLayout.getTotalScrollRange() / 2) * 1.0f / (appBarLayout.getTotalScrollRange() / 2);
+                toolbar.setAlpha(floate);
+                rlContainer.setAlpha(floate);
+                indexIvLogo.setAlpha(floate);
             }
         });
 
 
-        RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), SearchActivityNew.class));
-            }
-        });
-        banner.setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                SlideInfo slideInfo = mPresenter.getSlideInfo(position);
-                if (slideInfo != null && !TextUtils.isEmpty(slideInfo.getLink().trim())) {
-                    Intent intent = new Intent(getActivity(), WebActivity.class);
-                    intent.putExtra("url", slideInfo.getLink());
-                    startActivity(intent);
-                }
-            }
-        });
-
-        RxView.clicks(llFilter).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-
-                Intent intent = new Intent(getActivity(), SearchActivityNew.class);
+        RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivityNew.class)));
+        banner.setOnBannerListener(position -> {
+            SlideInfo slideInfo = mPresenter.getSlideInfo(position);
+            if (slideInfo != null && !TextUtils.isEmpty(slideInfo.getLink().trim())) {
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", slideInfo.getLink());
                 startActivity(intent);
             }
         });
 
+        RxView.clicks(llFilter).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 
-        indexZtAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-                TagInfo tagInfo = (TagInfo) adapter.getItem(position);
-                if (tagInfo != null) {
-                    WebActivity.startActivity(getActivity(), tagInfo.getZtpath(), tagInfo.getZtname());
-
-//                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
-                }
-
-            }
+            Intent intent = new Intent(getActivity(), SearchActivityNew.class);
+            startActivity(intent);
         });
 
-        tagAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                TagInfo tagInfo = (TagInfo) adapter.getItem(position);
-                if (tagInfo != null) {
-                    Intent intent = new Intent(getActivity(), SearchActivityNew.class);
-                    intent.putExtra("name", tagInfo.getTitle());
-                    startActivity(intent);
-                }
+
+        indexZtAdapter.setOnItemClickListener((adapter, view, position) -> {
+
+            TagInfo tagInfo = (TagInfo) adapter.getItem(position);
+            if (tagInfo != null) {
+                WebActivity.startActivity(getActivity(), tagInfo.getZtpath(), tagInfo.getZtname());
+
+//                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
+            }
+
+        });
+
+        tagAdapter.setOnItemClickListener((adapter, view, position) -> {
+            TagInfo tagInfo = (TagInfo) adapter.getItem(position);
+            if (tagInfo != null) {
+                Intent intent = new Intent(getActivity(), SearchActivityNew.class);
+                intent.putExtra("name", tagInfo.getTitle());
+                startActivity(intent);
             }
         });
 
@@ -276,7 +254,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         RxView.clicks(ivIndexShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                ShareFragment shareFragment = new ShareFragment();
+                com.yc.ac.setting.ui.fragment.ShareFragment shareFragment = new ShareFragment();
                 shareFragment.setIsShareMoney(true);
                 shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
                 shareFragment.show(getActivity().getSupportFragmentManager(), "");
@@ -355,6 +333,9 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void showZtInfos(List<TagInfo> list) {
+        if (list != null && list.size() > 4) {
+            list = list.subList(0, 4);
+        }
         indexZtAdapter.setNewData(list);
         if (smartRefreshLayout != null) {
             smartRefreshLayout.finishRefresh();
@@ -371,6 +352,12 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     public void onStop() {
         super.onStop();
         banner.stopAutoPlay();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        TTAdDispatchManager.getManager().onDestroy();
     }
 
     private void initRefresh() {
@@ -395,5 +382,31 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         mPresenter.getTagInfos();
         mPresenter.getZtInfos();
     }
+
+    @Override
+    public void loadSuccess() {
+
+    }
+
+    @Override
+    public void loadFailed() {
+
+    }
+
+    @Override
+    public void clickAD() {
+
+    }
+
+    @Override
+    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
+
+    }
+
+    @Override
+    public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
+    }
+
 
 }

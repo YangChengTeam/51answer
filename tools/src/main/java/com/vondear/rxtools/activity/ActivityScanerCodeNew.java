@@ -13,8 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -46,6 +44,9 @@ import com.vondear.rxtools.view.dialog.RxDialogSure;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author vondear

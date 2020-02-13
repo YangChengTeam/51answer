@@ -17,9 +17,9 @@
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/distance_5"
             android:paddingLeft="@dimen/distance_10"
-            android:paddingRight="@dimen/distance_10">
+            android:paddingRight="@dimen/distance_10"
+            android:paddingBottom="@dimen/distance_5">
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -59,7 +59,7 @@
                         android:layout_centerVertical="true"
                         android:src="@mipmap/scan_gray" />
 
-                    <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                         android:id="@+id/et_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -71,9 +71,9 @@
                         android:background="@null"
                         android:completionThreshold="1"
                         android:dropDownAnchor="@id/rl"
+                        android:dropDownWidth="match_parent"
                         android:dropDownHeight="match_parent"
                         android:dropDownVerticalOffset="@dimen/distance_2"
-                        android:dropDownWidth="match_parent"
                         android:ellipsize="end"
                         android:hint="@string/input_book_name"
                         android:popupBackground="@color/white"

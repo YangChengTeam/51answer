@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_code_tool"
@@ -28,14 +27,14 @@
             app:rightIconVisibility="false"
             app:title="扫码工具"
             app:titleColor="@color/white"
-            app:titleSize="20sp"/>
+            app:titleSize="20sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="#33f8f8f8"/>
+            android:background="#33f8f8f8" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="扫码次数"
-                    android:textColor="#aaf8f8f8"/>
+                    android:textColor="#aaf8f8f8" />
 
                 <com.vondear.rxtools.view.ticker.RxTickerView
                     android:id="@+id/ticker_scan_count"
@@ -62,13 +61,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textAppearance="@style/TickerTextAppearance"
-                    app:ticker_animationDuration="500"/>
+                    app:ticker_animationDuration="500" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="50dp"
-                android:background="#33f8f8f8"/>
+                android:background="#33f8f8f8" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="生成码次数"
-                    android:textColor="#aaf8f8f8"/>
+                    android:textColor="#aaf8f8f8" />
 
                 <com.vondear.rxtools.view.ticker.RxTickerView
                     android:id="@+id/ticker_made_count"
@@ -89,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textAppearance="@style/TickerTextAppearance"
-                    app:ticker_animationDuration="500"/>
+                    app:ticker_animationDuration="500" />
 
             </LinearLayout>
         </LinearLayout>
@@ -117,7 +116,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/circle_capture"/>
+                android:src="@drawable/circle_capture" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,7 +125,7 @@
                 android:gravity="center"
                 android:text="扫描\n二维码与条形码"
                 android:textColor="@color/brown2"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,7 +142,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/circle_qr_code"/>
+                android:src="@drawable/circle_qr_code" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,7 +151,7 @@
                 android:gravity="center"
                 android:text="生成\n二维码"
                 android:textColor="@color/brown2"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -169,7 +168,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/circle_bar_code"/>
+                android:src="@drawable/circle_bar_code" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,12 +177,12 @@
                 android:gravity="center"
                 android:text="生成\n条形码"
                 android:textColor="@color/brown2"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -221,18 +220,18 @@
                         android:gravity="center"
                         android:hint="请输入二维码的文字内容"
                         android:padding="10dp"
-                        android:paddingBottom="10dp"
                         android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:textColor="@color/f0"
                         android:textColorHint="#aaf8f8f8"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
 
 
                     <ImageView
                         android:id="@+id/iv_create_qr_code"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/next"/>
+                        android:src="@drawable/next" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -250,14 +249,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/transparent_bg"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:text="二维码已生成！"
-                        android:textColor="@color/brown2"/>
+                        android:textColor="@color/brown2" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -290,18 +289,18 @@
                         android:gravity="center"
                         android:hint="请输入条形码文字内容"
                         android:padding="10dp"
-                        android:paddingBottom="10dp"
                         android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
                         android:textColor="@color/f0"
                         android:textColorHint="#aaf8f8f8"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
 
 
                     <ImageView
                         android:id="@+id/iv_create_bar_code"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/next"/>
+                        android:src="@drawable/next" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -318,23 +317,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="30dp"
                         android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
                         android:src="@drawable/transparent_bg"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:text="条形码码已生成！"
-                        android:textColor="@color/brown2"/>
+                        android:textColor="@color/brown2" />
 
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

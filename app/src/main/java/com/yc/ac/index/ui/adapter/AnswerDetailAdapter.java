@@ -1,8 +1,8 @@
 package com.yc.ac.index.ui.adapter;
 
 import android.content.Context;
-import android.graphics.RectF;
-import android.support.v4.view.PagerAdapter;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +10,16 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.ImageViewTarget;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.yc.ac.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * Created by wanglin  on 2018/3/12 11:25.
@@ -60,26 +64,32 @@ public class AnswerDetailAdapter extends PagerAdapter {
 
         final PhotoView scaleImageView = view.findViewById(R.id.xImageView);
 
-        Glide.with(mContext).asBitmap().load(path).apply(new RequestOptions()
-                .placeholder(R.mipmap.big_placeholder).error(R.mipmap.big_placeholder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true).centerInside()).thumbnail(0.1f).into(scaleImageView);
+        Glide.with(mContext).asDrawable().load(path).apply(new RequestOptions()
+                .placeholder(R.mipmap.big_placeholder).error(R.mipmap.big_placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true)
+                .centerInside()).thumbnail(0.1f).into(new ImageViewTarget<Drawable>(scaleImageView) {
+            @Override
+            protected void setResource(@Nullable Drawable resource) {
+                scaleImageView.setImageDrawable(resource);
+            }
+
+
+        });
+
+//        Glide.with(mContext).asBitmap().load(path).apply(new RequestOptions()
+//                .placeholder(R.mipmap.big_placeholder).error(R.mipmap.big_placeholder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true).centerInside()).thumbnail(0.1f).into(scaleImageView);
         container.addView(view);
 
-        scaleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isClick = !isClick;
-                if (onViewClickListener != null) {
-                    onViewClickListener.onViewSingleClick(isClick);
-                }
+        scaleImageView.setOnClickListener(v -> {
+            isClick = !isClick;
+            if (onViewClickListener != null) {
+                onViewClickListener.onViewSingleClick(isClick);
             }
         });
-        scaleImageView.setOnTouchImageViewListener(new PhotoViewAttacher.OnTouchImageViewListener() {
-            @Override
-            public void onDoubleClick() {
-                isDoubleClick = !isDoubleClick;
-                if (onViewClickListener != null) {
-                    onViewClickListener.onViewDoubleClick(isDoubleClick);
-                }
+        scaleImageView.setOnTouchImageViewListener(() -> {
+            isDoubleClick = !isDoubleClick;
+            if (onViewClickListener != null) {
+                onViewClickListener.onViewDoubleClick(isDoubleClick);
             }
         });
 

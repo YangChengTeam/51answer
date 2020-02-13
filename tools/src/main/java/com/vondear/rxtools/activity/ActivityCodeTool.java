@@ -1,7 +1,6 @@
 package com.vondear.rxtools.activity;
 
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +17,8 @@ import com.vondear.rxtools.view.RxTitle;
 import com.vondear.rxtools.view.RxToast;
 import com.vondear.rxtools.view.ticker.RxTickerUtils;
 import com.vondear.rxtools.view.ticker.RxTickerView;
+
+import androidx.core.widget.NestedScrollView;
 
 import static com.vondear.rxtools.RxConstants.SP_MADE_CODE;
 import static com.vondear.rxtools.RxConstants.SP_SCAN_CODE;

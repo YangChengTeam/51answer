@@ -49,6 +49,5 @@ public class SpConstant {
     public static final String TASK_INFOS = "task_infos";
 
 
-
-
+    public static final String INDEX_DIALOG = "index_dialog";
 }

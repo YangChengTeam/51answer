@@ -6,7 +6,7 @@
 
     <include layout="@layout/common_top_view" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -45,8 +45,8 @@
                 android:id="@+id/tv_tips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/t20dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/t20dp"
                 android:textColor="@color/black" />
 
             <TextView
@@ -64,6 +64,6 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

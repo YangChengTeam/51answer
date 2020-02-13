@@ -7,12 +7,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 
 import com.vondear.rxtools.RxLocationTool;
 import com.vondear.rxtools.RxVibrateTool;
 import com.vondear.rxtools.view.RxToast;
 import com.vondear.rxtools.view.dialog.RxDialogGPSCheck;
+
+import androidx.core.app.ActivityCompat;
 
 /**
  * @author vondear

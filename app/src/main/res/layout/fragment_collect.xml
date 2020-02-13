@@ -28,13 +28,13 @@
             android:layout_height="match_parent">
 
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/collect_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                android:paddingBottom="@dimen/t10dp"
-                android:paddingLeft="@dimen/t12dp" />
+                android:paddingLeft="@dimen/t12dp"
+                android:paddingBottom="@dimen/t10dp" />
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>

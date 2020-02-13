@@ -1,10 +1,11 @@
 package com.yc.ac.index.ui.widget;
 
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.vondear.rxtools.RxImageTool;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by wanglin  on 2018/3/8 18:43.

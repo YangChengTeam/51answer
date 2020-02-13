@@ -1,9 +1,6 @@
 package com.yc.ac.setting.ui.fragment;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -16,11 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
-import com.hwangjr.rxbus.thread.EventThread;
 import com.yc.ac.R;
-import com.yc.ac.constant.BusAction;
 import com.yc.ac.setting.contract.LoginContract;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.LoginPresenter;
@@ -29,10 +22,11 @@ import com.yc.ac.utils.ToastUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import yc.com.base.BaseFragment;
 
