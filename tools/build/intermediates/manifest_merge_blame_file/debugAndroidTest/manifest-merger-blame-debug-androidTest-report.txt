@@ -1,0 +1,127 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vondear.rxtools.test" >
+4
+5    <uses-sdk
+5-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:5:5-74
+6        android:minSdkVersion="14"
+6-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:5:15-41
+7        android:targetSdkVersion="28" />
+7-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:5:42-71
+8
+9    <instrumentation
+9-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:11:5-15:74
+10        android:name="android.support.test.runner.AndroidJUnitRunner"
+10-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:11:22-83
+11        android:functionalTest="false"
+11-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:14:22-52
+12        android:handleProfiling="false"
+12-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:13:22-53
+13        android:label="Tests for com.vondear.rxtools.test"
+13-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:15:22-72
+14        android:targetPackage="com.vondear.rxtools.test" />
+14-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:12:22-70
+15
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
+16-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-64
+17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+17-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-81
+17-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-78
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-79
+18-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-76
+19    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+19-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-76
+19-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-73
+20    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 外部存储 -->
+20-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-69
+20-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-66
+21    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+21-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:5-75
+21-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:22-72
+22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 许可振动 -->
+22-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:5-81
+22-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:22-78
+23    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 打开闪光灯 -->
+23-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:5-66
+23-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:22-63
+24    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 许可使用照相机 -->
+24-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:5-69
+24-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:22-66
+25    <uses-permission android:name="android.permission.CAMERA" /> <!-- 许可调用相机硬件 -->
+25-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:5-65
+25-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:22-62
+26    <uses-feature android:name="android.hardware.camera" /> <!-- 许可调用相机自动对焦 -->
+26-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:5-60
+26-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:19-57
+27    <uses-feature android:name="android.hardware.camera.autofocus" />
+27-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:5-70
+27-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:19-67
+28
+29    <application
+29-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:7:5-9:19
+30        android:allowBackup="true"
+30-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:9-35
+31        android:debuggable="true"
+31-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:7:18-43
+32        android:label="@string/app_name"
+32-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-41
+33        android:supportsRtl="true" >
+33-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:9-35
+34        <uses-library android:name="android.test.runner" />
+34-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:8:9-60
+34-->D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger8014068264566621723.xml:8:23-57
+35
+36        <activity android:name="com.vondear.rxtools.activity.ActivityWebView" >
+36-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:9-39:20
+36-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:19-78
+37            <intent-filter>
+37-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:13-38:29
+38                <category android:name="android.intent.category.DEFAULT" />
+38-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:17-76
+38-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:27-73
+39            </intent-filter>
+40        </activity>
+41        <activity android:name="com.vondear.rxtools.activity.ActivityBase" />
+41-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:9-78
+41-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:19-75
+42        <activity
+42-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:9-43:52
+43            android:name="com.vondear.rxtools.activity.ActivityScanerCode"
+43-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-75
+44            android:screenOrientation="portrait" />
+44-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:13-49
+45        <activity
+45-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:9-46:52
+46            android:name="com.vondear.rxtools.activity.ActivityScanerCodeNew"
+46-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:45:13-78
+47            android:screenOrientation="portrait" />
+47-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:46:13-49
+48        <activity android:name="com.vondear.rxtools.activity.ActivityCodeTool" /> <!-- 注意： -->
+48-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:47:9-82
+48-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:47:19-79
+49        <!-- authorities：app的包名.fileProvider -->
+50        <!-- grantUriPermissions：必须是true，表示授予 URI 临时访问权限 -->
+51        <!-- exported：必须是false -->
+52        <!-- resource：中的@xml/file_paths是我们接下来要添加的文件 -->
+53        <provider
+53-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:55:9-63:20
+54            android:name="androidx.core.content.FileProvider"
+54-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:56:13-62
+55            android:authorities="com.vondear.rxtools.test.provider"
+55-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:57:13-60
+56            android:exported="false"
+56-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:58:13-37
+57            android:grantUriPermissions="true" >
+57-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:59:13-47
+58            <meta-data
+58-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:60:13-62:54
+59                android:name="android.support.FILE_PROVIDER_PATHS"
+59-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:61:17-67
+60                android:resource="@xml/file_paths" />
+60-->[__tested_artifact__::tools] D:\AndroidStudioProjects\primaryanswer\tools\build\intermediates\library_manifest\debug\AndroidManifest.xml:62:17-51
+61        </provider>
+62    </application>
+63
+64</manifest>

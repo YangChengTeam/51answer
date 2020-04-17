@@ -1,0 +1,103 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+	package
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:2:5-33
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:1-39:12
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:4:22-64
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:8:5-75
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:8:22-72
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:9:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:10:22-78
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:11:5-76
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:11:22-73
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:12:5-81
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:12:22-78
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:13:5-83
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:13:22-80
+uses-permission#android.permission.GET_TASKS
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:14:5-68
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:14:22-65
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:16:5-79
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:16:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:20:5-68
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:20:22-65
+application
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:22:5-38:19
+provider#com.bytedance.sdk.openadsdk.TTFileProvider
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:24:9-32:20
+	android:grantUriPermissions
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:28:13-47
+	android:authorities
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:26:13-66
+	android:exported
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:25:13-70
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:29:13-31:54
+	android:resource
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:31:17-51
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:30:17-67
+provider#com.bytedance.sdk.openadsdk.multipro.TTMultiProvider
+ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:34:9-37:40
+	android:authorities
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:36:13-67
+	android:exported
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:37:13-37
+	android:name
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:35:13-80
+uses-sdk
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml

@@ -1,0 +1,119 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vondear.rxtools"
+4    android:versionCode="1"
+5    android:versionName="1.2.3" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="14"
+8-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:5:5-67
+11-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+12-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:6:5-81
+12-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:6:22-78
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:7:5-79
+13-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+14-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:8:5-76
+14-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:8:22-73
+15    <uses-permission android:name="android.permission.CALL_PHONE" />
+15-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:9:5-69
+15-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:9:22-66
+16
+17    <!-- 外部存储 -->
+18    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+18-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:12:5-75
+18-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:12:22-72
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+19-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:13:5-81
+19-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:13:22-78
+20    <!-- 许可振动 -->
+21    <uses-permission android:name="android.permission.VIBRATE" />
+21-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:15:5-66
+21-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:15:22-63
+22    <!-- 打开闪光灯 -->
+23    <uses-permission android:name="android.permission.FLASHLIGHT" />
+23-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:17:5-69
+23-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:17:22-66
+24    <!-- 许可使用照相机 -->
+25    <uses-permission android:name="android.permission.CAMERA" />
+25-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:19:5-65
+25-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:19:22-62
+26    <!-- 许可调用相机硬件 -->
+27    <uses-feature android:name="android.hardware.camera" />
+27-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:21:5-60
+27-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:21:19-57
+28    <!-- 许可调用相机自动对焦 -->
+29    <uses-feature android:name="android.hardware.camera.autofocus" />
+29-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:23:5-70
+29-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:23:19-67
+30
+31    <application
+31-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:26:5-60:19
+32        android:allowBackup="true"
+32-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:27:9-35
+33        android:label="@string/app_name"
+33-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:28:9-41
+34        android:supportsRtl="true" >
+34-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:29:9-35
+35        <activity android:name="com.vondear.rxtools.activity.ActivityWebView" >
+35-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:30:9-34:20
+35-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:30:19-78
+36            <intent-filter>
+36-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:31:13-33:29
+37                <category android:name="android.intent.category.DEFAULT" />
+37-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:32:17-76
+37-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:32:27-73
+38            </intent-filter>
+39        </activity>
+40        <activity android:name="com.vondear.rxtools.activity.ActivityBase" />
+40-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:35:9-87
+40-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:35:19-75
+41        <activity
+41-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:36:9-38:61
+42            android:name="com.vondear.rxtools.activity.ActivityScanerCode"
+42-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:37:13-75
+43            android:screenOrientation="portrait" />
+43-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:38:13-49
+44        <activity
+44-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:39:9-41:52
+45            android:name="com.vondear.rxtools.activity.ActivityScanerCodeNew"
+45-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:40:13-78
+46            android:screenOrientation="portrait" />
+46-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:41:13-49
+47        <activity android:name="com.vondear.rxtools.activity.ActivityCodeTool" />
+47-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:42:9-91
+47-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:42:19-79
+48
+49        <!-- 注意： -->
+50        <!-- authorities：app的包名.fileProvider -->
+51        <!-- grantUriPermissions：必须是true，表示授予 URI 临时访问权限 -->
+52        <!-- exported：必须是false -->
+53        <!-- resource：中的@xml/file_paths是我们接下来要添加的文件 -->
+54
+55        <provider
+55-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:50:9-58:20
+56            android:name="androidx.core.content.FileProvider"
+56-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:51:13-62
+57            android:authorities="dollar_openBracket_applicationId_closeBracket.provider"
+57-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:52:13-60
+58            android:exported="false"
+58-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:53:13-37
+59            android:grantUriPermissions="true" >
+59-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:54:13-47
+60            <meta-data
+60-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:55:13-57:54
+61                android:name="android.support.FILE_PROVIDER_PATHS"
+61-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:56:17-67
+62                android:resource="@xml/file_paths" />
+62-->D:\AndroidStudioProjects\primaryanswer\tools\src\main\AndroidManifest.xml:57:17-51
+63        </provider>
+64    </application>
+65
+66</manifest>

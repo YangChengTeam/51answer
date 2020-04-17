@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <string-array name="english_stage_words">
+        <item>小学</item>
+        <item>初中</item>
+        <item>高中</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="english_word_num">
+        <item>0-60</item>
+        <item>61-100</item>
+        <item>101-150</item>
+        <item>151-200</item>
+        <item>200以上</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="genre">
+        <item>话题作文</item>
+        <item>小说</item>
+        <item>日记</item>
+        <item>读后感</item>
+        <item>演讲稿</item>
+        <item>散文诗歌</item>
+        <item>议论文</item>
+        <item>写景作文</item>
+        <item>状物作文</item>
+        <item>叙事作文</item>
+        <item>写人作文</item>
+        <item>想象作文</item>
+        <item>书信</item>
+        <item>续写改写</item>
+        <item>说明文</item>
+        <item>申请书</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="grade">
+        <item>一年级</item>
+        <item>二年级</item>
+        <item>三年级</item>
+        <item>四年级</item>
+        <item>五年级</item>
+        <item>六年级</item>
+        <item>七年级</item>
+        <item>八年级</item>
+        <item>九年级</item>
+        <item>高一</item>
+        <item>高二</item>
+        <item>高三</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="number_of_words">
+        <item>200以下</item>
+        <item>200-400</item>
+        <item>401-800</item>
+        <item>801-1000</item>
+        <item>1000以上</item>
+        <item>全部</item>
+    </string-array>
+    <array name="waveSideBarLetters">
+        <item>\u0023</item>
+        <item>\u2606</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+        <item>M</item>
+        <item>N</item>
+        <item>O</item>
+        <item>P</item>
+        <item>Q</item>
+        <item>R</item>
+        <item>S</item>
+        <item>T</item>
+        <item>U</item>
+        <item>V</item>
+        <item>W</item>
+        <item>X</item>
+        <item>Y</item>
+        <item>Z</item>
+    </array>
+    <string-array name="writting_matter">
+        <item>好词好句</item>
+        <item>优美段落</item>
+        <item>名言警句</item>
+        <item>名人故事</item>
+        <item>小学考场素材</item>
+        <item>初中考场素材</item>
+        <item>高中考场素材</item>
+        <item>实事论据</item>
+        <item>历史故事</item>
+    </string-array>
+    <attr format="reference" name="SpinKitViewStyle"/>
+    <attr format="reference" name="abstractWheelViewStyle"/>
+    <bool name="abc_action_bar_embed_tabs">true</bool>
+    <bool name="abc_action_bar_embed_tabs_pre_jb">false</bool>
+    <bool name="abc_action_bar_expanded_action_views_exclusive">true</bool>
+    <bool name="abc_config_actionMenuItemAllCaps">true</bool>
+    <bool name="abc_config_allowActionMenuItemTextWithIcon">false</bool>
+    <bool name="abc_config_closeDialogWhenTouchOutside">true</bool>
+    <bool name="abc_config_showMenuShortcutsWhenKeyboardPresent">false</bool>
+    <bool name="auto_updates">true</bool>
+    <color name="_8c">#8c8c8c</color>
+    <color name="a5">#A5A5A5</color>
+    <color name="abc_input_method_navigation_guard">@android:color/black</color>
+    <color name="abc_search_url_text_normal">#ff7fa87f</color>
+    <color name="abc_search_url_text_pressed">@android:color/black</color>
+    <color name="abc_search_url_text_selected">@android:color/black</color>
+    <color name="accent_material_dark">@color/material_deep_teal_200</color>
+    <color name="accent_material_light">@color/material_deep_teal_500</color>
+    <color name="add_book_out_2">#ff717171</color>
+    <color name="alpha_50">#80aea591</color>
+    <color name="alpha_80">#cc676154</color>
+    <color name="alpha_gray">#b3111111</color>
+    <color name="answer_info_seting_pb_tx">#ff2a2d30</color>
+    <color name="background_floating_material_dark">#ff424242</color>
+    <color name="background_floating_material_light">#ffeeeeee</color>
+    <color name="background_material_dark">#ff303030</color>
+    <color name="background_material_light">#ffeeeeee</color>
+    <color name="bgColor_overlay">#60000000</color>
+    <color name="black">#FF000000</color>
+    <color name="blue">#3F51B5</color>
+    <color name="book_name_tx_color">#ff333333</color>
+    <color name="book_size_text_color">#ff666666</color>
+    <color name="bottom_tab_choose">#ffee4949</color>
+    <color name="bottom_tab_unchoose">#ffaaaaaa</color>
+    <color name="bottom_tx_color">#ff333333</color>
+    <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
+    <color name="bright_foreground_disabled_material_light">#80000000</color>
+    <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
+    <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
+    <color name="bright_foreground_material_dark">@android:color/white</color>
+    <color name="bright_foreground_material_light">@android:color/black</color>
+    <color name="brown">#7a583e</color>
+    <color name="brown2">#b19282</color>
+    <color name="button_material_dark">#ff5a595b</color>
+    <color name="button_material_light">#ffd6d7d7</color>
+    <color name="c">#CCCCCC</color>
+    <color name="c_F1433F">#fff1433f</color>
+    <color name="c_d63B38">#ffd63b38</color>
+    <color name="c_fed11f">#fffed11f</color>
+    <color name="circle">#aa738ffe</color>
+    <color name="colorBackground">#FF4081</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="color_3">#ff333333</color>
+    <color name="color_50ffffff">#50ffffff</color>
+    <color name="color_6">#ff666666</color>
+    <color name="color_676154">#ff676154</color>
+    <color name="color_75ffffff">#75ffffff</color>
+    <color name="color_7f000000">#7f000000</color>
+    <color name="color_8">#ff888888</color>
+    <color name="color_80ffffff">#80ffffff</color>
+    <color name="color_9">#ff999999</color>
+    <color name="color_99000000">#99000000</color>
+    <color name="color_99e3333">#ff993333</color>
+    <color name="color_EE4545">#ffee4545</color>
+    <color name="color_a">#ffaaaaaa</color>
+    <color name="color_c">#ffcccccc</color>
+    <color name="color_c_60">#99cccccc</color>
+    <color name="color_cb">#ffcbcbcb</color>
+    <color name="color_cbcbcb">#ffcbcbcb</color>
+    <color name="color_d84040">#ffd84040</color>
+    <color name="color_d8d8d8">#ffd8d8d8</color>
+    <color name="color_d8d8d8_60">#99d8d8d8</color>
+    <color name="color_e1">#ffe1e1e1</color>
+    <color name="color_e5">#ffe5e5e5</color>
+    <color name="color_e7">#ffe7e7e7</color>
+    <color name="color_e72d36">#ffe72d36</color>
+    <color name="color_ed">#ffededed</color>
+    <color name="color_ededed">#ffededed</color>
+    <color name="color_ee4545">#ffee4545</color>
+    <color name="color_ee7878">#ffee7878</color>
+    <color name="color_f2f2f2">#fff2f2f2</color>
+    <color name="color_f4f4">#fff4f4f4</color>
+    <color name="color_f5f5f5">#fff5f5f5</color>
+    <color name="color_f7">#fff7f7f7</color>
+    <color name="color_fbc00b">#fffbc00b</color>
+    <color name="color_fe5">#ffffe5e5</color>
+    <color name="color_fef0f0">#fffef0f0</color>
+    <color name="color_ff5451">#ffff5451</color>
+    <color name="color_ffc80b">#ffffc80b</color>
+    <color name="color_gold">#ffffea00</color>
+    <color name="color_white">#ffffffff</color>
+    <color name="color_white_90">#e6ffffff</color>
+    <color name="color_yellow">#fffdd15b</color>
+    <color name="color_yellow_2">#ffffd200</color>
+    <color name="context_bg">#fff7f7f7</color>
+    <color name="custom_progress_orange_progress">#ffff8800</color>
+    <color name="deep_tips_color">#f2000000</color>
+    <color name="dialog_alpha_bg">#00000000</color>
+    <color name="dialog_black_bg">#7f000000</color>
+    <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
+    <color name="dim_foreground_disabled_material_light">#80323232</color>
+    <color name="dim_foreground_material_dark">#ffbebebe</color>
+    <color name="dim_foreground_material_light">#ff323232</color>
+    <color name="e">#EEEEEE</color>
+    <color name="error_color">#ffdd2c00</color>
+    <color name="f0">#f0f0f0</color>
+    <color name="fab_stroke_end_inner_color">#0a000000</color>
+    <color name="fab_stroke_end_outer_color">#0f000000</color>
+    <color name="fab_stroke_top_inner_color">#1affffff</color>
+    <color name="fab_stroke_top_outer_color">#2effffff</color>
+    <color name="gray">#808080</color>
+    <color name="green">#008000</color>
+    <color name="highlighted_text_material_dark">#6680cbc4</color>
+    <color name="highlighted_text_material_light">#66009688</color>
+    <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
+    <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <color name="hot_pink">#FD4C5B</color>
+    <color name="line_color">#ffe8e8e8</color>
+    <color name="link_text_material_dark">@color/material_deep_teal_200</color>
+    <color name="link_text_material_light">@color/material_deep_teal_500</color>
+    <color name="login_type">#ff4d4d4d</color>
+    <color name="material_blue_grey_800">#ff37474f</color>
+    <color name="material_blue_grey_900">#ff263238</color>
+    <color name="material_blue_grey_950">#ff21272b</color>
+    <color name="material_deep_teal_200">#ff80cbc4</color>
+    <color name="material_deep_teal_500">#ff009688</color>
+    <color name="mi_green">#52BA97</color>
+    <color name="my_paper_list_item_bg">#fffdecec</color>
+    <color name="my_paper_list_item_line">#ffee4545</color>
+    <color name="none_color">#00000000</color>
+    <color name="notification_action_color_filter">#ffffffff</color>
+    <color name="notification_icon_bg_color">#ff9e9e9e</color>
+    <color name="notification_material_background_media_default_color">#ff424242</color>
+    <color name="off_text">#ff5b5b5b</color>
+    <color name="on_text">#ffffffff</color>
+    <color name="pickerview_bg_topbar">#ffffffff</color>
+    <color name="pickerview_timebtn_nor">#ff057dff</color>
+    <color name="pickerview_timebtn_pre">#ffc2daf5</color>
+    <color name="pickerview_topbar_title">#ff000000</color>
+    <color name="pickerview_wheelview_textcolor_center">#ff2a2a2a</color>
+    <color name="pickerview_wheelview_textcolor_divider">#ffd5d5d5</color>
+    <color name="pickerview_wheelview_textcolor_out">#ffa8a8a8</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="primary_dark_material_dark">#ff000000</color>
+    <color name="primary_dark_material_light">#ff757575</color>
+    <color name="primary_material_dark">#ff212121</color>
+    <color name="primary_material_light">#ffefefef</color>
+    <color name="primary_text_default_material_dark">#ffffffff</color>
+    <color name="primary_text_default_material_light">#de000000</color>
+    <color name="primary_text_disabled_material_dark">#4dffffff</color>
+    <color name="primary_text_disabled_material_light">#39000000</color>
+    <color name="pro_bg_bg">#ffe6e6e6</color>
+    <color name="pro_bg_p">#ffee4848</color>
+    <color name="rect">#aae84e40</color>
+    <color name="red">#ff0006</color>
+    <color name="red1">#FF0000</color>
+    <color name="red_bg">#fff1433f</color>
+    <color name="red_color">#ffe20829</color>
+    <color name="result_view">#b0000000</color>
+    <color name="ripple_material_dark">#4dffffff</color>
+    <color name="ripple_material_light">#1f000000</color>
+    <color name="round_corner_progress_bar_background_default">#5f5f5f</color>
+    <color name="round_corner_progress_bar_progress_default">#7f7f7f</color>
+    <color name="round_corner_progress_bar_secondary_progress_default">@android:color/transparent
+    </color>
+    <color name="royalblue">#4169E1</color>
+    <color name="school_image_item_bg">#ff666666</color>
+    <color name="school_image_item_name">#ff333333</color>
+    <color name="school_image_item_prise">#ff999999</color>
+    <color name="secondary_text_default_material_dark">#b3ffffff</color>
+    <color name="secondary_text_default_material_light">#8a000000</color>
+    <color name="secondary_text_disabled_material_dark">#36ffffff</color>
+    <color name="secondary_text_disabled_material_light">#24000000</color>
+    <color name="select_province_line">#ffc7c7c7</color>
+    <color name="shadow25">#25808080</color>
+    <color name="shadow_end_color">@android:color/transparent</color>
+    <color name="shadow_mid_color">#14000000</color>
+    <color name="shadow_start_color">#44000000</color>
+    <color name="slateblue">#6A5ACD</color>
+    <color name="snackbar_background_color">#ff323232</color>
+    <color name="style_color">#ff005fff</color>
+    <color name="switch_thumb_disabled_material_dark">#ff616161</color>
+    <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
+    <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
+    <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <color name="teal">#008080</color>
+    <color name="text_0">#ff000000</color>
+    <color name="text_7f">#ff7f7f7f</color>
+    <color name="text_color_6">#ff666666</color>
+    <color name="text_color_f2">#fff2f2f2</color>
+    <color name="text_color_gray">#ff999999</color>
+    <color name="text_color_gray_middle">#ffe3e3e3</color>
+    <color name="text_color_main">#ff666666</color>
+    <color name="text_color_main_content">#ff333333</color>
+    <color name="text_f7">#fff7f7f7</color>
+    <color name="text_ff4f">#ffff4f4f</color>
+    <color name="text_line">#ffe9e9e9</color>
+    <color name="text_red_color">#ffee4545</color>
+    <color name="tips_color">#99000000</color>
+    <color name="title_tx_color">#ff333333</color>
+    <color name="transparant">#00000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="triangle">#aa72d572</color>
+    <color name="truncent">#50000000</color>
+    <color name="tt_cancle_bg">#fddcdcdc</color>
+    <color name="tt_divider">#ffdcdcdc</color>
+    <color name="tt_header_font">#ff9b9b9b</color>
+    <color name="tt_listview">#fdffffff</color>
+    <color name="tt_listview_press">#fde6e6e6</color>
+    <color name="tt_skip_red">#ffdf112a</color>
+    <color name="tt_text_font">#ff4a4a4a</color>
+    <color name="tt_titlebar_background_dark">#46000000</color>
+    <color name="tt_titlebar_background_light">#ffe0e0e0</color>
+    <color name="tt_transparent">#00000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#e6ff00</color>
+    <color name="yellow_bg">#fffff0d0</color>
+    <color name="yellow_margin">#ffffe3a6</color>
+    <dimen name="abc_action_bar_content_inset_material">16.0dip</dimen>
+    <dimen name="abc_action_bar_default_height_material">56.0dip</dimen>
+    <dimen name="abc_action_bar_default_padding_material">4.0dip</dimen>
+    <dimen name="abc_action_bar_icon_vertical_padding_material">16.0dip</dimen>
+    <dimen name="abc_action_bar_navigation_padding_start_material">0.0dip</dimen>
+    <dimen name="abc_action_bar_overflow_padding_end_material">10.0dip</dimen>
+    <dimen name="abc_action_bar_overflow_padding_start_material">6.0dip</dimen>
+    <dimen name="abc_action_bar_progress_bar_size">40.0dip</dimen>
+    <dimen name="abc_action_bar_stacked_max_height">48.0dip</dimen>
+    <dimen name="abc_action_bar_stacked_tab_max_width">180.0dip</dimen>
+    <dimen name="abc_action_bar_subtitle_bottom_margin_material">5.0dip</dimen>
+    <dimen name="abc_action_bar_subtitle_top_margin_material">-3.0dip</dimen>
+    <dimen name="abc_action_button_min_height_material">48.0dip</dimen>
+    <dimen name="abc_action_button_min_width_material">48.0dip</dimen>
+    <dimen name="abc_action_button_min_width_overflow_material">36.0dip</dimen>
+    <dimen name="abc_alert_dialog_button_bar_height">48.0dip</dimen>
+    <item name="abc_button_inset_horizontal_material" type="dimen">
+        @dimen/abc_control_inset_material
+    </item>
+    <dimen name="abc_button_inset_vertical_material">6.0dip</dimen>
+    <dimen name="abc_button_padding_horizontal_material">8.0dip</dimen>
+    <item name="abc_button_padding_vertical_material" type="dimen">
+        @dimen/abc_control_padding_material
+    </item>
+    <dimen name="abc_config_prefDialogWidth">320.0dip</dimen>
+    <dimen name="abc_control_corner_material">2.0dip</dimen>
+    <dimen name="abc_control_inset_material">4.0dip</dimen>
+    <dimen name="abc_control_padding_material">4.0dip</dimen>
+    <dimen name="abc_dialog_list_padding_vertical_material">8.0dip</dimen>
+    <item name="abc_dialog_min_width_major" type="dimen">65.0%</item>
+    <item name="abc_dialog_min_width_minor" type="dimen">95.00001%</item>
+    <dimen name="abc_dialog_padding_material">24.0dip</dimen>
+    <dimen name="abc_dialog_padding_top_material">18.0dip</dimen>
+    <item name="abc_disabled_alpha_material_dark" type="dimen">0.3</item>
+    <item name="abc_disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="abc_dropdownitem_icon_width">32.0dip</dimen>
+    <dimen name="abc_dropdownitem_text_padding_left">8.0dip</dimen>
+    <dimen name="abc_dropdownitem_text_padding_right">8.0dip</dimen>
+    <dimen name="abc_edit_text_inset_bottom_material">7.0dip</dimen>
+    <dimen name="abc_edit_text_inset_horizontal_material">4.0dip</dimen>
+    <dimen name="abc_edit_text_inset_top_material">10.0dip</dimen>
+    <dimen name="abc_floating_window_z">16.0dip</dimen>
+    <item name="abc_list_item_padding_horizontal_material" type="dimen">
+        @dimen/abc_action_bar_content_inset_material
+    </item>
+    <dimen name="abc_panel_menu_list_width">296.0dip</dimen>
+    <dimen name="abc_search_view_preferred_width">320.0dip</dimen>
+    <dimen name="abc_search_view_text_min_width">160.0dip</dimen>
+    <dimen name="abc_switch_padding">3.0dip</dimen>
+    <dimen name="abc_text_size_body_1_material">14.0sp</dimen>
+    <dimen name="abc_text_size_body_2_material">14.0sp</dimen>
+    <dimen name="abc_text_size_button_material">14.0sp</dimen>
+    <dimen name="abc_text_size_caption_material">12.0sp</dimen>
+    <dimen name="abc_text_size_display_1_material">34.0sp</dimen>
+    <dimen name="abc_text_size_display_2_material">45.0sp</dimen>
+    <dimen name="abc_text_size_display_3_material">56.0sp</dimen>
+    <dimen name="abc_text_size_display_4_material">112.0sp</dimen>
+    <dimen name="abc_text_size_headline_material">24.0sp</dimen>
+    <dimen name="abc_text_size_large_material">22.0sp</dimen>
+    <dimen name="abc_text_size_medium_material">18.0sp</dimen>
+    <dimen name="abc_text_size_menu_material">16.0sp</dimen>
+    <dimen name="abc_text_size_small_material">14.0sp</dimen>
+    <dimen name="abc_text_size_subhead_material">16.0sp</dimen>
+    <dimen name="abc_text_size_subtitle_material_toolbar">16.0dip</dimen>
+    <dimen name="abc_text_size_title_material">20.0sp</dimen>
+    <dimen name="abc_text_size_title_material_toolbar">20.0dip</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="appbar_elevation">4.0dip</dimen>
+    <dimen name="ball_radius_sidebar">24dp</dimen>
+    <dimen name="compat_button_inset_horizontal_material">4.0dip</dimen>
+    <dimen name="compat_button_inset_vertical_material">6.0dip</dimen>
+    <dimen name="compat_button_padding_horizontal_material">8.0dip</dimen>
+    <dimen name="compat_button_padding_vertical_material">4.0dip</dimen>
+    <dimen name="compat_control_corner_material">2.0dip</dimen>
+    <dimen name="default_preview_height">40dp</dimen>
+    <dimen name="default_preview_image_height">36dp</dimen>
+    <dimen name="default_slider_bar_height">4dp</dimen>
+    <dimen name="default_slider_handler_radius">10dp</dimen>
+    <dimen name="default_slider_height">36dp</dimen>
+    <dimen name="default_slider_margin">24dp</dimen>
+    <dimen name="default_slider_margin_btw_title">20dp</dimen>
+    <item name="dialog_fixed_height_major" type="dimen">79.99999%</item>
+    <item name="dialog_fixed_height_minor" type="dimen">100.0%</item>
+    <dimen name="dialog_fixed_width_major">320.0dip</dimen>
+    <dimen name="dialog_fixed_width_minor">320.0dip</dimen>
+    <item name="disabled_alpha_material_dark" type="dimen">0.3</item>
+    <item name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="fab_border_width">0.5dip</dimen>
+    <dimen name="fab_content_size">24.0dip</dimen>
+    <dimen name="fab_elevation">8.0dip</dimen>
+    <dimen name="fab_size_mini">40.0dip</dimen>
+    <dimen name="fab_size_normal">56.0dip</dimen>
+    <dimen name="fab_translation_z_pressed">6.0dip</dimen>
+    <dimen name="fastscroll_default_thickness">8.0dip</dimen>
+    <dimen name="fastscroll_margin">0.0dip</dimen>
+    <dimen name="fastscroll_minimum_range">50.0dip</dimen>
+    <dimen name="folder_cover_size">72.0dip</dimen>
+    <dimen name="header_footer_left_right_padding">25.0dip</dimen>
+    <dimen name="header_footer_top_bottom_padding">10.0dip</dimen>
+    <dimen name="heart_anim_bezier_x_rand">40.0dp</dimen>
+    <dimen name="heart_anim_init_x">50.0dp</dimen>
+    <dimen name="heart_anim_init_y">25.0dp</dimen>
+    <dimen name="heart_anim_length">100.0dp</dimen>
+    <dimen name="heart_anim_length_rand">150.0dp</dimen>
+    <dimen name="heart_anim_x_point_factor">30.0dp</dimen>
+    <dimen name="heart_size_height">27.3dp</dimen>
+    <dimen name="heart_size_width">32.5dp</dimen>
+    <dimen name="height_226px">113.0dip</dimen>
+    <dimen name="height_84px">42.0dip</dimen>
+    <dimen name="image_size">120.0dip</dimen>
+    <dimen name="indicator_corner_radius">12.0dip</dimen>
+    <dimen name="indicator_internal_padding">4.0dip</dimen>
+    <dimen name="indicator_right_padding">10.0dip</dimen>
+    <dimen name="item_touch_helper_max_drag_scroll_per_frame">20.0dip</dimen>
+    <dimen name="item_touch_helper_swipe_escape_max_velocity">800.0dip</dimen>
+    <dimen name="item_touch_helper_swipe_escape_velocity">120.0dip</dimen>
+    <dimen name="large_textSize_sidebar">32sp</dimen>
+    <dimen name="lineSpacingExtra_14px">7.0dip</dimen>
+    <dimen name="margin_10px">5.0dip</dimen>
+    <dimen name="message_left_height_g">50.0dip</dimen>
+    <dimen name="message_left_width">40.0dip</dimen>
+    <dimen name="navigation_elevation">12.0dip</dimen>
+    <dimen name="navigation_icon_padding">32.0dip</dimen>
+    <dimen name="navigation_icon_size">24.0dip</dimen>
+    <dimen name="navigation_max_width">320.0dip</dimen>
+    <dimen name="navigation_padding_bottom">8.0dip</dimen>
+    <dimen name="navigation_padding_top_default">0.0dip</dimen>
+    <dimen name="navigation_separator_vertical_padding">8.0dip</dimen>
+    <dimen name="notification_action_icon_size">32.0dip</dimen>
+    <dimen name="notification_action_text_size">13.0sp</dimen>
+    <dimen name="notification_big_circle_margin">12.0dip</dimen>
+    <dimen name="notification_content_margin_start">8.0dip</dimen>
+    <dimen name="notification_large_icon_height">64.0dip</dimen>
+    <dimen name="notification_large_icon_width">64.0dip</dimen>
+    <dimen name="notification_main_column_padding_top">10.0dip</dimen>
+    <item name="notification_media_narrow_margin" type="dimen">
+        @dimen/notification_content_margin_start
+    </item>
+    <dimen name="notification_right_icon_size">16.0dip</dimen>
+    <dimen name="notification_right_side_padding_top">2.0dip</dimen>
+    <dimen name="notification_small_icon_background_padding">3.0dip</dimen>
+    <dimen name="notification_small_icon_size_as_large">24.0dip</dimen>
+    <dimen name="notification_subtext_size">12.0dip</dimen>
+    <dimen name="notification_top_pad">10.0dip</dimen>
+    <dimen name="notification_top_pad_large_text">5.0dip</dimen>
+    <dimen name="pickerview_topbar_btn_textsize">15.0sp</dimen>
+    <dimen name="pickerview_topbar_height">44.0dip</dimen>
+    <dimen name="pickerview_topbar_paddingleft">15.0dip</dimen>
+    <dimen name="pickerview_topbar_paddingright">30.0dip</dimen>
+    <dimen name="pickerview_topbar_title_textsize">21.0sp</dimen>
+    <dimen name="radius_sidebar">20dp</dimen>
+    <dimen name="school_image_17px">8.5dip</dimen>
+    <dimen name="school_image_22px">11.0dip</dimen>
+    <dimen name="school_image_28px">14.0dip</dimen>
+    <dimen name="school_image_34px">17.0dip</dimen>
+    <dimen name="school_user_wh">20.0dip</dimen>
+    <dimen name="seek_bar_image">150.0dip</dimen>
+    <dimen name="shadow_width">1.0dip</dimen>
+    <dimen name="size_F1">13.0dip</dimen>
+    <dimen name="size_F2">14.0dip</dimen>
+    <dimen name="size_F3">15.0dip</dimen>
+    <dimen name="slidingmenu_offset">100.0dip</dimen>
+    <dimen name="snackbar_action_inline_max_width">128.0dip</dimen>
+    <dimen name="snackbar_background_corner_radius">0.0dip</dimen>
+    <dimen name="snackbar_elevation">2.0dip</dimen>
+    <dimen name="snackbar_extra_spacing_horizontal">0.0dip</dimen>
+    <dimen name="snackbar_max_width">-1.0px</dimen>
+    <dimen name="snackbar_min_width">-1.0px</dimen>
+    <dimen name="snackbar_padding_horizontal">12.0dip</dimen>
+    <dimen name="snackbar_padding_vertical">14.0dip</dimen>
+    <dimen name="snackbar_padding_vertical_2lines">24.0dip</dimen>
+    <dimen name="snackbar_text_size">14.0sp</dimen>
+    <dimen name="space_size">2.0dip</dimen>
+    <dimen name="space_size_5">5.0dip</dimen>
+    <dimen name="t100dp">100.0dip</dimen>
+    <dimen name="t10dp">10.0dip</dimen>
+    <dimen name="t10sp">10.0sp</dimen>
+    <dimen name="t112dp">112.0dip</dimen>
+    <dimen name="t11dp">11.0dip</dimen>
+    <dimen name="t11sp">11.0sp</dimen>
+    <dimen name="t12dp">12.0dip</dimen>
+    <dimen name="t12sp">12.0sp</dimen>
+    <dimen name="t13dp">13.0dip</dimen>
+    <dimen name="t13sp">13.0sp</dimen>
+    <dimen name="t14dp">14.0dip</dimen>
+    <dimen name="t14sp">14.0sp</dimen>
+    <dimen name="t15dp">15.0dip</dimen>
+    <dimen name="t15sp">15.0sp</dimen>
+    <dimen name="t16dp">16.0dip</dimen>
+    <dimen name="t16sp">16.0sp</dimen>
+    <dimen name="t17dp">17.0dip</dimen>
+    <dimen name="t17sp">17.0sp</dimen>
+    <dimen name="t18dp">18.0dip</dimen>
+    <dimen name="t18sp">18.0sp</dimen>
+    <dimen name="t190dp">190.0dip</dimen>
+    <dimen name="t19dp">19.0dip</dimen>
+    <dimen name="t19sp">19.0sp</dimen>
+    <dimen name="t1dp">1.0dip</dimen>
+    <dimen name="t20dp">20.0dip</dimen>
+    <dimen name="t20sp">20.0sp</dimen>
+    <dimen name="t21dp">21.0dip</dimen>
+    <dimen name="t21sp">21.0sp</dimen>
+    <dimen name="t22dp">22.0dip</dimen>
+    <dimen name="t22sp">22.0sp</dimen>
+    <dimen name="t23dp">23.0dip</dimen>
+    <dimen name="t23sp">23.0sp</dimen>
+    <dimen name="t24dp">24.0dip</dimen>
+    <dimen name="t24sp">24.0sp</dimen>
+    <dimen name="t25dp">25.0dip</dimen>
+    <dimen name="t25sp">25.0sp</dimen>
+    <dimen name="t26dp">26.0dip</dimen>
+    <dimen name="t26sp">26.0sp</dimen>
+    <dimen name="t27dp">27.0dip</dimen>
+    <dimen name="t27sp">27.0sp</dimen>
+    <dimen name="t28dp">28.0dip</dimen>
+    <dimen name="t28sp">28.0sp</dimen>
+    <dimen name="t29dp">29.0dip</dimen>
+    <dimen name="t29sp">29.0sp</dimen>
+    <dimen name="t2dp">2.0dip</dimen>
+    <dimen name="t30dp">30.0dip</dimen>
+    <dimen name="t30sp">30.0sp</dimen>
+    <dimen name="t31dp">31.0dip</dimen>
+    <dimen name="t31sp">31.0sp</dimen>
+    <dimen name="t32dp">32.0dip</dimen>
+    <dimen name="t32sp">32.0sp</dimen>
+    <dimen name="t33dp">33.0dip</dimen>
+    <dimen name="t33sp">33.0sp</dimen>
+    <dimen name="t34dp">34.0dip</dimen>
+    <dimen name="t34sp">34.0sp</dimen>
+    <dimen name="t35dp">35.0dip</dimen>
+    <dimen name="t35sp">35.0sp</dimen>
+    <dimen name="t36dp">36.0dip</dimen>
+    <dimen name="t36sp">36.0sp</dimen>
+    <dimen name="t37dp">37.0dip</dimen>
+    <dimen name="t37sp">37.0sp</dimen>
+    <dimen name="t38dp">38.0dip</dimen>
+    <dimen name="t38sp">38.0sp</dimen>
+    <dimen name="t39dp">39.0dip</dimen>
+    <dimen name="t39sp">39.0sp</dimen>
+    <dimen name="t3dp">3.0dip</dimen>
+    <dimen name="t4.8dp">4.799988dip</dimen>
+    <dimen name="t40dp">40.0dip</dimen>
+    <dimen name="t40sp">40.0sp</dimen>
+    <dimen name="t41dp">41.0dip</dimen>
+    <dimen name="t42dp">42.0dip</dimen>
+    <dimen name="t43dp">43.0dip</dimen>
+    <dimen name="t44dp">44.0dip</dimen>
+    <dimen name="t45dp">45.0dip</dimen>
+    <dimen name="t46dp">46.0dip</dimen>
+    <dimen name="t47dp">47.0dip</dimen>
+    <dimen name="t48dp">48.0dip</dimen>
+    <dimen name="t49dp">49.0dip</dimen>
+    <dimen name="t4dp">4.0dip</dimen>
+    <dimen name="t50dp">50.0dip</dimen>
+    <dimen name="t51dp">51.0dip</dimen>
+    <dimen name="t52dp">52.0dip</dimen>
+    <dimen name="t53dp">53.0dip</dimen>
+    <dimen name="t54dp">54.0dip</dimen>
+    <dimen name="t55dp">55.0dip</dimen>
+    <dimen name="t56dp">56.0dip</dimen>
+    <dimen name="t57dp">57.0dip</dimen>
+    <dimen name="t58dp">58.0dip</dimen>
+    <dimen name="t59dp">59.0dip</dimen>
+    <dimen name="t5dp">5.0dip</dimen>
+    <dimen name="t5sp">5.0sp</dimen>
+    <dimen name="t60dp">60.0dip</dimen>
+    <dimen name="t61dp">61.0dip</dimen>
+    <dimen name="t62dp">62.0dip</dimen>
+    <dimen name="t63dp">63.0dip</dimen>
+    <dimen name="t64dp">64.0dip</dimen>
+    <dimen name="t65dp">65.0dip</dimen>
+    <dimen name="t66dp">66.0dip</dimen>
+    <dimen name="t67dp">67.0dip</dimen>
+    <dimen name="t68dp">68.0dip</dimen>
+    <dimen name="t69dp">69.0dip</dimen>
+    <dimen name="t6dp">6.0dip</dimen>
+    <dimen name="t6sp">6.0sp</dimen>
+    <dimen name="t70dp">70.0dip</dimen>
+    <dimen name="t71dp">71.0dip</dimen>
+    <dimen name="t72dp">72.0dip</dimen>
+    <dimen name="t73dp">73.0dip</dimen>
+    <dimen name="t74dp">74.0dip</dimen>
+    <dimen name="t75dp">75.0dip</dimen>
+    <dimen name="t76dp">76.0dip</dimen>
+    <dimen name="t77dp">77.0dip</dimen>
+    <dimen name="t78dp">78.0dip</dimen>
+    <dimen name="t79dp">79.0dip</dimen>
+    <dimen name="t7dp">7.0dip</dimen>
+    <dimen name="t7sp">7.0sp</dimen>
+    <dimen name="t80dp">80.0dip</dimen>
+    <dimen name="t81dp">81.0dip</dimen>
+    <dimen name="t82dp">82.0dip</dimen>
+    <dimen name="t83dp">83.0dip</dimen>
+    <dimen name="t84dp">84.0dip</dimen>
+    <dimen name="t85dp">85.0dip</dimen>
+    <dimen name="t86dp">86.0dip</dimen>
+    <dimen name="t87dp">87.0dip</dimen>
+    <dimen name="t88dp">88.0dip</dimen>
+    <dimen name="t89dp">89.0dip</dimen>
+    <dimen name="t8dp">8.0dip</dimen>
+    <dimen name="t8sp">8.0sp</dimen>
+    <dimen name="t90dp">90.0dip</dimen>
+    <dimen name="t91dp">91.0dip</dimen>
+    <dimen name="t92dp">92.0dip</dimen>
+    <dimen name="t93dp">93.0dip</dimen>
+    <dimen name="t94dp">94.0dip</dimen>
+    <dimen name="t95dp">95.0dip</dimen>
+    <dimen name="t96dp">96.0dip</dimen>
+    <dimen name="t97dp">97.0dip</dimen>
+    <dimen name="t98dp">98.0dip</dimen>
+    <dimen name="t99dp">99.0dip</dimen>
+    <dimen name="t9dp">9.0dip</dimen>
+    <dimen name="t9sp">9.0sp</dimen>
+    <dimen name="tab_max_width">264.0dip</dimen>
+    <dimen name="tab_min_width">72.0dip</dimen>
+    <dimen name="textSize_sidebar">10sp</dimen>
+    <dimen name="textSize_sidebar_padding">20sp</dimen>
+    <dimen name="user_head_ic_bg_width_height">93.0dip</dimen>
+    <dimen name="user_head_ic_width_height">90.0dip</dimen>
+    <dimen name="userinfo_edit_height">45.0dip</dimen>
+    <dimen name="video_progress_dialog_margin_top">80.0dip</dimen>
+    <dimen name="video_volume_dialog_margin_left">24.0dip</dimen>
+    <item name="default_image_background" type="drawable">#ffe0e0e0</item>
+    <item name="eeeeee" type="drawable">#ffeeeeee</item>
+    <item name="notification_template_icon_bg" type="drawable">#3333b5e5</item>
+    <item name="notification_template_icon_low_bg" type="drawable">#0cffffff</item>
+    <item name="progress_bar_bg" type="drawable">#80ffffff</item>
+    <item name="title_bg_1" type="drawable">#ffee4848</item>
+    <item name="white" type="drawable">#ffffffff</item>
+    <item name="about_version_code" type="id"/>
+    <item name="auto_focus" type="id"/>
+    <item name="complete_password" type="id"/>
+    <item name="complete_qrpaword" type="id"/>
+    <item name="complete_zhuce" type="id"/>
+    <item name="decode" type="id"/>
+    <item name="decode_failed" type="id"/>
+    <item name="decode_succeeded" type="id"/>
+    <item name="encode_failed" type="id"/>
+    <item name="encode_succeeded" type="id"/>
+    <item name="gridview" type="id"/>
+    <item name="launch_product_query" type="id"/>
+    <item name="quit" type="id"/>
+    <item name="register_phone_edittext" type="id"/>
+    <item name="restart_preview" type="id"/>
+    <item name="return_scan_result" type="id"/>
+    <item name="search_book_contents_failed" type="id"/>
+    <item name="search_book_contents_succeeded" type="id"/>
+    <item name="split" type="id"/>
+    <item name="webview" type="id"/>
+    <item name="zhuce_title" type="id"/>
+    <integer name="anim_duration">3000</integer>
+    <integer name="heart_anim_bezier_factor">6</integer>
+    <string name="android_origin">Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。尚未有统一中文名称，中国大陆地区较多人使用“安卓”或“安致”。Android操作系统最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。2007年11月，Google与84家硬件制造商、软件开发商及电信营运商组建开放手机联盟共同研发改良Android系统。随后Google以Apache开源许可证的授权方式，发布了Android的源代码。第一部Android智能手机发布于2008年10月。Android逐渐扩展到平板电脑及其他领域上，如电视、数码相机、游戏机等。2011年第一季度，Android在全球的市场份额首次超过塞班系统，跃居全球第一。 2013年的第四季度，Android平台手机的全球市场份额已经达到78.1%。[1] 2013年09月24日谷歌开发的操作系统Android在迎来了5岁生日，全世界采用这款系统的设备数量已经达到10亿台。</string>
+    <string name="app_name">RxTools</string>
+    <string name="login">登录</string>
+    <string name="login_forget_pwd">忘记密码</string>
+    <string name="number_letter">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <style name="SpinKitView">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:minWidth">48dip</item>
+        <item name="android:maxWidth">48dip</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:maxHeight">48dip</item>
+    </style>
+    <style name="SpinKitView.CubeGrid">
+        <item name="SpinKit_Style">CubeGrid</item>
+    </style>
+    <style name="TickerTextAppearance">
+        <item name="android:textColor">@color/f0</item>
+        <item name="android:textSize">50sp</item>
+    </style>
+    <style name="custom_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+    <declare-styleable name="AbstractWheelView">
+        <attr format="integer" name="visibleItems"/>
+        <attr format="boolean" name="isAllVisible"/>
+        <attr format="integer" name="itemOffsetPercent"/>
+        <attr format="dimension" name="itemsPadding"/>
+        <attr format="integer" name="selectionDividerDimmedAlpha"/>
+        <attr format="integer" name="selectionDividerActiveAlpha"/>
+        <attr format="reference" name="selectionDivider"/>
+        <attr format="integer" name="itemsDimmedAlpha"/>
+        <attr format="boolean" name="isCyclic"/>
+    </declare-styleable>
+    <declare-styleable name="ColorPickerPreference">
+        <attr format="boolean" name="alphaSlider"/>
+        <attr format="boolean" name="lightnessSlider"/>
+        <attr format="integer" name="density"/>
+        <attr format="integer" name="initialColor"/>
+        <attr format="enum" name="wheelType">
+            <enum name="FLOWER" value="0"/>
+            <enum name="CIRCLE" value="1"/>
+        </attr>
+        <attr format="reference" name="lightnessSliderView"/>
+        <attr format="reference" name="alphaSliderView"/>
+        <attr format="integer" name="pickerColorEditTextColor"/>
+        <attr format="reference|string" name="pickerTitle"/>
+        <attr format="reference|string" name="pickerButtonOk"/>
+        <attr format="reference|string" name="pickerButtonCancel"/>
+    </declare-styleable>
+    <declare-styleable name="FlikerProgressBar">
+        <attr format="dimension" name="textSize"/>
+        <attr format="color" name="loadingColor"/>
+        <attr format="color" name="stopColor"/>
+        <attr format="color" name="finishColor"/>
+        <attr format="dimension" name="radius"/>
+        <attr format="dimension" name="borderWidth"/>
+    </declare-styleable>
+    <declare-styleable name="IconRoundCornerProgress">
+        <attr format="integer" name="rcIconSrc"/>
+        <attr format="dimension" name="rcIconSize"/>
+        <attr format="dimension" name="rcIconWidth"/>
+        <attr format="dimension" name="rcIconHeight"/>
+        <attr format="dimension" name="rcIconPadding"/>
+        <attr format="dimension" name="rcIconPaddingLeft"/>
+        <attr format="dimension" name="rcIconPaddingRight"/>
+        <attr format="dimension" name="rcIconPaddingTop"/>
+        <attr format="dimension" name="rcIconPaddingBottom"/>
+        <attr format="color" name="rcIconBackgroundColor"/>
+    </declare-styleable>
+    <declare-styleable name="RoundCornerProgress">
+        <attr format="boolean" name="rcReverse"/>
+        <attr format="float" name="rcProgress"/>
+        <attr format="float" name="rcMax"/>
+        <attr format="float" name="rcSecondaryProgress"/>
+        <attr format="dimension" name="rcBackgroundPadding"/>
+        <attr format="dimension" name="rcRadius"/>
+        <attr format="color" name="rcProgressColor"/>
+        <attr format="color" name="rcSecondaryProgressColor"/>
+        <attr format="color" name="rcBackgroundColor"/>
+    </declare-styleable>
+    <declare-styleable name="RxAutoImageView">
+        <attr format="reference" name="ImageSrc"/>
+    </declare-styleable>
+    <declare-styleable name="RxCardStackView">
+        <attr format="dimension" name="stackOverlapGaps"/>
+        <attr format="dimension" name="stackOverlapGapsCollapse"/>
+        <attr format="dimension" name="stackHeaderHeight"/>
+        <attr format="integer" name="stackDuration"/>
+        <attr format="integer" name="stackNumBottomShow"/>
+        <attr name="stackAnimationType">
+            <flag name="allDown" value="0"/>
+            <flag name="upDown" value="1"/>
+            <flag name="upDownStack" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="RxCobwebView">
+
+        <attr format="color" name="spiderColor"/>
+        <attr format="color" name="spiderRadiusColor"/>
+        <attr format="color" name="spiderLevelColor"/>
+        <attr format="boolean" name="spiderLevelStroke"/>
+        <attr format="boolean" name="spiderRotate"/>
+        <attr format="float" name="spiderLevelStrokeWidth"/>
+        <attr format="integer" name="spiderMaxLevel"/>
+        <attr format="dimension" name="spiderNameSize"/>
+
+    </declare-styleable>
+    <declare-styleable name="RxHeartLayout">
+        <attr format="dimension" name="initX"/>
+        <attr format="dimension" name="initY"/>
+        <attr format="dimension" name="xRand"/>
+        <attr format="dimension" name="animLengthRand"/>
+        <attr format="dimension" name="xPointFactor"/>
+        <attr format="dimension" name="animLength"/>
+        <attr format="dimension" name="heart_width"/>
+        <attr format="dimension" name="heart_height"/>
+        <attr format="integer" name="bezierFactor"/>
+        <attr format="integer" name="anim_duration"/>
+    </declare-styleable>
+    <declare-styleable name="RxNetSpeedView">
+        <attr format="color" name="RxTextColor"/>
+        <attr format="dimension" name="RxTextSize"/>
+        <attr format="boolean" name="isMulti"/>
+    </declare-styleable>
+    <declare-styleable name="RxPorterImageView">
+        <attr format="integer|reference" name="siShape"/>
+    </declare-styleable>
+    <declare-styleable name="RxRotateBar">
+        <attr format="string" name="ratingCenterTitle"/>
+        <attr format="dimension" name="centerTitleSize"/>
+        <attr format="integer" name="ratingMax"/>
+        <attr format="color" name="ratingUnratedColor"/>
+        <attr format="color" name="ratingRatedColor"/>
+        <attr format="color" name="ratingTitleColor"/>
+        <attr format="color" name="ratingOutlineColor"/>
+        <attr format="color" name="ratingDefaultColor"/>
+        <attr format="boolean" name="ratingTitleVisible"/>
+        <attr format="color" name="ratingCenterColor"/>
+    </declare-styleable>
+    <declare-styleable name="RxRoundProgress">
+        <attr format="color" name="roundColor"/>
+        <attr format="color" name="roundProgressColor"/>
+        <attr format="dimension" name="roundWidth"/>
+        <attr format="color" name="textColor"/>
+        <attr format="dimension" name="textSize1"/>
+        <attr format="integer" name="max"/>
+        <attr format="boolean" name="textIsDisplayable"/>
+        <attr name="style">
+            <enum name="STROKE" value="0"/>
+            <enum name="FILL" value="1"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="RxScaleImageView">
+        <attr format="reference" name="src"/>
+        <attr format="string" name="assetName"/>
+        <attr format="boolean" name="panEnabled"/>
+        <attr format="boolean" name="zoomEnabled"/>
+        <attr format="boolean" name="quickScaleEnabled"/>
+        <attr format="color" name="tileBackgroundColor"/>
+    </declare-styleable>
+    <declare-styleable name="RxSeekBar">
+        <attr format="float" name="maxProgress"/>
+        <attr format="float" name="minProgress"/>
+        <attr format="float" name="reserve"/>
+        <attr format="integer" name="cells"/>
+        <attr format="boolean" name="hideProgressHint"/>
+        <attr format="boolean" name="isHintHolder"/>
+        <attr format="color" name="lineColorSelected"/>
+        <attr format="color" name="lineColorEdge"/>
+        <attr format="color" name="thumbPrimaryColor"/>
+        <attr format="color" name="thumbSecondaryColor"/>
+        <attr format="reference" name="markTextArray"/>
+        <attr format="reference" name="seekBarResId"/>
+        <!-- must use 9 path ！！！-->
+        <attr format="reference" name="progressHintResId"/>
+        <attr format="dimension" name="textPadding"/>
+        <attr format="dimension" name="textSize2"/>
+        <attr format="dimension" name="hintBGHeight"/>
+        <attr format="dimension" name="hintBGWith"/>
+        <attr format="dimension" name="hintBGPadding"/>
+        <attr format="dimension" name="seekBarHeight"/>
+        <attr format="dimension" name="thumbSize"/>
+        <attr format="enum" name="cellMode">
+            <enum name="number" value="0"/>
+            <enum name="other" value="1"/>
+        </attr>
+        <attr format="enum" name="seekBarMode">
+            <enum name="single" value="1"/>
+            <enum name="range" value="2"/>
+        </attr>
+
+    </declare-styleable>
+    <declare-styleable name="RxShapeLoadingView">
+
+        <attr format="string" name="loadingText"/>
+        <attr format="reference" name="loadingTextAppearance"/>
+    </declare-styleable>
+    <declare-styleable name="RxShineButton">
+        <attr format="color" name="btn_color"/>
+        <attr format="color" name="btn_fill_color"/>
+        <attr format="integer" name="shine_count"/>
+        <attr format="float" name="shine_turn_angle"/>
+        <attr format="float" name="small_shine_offset_angle"/>
+        <attr format="boolean" name="enable_flashing"/>
+        <attr format="boolean" name="allow_random_color"/>
+        <attr format="color" name="small_shine_color"/>
+        <attr format="color" name="big_shine_color"/>
+        <attr format="integer" name="shine_animation_duration"/>
+        <attr format="integer" name="click_animation_duration"/>
+        <attr format="float" name="shine_distance_multiple"/>
+        <attr format="dimension" name="shine_size"/>
+    </declare-styleable>
+    <declare-styleable name="RxSwipeCaptcha">
+        <attr format="dimension" name="captchaWidth"/>
+        <attr format="dimension" name="captchaHeight"/>
+        <attr format="dimension" name="matchDeviation"/>
+    </declare-styleable>
+    <declare-styleable name="RxTitle">
+        <attr format="string" name="title"/>
+        <attr format="color" name="titleColor"/>
+        <attr format="dimension" name="titleSize"/>
+        <attr format="boolean" name="titleVisibility"/>
+
+        <attr format="string" name="leftText"/>
+        <attr format="color" name="leftTextColor"/>
+        <attr format="dimension" name="leftTextSize"/>
+        <attr format="boolean" name="leftTextVisibility"/>
+
+        <attr format="string" name="rightText"/>
+        <attr format="color" name="rightTextColor"/>
+        <attr format="dimension" name="rightTextSize"/>
+        <attr format="boolean" name="rightTextVisibility"/>
+
+        <attr format="reference" name="leftIcon"/>
+        <attr format="boolean" name="leftIconVisibility"/>
+
+        <attr format="reference" name="rightIcon"/>
+        <attr format="boolean" name="rightIconVisibility"/>
+    </declare-styleable>
+    <declare-styleable name="SeatTableView">
+        <attr format="reference" name="seat_checked"/>
+        <attr format="reference" name="seat_sold"/>
+        <attr format="reference" name="seat_available"/>
+        <attr format="color" name="overview_checked"/>
+        <attr format="color" name="overview_sold"/>
+        <attr format="color" name="txt_color"/>
+    </declare-styleable>
+    <declare-styleable name="ShoppingView">
+        <attr format="color" name="sv_bg_color"/>
+        <attr format="string" name="sv_text"/>
+        <attr format="dimension" name="sv_text_size"/>
+        <attr format="integer" name="sv_duration"/>
+    </declare-styleable>
+    <declare-styleable name="SpinKitView">
+        <attr name="SpinKit_Style">
+            <enum name="RotatingPlane" value="0"/>
+            <enum name="DoubleBounce" value="1"/>
+            <enum name="Wave" value="2"/>
+            <enum name="WanderingCubes" value="3"/>
+            <enum name="Pulse" value="4"/>
+            <enum name="ChasingDots" value="5"/>
+            <enum name="ThreeBounce" value="6"/>
+            <enum name="Circle" value="7"/>
+            <enum name="CubeGrid" value="8"/>
+            <enum name="FadingCircle" value="9"/>
+            <enum name="FoldingCube" value="10"/>
+            <enum name="RotatingCircle" value="11"/>
+            <enum name="MultiplePulse" value="12"/>
+            <enum name="PulseRing" value="13"/>
+            <enum name="MultiplePulseRing" value="14"/>
+        </attr>
+        <attr format="color" name="SpinKit_Color"/>
+    </declare-styleable>
+    <declare-styleable name="TextRoundCornerProgress">
+        <attr format="color" name="rcTextProgressColor"/>
+        <attr format="dimension" name="rcTextProgressSize"/>
+        <attr format="dimension" name="rcTextProgressMargin"/>
+        <attr format="string" name="rcTextProgress"/>
+    </declare-styleable>
+    <declare-styleable name="WaveSideBarView">
+        <attr format="color|reference" name="sidebarTextColor"/>
+        <attr format="color|reference" name="sidebarBackgroundColor"/>
+        <attr format="color|reference" name="sidebarChooseTextColor"/>
+        <attr format="dimension" name="sidebarTextSize"/>
+        <attr format="dimension" name="sidebarLargeTextSize"/>
+        <attr format="dimension" name="sidebarRadius"/>
+        <attr format="dimension" name="sidebarBallRadius"/>
+    </declare-styleable>
+    <declare-styleable name="WheelHorizontalView">
+        <attr format="dimension" name="selectionDividerWidth"/>
+    </declare-styleable>
+    <declare-styleable name="WheelVerticalView">
+        <attr format="dimension" name="selectionDividerHeight"/>
+    </declare-styleable>
+    <declare-styleable name="lwvWheelView">
+        <attr format="color|reference" name="lwvHighlightColor"/>
+        <attr format="color|reference" name="lwvMarkColor"/>
+        <attr format="color|reference" name="lwvMarkTextColor"/>
+        <attr format="float" name="lwvIntervalFactor"/>
+        <attr format="float" name="lwvMarkRatio"/>
+        <attr format="dimension" name="lwvCursorSize"/>
+        <attr format="dimension" name="lwvMarkTextSize"/>
+        <attr format="dimension" name="lwvCenterMarkTextSize"/>
+        <attr format="string|reference" name="lwvAdditionalCenterMark"/>
+    </declare-styleable>
+    <declare-styleable name="ticker_TickerView">
+        <attr format="reference|integer" name="ticker_animationDuration"/>
+        <attr format="reference|boolean" name="ticker_animateMeasurementChange"/>
+
+        <!-- Custom implementations of common android text attributes -->
+        <attr name="android:gravity" ns1:ignore="ResourceName"/>
+        <attr name="android:textAppearance" ns1:ignore="ResourceName"/>
+        <attr name="android:textColor" ns1:ignore="ResourceName"/>
+        <attr name="android:textSize" ns1:ignore="ResourceName"/>
+    </declare-styleable>
+</resources>

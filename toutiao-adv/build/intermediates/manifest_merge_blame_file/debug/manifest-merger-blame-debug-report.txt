@@ -1,0 +1,78 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="yc.com.toutiao_adv"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="15"
+8-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml
+10    <!-- 必要权限 -->
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:4:5-67
+11-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:4:22-64
+12
+13    <!-- 可选权限 -->
+14    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+14-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:8:5-75
+14-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:8:22-72
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:9:5-79
+15-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:9:22-76
+16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+16-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:10:5-81
+16-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:10:22-78
+17    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+17-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:11:5-76
+17-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:11:22-73
+18    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+18-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:12:5-81
+18-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:12:22-78
+19    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+19-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:13:5-83
+19-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:13:22-80
+20    <uses-permission android:name="android.permission.GET_TASKS" />
+20-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:14:5-68
+20-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:14:22-65
+21    <!-- 可选，向开发者声明获取定位后，才可慎重添加此权限，穿山甲将依据此权限投放精准广告 -->
+22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+22-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:16:5-79
+22-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:16:22-76
+23
+24    <!-- 如果有视频相关的广告且使用textureView播放，请务必添加，否则黑屏 -->
+25    <uses-permission android:name="android.permission.WAKE_LOCK" />
+25-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:20:5-68
+25-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:20:22-65
+26
+27    <application>
+27-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:22:5-38:19
+28        <provider
+28-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:24:9-32:20
+29            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
+29-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:25:13-70
+30            android:authorities="dollar_openBracket_applicationId_closeBracket.TTFileProvider"
+30-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:26:13-66
+31            android:exported="false"
+31-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:27:13-37
+32            android:grantUriPermissions="true" >
+32-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:28:13-47
+33            <meta-data
+33-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:29:13-31:54
+34                android:name="android.support.FILE_PROVIDER_PATHS"
+34-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:30:17-67
+35                android:resource="@xml/file_paths" />
+35-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:31:17-51
+36        </provider>
+37        <provider
+37-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:34:9-37:40
+38            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
+38-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:35:13-80
+39            android:authorities="dollar_openBracket_applicationId_closeBracket.TTMultiProvider"
+39-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:36:13-67
+40            android:exported="false" />
+40-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\src\main\AndroidManifest.xml:37:13-37
+41    </application>
+42
+43</manifest>

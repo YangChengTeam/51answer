@@ -1,0 +1,1 @@
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.2.3","enabled":true,"outputFile":"tools-release.aar","fullName":"release","baseName":"release"},"path":"..\\..\\library_manifest\\release\\AndroidManifest.xml","properties":{"packageId":"com.vondear.rxtools","split":""}}]

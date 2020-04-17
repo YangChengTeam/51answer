@@ -1,0 +1,291 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="yc.com.toutiao_adv.test" >
+4
+5    <uses-sdk
+5-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:5:5-74
+6        android:minSdkVersion="15"
+6-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:5:15-41
+7        android:targetSdkVersion="28" />
+7-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:5:42-71
+8
+9    <instrumentation
+9-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:11:5-15:73
+10        android:name="androidx.test.runner.AndroidJUnitRunner"
+10-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:11:22-76
+11        android:functionalTest="false"
+11-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:14:22-52
+12        android:handleProfiling="false"
+12-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:13:22-53
+13        android:label="Tests for yc.com.toutiao_adv.test"
+13-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:15:22-71
+14        android:targetPackage="yc.com.toutiao_adv.test" />
+14-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:12:22-69
+15    <!-- 必要权限 -->
+16    <uses-permission android:name="android.permission.INTERNET" /> <!-- 可选权限 -->
+16-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
+16-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-64
+17    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+17-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-75
+17-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-72
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-79
+18-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-76
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+19-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:5-81
+19-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:22-78
+20    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+20-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-76
+20-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:22-73
+21    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+21-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:5-81
+21-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:22-78
+22    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+22-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:5-83
+22-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:22-80
+23    <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 可选，向开发者声明获取定位后，才可慎重添加此权限，穿山甲将依据此权限投放精准广告 -->
+23-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-68
+23-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:22-65
+24    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 如果有视频相关的广告且使用textureView播放，请务必添加，否则黑屏 -->
+24-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:5-79
+24-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:22-76
+25    <uses-permission android:name="android.permission.WAKE_LOCK" />
+25-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:5-68
+25-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:22-65
+26    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+27    <uses-permission android:name="android.permission.REORDER_TASKS" />
+27-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:24:5-72
+27-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:24:22-69
+28
+29    <application
+29-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:7:5-9:19
+30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+30-->[androidx.core:core:1.1.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\d961743cc7d499ba32af0ad4d052394e\core-1.1.0\AndroidManifest.xml:24:18-86
+31        android:debuggable="true"
+31-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:7:18-43
+32        android:label="@string/app_name"
+32-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:23:9-41
+33        android:usesCleartextTraffic="true" >
+33-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:24:9-44
+34        <uses-library android:name="android.test.runner" />
+34-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:8:9-60
+34-->D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4231682680560518635.xml:8:23-57
+35
+36        <provider
+36-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:9-36:20
+37            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
+37-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-70
+38            android:authorities="yc.com.toutiao_adv.test.TTFileProvider"
+38-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-66
+39            android:exported="false"
+39-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-37
+40            android:grantUriPermissions="true" >
+40-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:13-47
+41            <meta-data
+41-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:13-35:54
+42                android:name="android.support.FILE_PROVIDER_PATHS"
+42-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:17-67
+43                android:resource="@xml/file_paths" />
+43-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:17-51
+44        </provider>
+45        <provider
+45-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:9-40:40
+46            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
+46-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-80
+47            android:authorities="yc.com.toutiao_adv.test.TTMultiProvider"
+47-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-67
+48            android:exported="false" />
+48-->[__tested_artifact__::toutiao-adv] D:\AndroidStudioProjects\primaryanswer\toutiao-adv\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-37
+49
+50        <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
+50-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:25:9-113
+50-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:25:18-110
+51        <service android:name="com.ss.android.socialbase.downloader.downloader.DownloadService" />
+51-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:26:9-99
+51-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:26:18-96
+52        <service
+52-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:27:9-33:19
+53            android:name="com.ss.android.socialbase.downloader.downloader.IndependentProcessDownloadService"
+53-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:28:13-109
+54            android:process=":downloader" >
+54-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:29:13-42
+55            <intent-filter>
+55-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:30:13-32:29
+56                <action android:name="com.ss.android.socialbase.downloader.remote" />
+56-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:31:17-86
+56-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:31:25-83
+57            </intent-filter>
+58        </service>
+59        <service android:name="com.ss.android.socialbase.downloader.impls.DownloadHandleService" /> <!-- <receiver android:name="com.ss.android.socialbase.downloader.downloader.DownloadReceiver"> -->
+59-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:34:9-100
+59-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:34:18-97
+60        <!-- <intent-filter> -->
+61        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/> -->
+62        <!-- </intent-filter> -->
+63        <!-- </receiver> -->
+64        <!-- APP DOWNLOADER START -->
+65        <service android:name="com.ss.android.socialbase.appdownloader.DownloadHandlerService" /> <!-- <receiver android:name="com.ss.android.socialbase.appdownloader.DownloadReceiver"> -->
+65-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:42:9-98
+65-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:42:18-95
+66        <!-- <intent-filter> -->
+67        <!-- <action android:name="android.intent.action.BOOT_COMPLETED"/> -->
+68        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/> -->
+69        <!-- <action android:name="android.ss.intent.action.DOWNLOAD_COMPLETE"/> -->
+70        <!-- </intent-filter> -->
+71        <!-- <intent-filter> -->
+72        <!-- <action android:name="android.intent.action.PACKAGE_ADDED"/> -->
+73        <!-- <action android:name="android.intent.action.PACKAGE_REPLACED"/> -->
+74        <!-- <data android:scheme="package"/> -->
+75        <!-- </intent-filter> -->
+76        <!-- <intent-filter> -->
+77        <!-- <action android:name="android.intent.action.MEDIA_MOUNTED"/> -->
+78        <!-- <data android:scheme="file"/> -->
+79        <!-- </intent-filter> -->
+80        <!-- </receiver> -->
+81        <activity
+81-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:58:9-61:59
+82            android:name="com.ss.android.socialbase.appdownloader.view.DownloadSizeLimitActivity"
+82-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:59:13-98
+83            android:launchMode="singleTask"
+83-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:60:13-44
+84            android:theme="@android:style/Theme.Dialog" />
+84-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:61:13-56
+85        <activity
+85-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:62:9-65:59
+86            android:name="com.ss.android.socialbase.appdownloader.view.DownloadTaskDeleteActivity"
+86-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:63:13-99
+87            android:launchMode="singleTask"
+87-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:64:13-44
+88            android:theme="@android:style/Theme.Dialog" />
+88-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:65:13-56
+89        <activity
+89-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:66:9-69:75
+90            android:name="com.ss.android.downloadlib.activity.TTDelegateActivity"
+90-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:67:13-82
+91            android:launchMode="singleTask"
+91-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:68:13-44
+92            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+92-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:69:13-72
+93
+94        <receiver android:name="com.ss.android.downloadlib.core.download.DownloadReceiver" />
+94-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:71:9-94
+94-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:71:19-91
+95        <receiver
+95-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:72:9-75:39
+96            android:name="com.bytedance.embedapplog.collector.Collector"
+96-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:73:13-73
+97            android:enabled="true"
+97-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:74:13-35
+98            android:exported="true" /> <!-- 下面的activity和service必须注册 -->
+98-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:75:13-36
+99        <activity
+99-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:76:9-79:47
+100            android:name="com.bytedance.sdk.openadsdk.activity.TTLandingPageActivity"
+100-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:77:13-86
+101            android:configChanges="keyboardHidden|orientation|screenSize"
+101-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:78:13-74
+102            android:launchMode="singleTask" />
+102-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:79:13-44
+103        <activity
+103-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:80:9-83:47
+104            android:name="com.bytedance.sdk.openadsdk.activity.TTPlayableLandingPageActivity"
+104-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:81:13-94
+105            android:configChanges="keyboardHidden|orientation|screenSize"
+105-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:82:13-74
+106            android:launchMode="singleTask" />
+106-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:83:13-44
+107        <activity
+107-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:84:9-87:47
+108            android:name="com.bytedance.sdk.openadsdk.activity.TTVideoLandingPageActivity"
+108-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:85:13-91
+109            android:configChanges="keyboardHidden|orientation|screenSize"
+109-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:86:13-74
+110            android:launchMode="singleTask" />
+110-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:87:13-44
+111        <activity
+111-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:88:9-91:47
+112            android:name="com.bytedance.sdk.openadsdk.activity.TTRewardVideoActivity"
+112-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:89:13-86
+113            android:configChanges="keyboardHidden|orientation|screenSize"
+113-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:90:13-74
+114            android:launchMode="singleTask" />
+114-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:91:13-44
+115        <activity
+115-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:92:9-95:47
+116            android:name="com.bytedance.sdk.openadsdk.activity.TTRewardExpressVideoActivity"
+116-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:93:13-93
+117            android:configChanges="keyboardHidden|orientation|screenSize"
+117-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:94:13-74
+118            android:launchMode="singleTask" />
+118-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:95:13-44
+119        <activity
+119-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:96:9-99:47
+120            android:name="com.bytedance.sdk.openadsdk.activity.TTFullScreenVideoActivity"
+120-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:97:13-90
+121            android:configChanges="keyboardHidden|orientation|screenSize"
+121-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:98:13-74
+122            android:launchMode="singleTask" />
+122-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:99:13-44
+123        <activity
+123-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:100:9-103:47
+124            android:name="com.bytedance.sdk.openadsdk.activity.TTFullScreenExpressVideoActivity"
+124-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:101:13-97
+125            android:configChanges="keyboardHidden|orientation|screenSize"
+125-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:102:13-74
+126            android:launchMode="singleTask" />
+126-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:103:13-44
+127        <activity
+127-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:104:9-107:75
+128            android:name="com.bytedance.sdk.openadsdk.activity.TTDelegateActivity"
+128-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:105:13-83
+129            android:launchMode="singleTask"
+129-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:106:13-44
+130            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+130-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:107:13-72
+131
+132        <service android:name="com.bytedance.sdk.openadsdk.multipro.aidl.BinderPoolService" />
+132-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:109:9-95
+132-->[:open_ad_sdk:] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c3b5643b7fb6c467bd00c4c3e31ea0ab\jetified-open_ad_sdk\AndroidManifest.xml:109:18-92
+133
+134        <activity
+134-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:27:9-33:20
+135            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+135-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:28:13-99
+136            android:theme="@android:style/Theme" >
+136-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:29:13-49
+137            <intent-filter>
+137-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:30:13-32:29
+138                <action android:name="android.intent.action.MAIN" />
+138-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:31:17-69
+138-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:31:25-66
+139            </intent-filter>
+140        </activity>
+141        <activity
+141-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:34:9-40:20
+142            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+142-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:35:13-95
+143            android:theme="@android:style/Theme" >
+143-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:36:13-49
+144            <intent-filter>
+144-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:30:13-32:29
+145                <action android:name="android.intent.action.MAIN" />
+145-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:31:17-69
+145-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:31:25-66
+146            </intent-filter>
+147        </activity>
+148        <activity
+148-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:41:9-47:20
+149            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+149-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:42:13-103
+150            android:theme="@android:style/Theme.Dialog" >
+150-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:43:13-56
+151            <intent-filter>
+151-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:30:13-32:29
+152                <action android:name="android.intent.action.MAIN" />
+152-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:31:17-69
+152-->[androidx.test:core:1.2.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\248f7ec7df95d93d619502d196ca8939\core-1.2.0\AndroidManifest.xml:31:25-66
+153            </intent-filter>
+154        </activity>
+155    </application>
+156
+157</manifest>
