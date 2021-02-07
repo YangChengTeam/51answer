@@ -2,13 +2,15 @@ package com.yc.ac.index.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.google.android.material.appbar.AppBarLayout;
@@ -18,9 +20,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.vondear.rxtools.RxKeyboardTool;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.base.WebActivity;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.IndexContract;
@@ -29,13 +33,10 @@ import com.yc.ac.index.model.bean.SlideInfo;
 import com.yc.ac.index.model.bean.TagInfo;
 import com.yc.ac.index.model.bean.VersionDetailInfo;
 import com.yc.ac.index.presenter.IndexPresenter;
-import com.yc.ac.index.ui.activity.SearchActivityNew;
+import com.yc.ac.index.ui.activity.SearchActivity;
 import com.yc.ac.index.ui.activity.UploadBookListActivity;
 import com.yc.ac.index.ui.adapter.BannerImageLoader;
-import com.yc.ac.index.ui.adapter.IndexTagAdapter;
-import com.yc.ac.index.ui.adapter.IndexZtAdapter;
 import com.yc.ac.index.ui.widget.BaseSearchView;
-import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.fragment.ShareFragment;
 import com.yc.ac.utils.ShareInfoHelper;
@@ -48,8 +49,7 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
@@ -71,42 +71,30 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
     View view;
     @BindView(R.id.baseSearchView)
     BaseSearchView baseSearchView;
-    @BindView(R.id.appBarLayout)
-    AppBarLayout appBarLayout;
-    @BindView(R.id.hot_recyclerView)
-    RecyclerView hotRecyclerView;
-    @BindView(R.id.ll_filter)
-    LinearLayout llFilter;
-    @BindView(R.id.rl_tab)
-    RelativeLayout rlTab;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.ll_upload)
-    LinearLayout llUpload;
-    @BindView(R.id.smartRefreshLayout)
-    SmartRefreshLayout smartRefreshLayout;
-
-    @BindView(R.id.tv_hot_tag)
-    TextView tvHotTag;
-    @BindView(R.id.ll_container)
-    LinearLayout llContainer;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.rl_container)
-    RelativeLayout rlContainer;
     @BindView(R.id.index_iv_logo)
     ImageView indexIvLogo;
     @BindView(R.id.iv_index_share)
     ImageView ivIndexShare;
     @BindView(R.id.iv_index_search)
     ImageView ivIndexSearch;
+    @BindView(R.id.rl_container)
+    RelativeLayout rlContainer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
+    @BindView(R.id.container)
+    FrameLayout container;
+    @BindView(R.id.ll_upload)
+    LinearLayout llUpload;
+    @BindView(R.id.smartRefreshLayout)
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.bottomContainer)
     FrameLayout bottomContainer;
 
 
-    private IndexTagAdapter tagAdapter;
-    private IndexZtAdapter indexZtAdapter;
-
+    private SearchFragment searchFragment;
 
     @Override
     public int getLayoutId() {
@@ -120,26 +108,43 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         mPresenter = new IndexPresenter(getActivity(), this);
 
         if (!RxSPTool.getBoolean(getActivity(), SpConstant.INDEX_DIALOG)) {
-            IndexDialogFragment indexDialogFragment = new IndexDialogFragment();
-            indexDialogFragment.show(getChildFragmentManager(), "");
+//            IndexDialogFragment indexDialogFragment = new IndexDialogFragment();
+//            indexDialogFragment.show(getChildFragmentManager(), "");
+
+            PolicyTintFragment policyTintFragment = new PolicyTintFragment();
+            policyTintFragment.show(getChildFragmentManager(), "");
         }
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-//        hotItemAdapter = new IndexBookAdapter(null);
-        indexZtAdapter = new IndexZtAdapter(null);
-        recyclerView.setAdapter(indexZtAdapter);
 
-        recyclerView.addItemDecoration(new MyDecoration(10, 15));
-
-        hotRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        tagAdapter = new IndexTagAdapter(null);
-        hotRecyclerView.setAdapter(tagAdapter);
-
-        hotRecyclerView.addItemDecoration(new MyDecoration(10, 15));
         banner.setFocusable(false);
         initRefresh();
         initListener();
-//        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, bottomContainer, null, Config.tencent_media_id, Config.tencent_bottom_banner_id, null);
-        TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, bottomContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
+        searchFragment = new SearchFragment();
+
+        replaceFragment();
+
+//        if (MyApp.state == 1) {
+//            TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, bottomContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
+//        }
+    }
+
+
+    public void replaceFragment() {
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("showBottom", false);
+        searchFragment.setArguments(bundle);
+
+        ft.add(R.id.container, searchFragment);
+        ft.commit();
+
+    }
+
+
+    //是否是指定机型
+    private boolean isAssignPhone() {
+        return TextUtils.equals("huawei", Build.BRAND.toLowerCase()) || TextUtils.equals("honor", Build.BRAND.toLowerCase());
     }
 
     private void setStatusBar() {
@@ -171,9 +176,10 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
             /**
              * 当前最大高度偏移值除以2 在减去已偏移值 获取浮动 先显示在隐藏
              */
+            int scrollRange = appBarLayout.getTotalScrollRange() / 2;
             if (offset < appBarLayout.getTotalScrollRange() / 2) {
                 toolbar.setTitle("");
-                float alpha = (appBarLayout.getTotalScrollRange() / 2 - offset * 1.0f) / (appBarLayout.getTotalScrollRange() / 2);
+                float alpha = (scrollRange - offset * 1.0f) / (scrollRange);
                 toolbar.setAlpha(alpha);
                 rlContainer.setAlpha(alpha);
                 indexIvLogo.setAlpha(alpha);
@@ -182,15 +188,16 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
                  * 所以 offset - appBarLayout.getTotalScrollRange() / 2
                  */
             } else if (offset > appBarLayout.getTotalScrollRange() / 2) {
-                float floate = (offset - appBarLayout.getTotalScrollRange() / 2) * 1.0f / (appBarLayout.getTotalScrollRange() / 2);
+                float floate = (offset - scrollRange) * 1.0f / (scrollRange);
                 toolbar.setAlpha(floate);
                 rlContainer.setAlpha(floate);
                 indexIvLogo.setAlpha(floate);
             }
         });
 
+        baseSearchView.setOnClickListener(this::search);
 
-        RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivityNew.class)));
+//        RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivity.class)));
         banner.setOnBannerListener(position -> {
             SlideInfo slideInfo = mPresenter.getSlideInfo(position);
             if (slideInfo != null && !TextUtils.isEmpty(slideInfo.getLink().trim())) {
@@ -200,68 +207,39 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
             }
         });
 
-        RxView.clicks(llFilter).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 
-            Intent intent = new Intent(getActivity(), SearchActivityNew.class);
-            startActivity(intent);
-        });
-
-
-        indexZtAdapter.setOnItemClickListener((adapter, view, position) -> {
-
-            TagInfo tagInfo = (TagInfo) adapter.getItem(position);
-            if (tagInfo != null) {
-                WebActivity.startActivity(getActivity(), tagInfo.getZtpath(), tagInfo.getZtname());
-
-//                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
-            }
-
-        });
-
-        tagAdapter.setOnItemClickListener((adapter, view, position) -> {
-            TagInfo tagInfo = (TagInfo) adapter.getItem(position);
-            if (tagInfo != null) {
-                Intent intent = new Intent(getActivity(), SearchActivityNew.class);
-                intent.putExtra("name", tagInfo.getTitle());
+        RxView.clicks(llUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                Intent intent = new Intent(getActivity(), UploadBookListActivity.class);
                 startActivity(intent);
             }
         });
-
-        RxView.clicks(llUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    Intent intent = new Intent(getActivity(), UploadBookListActivity.class);
-                    startActivity(intent);
-                }
+        RxView.clicks(indexIvLogo).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
             }
         });
-        RxView.clicks(indexIvLogo).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    Intent intent = new Intent(getActivity(), SettingActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-        RxView.clicks(ivIndexSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), SearchActivityNew.class));
-            }
-        });
-        RxView.clicks(ivIndexShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                com.yc.ac.setting.ui.fragment.ShareFragment shareFragment = new ShareFragment();
-                shareFragment.setIsShareMoney(true);
-                shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                shareFragment.show(getActivity().getSupportFragmentManager(), "");
-            }
+        RxView.clicks(ivIndexSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivity.class)));
+        RxView.clicks(ivIndexShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            ShareFragment shareFragment = new ShareFragment();
+            shareFragment.setIsShareMoney(true);
+            shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
+            shareFragment.show(getActivity().getSupportFragmentManager(), "");
         });
 
     }
+
+    private void search(String inputText) {
+//        etSearch.dismissDropDown();
+
+        RxKeyboardTool.hideSoftInput(getActivity());
+        if (searchFragment != null) {
+            searchFragment.setName(inputText);
+        }
+
+    }
+
 
     /**
      * 根据百分比改变颜色透明度
@@ -279,7 +257,9 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void showNoNet() {
-
+        if (smartRefreshLayout != null) {
+            smartRefreshLayout.finishRefresh();
+        }
     }
 
     @Override
@@ -325,7 +305,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void showTagInfos(List<TagInfo> data) {
-        tagAdapter.setNewData(data);
+
         if (smartRefreshLayout != null) {
             smartRefreshLayout.finishRefresh();
         }
@@ -336,7 +316,7 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
         if (list != null && list.size() > 4) {
             list = list.subList(0, 4);
         }
-        indexZtAdapter.setNewData(list);
+
         if (smartRefreshLayout != null) {
             smartRefreshLayout.finishRefresh();
         }
@@ -405,6 +385,16 @@ public class IndexFragmentNew extends BaseFragment<IndexPresenter> implements In
 
     @Override
     public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
+    }
+
+    @Override
+    public void onRewardVideoComplete() {
+
+    }
+
+    @Override
+    public void loadRewardVideoSuccess() {
 
     }
 

@@ -20,6 +20,7 @@ import com.yc.ac.R;
 import com.yc.ac.collect.ui.fragment.CollectFragment;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.ui.activity.ScanTintActivity;
+import com.yc.ac.index.ui.fragment.IndexFragment;
 import com.yc.ac.index.ui.fragment.IndexFragmentNew;
 import com.yc.ac.setting.ui.fragment.MyFragment;
 import com.yc.ac.utils.ActivityScanHelper;
@@ -162,6 +163,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                     addPermission(Manifest.permission.CAMERA).
                     addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
                     addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
+                    addPermission(Manifest.permission.READ_EXTERNAL_STORAGE).
                     initPermission();
     }
 

@@ -13,7 +13,7 @@ public interface Config {
 
     String toutiao_splash_id = "887292514";
 
-    String toutiao_reward_id = "945013385";
+    String toutiao_reward_id = "945775371";
 
     String toutiao_banner1_id = "945013388";
 

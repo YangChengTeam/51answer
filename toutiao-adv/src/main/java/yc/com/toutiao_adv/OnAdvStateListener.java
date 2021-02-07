@@ -19,4 +19,8 @@ public interface OnAdvStateListener {
 
     void onNativeExpressDismiss(TTNativeExpressAd ad);
 
+    void onRewardVideoComplete();
+
+    void loadRewardVideoSuccess();
+
 }

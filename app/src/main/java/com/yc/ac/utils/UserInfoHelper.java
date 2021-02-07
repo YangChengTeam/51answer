@@ -16,7 +16,6 @@ import com.yc.ac.constant.HttpStatus;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.ui.activity.LoginGroupActivity;
-import com.yc.ac.setting.ui.activity.LoginGroupActivityNew;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -100,7 +99,7 @@ public class UserInfoHelper {
 
     public static boolean isGoToLogin(Activity activity) {
         if (!isLogin()) {
-            activity.startActivity(new Intent(activity, LoginGroupActivityNew.class));
+            activity.startActivity(new Intent(activity, LoginGroupActivity.class));
             activity.overridePendingTransition(R.anim.menu_enter, 0);
             return true;
         }
@@ -115,25 +114,12 @@ public class UserInfoHelper {
     }
 
     public static void getUserInfoDo(final Callback callback) {
-        Observable.just("").map(new Func1<String, UserInfo>() {
-            @Override
-            public UserInfo call(String s) {
-                return UserInfoHelper.getUserInfo();
+        Observable.just("").map(s -> UserInfoHelper.getUserInfo()).subscribeOn(Schedulers.io()).filter(userInfo -> {
+            boolean flag = !EmptyUtils.isEmpty(userInfo);
+            if (!flag) {
+                UIUtils.post(callback::showNoLogin);
             }
-        }).subscribeOn(Schedulers.io()).filter(new Func1<UserInfo, Boolean>() {
-            @Override
-            public Boolean call(UserInfo userInfo) {
-                boolean flag = !EmptyUtils.isEmpty(userInfo);
-                if (!flag) {
-                    UIUtils.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            callback.showNoLogin();
-                        }
-                    });
-                }
-                return flag;
-            }
+            return flag;
         }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<UserInfo>() {
             @Override
             public void call(UserInfo userInfo) {

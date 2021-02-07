@@ -1,6 +1,10 @@
 package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -10,6 +14,8 @@ import android.widget.TextView;
 
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.securityhttp.domain.ResultInfo;
+import com.kk.securityhttp.net.contains.HttpConfig;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
@@ -17,8 +23,11 @@ import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
 import com.yc.ac.base.MainActivity;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.constant.SpConstant;
+import com.yc.ac.index.model.bean.AdStateInfo;
 import com.yc.ac.index.ui.widget.SelectGradeView;
+import com.yc.ac.utils.EngineUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,9 +36,13 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import butterknife.BindView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
+import yc.com.base.UIUtils;
 import yc.com.tencent_adv.AdvDispatchManager;
 import yc.com.tencent_adv.AdvType;
 import yc.com.tencent_adv.OnAdvStateListener;
@@ -73,33 +86,53 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
         rlSelectGrade.setVisibility(View.GONE);
 //        iv.setVisibility(View.VISIBLE);
-
+        getAdState();
 //        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Config.tencent_media_id, Config.tencent_splash_id, this);
-        TTAdDispatchManager.getManager().init(this, TTAdType.SPLASH, splashContainer, Config.toutiao_splash_id, 0,null, null, 0, null, 0, this);
 
-//        switchActivity();
-//        if (RxSPTool.getBoolean(this, SpConstant.IS_FIRST_OPEN)) {
-//            rlSelectGrade.setVisibility(View.GONE);
-//            iv.setVisibility(View.VISIBLE);
-//            switchActivity();
-//
-//        } else {
-//            RxSPTool.putBoolean(this, SpConstant.IS_FIRST_OPEN, true);
-//            rlSelectGrade.setVisibility(View.VISIBLE);
-//            iv.setVisibility(View.GONE);
-//        }
-//        initSelectView();
-//        initListener();
+
+
+    }
+
+    private void getAdState() {
+        EngineUtils.getAdStateState(this).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResultInfo<AdStateInfo>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        switchActivity(Time);
+                    }
+
+                    @Override
+                    public void onNext(ResultInfo<AdStateInfo> adStateInfoResultInfo) {
+                        if (adStateInfoResultInfo != null && adStateInfoResultInfo.getCode() == HttpConfig.STATUS_OK) {
+                            MyApp.state = adStateInfoResultInfo.getData().status;
+                            if (MyApp.state == 1) {//打开广告
+                                TTAdDispatchManager.getManager().init(SplashActivity.this, TTAdType.SPLASH, splashContainer, Config.toutiao_splash_id, 0, null, null, 0, null, 0, SplashActivity.this);
+                            } else {
+                                switchActivity(Time);
+                            }
+                        }
+                    }
+                });
     }
 
     private void switchActivity(long delayTime) {
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            }
+        if (mHandler == null) {
+            mHandler = new Handler();
+        }
+        mHandler.postDelayed(() -> {
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
         }, delayTime);
+    }
+
+    //是否是指定机型
+    private boolean isAssignPhone() {
+        return TextUtils.equals("huawei", Build.BRAND.toLowerCase()) || TextUtils.equals("honor", Build.BRAND.toLowerCase());
     }
 
     private void initListener() {
@@ -139,16 +172,13 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
 
     private void setSelectState(final SelectGradeView view) {
-        view.setOnSelectGradeListener(new SelectGradeView.OnSelectGradeListener() {
-            @Override
-            public void onSelect(int position, String data) {
-                middleGradeView.clearSelect();
-                seniorGradeView.clearSelect();
-                smallGradeView.clearSelect();
-                view.click(position);
-                RxSPTool.putString(SplashActivity.this, SpConstant.SELECT_GRADE, data);
-                switchActivity(Time);
-            }
+        view.setOnSelectGradeListener((position, data) -> {
+            middleGradeView.clearSelect();
+            seniorGradeView.clearSelect();
+            smallGradeView.clearSelect();
+            view.click(position);
+            RxSPTool.putString(SplashActivity.this, SpConstant.SELECT_GRADE, data);
+            switchActivity(Time);
         });
 
     }
@@ -228,6 +258,16 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
     @Override
     public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
+    }
+
+    @Override
+    public void onRewardVideoComplete() {
+
+    }
+
+    @Override
+    public void loadRewardVideoSuccess() {
 
     }
 

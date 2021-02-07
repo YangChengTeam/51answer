@@ -18,6 +18,7 @@ import com.yc.ac.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -52,12 +53,12 @@ public class AnswerDetailAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.activity_answer_detail_item, container, false);
 
         String path = mImageList.get(position);

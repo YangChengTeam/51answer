@@ -3,10 +3,13 @@ package com.yc.ac.base;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -149,6 +152,23 @@ public class WebActivity extends BaseActivity {
                 return false;
             }
         });
+        webView.setDownloadListener((url12, userAgent, contentDisposition, mimetype, contentLength) -> {
+                    //在这里进行下载的处理。
+                    // 如果你没有进行处理，一般APP就不会开始下载行为，在这里可以自己开启一个线程来下载
+                    Log.i("download", "url: " + url12);
+                    Log.i("download", "contentDisposition: " + contentDisposition);
+                    Log.i("download", "mimetype: " + mimetype);
+
+                    /**
+                     * 通过系统下载apk
+                     */
+                    if (url12.endsWith(".apk") || contentDisposition.endsWith(".apk")) {
+                        Uri uri = Uri.parse(url12);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                }
+        );
 
     }
 

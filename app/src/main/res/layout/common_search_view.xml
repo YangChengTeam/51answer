@@ -22,38 +22,41 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/search" />
 
-        <TextView
+        <EditText
             android:id="@+id/et_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/distance_5"
-            android:layout_toRightOf="@id/iv_search"
-            android:text="@string/input_book_name"
+            android:layout_marginStart="@dimen/distance_5"
+            android:layout_toEndOf="@id/iv_search"
+            android:layout_toStartOf="@id/iv_scan"
+            android:background="@null"
+            android:hint="@string/input_book_name"
+            android:textCursorDrawable="@drawable/et_cursor_bg"
             android:textColor="@color/gray_aaa"
-            android:textSize="@dimen/text_16" />
+            android:textColorHint="@color/gray_aaa"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_14" />
 
 
         <ImageView
             android:id="@+id/iv_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/scan_black"
-            android:visibility="gone" />
+            android:src="@mipmap/scan_black" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/btn_search"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/distance_10"
-        android:background="@drawable/search_white_bg"
+        android:layout_marginStart="@dimen/dp_10"
         android:gravity="center"
         android:text="@string/seek"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_16"
-        android:visibility="gone" />
+        android:textColor="@color/red_f14343"
+        android:textSize="@dimen/text_14" />
 
 </LinearLayout>

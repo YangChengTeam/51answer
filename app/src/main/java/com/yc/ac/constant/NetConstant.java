@@ -153,4 +153,9 @@ public interface NetConstant {
      * 首页专题
      */
     String index_zt_url = BaseNetConstant.getBaseUrl() + "zt/index";
+
+    /**
+     * 打开广告开关
+     */
+    String switch_ad_url = BaseNetConstant.getBaseUrl() + "versionSwitch";
 }

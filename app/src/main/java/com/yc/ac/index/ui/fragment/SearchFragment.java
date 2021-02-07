@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +19,7 @@ import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.base.StateView;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.constant.SpConstant;
@@ -29,7 +29,7 @@ import com.yc.ac.index.presenter.BookConditionPresenter;
 import com.yc.ac.index.ui.activity.AnswerDetailActivity;
 import com.yc.ac.index.ui.activity.UploadBookActivity;
 import com.yc.ac.index.ui.adapter.SearchResultItemAdapter;
-import com.yc.ac.index.ui.widget.FilterPopWindowNew;
+import com.yc.ac.index.ui.widget.FilterPopWindow;
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.util.ArrayList;
@@ -38,13 +38,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
-import yc.com.tencent_adv.AdvDispatchManager;
-import yc.com.tencent_adv.AdvType;
+import yc.com.base.UIUtils;
 import yc.com.tencent_adv.OnAdvStateListener;
 import yc.com.toutiao_adv.TTAdDispatchManager;
 import yc.com.toutiao_adv.TTAdType;
@@ -53,7 +53,7 @@ import yc.com.toutiao_adv.TTAdType;
  * Created by wanglin  on 2018/3/10 10:09.
  */
 
-public class SearchNewFragment extends BaseFragment<BookConditionPresenter> implements BookConditionContract.View, OnAdvStateListener, yc.com.toutiao_adv.OnAdvStateListener {
+public class SearchFragment extends BaseFragment<BookConditionPresenter> implements BookConditionContract.View, OnAdvStateListener, yc.com.toutiao_adv.OnAdvStateListener {
 
 
     @BindView(R.id.tv_grade)
@@ -113,9 +113,11 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     public static int SECOND_AD_POSITION = 10; // 第一条广告的位置
     private HashMap<TTNativeExpressAd, Integer> mAdViewPositionMap = new HashMap<>();
 
+    private boolean showBottom = true;
+
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_new_search;
+        return R.layout.fragment_search;
     }
 
     public String getName() {
@@ -142,17 +144,27 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     public void init() {
 
         mPresenter = new BookConditionPresenter(getActivity(), this);
-        code = getArguments().getString("code");
-        mName = getArguments().getString("name");
-
+        if (getArguments() != null) {
+            code = getArguments().getString("code");
+            mName = getArguments().getString("name");
+            showBottom = getArguments().getBoolean("showBottom", true);
+        }
         initView();
         initAdapter();
         initListener();
+
+
+        rlFeedback.setVisibility(showBottom ? View.VISIBLE : View.GONE);
+        loadAd();
+    }
+
+    private void loadAd() {
         List<Integer> positions = new ArrayList<>();
         positions.add(FIRST_AD_POSITION);
         positions.add(SECOND_AD_POSITION);
-//        AdvDispatchManager.getManager().init(getActivity(), AdvType.ORIGIN_PIC, null, null, Config.tencent_media_id, Config.tencent_native_id, AD_COUNT, positions, this);
-        TTAdDispatchManager.getManager().init(getActivity(), TTAdType.NATIVE_EXPRESS, null, Config.toutiao_native_id, AD_COUNT, positions, null, 0, null, 0, this);
+        if (MyApp.state == 1)
+            TTAdDispatchManager.getManager().init(getActivity(), TTAdType.NATIVE_EXPRESS, null, Config.toutiao_native_id, AD_COUNT, positions, null, 0, null, 0, this);
+
     }
 
     private void initView() {
@@ -169,7 +181,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     }
 
     private void initListener() {
-        itemAdapter.setOnLoadMoreListener(() -> getData(), searchRecyclerView);
+        itemAdapter.setOnLoadMoreListener(this::getData, searchRecyclerView);
         itemAdapter.setOnItemClickListener((adapter, view, position) -> {
             BookInfo bookInfo = itemAdapter.getItem(position);
             if (bookInfo != null) {
@@ -178,33 +190,17 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
         });
 
-        itemAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        itemAdapter.setOnItemChildClickListener((adapter, view, position) -> {
 
-                textView = (TextView) view;
-                if (UserInfoHelper.isLogin()) {
-                    mPresenter.favoriteAnswer((BookInfo) adapter.getItem(position));
-                } else {
-                    mPresenter.saveBook((BookInfo) adapter.getItem(position));
-                }
+            textView = (TextView) view;
+            if (UserInfoHelper.isLogin()) {
+                mPresenter.favoriteAnswer((BookInfo) adapter.getItem(position));
+            } else {
+                mPresenter.saveBook((BookInfo) adapter.getItem(position));
             }
         });
-        RxView.clicks(llGrade).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                showPopWindow(getString(R.string.grade), ivGrade, tvGrade);
-
-            }
-        });
-        RxView.clicks(llSubject).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-
-                showPopWindow(getString(R.string.subject), ivSubject, tvSubject);
-
-            }
-        });
+        RxView.clicks(llGrade).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> showPopWindow(getString(R.string.grade), ivGrade, tvGrade));
+        RxView.clicks(llSubject).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> showPopWindow(getString(R.string.subject), ivSubject, tvSubject));
         RxView.clicks(llPart).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -212,30 +208,25 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
             }
         });
-        RxView.clicks(llVersion).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                showPopWindow(getString(R.string.version), ivVersion, tvVersion);
-            }
-        });
+        RxView.clicks(llVersion).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> showPopWindow(getString(R.string.version), ivVersion, tvVersion));
 
-        RxView.clicks(tvFeedback).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    Intent intent = new Intent(getActivity(), UploadBookActivity.class);
-                    startActivity(intent);
-                }
+        RxView.clicks(tvFeedback).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                Intent intent = new Intent(getActivity(), UploadBookActivity.class);
+                startActivity(intent);
             }
         });
         searchRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    rlFeedback.setVisibility(View.VISIBLE);
-                } else {
-                    rlFeedback.setVisibility(View.GONE);
+                if (showBottom) {
+
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        rlFeedback.setVisibility(View.VISIBLE);
+                    } else {
+                        rlFeedback.setVisibility(View.GONE);
+                    }
                 }
 
             }
@@ -244,7 +235,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
     }
 
     private void showPopWindow(String name, final ImageView iv, final TextView tv) {
-        final FilterPopWindowNew popWindow = new FilterPopWindowNew(getActivity(), name);
+        final FilterPopWindow popWindow = new FilterPopWindow(getActivity(), name);
         popWindow.showAsDropDown(llTopGuide);
         iv.setImageResource(R.mipmap.search_up);
         popWindow.setOnDismissListener(() -> iv.setImageResource(R.mipmap.search_down));
@@ -338,6 +329,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
         } else {
             mPresenter.getBookList(page, LIMIT, "", "", "", grade, "", part, "", version, "", subject, "", "");
         }
+        loadAd();
     }
 
     @Override
@@ -392,7 +384,7 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
 
     @Override
     public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
-        LogUtil.msg("size: " + mDatas.size());
+
         for (Map.Entry<TTNativeExpressAd, Integer> nativeExpressADView : mDatas.entrySet()) {
 
             mAdViewPositionMap.put(nativeExpressADView.getKey(), nativeExpressADView.getValue());
@@ -410,6 +402,16 @@ public class SearchNewFragment extends BaseFragment<BookConditionPresenter> impl
             int removedPosition = mAdViewPositionMap.get(ad);
             itemAdapter.removeADView(removedPosition, ad);
         }
+    }
+
+    @Override
+    public void onRewardVideoComplete() {
+
+    }
+
+    @Override
+    public void loadRewardVideoSuccess() {
+
     }
 
 

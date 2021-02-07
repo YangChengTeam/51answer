@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.FilterWord;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdDislike;
 import com.bytedance.sdk.openadsdk.TTAdNative;
@@ -108,10 +109,54 @@ public class BannerADManager implements OnAdvManagerListener {
             }
         });
         //dislike设置
+        bindDislike(ad, false);
         if (ad.getInteractionType() != TTAdConstant.INTERACTION_TYPE_DOWNLOAD) {
             return;
         }
 
+    }
+
+    /**
+     * 设置广告的不喜欢，开发者可自定义样式
+     *
+     * @param ad
+     * @param customStyle 是否自定义样式，true:样式自定义
+     */
+    private void bindDislike(TTNativeExpressAd ad, boolean customStyle) {
+        if (customStyle) {
+            //使用自定义样式
+            List<FilterWord> words = ad.getFilterWords();
+            if (words == null || words.isEmpty()) {
+                return;
+            }
+
+//            final DislikeDialog dislikeDialog = new DislikeDialog(this, words);
+//            dislikeDialog.setOnDislikeItemClick(new DislikeDialog.OnDislikeItemClick() {
+//                @Override
+//                public void onItemClick(FilterWord filterWord) {
+//                    //屏蔽广告
+//                    TToast.show(mContext, "点击 " + filterWord.getName());
+//                    //用户选择不喜欢原因后，移除广告展示
+//                    mExpressContainer.removeAllViews();
+//                }
+//            });
+//            ad.setDislikeDialog(dislikeDialog);
+            return;
+        }
+        //使用默认个性化模板中默认dislike弹出样式
+        ad.setDislikeCallback(mActivity, new TTAdDislike.DislikeInteractionCallback() {
+            @Override
+            public void onSelected(int position, String value) {
+//                TToast.show(mContext, "点击 " + value);
+                //用户选择不喜欢原因后，移除广告展示
+                mContainer.removeAllViews();
+            }
+
+            @Override
+            public void onCancel() {
+//                TToast.show(mContext, "点击取消 ");
+            }
+        });
     }
 
     @Override

@@ -26,7 +26,7 @@ import yc.com.base.CommonInfoHelper;
  * Created by wanglin  on 2018/3/8 15:53.
  */
 
-public class FilterPopWindowNew extends BasePopwindow {
+public class FilterPopWindow extends BasePopwindow {
 
 
     private String mFlag;
@@ -39,7 +39,7 @@ public class FilterPopWindowNew extends BasePopwindow {
     private VersionDetailInfo subjectDetailInfo;
     private String simple_flag = "";
 
-    public FilterPopWindowNew(Activity context, String flag) {
+    public FilterPopWindow(Activity context, String flag) {
         super(context);
         this.mFlag = flag;
     }

@@ -89,11 +89,13 @@ public class RewardVideoAdManager implements OnAdvManagerListener, WeakHandler.I
                     @Override
                     public void onAdShow() {
                         Log.e("rewardvideo", "onAdShow: " + "rewardVideoAd show");
+                        stateListener.loadRewardVideoSuccess();
                     }
 
                     @Override
                     public void onAdVideoBarClick() {
                         Log.e("rewardvideo", "rewardVideoAd bar click");
+
                     }
 
                     @Override
@@ -106,6 +108,7 @@ public class RewardVideoAdManager implements OnAdvManagerListener, WeakHandler.I
                     @Override
                     public void onVideoComplete() {
                         Log.e("rewardvideo", "rewardVideoAd complete");
+                        stateListener.onRewardVideoComplete();
                     }
 
                     @Override

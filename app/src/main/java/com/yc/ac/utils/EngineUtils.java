@@ -11,6 +11,7 @@ import com.kk.securityhttp.engin.HttpCoreEngin;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.securityhttp.net.entry.UpFileInfo;
 import com.yc.ac.constant.NetConstant;
+import com.yc.ac.index.model.bean.AdStateInfo;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.BookInfoWrapper;
 import com.yc.ac.setting.model.bean.QbInfoWrapper;
@@ -211,7 +212,7 @@ public class EngineUtils {
             headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
         return HttpCoreEngin.get(context).rxpost(NetConstant.task_good_comment_url, new TypeReference<ResultInfo<String>>() {
                 }.getType(),
-                null,headers, false, false, false);
+                null, headers, false, false, false);
     }
 
 
@@ -239,8 +240,13 @@ public class EngineUtils {
             headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
 
         return HttpCoreEngin.get(context).rxpost(NetConstant.task_list_url, new TypeReference<ResultInfo<TaskLisInfoWrapper>>() {
-        }.getType(), null,headers, false, false, false);
+        }.getType(), null, headers, false, false, false);
 
+    }
+
+    public static Observable<ResultInfo<AdStateInfo>> getAdStateState(Context context) {
+        return HttpCoreEngin.get(context).rxget(NetConstant.switch_ad_url, new TypeReference<ResultInfo<AdStateInfo>>() {
+        }.getType(), false);
     }
 
 }

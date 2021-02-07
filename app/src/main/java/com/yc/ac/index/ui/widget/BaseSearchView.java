@@ -1,7 +1,9 @@
 package com.yc.ac.index.ui.widget;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.yc.ac.R;
 import com.yc.ac.utils.ActivityScanHelper;
+import com.yc.ac.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +29,7 @@ public class BaseSearchView extends BaseView {
     @BindView(R.id.iv_search)
     ImageView ivSearch;
     @BindView(R.id.et_search)
-    TextView etSearch;
+    EditText etSearch;
     @BindView(R.id.iv_scan)
     ImageView ivScan;
     @BindView(R.id.btn_search)
@@ -50,13 +53,25 @@ public class BaseSearchView extends BaseView {
     public void init() {
         super.init();
 
-
         RxView.clicks(ivScan).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-
-
                 ActivityScanHelper.startScanerCode(mContext);
+
+            }
+        });
+        RxView.clicks(btnSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                String keyWord = etSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(keyWord)) {
+                    ToastUtils.showCenterToast(getContext(), "搜索内容不能为空");
+                    return;
+                }
+//                etSearch.setFocusable(false);
+                if (onClickListener != null) {
+                    onClickListener.onClick(keyWord);
+                }
 
             }
         });
@@ -80,7 +95,7 @@ public class BaseSearchView extends BaseView {
 
 
     public interface onClickListener {
-        void onClick();
+        void onClick(String keyword);
     }
 
     private onClickListener onClickListener;

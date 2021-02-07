@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-files-path
+        name="umeng_cache"
+        path="umeng_cache/" />
+
+    <external-path
+        name="external"
+        path="app/primaryanswer/" />
+
+    <external-path
+        name="external_storage_root"
+        path="." />
+
+    <external-path
+        name="camera_photos"
+        path="" />
+<!--    <external-path-->
+<!--        name="my_images"-->
+<!--        path="." />-->
+</paths>

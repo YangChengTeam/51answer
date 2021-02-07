@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.vondear.rxtools.RxRegTool;
 import com.yc.ac.R;
-import com.yc.ac.setting.ui.activity.LoginGroupActivityNew;
+import com.yc.ac.setting.ui.activity.LoginGroupActivity;
 import com.yc.ac.utils.ToastUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
@@ -30,12 +30,12 @@ public class LoginPhoneFragment extends BaseFragment {
     TextView tvNext;
     @BindView(R.id.iv_cancel)
     ImageView ivAccountCancel;
-    private LoginGroupActivityNew mLoginGroupActivity;
+    private LoginGroupActivity mLoginGroupActivity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mLoginGroupActivity = (LoginGroupActivityNew) context;
+        mLoginGroupActivity = (LoginGroupActivity) context;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class LoginPhoneFragment extends BaseFragment {
         }
 
 //        RxBus.get().post(BusAction.LOGIN_CODE, phone);
-        mLoginGroupActivity.addReplaceFragment(LoginGroupActivityNew.LOGIN_PWD, "登录", "注册", phone);
+        mLoginGroupActivity.addReplaceFragment(LoginGroupActivity.LOGIN_PWD, "登录", "注册", phone);
 
     }
 

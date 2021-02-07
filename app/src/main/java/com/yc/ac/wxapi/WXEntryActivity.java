@@ -11,7 +11,7 @@ import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
 public class WXEntryActivity extends WXCallbackActivity {
     public void onResp(BaseResp resp) {
-
+        super.onResp(resp);//这句不能少
         if (resp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
             WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) resp;
             String extraData = launchMiniProResp.extMsg; // 对应JsApi navigateBackApplication中的extraData字段数据

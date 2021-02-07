@@ -3,11 +3,8 @@ package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,31 +17,24 @@ import com.baidu.location.LocationClientOption;
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.kk.utils.LogUtil;
+import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
 import com.vondear.rxtools.RxKeyboardTool;
-import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
-import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.SearchContract;
 import com.yc.ac.index.presenter.SearchPresenter;
 import com.yc.ac.index.ui.adapter.AutoCompleteAdapter;
-import com.yc.ac.index.ui.fragment.SearchCodeFragment;
-import com.yc.ac.index.ui.fragment.SearchConditionFragment;
-import com.yc.ac.index.ui.fragment.SearchResultFragment;
+import com.yc.ac.index.ui.fragment.SearchFragment;
 import com.yc.ac.utils.ActivityScanHelper;
-import com.yc.ac.utils.SearchHistoryHelper;
 import com.yc.ac.utils.ToastUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
 /**
@@ -66,20 +56,17 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     TextView btnSearch;
     @BindView(R.id.container)
     FrameLayout container;
+    @BindView(R.id.et_input_content)
+    EditText etInputContent;
 
 
-    private List<Fragment> fragmentList;
-    private int page;
-    private String subject;
-    private String grade;
-    private String part;
     private String code;
     private String name;
-    private String version;
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
 
     private boolean isFoucusable = false;
+    private SearchFragment searchNewFragment;
 
     @Override
     public int getLayoutId() {
@@ -89,24 +76,19 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @Override
     public void init() {
 
-        if (getIntent() != null) {
-            page = getIntent().getIntExtra("page", 0);
-            name = getIntent().getStringExtra("text");
+        Intent intent = getIntent();
+        if (intent != null) {
+            code = intent.getStringExtra("code");
+            name = intent.getStringExtra("name");
+        }
 
-            subject = getIntent().getStringExtra("subject");
-            grade = getIntent().getStringExtra("grade");
-            part = getIntent().getStringExtra("part");
-            code = getIntent().getStringExtra("code");
-            version = getIntent().getStringExtra("version");
-        }
-        if (page == 2) {
-            etSearch.setInputType(InputType.TYPE_CLASS_NUMBER);
-            etSearch.setHint("请输入书籍条形码");
-        }
 
         mPresenter = new SearchPresenter(this, this);
 
-        initFragment();
+        searchNewFragment = new SearchFragment();
+
+        replaceFragment(code, name);
+
 
 //        SpanUtils.setEditTextHintSize(etSearch);
         mLocationClient = new LocationClient(getApplicationContext());
@@ -118,113 +100,63 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
         initListener();
     }
 
-    private void initFragment() {
-        fragmentList = new ArrayList<>();
-        SearchConditionFragment conditionFragment = new SearchConditionFragment();
-        SearchResultFragment searchResultFragment = new SearchResultFragment();
-        SearchCodeFragment searchCodeFragment = new SearchCodeFragment();
-        if (!fragmentList.contains(conditionFragment)) {
-            fragmentList.add(conditionFragment);
-        }
-        if (!fragmentList.contains(searchResultFragment))
-            fragmentList.add(searchResultFragment);
-        if (!fragmentList.contains(searchCodeFragment))
-            fragmentList.add(searchCodeFragment);
-        replaceFragment(page, name, subject, grade, part, code, version);
-    }
-
-
     private void initListener() {
-        RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                finish();
+        RxView.clicks(ivBack).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> finish());
+        RxView.clicks(btnSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+//                String inputText = etSearch.getText().toString().trim();
+            String inputText = etInputContent.getText().toString().trim();
+            if (TextUtils.isEmpty(inputText)) {
+                ToastUtils.showCenterToast(SearchActivity.this, "请输入相关书籍名称");
+                return;
             }
-        });
-        RxView.clicks(btnSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                etSearch.dismissDropDown();
-                String inputText = etSearch.getText().toString().trim();
-                if (TextUtils.isEmpty(inputText)) {
-                    ToastUtils.showCenterToast(SearchActivity.this, "请输入相关书籍名称");
-                    return;
-                }
-                RxKeyboardTool.hideSoftInput(SearchActivity.this);
+            search(inputText);
 
-                search(inputText);
-
-//                replaceFragment(1, inputText, subject, grade, part, code);
-
-            }
         });
 
-        RxView.clicks(ivScan).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
+        RxView.clicks(ivScan).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 
-
-                if (!RxSPTool.getBoolean(SearchActivity.this, SpConstant.IS_OPEN_SCAN)) {
-                    startActivity(new Intent(SearchActivity.this, ScanTintActivity.class));
-                    RxSPTool.putBoolean(SearchActivity.this, SpConstant.IS_OPEN_SCAN, true);
-                } else {
-                    ActivityScanHelper.startScanerCode(SearchActivity.this);
-                }
-                finish();
-            }
+            ActivityScanHelper.startScanerCode(SearchActivity.this);
+            finish();
         });
-        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                isFoucusable = hasFocus;
-                if (hasFocus) {
-                    mPresenter.searchTips(((AutoCompleteTextView) v).getText().toString().trim());
-                }
+        RxView.clicks(etInputContent).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            etInputContent.setFocusable(true);
+            etInputContent.setFocusableInTouchMode(true);
+            etInputContent.requestFocus();
+            RxKeyboardTool.showSoftInput(SearchActivity.this, etInputContent);
+        });
+
+        etInputContent.setOnFocusChangeListener((v, hasFocus) -> {
+            isFoucusable = hasFocus;
+            if (hasFocus) {
+                mPresenter.searchTips(((EditText) v).getText().toString().trim());
             }
         });
     }
 
     private void search(String inputText) {
-
-        Intent intent = new Intent(SearchActivity.this, SearchActivity.class);
-        if (page == 2) {
-            intent.putExtra("code", inputText);
-        } else {
-            intent.putExtra("text", inputText);
-            SearchHistoryHelper.saveHistoryList(inputText);
+//        etSearch.dismissDropDown();
+        etInputContent.setFocusable(false);
+        RxKeyboardTool.hideSoftInput(SearchActivity.this);
+        if (searchNewFragment != null) {
+            searchNewFragment.setName(inputText);
         }
-        intent.putExtra("page", 1);
-        startActivity(intent);
-        finish();
+
     }
 
 
-    public void replaceFragment(int position, String text, String subject, String grade, String part, String code, String version) {
-        name = text;
-        if (!TextUtils.isEmpty(name)) etSearch.setText(name);
+    public void replaceFragment(String code, String name) {
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        for (Fragment fragment : fragmentList) {
-            if (fragment.isAdded()) {
-                ft.hide(fragment);
-            }
-        }
-        Fragment fragment = fragmentList.get(position);
 
         Bundle bundle = new Bundle();
-        bundle.putString("text", text);
-        bundle.putString("subject", subject);
-        bundle.putString("grade", grade);
-        bundle.putString("part", part);
-        bundle.putString("code", code);
-        bundle.putString("version", version);
+        if (!TextUtils.isEmpty(code))
+            bundle.putString("code", code);
+        if (!TextUtils.isEmpty(name))
+            bundle.putString("name", name);
 
-        fragment.setArguments(bundle);
-        if (!fragment.isAdded()) {
-            ft.add(R.id.container, fragment);
-        } else {
-            ft.show(fragment);
-        }
+        searchNewFragment.setArguments(bundle);
 
+        ft.add(R.id.container, searchNewFragment);
         ft.commit();
 
     }
@@ -232,14 +164,11 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     private void initAutoTextView() {
 
-        RxTextView.textChanges(etSearch)
+        RxTextView.textChanges(etInputContent)
                 .debounce(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<CharSequence>() {
-                    @Override
-                    public void call(CharSequence charSequence) {
-                        if (isFoucusable) {
-                            mPresenter.searchTips(charSequence.toString().trim());
-                        }
+                .subscribe(charSequence -> {
+                    if (isFoucusable) {
+                        mPresenter.searchTips(charSequence.toString().trim());
                     }
                 });
 
@@ -304,21 +233,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @Override
     public void showSearchTips(List<String> data) {
         etSearch.setDropDownHorizontalOffset(-RxImageTool.dp2px(75));
-
-//        etSearch.setDropDownWidth(RxDeviceTool.getScreenWidth(this) - RxImageTool.dip2px(btnSearch.getMeasuredWidth() + 30));
+//
+        etSearch.setDropDownWidth(RxDeviceTool.getScreenWidth(this) - RxImageTool.dip2px(btnSearch.getMeasuredWidth() + 30));
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 //
 //                android.R.layout.simple_dropdown_item_1line, list);
-
+//
         AutoCompleteAdapter adapter = new AutoCompleteAdapter(this, data);
         etSearch.setAdapter(adapter);
         etSearch.showDropDown();
-        etSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                search(etSearch.getText().toString().trim());
-            }
-        });
+        etSearch.setOnItemClickListener((parent, view, position, id) -> search(etSearch.getText().toString().trim()));
 
     }
 

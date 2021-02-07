@@ -15,7 +15,7 @@ import com.yc.ac.R;
 import com.yc.ac.setting.contract.LoginContract;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.LoginPresenter;
-import com.yc.ac.setting.ui.activity.LoginGroupActivityNew;
+import com.yc.ac.setting.ui.activity.LoginGroupActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +42,7 @@ public class LoginNewPwdFragment extends BaseFragment<LoginPresenter> implements
 
     private String phone;
     private String code;
-    private LoginGroupActivityNew mLoginGroupActivity;
+    private LoginGroupActivity mLoginGroupActivity;
 
     @Override
     public int getLayoutId() {
@@ -53,7 +53,7 @@ public class LoginNewPwdFragment extends BaseFragment<LoginPresenter> implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mLoginGroupActivity = (LoginGroupActivityNew) context;
+        mLoginGroupActivity = (LoginGroupActivity) context;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class LoginNewPwdFragment extends BaseFragment<LoginPresenter> implements
         RxView.clicks(tvCodeLogin).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                mLoginGroupActivity.addReplaceFragment(LoginGroupActivityNew.LOGIN_CODE, "登录", "注册", phone);
+                mLoginGroupActivity.addReplaceFragment(LoginGroupActivity.LOGIN_CODE, "登录", "注册", phone);
             }
         });
         RxView.clicks(ivCancel).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {

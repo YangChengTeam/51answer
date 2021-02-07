@@ -3,21 +3,24 @@ package com.yc.ac.base;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 
 import com.kk.securityhttp.domain.GoagalInfo;
+import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.tencent.bugly.Bugly;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.analytics.game.UMGameAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxTool;
 import com.yc.ac.R;
 import com.yc.ac.index.listener.GlidePauseOnScrollListener;
+import com.yc.ac.index.model.bean.AdStateInfo;
 import com.yc.ac.index.model.bean.DaoMaster;
 import com.yc.ac.index.model.bean.DaoSession;
 import com.yc.ac.index.ui.widget.GlideImageLoader;
+import com.yc.ac.utils.EngineUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -31,9 +34,10 @@ import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import yc.com.toutiao_adv.TTAdDispatchManager;
 import yc.com.toutiao_adv.TTAdManagerHolder;
 
 /**
@@ -44,6 +48,7 @@ public class MyApp extends MultiDexApplication {
 
 
     private static DaoSession daoSession;
+    public static int state;
 
     @Override
     public void onCreate() {
@@ -67,6 +72,8 @@ public class MyApp extends MultiDexApplication {
         daoSession = dm.newSession();
         QueryBuilder.LOG_SQL = true;
         QueryBuilder.LOG_VALUES = true;
+
+
     }
 
 
@@ -78,9 +85,11 @@ public class MyApp extends MultiDexApplication {
         RxTool.init(this);
 
         //友盟统计
-        UMGameAgent.setDebugMode(false);
-        UMGameAgent.init(this);
-        UMGameAgent.setPlayerLevel(1);
+//        UMGameAgent.setDebugMode(false);
+//        UMGameAgent.init(this);
+//        UMGameAgent.setPlayerLevel(1);
+        UMConfigure.setLogEnabled(true);
+
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
 
@@ -89,8 +98,14 @@ public class MyApp extends MultiDexApplication {
         //http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
         UMConfigure.setLogEnabled(false);
 
+
         PlatformConfig.setWeixin("wx622cbf19fcb00f29", "4aa67b15c55411749dddfbad0cd66798");
+//        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
+        PlatformConfig.setWXFileProvider("com.yc.ac.fileprovider");
+
         PlatformConfig.setQQZone("1108013607", "2mun88jc6IlVjy1A");
+        PlatformConfig.setQQFileProvider("com.yc.ac.fileprovider");
+
         //初始化友盟SDK
         UMShareAPI.get(this);//初始化sd
 
@@ -151,10 +166,13 @@ public class MyApp extends MultiDexApplication {
         //配置imageloader
         CoreConfig coreConfig = new CoreConfig.Builder(this, imageloader, theme)
                 .setFunctionConfig(functionConfig)
+                .setTakePhotoFolder(getExternalFilesDir(Environment.DIRECTORY_PICTURES))
                 .setPauseOnScrollListener(new GlidePauseOnScrollListener(false, true))
                 .build();
 
         GalleryFinal.init(coreConfig);
         //设置主题
     }
+
+
 }

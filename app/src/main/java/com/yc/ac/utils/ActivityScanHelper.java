@@ -6,12 +6,10 @@ import android.content.Intent;
 
 import com.google.zxing.Result;
 import com.vondear.rxtools.RxActivityTool;
-import com.vondear.rxtools.activity.ActivityScanerCode;
 import com.vondear.rxtools.activity.ActivityScanerCodeNew;
 import com.vondear.rxtools.interfaces.OnRxScanerListener;
 import com.yc.ac.index.ui.activity.ScanTintActivity;
 import com.yc.ac.index.ui.activity.SearchActivity;
-import com.yc.ac.index.ui.activity.SearchActivityNew;
 import com.yc.ac.index.ui.activity.SearchCodeActivity;
 
 /**
@@ -24,7 +22,7 @@ public class ActivityScanHelper {
         ActivityScanerCodeNew.setScanerListener(new OnRxScanerListener() {
             @Override
             public void onSuccess(String type, Result result) {
-                Intent intent1 = new Intent(context, SearchActivityNew.class);
+                Intent intent1 = new Intent(context, SearchActivity.class);
                 intent1.putExtra("code", result.getText());
                 context.startActivity(intent1);
                 RxActivityTool.finishAllActivity();

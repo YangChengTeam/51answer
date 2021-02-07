@@ -46,7 +46,6 @@ public class TTAdDispatchManager {
         } else if (adType == TTAdType.FULLSCREEN_VIDEO) {
             managerListener = new FullscreenVideoAdManager(activity, adId, orientation);
         }
-
         managerListener.showAD();
     }
 

@@ -1,13 +1,23 @@
 package com.yc.ac.index.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
@@ -20,6 +30,8 @@ import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
+import com.yc.ac.base.MyApp;
+import com.yc.ac.base.MyRelativeLayout;
 import com.yc.ac.base.StateView;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.index.contract.AnswerDetailContract;
@@ -30,7 +42,6 @@ import com.yc.ac.index.ui.fragment.AnswerTintFragment;
 import com.yc.ac.index.ui.fragment.DeleteTintFragment;
 import com.yc.ac.index.ui.fragment.ShareFragment;
 import com.yc.ac.setting.model.bean.BrowserInfo;
-import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.utils.RxDownloadManager;
 import com.yc.ac.utils.ToastUtils;
@@ -41,12 +52,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
-import rx.functions.Action1;
+import butterknife.ButterKnife;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
 import yc.com.base.FileUtils;
@@ -94,9 +108,14 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     TextView tvShare;
 
     @BindView(R.id.ll_container)
-    RelativeLayout llContainer;
+    MyRelativeLayout llContainer;
     @BindView(R.id.ll_common_container)
     LinearLayout llCommonContainer;
+    @BindView(R.id.fl_ad_container)
+    FrameLayout flAdContainer;
+
+    @BindView(R.id.iv_scale_icon)
+    ImageView ivScaleIcon;
     private BookInfo bookInfo;
 
 
@@ -107,6 +126,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     private String bookId;
 
     private boolean isNeedReadVideo = true;
+
 
     @Override
     public int getLayoutId() {
@@ -126,7 +146,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     public void init() {
         if (getIntent() != null) {
 
-//            bookInfo = getIntent().getParcelableExtra("bookInfo");
 
             String bookName = getIntent().getStringExtra("bookName");
             bookId = getIntent().getStringExtra("bookId");
@@ -142,7 +161,14 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
         getData(false);
         initListener();
+
+        if (MyApp.state == 1) {
+
+            TTAdDispatchManager.getManager().init(this, TTAdType.BANNER, flAdContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
+        }
+        timerTask = new MyTask();
     }
+
 
     private int browserPage = 1;//浏览的页数
 
@@ -186,19 +212,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         //            }
         RxView.clicks(rlDownload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-            if (judgeIsDownload()) {//已经下载
-                DeleteTintFragment deleteTintFragment = new DeleteTintFragment();
-                deleteTintFragment.show(getSupportFragmentManager(), "delete");
-                deleteTintFragment.setOnConfirmListener(() -> deleteBook());
-            } else {
-                if (bookInfo != null && bookInfo.getAccess() == 0) {
-                    ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
-                    return;
-                }
-                if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
-                    RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
-                }
-            }
+            TTAdDispatchManager.getManager().init(AnswerDetailActivity.this, TTAdType.REWARD_VIDEO, null, Config.toutiao_reward_id, 0, null, "高清解析", 1, UserInfoHelper.getUId(), TTAdConstant.VERTICAL, AnswerDetailActivity.this);
 
         });
 
@@ -223,6 +237,22 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     }
 
+    //下载
+    private void download() {
+        if (judgeIsDownload()) {//已经下载
+            DeleteTintFragment deleteTintFragment = new DeleteTintFragment();
+            deleteTintFragment.show(getSupportFragmentManager(), "delete");
+            deleteTintFragment.setOnConfirmListener(this::deleteBook);
+        } else {
+            if (bookInfo != null && bookInfo.getAccess() == 0) {
+                ToastUtils.showCenterToast(AnswerDetailActivity.this, "分享之后才能下载");
+                return;
+            }
+            if (downLoadUrlList != null && downLoadUrlList.size() > 0) {
+                RxDownloadManager.getInstance(AnswerDetailActivity.this).downLoad(downLoadUrlList, bookInfo.getBookId());
+            }
+        }
+    }
 
     private void getData(boolean isReload) {
 
@@ -261,8 +291,9 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         return newData;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initViewPager(List<String> answerList) {
-        tvDownLoad.setText(judgeIsDownload() ? "已下载" : "下载");
+//        tvDownLoad.setText(judgeIsDownload() ? "已下载" : "下载");
         tvSumPage.setText(String.valueOf(answerList.size()));
         AnswerDetailAdapter answerDetailAdapter = new AnswerDetailAdapter(this, answerList);
         mViewpager.setAdapter(answerDetailAdapter);
@@ -432,7 +463,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -483,6 +513,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     @Override
     public void loadSuccess() {
 
+//
     }
 
     @Override
@@ -503,6 +534,43 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     @Override
     public void onNativeExpressDismiss(TTNativeExpressAd view) {
 
+    }
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private Runnable timerTask;
+
+    private class MyTask implements Runnable {
+        @Override
+        public void run() {
+            showToast();
+            mHandler.postDelayed(this, 3000);
+        }
+    }
+
+    private void showToast() {
+        Toast toast = new Toast(this);
+        View view = View.inflate(this, R.layout.toast_center_layout, null);
+        TextView sMTv_text = view.findViewById(R.id.tv_text);
+        sMTv_text.setText("点击下载  解锁会员专属高清答案");
+        toast.setView(view);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    @Override
+    public void onRewardVideoComplete() {
+        mHandler.removeCallbacks(timerTask);
+        ivScaleIcon.setVisibility(View.VISIBLE);
+        llContainer.setIsInterceptTouchEvent(ivScaleIcon.getVisibility() == View.VISIBLE);
+        llContainer.setListener(() -> {
+            ivScaleIcon.setVisibility(View.GONE);
+            llContainer.setIsInterceptTouchEvent(false);
+        });
+    }
+
+    @Override
+    public void loadRewardVideoSuccess() {
+        mHandler.post(timerTask);
     }
 
 

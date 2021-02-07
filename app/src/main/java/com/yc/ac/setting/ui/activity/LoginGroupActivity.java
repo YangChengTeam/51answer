@@ -1,6 +1,7 @@
 package com.yc.ac.setting.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,9 +18,11 @@ import com.yc.ac.setting.contract.LoginContract;
 import com.yc.ac.setting.model.bean.UserDataInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.LoginPresenter;
-import com.yc.ac.setting.ui.fragment.LoginEditPasswordFragment;
-import com.yc.ac.setting.ui.fragment.LoginFragment;
-import com.yc.ac.setting.ui.fragment.LoginRegisterFragment;
+import com.yc.ac.setting.ui.fragment.ForgetPwdCodeFragment;
+import com.yc.ac.setting.ui.fragment.LoginCodeFragment;
+import com.yc.ac.setting.ui.fragment.LoginNewPwdFragment;
+import com.yc.ac.setting.ui.fragment.LoginPhoneFragment;
+import com.yc.ac.setting.ui.fragment.LoginPwdFragment;
 import com.yc.ac.utils.ToastUtils;
 
 import java.util.HashMap;
@@ -63,7 +66,17 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
     public static final String REGISTER = "register";
     public static final String FIND_PWD = "find_pwd";
 
-    public static final String LOGIN_PHONE="login_phone";
+    public static final String LOGIN_PHONE = "login_phone";
+
+    public static final String LOGIN_CODE = "login_code";
+
+    public static final String LOGIN_PWD = "login_pwd";
+
+    public static final String FORGET_PWD_CODE = "forget_pwd_code";
+
+    public static final String LOGIN_NEW_PWD = "login_new_pwd";
+
+//    public static final String
 
     @Override
     public int getLayoutId() {
@@ -75,37 +88,37 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
         mPresenter = new LoginPresenter(this, this);
         fragmentMap = new HashMap<>();
 
-        fragmentMap.put(LOGIN, new LoginFragment());
-        fragmentMap.put(REGISTER, new LoginRegisterFragment());
-        fragmentMap.put(FIND_PWD, new LoginEditPasswordFragment());
+
+        fragmentMap.put(LOGIN_PHONE, new LoginPhoneFragment());
+        fragmentMap.put(LOGIN_CODE, new LoginCodeFragment());
+        fragmentMap.put(LOGIN_PWD, new LoginPwdFragment());
+        fragmentMap.put(FORGET_PWD_CODE, new ForgetPwdCodeFragment());
+        fragmentMap.put(LOGIN_NEW_PWD, new LoginNewPwdFragment());
 
         initViews();
     }
 
     private void initViews() {
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.btn_back:
-                        onBackPressed();
-                        break;
-                    case R.id.btn_register:
-                        openBtnAction();
-                        break;
-                    //微信登录
-                    case R.id.re_weichat:
-                        login(SHARE_MEDIA.WEIXIN);
-                        break;
-                    //QQ登录
-                    case R.id.re_qq:
-                        login(SHARE_MEDIA.QQ);
-                        break;
-                    //微博登录
-                    case R.id.re_weibo:
-                        login(SHARE_MEDIA.SINA);
-                        break;
-                }
+        View.OnClickListener onClickListener = v -> {
+            switch (v.getId()) {
+                case R.id.btn_back:
+                    onBackPressed();
+                    break;
+                case R.id.btn_register:
+                    openBtnAction();
+                    break;
+                //微信登录
+                case R.id.re_weichat:
+                    login(SHARE_MEDIA.WEIXIN);
+                    break;
+                //QQ登录
+                case R.id.re_qq:
+                    login(SHARE_MEDIA.QQ);
+                    break;
+                //微博登录
+                case R.id.re_weibo:
+                    login(SHARE_MEDIA.SINA);
+                    break;
             }
         };
         btnBack.setOnClickListener(onClickListener);
@@ -113,9 +126,9 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
         reWeichat.setOnClickListener(onClickListener);
         reQq.setOnClickListener(onClickListener);
         reWeibo.setOnClickListener(onClickListener);
-        addReplaceFragment(LOGIN, "登录", "注册");//初始化默认登录界面
+        addReplaceFragment(LOGIN_PHONE, "登录", "注册");//初始化默认登录界面
         tvOtherLoginTips.setText("快捷登录");
-//        showOthreLoginView(true);
+        showOthreLoginView(true);
     }
 
     /**
@@ -137,19 +150,29 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
      * @param centerTitle 中间标题
      * @param rightTitle  右边小标题
      */
-    public void addReplaceFragment(String flag, String centerTitle, String rightTitle) {
+    public void addReplaceFragment(String flag, String centerTitle, String rightTitle, String... phone) {
         tvTitle.setText(centerTitle);
         btnRegister.setText(rightTitle);
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
 
-        for (Map.Entry<String, Fragment> entry : fragmentMap.entrySet()) {
-            Fragment fragment = entry.getValue();
-            if (fragment.isAdded()) {
-                fragmentTransaction.hide(fragment);
+//        for (Map.Entry<String, Fragment> entry : fragmentMap.entrySet()) {
+//            Fragment fragment = entry.getValue();
+//            if (fragment.isAdded()) {
+//                fragmentTransaction.hide(fragment);
+//            }
+//        }
+        Fragment fragment = fragmentMap.get(flag);
+        if (fragment instanceof LoginPwdFragment || (fragment instanceof LoginCodeFragment
+                || fragment instanceof ForgetPwdCodeFragment || fragment instanceof LoginNewPwdFragment) && (phone != null && phone.length > 0)) {
+            Bundle bundle = new Bundle();
+            bundle.putString("phone", phone[0]);
+            if (phone.length > 1) {
+                bundle.putString("code", phone[1]);
             }
+            fragment.setArguments(bundle);
         }
-        fragmentTransaction.add(R.id.frame_layout, fragmentMap.get(flag), centerTitle);
+        fragmentTransaction.replace(R.id.frame_layout, fragment, centerTitle);
         fragmentTransaction.addToBackStack(centerTitle);
         fragmentTransaction.commit();
     }
@@ -173,7 +196,6 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
      * @param userDataInfo
      */
     private void login(UserDataInfo userDataInfo) {
-
         mPresenter.snsLogin(userDataInfo);
     }
 
@@ -207,24 +229,9 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
 
 
     /**
-     * QQ、微信、微博 登录
-     *
-     * @param media
-     */
-    public void login(SHARE_MEDIA media) {
-        boolean isauth = UMShareAPI.get(LoginGroupActivity.this).isAuthorize(LoginGroupActivity.this, media);//判断当前APP有没有授权登录
-        if (isauth) {
-            UMShareAPI.get(LoginGroupActivity.this).getPlatformInfo(LoginGroupActivity.this, media, LoginAuthListener);//获取用户信息
-        } else {
-            UMShareAPI.get(LoginGroupActivity.this).doOauthVerify(LoginGroupActivity.this, media, LoginAuthListener);//用户授权登录
-        }
-    }
-
-
-    /**
      * QQ 微信 微博 登陆后回调
      */
-    UMAuthListener LoginAuthListener = new UMAuthListener() {
+    UMAuthListener loginAuthListener = new UMAuthListener() {
         @Override
         public void onStart(SHARE_MEDIA share_media) {
             showLoadingDialog("登录中，请稍后...");
@@ -311,6 +318,29 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
     };
 
 
+    /**
+     * QQ、微信、微博 登录
+     *
+     * @param media
+     */
+    public void login(SHARE_MEDIA media) {
+        boolean isauth = UMShareAPI.get(LoginGroupActivity.this).isAuthorize(LoginGroupActivity.this, media);//判断当前APP有没有授权登录
+        if (isauth) {
+            UMShareAPI.get(LoginGroupActivity.this).getPlatformInfo(LoginGroupActivity.this, media, loginAuthListener);//获取用户信息
+        } else {
+            UMShareAPI.get(LoginGroupActivity.this).doOauthVerify(LoginGroupActivity.this, media, loginAuthListener);//用户授权登录
+        }
+
+
+    }
+
+
+
+
+
+
+
+
     //======================================登录到服务器回调=========================================
 
 
@@ -339,7 +369,7 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
         }
 
         //栈顶存在两个
-        if (getSupportFragmentManager().getBackStackEntryCount() == 2 && !LoginGroupActivity.this.isFinishing()) {
+        if (getSupportFragmentManager().getBackStackEntryCount() >= 2 && !LoginGroupActivity.this.isFinishing()) {
             tvTitle.setText("登录");
             btnRegister.setText("注册");
             tvOtherLoginTips.setText("快捷登录");
@@ -372,5 +402,11 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
     @Override
     public void showGetCode() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
     }
 }

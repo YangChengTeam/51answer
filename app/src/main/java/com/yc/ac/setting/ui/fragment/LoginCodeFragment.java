@@ -11,7 +11,7 @@ import com.yc.ac.R;
 import com.yc.ac.setting.contract.LoginContract;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.LoginPresenter;
-import com.yc.ac.setting.ui.activity.LoginGroupActivityNew;
+import com.yc.ac.setting.ui.activity.LoginGroupActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +40,7 @@ public class LoginCodeFragment extends BaseFragment<LoginPresenter> implements L
 
 
     private String phone;
-    private LoginGroupActivityNew mLoginGroupActivity;
+    private LoginGroupActivity mLoginGroupActivity;
 
     @Override
     public int getLayoutId() {
@@ -51,7 +51,7 @@ public class LoginCodeFragment extends BaseFragment<LoginPresenter> implements L
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mLoginGroupActivity = (LoginGroupActivityNew) context;
+        mLoginGroupActivity = (LoginGroupActivity) context;
     }
 
     @Override

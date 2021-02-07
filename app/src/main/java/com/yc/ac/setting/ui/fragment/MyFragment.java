@@ -25,7 +25,6 @@ import com.vondear.rxtools.view.dialog.RxDialogEditSureCancel;
 import com.yc.ac.R;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.constant.SpConstant;
-
 import com.yc.ac.setting.contract.MyContract;
 import com.yc.ac.setting.model.bean.QbInfo;
 import com.yc.ac.setting.model.bean.ShareInfo;
@@ -39,6 +38,7 @@ import com.yc.ac.setting.ui.activity.PrivacyStatementActivity;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.activity.StatementActivity;
 import com.yc.ac.setting.ui.activity.UploadBookIntroduceActivity;
+import com.yc.ac.setting.ui.activity.UserPolicyActivity;
 import com.yc.ac.setting.ui.widget.BaseSettingView;
 import com.yc.ac.utils.ActivityUtils;
 import com.yc.ac.utils.QQUtils;
@@ -55,7 +55,6 @@ import java.util.concurrent.TimeUnit;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import butterknife.BindView;
-import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
 
@@ -113,6 +112,8 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     BaseSettingView baseSettingViewBrowser;
     @BindView(R.id.baseSettingView_privacy_statement)
     BaseSettingView baseSettingViewPrivacyStatement;
+    @BindView(R.id.baseSettingView_user_policy)
+    BaseSettingView baseSettingViewUserPolicy;
 
     private long startTime;
 
@@ -213,7 +214,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
 
             shareFragment.setIsShareMoney(true);
             ShareInfo shareInfo = ShareInfoHelper.getShareInfo();
-            shareInfo.setBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.share_pic));
+            shareInfo.setBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.share_pic));
             shareFragment.setShareInfo(shareInfo);
 
 
@@ -224,6 +225,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
 
         RxView.clicks(baseSettingViewBrowser).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), BrowserActivity.class)));
         RxView.clicks(baseSettingViewPrivacyStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), PrivacyStatementActivity.class)));
+        RxView.clicks(baseSettingViewUserPolicy).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), UserPolicyActivity.class)));
     }
 
 

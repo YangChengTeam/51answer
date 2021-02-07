@@ -108,7 +108,7 @@ public class SearchCodeActivity extends BaseActivity<SearchPresenter> implements
 
     private void search(String inputText) {
 
-        Intent intent = new Intent(SearchCodeActivity.this, SearchActivityNew.class);
+        Intent intent = new Intent(SearchCodeActivity.this, SearchActivity.class);
         intent.putExtra("code", inputText);
         startActivity(intent);
         finish();

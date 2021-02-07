@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yc.ac">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,9 +24,11 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:targetApi="q">
         <activity
             android:name=".index.ui.activity.SplashActivity"
             android:exported="true"
@@ -41,7 +44,7 @@
             android:name=".base.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -53,25 +56,17 @@
         <activity
             android:name=".setting.ui.activity.SettingActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
-        <activity
-            android:name=".setting.ui.activity.LoginGroupActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".index.ui.activity.SearchActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".index.ui.activity.SearchActivityNew"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.AnswerDetailActivity"
             android:exported="true"
             android:hardwareAccelerated="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -80,89 +75,90 @@
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="behind"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name=".setting.ui.activity.BindPhoneActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".base.WebActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="behind"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name=".index.ui.activity.ScanTintActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.StatementActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <activity
             android:name=".index.ui.activity.UploadBookActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.UploadAnswerActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <activity
             android:name=".index.ui.activity.PerfectBookInfoActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.PerfectBookDetailInfoActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.AnswerPreviewActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.UploadBookListActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.ForwardActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.SearchCodeActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.InvitationActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.EarningsDetailActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.InvitationFriendActicity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.UploadBookIntroduceActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
-            android:name=".setting.ui.activity.LoginGroupActivityNew"
+            android:name=".setting.ui.activity.LoginGroupActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.BrowserActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity android:name=".setting.ui.activity.PrivacyStatementActivity" />
+        <activity android:name=".setting.ui.activity.UserPolicyActivity" />
 
         <service
             android:name="com.baidu.location.f"
@@ -176,6 +172,23 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-    </application>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"
+                tools:replace="android:resource" />
+        </provider>
+
+    </application>
+    <!--        // 指定微信包名-->
+    <queries>
+        <package android:name="com.tencent.mm" />
+        <package android:name="com.tencent.mobileqq" />
+    </queries>
 </manifest>

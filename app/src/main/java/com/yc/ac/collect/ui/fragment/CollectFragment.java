@@ -23,6 +23,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.base.StateView;
 import com.yc.ac.collect.contract.CollectContract;
 import com.yc.ac.collect.presenter.CollectPresenter;
@@ -45,6 +46,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
+import yc.com.base.UIUtils;
 import yc.com.tencent_adv.AdvDispatchManager;
 import yc.com.tencent_adv.AdvType;
 import yc.com.toutiao_adv.OnAdvStateListener;
@@ -105,7 +107,8 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         initRefresh();
         getData(false);
 //        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, topContainer, null, Config.tencent_media_id, Config.tencent_top_banner_id, null);
-        TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, topContainer, Config.toutiao_banner2_id, 0, null, null, 0, null, 0, this);
+        if (MyApp.state == 1)
+            TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, topContainer, Config.toutiao_banner2_id, 0, null, null, 0, null, 0, this);
 
     }
 
@@ -303,6 +306,16 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
 
     @Override
     public void onNativeExpressDismiss(TTNativeExpressAd view) {
+
+    }
+
+    @Override
+    public void onRewardVideoComplete() {
+
+    }
+
+    @Override
+    public void loadRewardVideoSuccess() {
 
     }
 

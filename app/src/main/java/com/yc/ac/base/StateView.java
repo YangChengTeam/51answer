@@ -65,14 +65,13 @@ public class StateView extends BaseView {
         mContentView = contentView;
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ivLoading.getLayoutParams();
 
-        layoutParams.width = RxImageTool.dp2px(1080 / 3);
-        layoutParams.height = RxImageTool.dp2px(600 / 3);
+        layoutParams.width = RxImageTool.dp2px(1080f / 3);
+        layoutParams.height = RxImageTool.dp2px(600f / 3);
         ivLoading.setLayoutParams(layoutParams);
         setVisibility(VISIBLE);
         tvMess.setText(mess);
         ivLoading.setVisibility(VISIBLE);
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.override(RxImageTool.dp2px(1080 / 3), RxImageTool.dp2px(600 / 3));
+        RequestOptions requestOptions = RequestOptions.overrideOf(RxImageTool.dp2px(1080f / 3), RxImageTool.dp2px(600f / 3));
 
         Glide.with(this).load(R.mipmap.loading).apply(requestOptions).into(ivLoading);
 
@@ -91,8 +90,8 @@ public class StateView extends BaseView {
     public void showNoData(View contentView, CharSequence message, final OnClickListener listener) {
         mContentView = contentView;
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ivLoading.getLayoutParams();
-        layoutParams.width = RxImageTool.dp2px(344 / 3);
-        layoutParams.height = RxImageTool.dp2px(276 / 3);
+        layoutParams.width = RxImageTool.dp2px(344f / 3);
+        layoutParams.height = RxImageTool.dp2px(276f / 3);
         ivLoading.setLayoutParams(layoutParams);
         setVisibility(VISIBLE);
         tvMess.setText(message);
@@ -120,16 +119,15 @@ public class StateView extends BaseView {
     public void showNoNet(View contentView, String message, final OnClickListener onClickListener) {
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ivLoading.getLayoutParams();
-        layoutParams.width = RxImageTool.dp2px(256 / 3);
-        layoutParams.height = RxImageTool.dp2px(256 / 3);
+        layoutParams.width = RxImageTool.dp2px(256f / 3);
+        layoutParams.height = RxImageTool.dp2px(256f / 3);
         ivLoading.setLayoutParams(layoutParams);
         mContentView = contentView;
         setVisibility(View.VISIBLE);
         mContentView.setVisibility(View.GONE);
         tvMess.setText(message);
         ivLoading.setVisibility(GONE);
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.override(RxImageTool.dp2px(256 / 3), RxImageTool.dp2px(256 / 3));
+        RequestOptions requestOptions = RequestOptions.overrideOf(RxImageTool.dp2px(256f / 3), RxImageTool.dp2px(256f / 3));
 
 //        Glide.with(this).load(R.mipmap.base_no_wifi).apply(requestOptions).into(ivLoading);
 

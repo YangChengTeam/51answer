@@ -20,10 +20,16 @@ public class ToastUtils {
     private static Toast centerToast;
 
     public static void showCenterToast(Context context, String text) {
+
+
+        showCenterToast(context, text, Gravity.NO_GRAVITY);
+    }
+
+    public static void showCenterToast(Context context, String text, int gravity) {
         if (null == centerToast) {
             centerToast = new Toast(context);
             centerToast.setDuration(Toast.LENGTH_LONG);
-            centerToast.setGravity(Gravity.NO_GRAVITY, 0, 0);
+            centerToast.setGravity(gravity, 0, 0);
             View view = View.inflate(context, R.layout.toast_center_layout, null);
             sMTv_text = view.findViewById(R.id.tv_text);
             sMTv_text.setText(TextUtils.isEmpty(text) ? "" : text);
