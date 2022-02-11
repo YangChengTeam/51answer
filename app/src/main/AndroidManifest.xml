@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.CAMERA" />
+<!--    <uses-permission android:name="android.permission.CAMERA" />-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
@@ -25,6 +25,7 @@
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
+
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -159,6 +160,15 @@
             android:screenOrientation="behind" />
         <activity android:name=".setting.ui.activity.PrivacyStatementActivity" />
         <activity android:name=".setting.ui.activity.UserPolicyActivity" />
+        <activity android:name=".index.ui.activity.PayActivity" />
+        <activity android:name=".index.ui.activity.PaySuccessActivity" />
+        <activity android:name=".setting.ui.activity.RechargeRecordActivity" />
+        <activity android:name=".setting.ui.activity.NotificationActivity" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
@@ -183,6 +193,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths"
                 tools:replace="android:resource" />
+
         </provider>
 
     </application>

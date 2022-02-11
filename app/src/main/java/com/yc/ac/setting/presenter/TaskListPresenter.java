@@ -74,8 +74,8 @@ public class TaskListPresenter extends BasePresenter<TaskListEngine, TaskListCon
     }
 
 
-    public void comment(String user_id) {
-        Subscription subscription = EngineUtils.comment(mContext, user_id).subscribe(new Subscriber<ResultInfo<String>>() {
+    public void comment() {
+        Subscription subscription = EngineUtils.comment(mContext).subscribe(new Subscriber<ResultInfo<String>>() {
             @Override
             public void onCompleted() {
 

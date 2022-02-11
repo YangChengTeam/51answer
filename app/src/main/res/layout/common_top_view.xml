@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll_common_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/common_header_bg"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:padding="@dimen/distance_10">
+        android:padding="@dimen/distance_10"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!--<android.support.v4.widget.Space-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/distance_25" />-->
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/status_bar_height"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/t10dp"
+            android:paddingRight="@dimen/t10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space">
 
-            <RelativeLayout
-                android:id="@+id/iv_back"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/t10dp"
-                android:paddingRight="@dimen/t10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/back" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/common_tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/distance_5"
-                android:layout_toRightOf="@id/iv_back"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_16" />
-
-            <TextView
-                android:id="@+id/tv_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/base_ok"
-                android:textColor="@color/white"
-                android:visibility="gone" />
+                android:layout_centerInParent="true"
+                android:src="@mipmap/back" />
         </RelativeLayout>
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/common_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/distance_5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/iv_back"
+            app:layout_constraintRight_toLeftOf="@id/tv_ok"
+            app:layout_constraintTop_toBottomOf="@id/space" />
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/base_ok"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

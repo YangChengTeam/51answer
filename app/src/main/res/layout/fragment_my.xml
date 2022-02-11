@@ -42,68 +42,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/distance_10"
+
             android:orientation="vertical">
+<!--            android:layout_marginTop="@dimen/distance_10"-->
+
 
             <com.yc.ac.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_new_book"
+                android:id="@+id/baseSettingView_recharge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@mipmap/setting_upload"
-                app:show_icon_extra="true"
-                app:tag="上传"
-                app:title="@string/upload_book_get_coin" />
+                app:icon="@mipmap/setting_browse"
+                app:title="@string/recharge_record" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/gray_f5f5f5" />
-
-            <com.yc.ac.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_market"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:icon="@mipmap/setting_market"
-                app:show_icon_extra="true"
-                app:tag="好评"
-                app:title="@string/market_favorable_reception" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_f5f5f5" />
-
-            <com.yc.ac.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_share"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:icon="@mipmap/setting_share"
-                app:show_icon_extra="true"
-                app:tag="分享"
-                app:title="@string/share_get_coin" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_f5f5f5" />
-
-            <com.yc.ac.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_invite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:icon="@mipmap/setting_invite"
-                app:show_icon_extra="true"
-                app:tag="邀请"
-                app:title="@string/invite_get_coin" />
-
 
             <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_browser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/t10dp"
+
                 app:icon="@mipmap/setting_browse"
                 app:title="@string/browser_record" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_f5f5f5" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@mipmap/setting_browse"
+                app:title="@string/notification_message" />
 
             <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_service"
@@ -112,7 +86,7 @@
                 android:layout_marginTop="@dimen/t10dp"
                 app:icon="@mipmap/setting_qq"
                 app:show_extra="false"
-                app:title="联系QQ：1872935735" />
+                app:title="联系QQ：2645034912" />
 
             <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_privacy_statement"

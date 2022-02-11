@@ -3,6 +3,7 @@ package com.yc.ac.index.ui.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,10 +19,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.vondear.rxtools.RxKeyboardTool;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
-import com.yc.ac.base.Config;
-import com.yc.ac.base.MyApp;
 import com.yc.ac.base.WebActivity;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.IndexContract;
@@ -33,10 +33,7 @@ import com.yc.ac.index.presenter.IndexPresenter;
 import com.yc.ac.index.ui.activity.SearchActivity;
 import com.yc.ac.index.ui.activity.UploadBookListActivity;
 import com.yc.ac.index.ui.adapter.BannerImageLoader;
-import com.yc.ac.index.ui.adapter.IndexTagAdapter;
-import com.yc.ac.index.ui.adapter.IndexZtAdapter;
 import com.yc.ac.index.ui.widget.BaseSearchView;
-import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.fragment.ShareFragment;
 import com.yc.ac.utils.ShareInfoHelper;
@@ -49,15 +46,12 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
-import rx.functions.Action1;
 import yc.com.base.BaseFragment;
 import yc.com.base.StatusBarUtil;
 import yc.com.toutiao_adv.OnAdvStateListener;
 import yc.com.toutiao_adv.TTAdDispatchManager;
-import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/2/27 14:43.
@@ -72,38 +66,30 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
     View view;
     @BindView(R.id.baseSearchView)
     BaseSearchView baseSearchView;
-    @BindView(R.id.appBarLayout)
-    AppBarLayout appBarLayout;
-    @BindView(R.id.hot_recyclerView)
-    RecyclerView hotRecyclerView;
-    @BindView(R.id.ll_filter)
-    LinearLayout llFilter;
-
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.ll_upload)
-    LinearLayout llUpload;
-    @BindView(R.id.smartRefreshLayout)
-    SmartRefreshLayout smartRefreshLayout;
-
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.rl_container)
-    RelativeLayout rlContainer;
     @BindView(R.id.index_iv_logo)
     ImageView indexIvLogo;
     @BindView(R.id.iv_index_share)
     ImageView ivIndexShare;
     @BindView(R.id.iv_index_search)
     ImageView ivIndexSearch;
+    @BindView(R.id.rl_container)
+    RelativeLayout rlContainer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
+    @BindView(R.id.container)
+    FrameLayout container;
+    @BindView(R.id.ll_upload)
+    LinearLayout llUpload;
+    @BindView(R.id.smartRefreshLayout)
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.bottomContainer)
     FrameLayout bottomContainer;
 
 
-    private IndexTagAdapter tagAdapter;
-    private IndexZtAdapter indexZtAdapter;
-
+    private SearchFragment searchFragment;
 
     @Override
     public int getLayoutId() {
@@ -112,33 +98,35 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
 
     @Override
     public void init() {
-//        setStatusBar();
-//        StatusBarUtil.setStatusTextColor1(true, getActivity());
+
         mPresenter = new IndexPresenter(getActivity(), this);
 
-        if (!RxSPTool.getBoolean(getActivity(), SpConstant.INDEX_DIALOG)) {
-            IndexDialogFragment indexDialogFragment = new IndexDialogFragment();
-            indexDialogFragment.show(getChildFragmentManager(), "");
-        }
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-//        hotItemAdapter = new IndexBookAdapter(null);
-        indexZtAdapter = new IndexZtAdapter(null);
-        recyclerView.setAdapter(indexZtAdapter);
 
-        recyclerView.addItemDecoration(new MyDecoration(10, 15));
 
-        hotRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        tagAdapter = new IndexTagAdapter(null);
-        hotRecyclerView.setAdapter(tagAdapter);
-
-        hotRecyclerView.addItemDecoration(new MyDecoration(10, 15));
         banner.setFocusable(false);
         initRefresh();
         initListener();
-//        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, bottomContainer, null, Config.tencent_media_id, Config.tencent_bottom_banner_id, null);
-        if (MyApp.state == 1) {
-            TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, bottomContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
-        }
+        searchFragment = new SearchFragment();
+
+        replaceFragment();
+
+//        if (MyApp.state == 1) {
+//            TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, bottomContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
+//        }
+    }
+
+
+    public void replaceFragment() {
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("showBottom", false);
+        searchFragment.setArguments(bundle);
+
+        ft.add(R.id.container, searchFragment);
+        ft.commit();
+
     }
 
 
@@ -195,8 +183,9 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
             }
         });
 
+        baseSearchView.setOnClickListener(this::search);
 
-        RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivity.class)));
+//        RxView.clicks(baseSearchView).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivity.class)));
         banner.setOnBannerListener(position -> {
             SlideInfo slideInfo = mPresenter.getSlideInfo(position);
             if (slideInfo != null && !TextUtils.isEmpty(slideInfo.getLink().trim())) {
@@ -206,68 +195,39 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
             }
         });
 
-        RxView.clicks(llFilter).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 
-            Intent intent = new Intent(getActivity(), SearchActivity.class);
-            startActivity(intent);
-        });
-
-
-        indexZtAdapter.setOnItemClickListener((adapter, view, position) -> {
-
-            TagInfo tagInfo = (TagInfo) adapter.getItem(position);
-            if (tagInfo != null) {
-                WebActivity.startActivity(getActivity(), tagInfo.getZtpath(), tagInfo.getZtname());
-
-//                    AnswerDetailActivity.startActivity(getActivity(), bookInfo.getName(), bookInfo.getBookId());
-            }
-
-        });
-
-        tagAdapter.setOnItemClickListener((adapter, view, position) -> {
-            TagInfo tagInfo = (TagInfo) adapter.getItem(position);
-            if (tagInfo != null) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                intent.putExtra("name", tagInfo.getTitle());
+        RxView.clicks(llUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                Intent intent = new Intent(getActivity(), UploadBookListActivity.class);
                 startActivity(intent);
             }
         });
-
-        RxView.clicks(llUpload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    Intent intent = new Intent(getActivity(), UploadBookListActivity.class);
-                    startActivity(intent);
-                }
+        RxView.clicks(indexIvLogo).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            if (!UserInfoHelper.isGoToLogin(getActivity())) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
             }
         });
-        RxView.clicks(indexIvLogo).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                if (!UserInfoHelper.isGoToLogin(getActivity())) {
-                    Intent intent = new Intent(getActivity(), SettingActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-        RxView.clicks(ivIndexSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                startActivity(new Intent(getActivity(), SearchActivity.class));
-            }
-        });
-        RxView.clicks(ivIndexShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                com.yc.ac.setting.ui.fragment.ShareFragment shareFragment = new ShareFragment();
-                shareFragment.setIsShareMoney(true);
-                shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
-                shareFragment.show(getActivity().getSupportFragmentManager(), "");
-            }
+        RxView.clicks(ivIndexSearch).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), SearchActivity.class)));
+        RxView.clicks(ivIndexShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+            ShareFragment shareFragment = new ShareFragment();
+            shareFragment.setIsShareMoney(true);
+            shareFragment.setShareInfo(ShareInfoHelper.getShareInfo());
+            shareFragment.show(getActivity().getSupportFragmentManager(), "");
         });
 
     }
+
+    private void search(String inputText) {
+//        etSearch.dismissDropDown();
+
+        RxKeyboardTool.hideSoftInput(getActivity());
+        if (searchFragment != null) {
+            searchFragment.setName(inputText);
+        }
+
+    }
+
 
     /**
      * 根据百分比改变颜色透明度
@@ -292,7 +252,9 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
 
     @Override
     public void showNoData() {
-
+        if (smartRefreshLayout != null) {
+            smartRefreshLayout.finishRefresh();
+        }
     }
 
     @Override
@@ -333,7 +295,7 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
 
     @Override
     public void showTagInfos(List<TagInfo> data) {
-        tagAdapter.setNewData(data);
+
         if (smartRefreshLayout != null) {
             smartRefreshLayout.finishRefresh();
         }
@@ -344,7 +306,7 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
         if (list != null && list.size() > 4) {
             list = list.subList(0, 4);
         }
-        indexZtAdapter.setNewData(list);
+
         if (smartRefreshLayout != null) {
             smartRefreshLayout.finishRefresh();
         }

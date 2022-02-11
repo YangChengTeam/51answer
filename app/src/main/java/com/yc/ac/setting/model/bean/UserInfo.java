@@ -1,5 +1,7 @@
 package com.yc.ac.setting.model.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by wanglin  on 2018/3/7 15;01.
  */
@@ -11,7 +13,8 @@ public class UserInfo {
     private String nick_name;// 昵称
     private String mobile; //手机号
     private String face; //头像
-    private int vip; //vip等级，0; 不是vip，1; vip
+    @JSONField(name = "is_pay_vip")
+    private int vip; //vip等级，0; 不是vip，1; vip    //是否是付费会员 1是 0否
     private String vip_end_time;//vip到期时间，时间戳（秒）
 
     private boolean isLogin;

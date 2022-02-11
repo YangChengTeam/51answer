@@ -65,7 +65,8 @@
                     android:id="@+id/rl_download"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_downLoad"
@@ -150,8 +151,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_centerInParent="true"
-            android:visibility="gone"
-            android:src="@mipmap/scale_guesture_icon" />
+            android:src="@mipmap/scale_guesture_icon"
+            android:visibility="gone" />
 
     </com.yc.ac.base.MyRelativeLayout>
 

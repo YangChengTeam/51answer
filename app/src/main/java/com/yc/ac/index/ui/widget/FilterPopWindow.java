@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.tencent.mmkv.MMKV;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.constant.SpConstant;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import yc.com.base.BasePopwindow;
 import yc.com.base.CommonInfoHelper;
@@ -56,56 +59,99 @@ public class FilterPopWindow extends BasePopwindow {
         setOutsideTouchable(true);
 
         subjectRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
-        CommonInfoHelper.getO(mContext, SpConstant.INDEX_VERSION, new TypeReference<VersionInfo>() {
-        }.getType(), new CommonInfoHelper.onParseListener<VersionInfo>() {
-
-
-            @Override
-            public void onParse(VersionInfo versionInfo) {
-                List<VersionDetailInfo> subjectList = null;
-                if (TextUtils.equals(mContext.getString(R.string.grade), mFlag)) {
-                    subjectList = createNewList(versionInfo.getGrade());
-                    simple_flag = "grade";
-                } else if (TextUtils.equals(mContext.getString(R.string.subject), mFlag)) {
-                    subjectList = createNewList(versionInfo.getSubject());
-                    simple_flag = "subject";
-                } else if (TextUtils.equals(mContext.getString(R.string.part), mFlag)) {
-                    subjectList = createNewList(versionInfo.getPart_type());
-                    simple_flag = "part";
-                } else if (TextUtils.equals(mContext.getString(R.string.version), mFlag)) {
-                    subjectList = createNewList(versionInfo.getVersion());
-                    simple_flag = "version";
-                }
-
-                if (subjectList != null)
-                    subjectDetailInfo = subjectList.get(0);
-
-                subjectFilterItemAdapter = new FilterItemDetailAdapter(subjectList, simple_flag);
-
-                subjectRecyclerView.setAdapter(subjectFilterItemAdapter);
-
-                subjectRecyclerView.addItemDecoration(new MyDecoration(10));
-                subjectFilterItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        subjectFilterItemAdapter.onClick(position);
-                        subjectDetailInfo = subjectFilterItemAdapter.getItem(position);
-                        RxSPTool.putString(mContext, simple_flag, subjectDetailInfo.getName());
-                        if (listener != null) {
-                            listener.onPopClick(subjectDetailInfo.getName());
-                        }
-
+        subjectRecyclerView.post(() -> {
+            String result = MMKV.defaultMMKV().getString(SpConstant.INDEX_VERSION, "");
+            if (!TextUtils.isEmpty(result)) {
+                VersionInfo versionInfo = JSON.parseObject(result, VersionInfo.class);
+                if (versionInfo != null) {
+                    List<VersionDetailInfo> subjectList = null;
+                    if (TextUtils.equals(mContext.getString(R.string.grade), mFlag)) {
+                        subjectList = createNewList(versionInfo.getGrade());
+                        simple_flag = "grade";
+                    } else if (TextUtils.equals(mContext.getString(R.string.subject), mFlag)) {
+                        subjectList = createNewList(versionInfo.getSubject());
+                        simple_flag = "subject";
+                    } else if (TextUtils.equals(mContext.getString(R.string.part), mFlag)) {
+                        subjectList = createNewList(versionInfo.getPart_type());
+                        simple_flag = "part";
+                    } else if (TextUtils.equals(mContext.getString(R.string.version), mFlag)) {
+                        subjectList = createNewList(versionInfo.getVersion());
+                        simple_flag = "version";
                     }
-                });
-            }
 
-            @Override
-            public void onFail(String json) {
+                    if (subjectList != null)
+                        subjectDetailInfo = subjectList.get(0);
 
+                    subjectFilterItemAdapter = new FilterItemDetailAdapter(subjectList, simple_flag);
+
+                    subjectRecyclerView.setAdapter(subjectFilterItemAdapter);
+
+                    subjectRecyclerView.addItemDecoration(new MyDecoration(10));
+                    subjectFilterItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            subjectFilterItemAdapter.onClick(position);
+                            subjectDetailInfo = subjectFilterItemAdapter.getItem(position);
+                            RxSPTool.putString(mContext, simple_flag, subjectDetailInfo.getName());
+                            if (listener != null) {
+                                listener.onPopClick(subjectDetailInfo.getName());
+                            }
+
+                        }
+                    });
+                }
             }
         });
 
 
+//        CommonInfoHelper.getO(mContext, SpConstant.INDEX_VERSION, new TypeReference<VersionInfo>() {
+//        }.getType(), new CommonInfoHelper.onParseListener<VersionInfo>() {
+//
+//
+//            @Override
+//            public void onParse(VersionInfo versionInfo) {
+//                List<VersionDetailInfo> subjectList = null;
+//                if (TextUtils.equals(mContext.getString(R.string.grade), mFlag)) {
+//                    subjectList = createNewList(versionInfo.getGrade());
+//                    simple_flag = "grade";
+//                } else if (TextUtils.equals(mContext.getString(R.string.subject), mFlag)) {
+//                    subjectList = createNewList(versionInfo.getSubject());
+//                    simple_flag = "subject";
+//                } else if (TextUtils.equals(mContext.getString(R.string.part), mFlag)) {
+//                    subjectList = createNewList(versionInfo.getPart_type());
+//                    simple_flag = "part";
+//                } else if (TextUtils.equals(mContext.getString(R.string.version), mFlag)) {
+//                    subjectList = createNewList(versionInfo.getVersion());
+//                    simple_flag = "version";
+//                }
+//
+//                if (subjectList != null)
+//                    subjectDetailInfo = subjectList.get(0);
+//
+//                subjectFilterItemAdapter = new FilterItemDetailAdapter(subjectList, simple_flag);
+//
+//                subjectRecyclerView.setAdapter(subjectFilterItemAdapter);
+//
+//                subjectRecyclerView.addItemDecoration(new MyDecoration(10));
+//                subjectFilterItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                        subjectFilterItemAdapter.onClick(position);
+//                        subjectDetailInfo = subjectFilterItemAdapter.getItem(position);
+//                        RxSPTool.putString(mContext, simple_flag, subjectDetailInfo.getName());
+//                        if (listener != null) {
+//                            listener.onPopClick(subjectDetailInfo.getName());
+//                        }
+//
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onFail(String json) {
+//
+//            }
+//        });
     }
 
     @Override

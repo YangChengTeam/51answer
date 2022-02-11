@@ -2,6 +2,7 @@ package com.yc.ac.base;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.yc.ac.utils.UserInfoHelper;
 
@@ -23,8 +24,9 @@ public class BaseEngine {
 
     public Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
-        if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
+        if (!TextUtils.isEmpty(UserInfoHelper.getToken())) {
             headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());
+        }
         return headers;
     }
 }

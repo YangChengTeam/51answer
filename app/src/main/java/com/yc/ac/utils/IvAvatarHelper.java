@@ -15,6 +15,7 @@ import com.yc.ac.R;
 import com.yc.ac.constant.BusAction;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -34,15 +35,28 @@ public class IvAvatarHelper {
         switch (requestCode) {
             case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                 if (resultCode == RESULT_OK) {
-                    RxPhotoTool.cropImage(activity, data.getData(), RxPhotoTool.GET_IMAGE_FROM_PHONE);// 裁剪图片
-//                    initUCrop(activity, data.getData());
+                    try {
+                        if (Build.VERSION.SDK_INT >= 29) {
+                            RxBus.get().post(BusAction.GET_PICTURE, data.getData());
+                        } else {
+                            RxPhotoTool.cropImage(activity, data.getData(), RxPhotoTool.GET_IMAGE_FROM_PHONE);// 裁剪图片
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+//
+                    //                    initUCrop(activity, data.getData());
                 }
 
                 break;
             case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                 if (resultCode == RESULT_OK) {
 
-                    RxPhotoTool.cropImage(activity, RxPhotoTool.imageUriFromCamera, RxPhotoTool.GET_IMAGE_BY_CAMERA);// 裁剪图片
+                    try {
+                        RxPhotoTool.cropImage(activity, RxPhotoTool.imageUriFromCamera, RxPhotoTool.GET_IMAGE_BY_CAMERA);// 裁剪图片
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
 //                    initUCrop(activity, RxPhotoTool.imageUriFromCamera);
@@ -72,7 +86,7 @@ public class IvAvatarHelper {
         String imageName = timeFormatter.format(new Date(time));
 
 
-        Uri destinationUri= Uri.fromFile(new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageName + ".png"));
+        Uri destinationUri = Uri.fromFile(new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageName + ".png"));
 //        Uri destinationUri = getUriForFile(activity, new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageName + ".png"));
 
         UCrop.Options options = new UCrop.Options();

@@ -9,12 +9,15 @@ import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.tencent.bugly.Bugly;
+import com.tencent.mmkv.MMKV;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 import com.yc.ac.R;
+import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.listener.GlidePauseOnScrollListener;
 import com.yc.ac.index.model.bean.AdStateInfo;
 import com.yc.ac.index.model.bean.DaoMaster;
@@ -29,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.multidex.MultiDexApplication;
+
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -53,12 +57,9 @@ public class MyApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Observable.just("").subscribeOn(Schedulers.io()).subscribe(new Action1<String>() {
-            @Override
-            public void call(String s) {
-                init();
-                initGalleryFinal();
-            }
+        Observable.just("").subscribeOn(Schedulers.io()).subscribe(s -> {
+            init();
+            initGalleryFinal();
         });
 
         Bugly.init(getApplicationContext(), "af5788360b", false);
@@ -70,9 +71,9 @@ public class MyApp extends MultiDexApplication {
         DaoMaster dm = new DaoMaster(db);
 
         daoSession = dm.newSession();
-        QueryBuilder.LOG_SQL = true;
-        QueryBuilder.LOG_VALUES = true;
-
+//        QueryBuilder.LOG_SQL = true;
+//        QueryBuilder.LOG_VALUES = true;
+        MMKV.initialize(this);
 
     }
 
@@ -92,8 +93,10 @@ public class MyApp extends MultiDexApplication {
 
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
-
-        UMConfigure.init(this, "5c3ea2e5b465f59e50001540", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        UMConfigure.preInit(this, "5c3ea2e5b465f59e50001540", "umeng");
+        if (RxSPTool.getBoolean(this, SpConstant.INDEX_DIALOG)) {
+            UMConfigure.init(this, "5c3ea2e5b465f59e50001540", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        }
         //开启debug模式，方便定位错误，具体错误检查方式可以查看
         //http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
         UMConfigure.setLogEnabled(false);

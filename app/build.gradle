@@ -11,8 +11,8 @@ android {
         applicationId "com.yc.ac"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 10
-        versionName "1.6.0"
+        versionCode 15
+        versionName "2.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -36,7 +36,7 @@ android {
                 arguments = ['objectbox.debug': 'true']
             }
         }
-        manifestPlaceholders = [qqappid: "1106261461"]
+        manifestPlaceholders = [qqappid: "1108013607"]
     }
     //忽略错误警告
     lintOptions {
@@ -100,6 +100,7 @@ android {
         Anzhi {//安智应用市场
         }
 
+
     }
     //注意我注释掉的，可以去掉注释，那样的话，下面这句就可以不用了
     productFlavors.all {
@@ -130,9 +131,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 //    implementation project(':share')
-//    implementation 'com.jakewharton:butterknife:10.2.0'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-//    kapt 'com.jakewharton:butterknife-compiler:10.2.0'
+
 
     annotationProcessor 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
@@ -174,7 +173,9 @@ dependencies {
 //    annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
 //    debugCompile "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
 //    releaseCompile "io.objectbox:objectbox-android:$objectboxVersion"
+    implementation(name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
 
+    implementation 'com.tencent:mmkv-static:1.1.2'
 }
 repositories {
     mavenCentral()

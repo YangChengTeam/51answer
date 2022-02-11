@@ -3,6 +3,7 @@ package com.yc.ac.index.ui.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.kk.utils.LogUtil;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxImageTool;
@@ -32,9 +34,11 @@ import com.yc.ac.utils.EngineUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
+
 import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -86,9 +90,9 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
         rlSelectGrade.setVisibility(View.GONE);
 //        iv.setVisibility(View.VISIBLE);
-        getAdState();
+//        getAdState();
+        switchActivity(Time);
 //        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Config.tencent_media_id, Config.tencent_splash_id, this);
-
 
 
     }
@@ -103,6 +107,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
                     @Override
                     public void onError(Throwable e) {
+                        LogUtil.msg("onError: " + e.getMessage());
                         switchActivity(Time);
                     }
 
@@ -122,7 +127,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
     private void switchActivity(long delayTime) {
         if (mHandler == null) {
-            mHandler = new Handler();
+            mHandler = new Handler(Objects.requireNonNull(Looper.myLooper()));
         }
         mHandler.postDelayed(() -> {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));

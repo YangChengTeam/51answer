@@ -37,9 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     api 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-    //    compile 'com.github.vondear:RxTools:v1.7.6.4'
-//    api 'com.umeng.analytics:analytics:6.1.4'
-    //    compile project(':securityhttp')
+
     api 'com.kk:securityhttp:1.1.6'
     api project(':rxbus')
 

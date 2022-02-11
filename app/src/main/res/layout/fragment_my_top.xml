@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
+    <!--    250dp-->
 
     <FrameLayout
         android:id="@+id/toolbarWarpper"
@@ -43,7 +44,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/get_qq"
+                        android:text=""
                         android:textColor="@color/white" />
 
                     <TextView
@@ -71,7 +72,6 @@
                         android:id="@+id/tv_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_ivatar"
                         android:layout_gravity="center_horizontal"
                         android:textColor="#ffffff"
                         android:textSize="16sp" />
@@ -80,7 +80,6 @@
                         android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_nickname"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:drawableLeft="@mipmap/small_phone"
@@ -153,32 +152,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom">
-
-        <TextView
-            android:id="@+id/tv_qb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0.00"
-            android:textColor="@color/black_333"
-            android:textSize="@dimen/t24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_10"
-            android:text="@string/look_detail"
-            android:textColor="@color/red_f14343" />
-    </RelativeLayout>
 
 
 </LinearLayout>

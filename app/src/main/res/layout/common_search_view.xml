@@ -28,15 +28,15 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/distance_5"
-            android:layout_toEndOf="@id/iv_search"
             android:layout_toStartOf="@id/iv_scan"
+            android:layout_toEndOf="@id/iv_search"
             android:background="@null"
+            android:ellipsize="end"
             android:hint="@string/input_book_name"
-            android:textCursorDrawable="@drawable/et_cursor_bg"
+            android:singleLine="true"
             android:textColor="@color/gray_aaa"
             android:textColorHint="@color/gray_aaa"
-            android:singleLine="true"
-            android:ellipsize="end"
+            android:textCursorDrawable="@drawable/et_cursor_bg"
             android:textSize="@dimen/text_14" />
 
 
@@ -46,7 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/scan_black" />
+            android:src="@mipmap/scan_black"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <TextView

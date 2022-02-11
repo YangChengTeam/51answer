@@ -21,6 +21,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
 import com.yc.ac.base.MyApp;
@@ -28,12 +29,14 @@ import com.yc.ac.base.StateView;
 import com.yc.ac.collect.contract.CollectContract;
 import com.yc.ac.collect.presenter.CollectPresenter;
 import com.yc.ac.constant.BusAction;
+import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.BookInfoWrapper;
 import com.yc.ac.index.ui.activity.AnswerDetailActivity;
 import com.yc.ac.index.ui.adapter.IndexBookAdapter;
 import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.model.bean.UserInfo;
+import com.yc.ac.utils.SpanUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.util.List;
@@ -43,6 +46,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
@@ -107,7 +111,7 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         initRefresh();
         getData(false);
 //        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, topContainer, null, Config.tencent_media_id, Config.tencent_top_banner_id, null);
-        if (MyApp.state == 1)
+        if (MyApp.state == 1 && RxSPTool.getBoolean(requireActivity(), SpConstant.INDEX_DIALOG))
             TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, topContainer, Config.toutiao_banner2_id, 0, null, null, 0, null, 0, this);
 
     }

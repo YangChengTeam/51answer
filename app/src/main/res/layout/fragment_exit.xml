@@ -23,8 +23,9 @@
             android:id="@+id/tv_tint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/t50dp"
+            android:layout_marginStart="@dimen/t50dp"
             android:layout_marginTop="@dimen/distance_20"
+            android:layout_marginEnd="@dimen/t50dp"
             android:text="是否退出?"
             android:textColor="@color/black_333" />
 

@@ -1,9 +1,10 @@
 package com.yc.ac.index.ui.adapter;
 
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -17,8 +18,6 @@ import com.yc.ac.utils.SubjectHelper;
 
 import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.Nullable;
 
 /**
  * Created by wanglin  on 2018/3/10 10:56.
@@ -75,6 +74,7 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
                         .setText(R.id.tv_part, item.getPart_type()).setText(R.id.tv_version, item.getVersion()).addOnClickListener(R.id.tv_collect);
                 helper.setBackgroundRes(R.id.tv_collect, item.getFavorite() == 1 ? R.drawable.book_collect_gray_bg : R.drawable.book_collect_red_bg);
                 helper.setText(R.id.tv_collect, item.getFavorite() == 1 ? "已收藏" : "收藏");
+                helper.setVisible(R.id.iv_vip, item.getIsVip() == 1);
 
                 Glide.with(mContext).load(item.getCover_img()).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
                         .skipMemoryCache(true).centerCrop().error(R.mipmap.small_placeholder).dontAnimate()).thumbnail(0.1f).into((ImageView) helper.getView(R.id.iv_book));

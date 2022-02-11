@@ -21,5 +21,9 @@ public class BusAction {
 
     public static final String SHARE_MONEY_SUCCESS = "share_money_success";
 
-    public static final String LOGIN_CODE="login_code";
+    public static final String LOGIN_CODE = "login_code";
+
+    public static final String WX_PAY_SUCCESS = "wx_pay_success";
+
+    public static final String PAY_SUCCESS="pay_success";
 }

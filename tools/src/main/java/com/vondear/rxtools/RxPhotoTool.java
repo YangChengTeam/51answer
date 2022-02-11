@@ -20,6 +20,7 @@ import android.util.Log;
 import com.vondear.rxtools.view.RxToast;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import static android.os.Environment.DIRECTORY_PICTURES;
 import static com.vondear.rxtools.RxFileTool.getDataColumn;
 import static com.vondear.rxtools.RxFileTool.isDownloadsDocument;
 import static com.vondear.rxtools.RxFileTool.isExternalStorageDocument;
@@ -89,7 +91,7 @@ public class RxPhotoTool {
         fragment.startActivityForResult(intent, GET_IMAGE_FROM_PHONE);
     }
 
-    public static void cropImage(Activity activity, Uri srcUri, int type) {
+    public static void cropImage(Activity activity, Uri srcUri, int type) throws IOException {
 
 
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -129,10 +131,30 @@ public class RxPhotoTool {
 
             String cropTempName;
             if (status.equals(Environment.MEDIA_MOUNTED)) {// 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
-                cropTempName = Environment.getExternalStorageDirectory().getPath()
-                        + "/" + System.currentTimeMillis() + "_crop_temp.jpg";
+                if (Build.VERSION.SDK_INT >= 29) {
+
+//                    Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES)
+                    File dir = new File(activity.getExternalFilesDir(null).getPath());
+                    if (!dir.exists()) {
+                        dir.mkdir();
+                    }
+                    File file = new File(dir, System.currentTimeMillis() + "_crop_temp.jpg");
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+//
+//                    File cropPhoto = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES), File.separator + System.currentTimeMillis() + "_crop_temp.jpg");
+                    cropTempName = file.getAbsolutePath();
+
+                } else {
+                    cropTempName = Environment.getExternalStorageDirectory().getPath()
+                            + "/" + System.currentTimeMillis() + "_crop_temp.jpg";
+                }
+
             } else {
-                cropTempName = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() +
+//                activity.getExternalFilesDir(null).getPath()
+                cropTempName = activity.getExternalFilesDir(DIRECTORY_PICTURES).getPath() +
                         File.separator + System.currentTimeMillis() + "_crop_temp.jpg";
             }
             cropImageUri = Uri.fromFile(new File(cropTempName));

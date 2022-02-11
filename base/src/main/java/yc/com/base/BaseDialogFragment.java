@@ -15,6 +15,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.vondear.rxtools.RxDeviceTool;
 import com.vondear.rxtools.RxLogTool;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import butterknife.ButterKnife;
@@ -32,7 +33,7 @@ public abstract class BaseDialogFragment<P extends BasePresenter> extends Dialog
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         RxBus.get().register(this);
         Window window = getDialog().getWindow();
 

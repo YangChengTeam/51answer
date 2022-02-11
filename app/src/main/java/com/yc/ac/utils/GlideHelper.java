@@ -17,7 +17,7 @@ public class GlideHelper {
 
     public static void loadImage(Context context, String path, ImageView imageView, int placeHolder, boolean isCenterCrop) {
         RequestOptions options = new RequestOptions();
-        options.placeholder(placeHolder).error(placeHolder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(true);
+        options.placeholder(placeHolder).error(placeHolder).diskCacheStrategy(DiskCacheStrategy.DATA).skipMemoryCache(false);
         if (isCenterCrop) {
             options.centerCrop();
         }

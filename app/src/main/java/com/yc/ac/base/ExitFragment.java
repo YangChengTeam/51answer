@@ -1,8 +1,6 @@
 package com.yc.ac.base;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -12,8 +10,6 @@ import com.yc.ac.R;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import rx.functions.Action1;
 import yc.com.base.BaseDialogFragment;
 
@@ -28,6 +24,7 @@ public class ExitFragment extends BaseDialogFragment {
     TextView tvCancel;
     @BindView(R.id.tv_tint)
     TextView tvTint;
+    private String mTint;
 
 
     @Override
@@ -37,7 +34,10 @@ public class ExitFragment extends BaseDialogFragment {
 
     @Override
     public void init() {
-        tvTint.setText(String.format(getString(R.string.is_exit), getString(R.string.app_name)));
+        if (TextUtils.isEmpty(mTint)) {
+            mTint = String.format(getString(R.string.is_exit), getString(R.string.app_name));
+        }
+        tvTint.setText(mTint);
         RxView.clicks(tvConfirm).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -55,6 +55,10 @@ public class ExitFragment extends BaseDialogFragment {
         });
     }
 
+
+    public void setTintContent(String tint) {
+        this.mTint = tint;
+    }
 
     @Override
     protected float getWidth() {

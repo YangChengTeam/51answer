@@ -30,6 +30,7 @@ import com.yc.ac.index.ui.activity.AnswerDetailActivity;
 import com.yc.ac.index.ui.activity.UploadBookActivity;
 import com.yc.ac.index.ui.adapter.SearchResultItemAdapter;
 import com.yc.ac.index.ui.widget.FilterPopWindow;
+import com.yc.ac.pay.PaySuccessInfo;
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
@@ -162,16 +164,16 @@ public class SearchFragment extends BaseFragment<BookConditionPresenter> impleme
         List<Integer> positions = new ArrayList<>();
         positions.add(FIRST_AD_POSITION);
         positions.add(SECOND_AD_POSITION);
-        if (MyApp.state == 1)
+        if (MyApp.state == 1 && RxSPTool.getBoolean(requireActivity(), SpConstant.INDEX_DIALOG))
             TTAdDispatchManager.getManager().init(getActivity(), TTAdType.NATIVE_EXPRESS, null, Config.toutiao_native_id, AD_COUNT, positions, null, 0, null, 0, this);
 
     }
 
     private void initView() {
-        grade = RxSPTool.getString(getActivity(), SpConstant.SELECT_GRADE);
-        subject = RxSPTool.getString(getActivity(), SpConstant.SELECT_SUBJECT);
-        part = RxSPTool.getString(getActivity(), SpConstant.SELECT_PART);
-        version = RxSPTool.getString(getActivity(), SpConstant.SELECT_VERSION);
+        grade = RxSPTool.getString(requireActivity(), SpConstant.SELECT_GRADE);
+        subject = RxSPTool.getString(requireActivity(), SpConstant.SELECT_SUBJECT);
+        part = RxSPTool.getString(requireActivity(), SpConstant.SELECT_PART);
+        version = RxSPTool.getString(requireActivity(), SpConstant.SELECT_VERSION);
 
         if (!TextUtils.isEmpty(grade)) tvGrade.setText(grade);
         if (!TextUtils.isEmpty(subject)) tvSubject.setText(subject);
@@ -234,6 +236,8 @@ public class SearchFragment extends BaseFragment<BookConditionPresenter> impleme
 
     }
 
+
+
     private void showPopWindow(String name, final ImageView iv, final TextView tv) {
         final FilterPopWindow popWindow = new FilterPopWindow(getActivity(), name);
         popWindow.showAsDropDown(llTopGuide);
@@ -247,8 +251,8 @@ public class SearchFragment extends BaseFragment<BookConditionPresenter> impleme
             part = tvPart.getText().toString();
             version = tvVersion.getText().toString();
             page = 1;
-            code = "";
-            mName = "";
+//            code = "";
+//            mName = "";
             getData();
 
         });
@@ -322,23 +326,24 @@ public class SearchFragment extends BaseFragment<BookConditionPresenter> impleme
     }
 
     private void getData() {
-        if (!TextUtils.isEmpty(code)) {
-            mPresenter.getBookList(page, LIMIT, "", code, "", "", "", "", "", "", "", "", "", "");
-        } else if (!TextUtils.isEmpty(mName)) {
-            mPresenter.getBookList(page, LIMIT, mName, "", "", "", "", "", "", "", "", "", "", "");
-        } else {
-            mPresenter.getBookList(page, LIMIT, "", "", "", grade, "", part, "", version, "", subject, "", "");
-        }
+//        if (!TextUtils.isEmpty(code)) {
+//            mPresenter.getBookList(page, LIMIT, "", code, "", "", "", "", "", "", "", "", "", "");
+//        } else if (!TextUtils.isEmpty(mName)) {
+//            mPresenter.getBookList(page, LIMIT, mName, "", "", "", "", "", "", "", "", "", "", "");
+//        } else {
+//            mPresenter.getBookList(page, LIMIT, "", "", "", grade, "", part, "", version, "", subject, "", "");
+//        }
+        mPresenter.getBookList(page, LIMIT, mName, code, "", grade, "", part, "", version, "", subject, "", "");
         loadAd();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxSPTool.putString(getActivity(), SpConstant.SELECT_GRADE, grade);
-        RxSPTool.putString(getActivity(), SpConstant.SELECT_SUBJECT, subject);
-        RxSPTool.putString(getActivity(), SpConstant.SELECT_PART, part);
-        RxSPTool.putString(getActivity(), SpConstant.SELECT_VERSION, version);
+        RxSPTool.putString(requireActivity(), SpConstant.SELECT_GRADE, grade);
+        RxSPTool.putString(requireActivity(), SpConstant.SELECT_SUBJECT, subject);
+        RxSPTool.putString(requireActivity(), SpConstant.SELECT_PART, part);
+        RxSPTool.putString(requireActivity(), SpConstant.SELECT_VERSION, version);
         TTAdDispatchManager.getManager().onDestroy();
     }
 

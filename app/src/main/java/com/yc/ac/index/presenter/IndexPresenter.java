@@ -1,10 +1,13 @@
 package com.yc.ac.index.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.tencent.mmkv.MMKV;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.IndexContract;
 import com.yc.ac.index.model.bean.SlideInfo;
@@ -46,20 +49,20 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
 
     @Override
     public void getSlideInfo(String group) {
-        CommonInfoHelper.getO(mContext, SpConstant.SLIDE_INFO, new TypeReference<List<SlideInfo>>() {
-        }.getType(), new CommonInfoHelper.onParseListener<List<SlideInfo>>() {
-            @Override
-            public void onParse(List<SlideInfo> o) {
-                if (o != null) {
-                    showImagList(o);
-                }
-            }
-
-            @Override
-            public void onFail(String json) {
-
-            }
-        });
+//        CommonInfoHelper.getO(mContext, SpConstant.SLIDE_INFO, new TypeReference<List<SlideInfo>>() {
+//        }.getType(), new CommonInfoHelper.onParseListener<List<SlideInfo>>() {
+//            @Override
+//            public void onParse(List<SlideInfo> o) {
+//                if (o != null) {
+//                    showImagList(o);
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String json) {
+//                mView.showNoData();
+//            }
+//        });
 
         Subscription subscription = mEngine.getSlideInfos(group).subscribe(new Subscriber<ResultInfo<List<SlideInfo>>>() {
             @Override
@@ -75,8 +78,8 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
             @Override
             public void onNext(ResultInfo<List<SlideInfo>> listResultInfo) {
                 if (listResultInfo != null && listResultInfo.getCode() == HttpConfig.STATUS_OK && listResultInfo.getData() != null) {
-                    CommonInfoHelper.setO(mContext, listResultInfo.getData(), SpConstant.SLIDE_INFO);
                     showImagList(listResultInfo.getData());
+//                    CommonInfoHelper.setO(mContext, listResultInfo.getData(), SpConstant.SLIDE_INFO);
                 }
             }
         });
@@ -118,6 +121,7 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
             @Override
             public void onError(Throwable e) {
                 getCacheVersion();
+                mView.showNoNet();
 
             }
 
@@ -125,7 +129,8 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
             public void onNext(ResultInfo<VersionInfo> resultInfoResultInfo) {
                 if (resultInfoResultInfo != null && resultInfoResultInfo.getCode() == HttpConfig.STATUS_OK && resultInfoResultInfo.getData() != null) {
                     showNewData(resultInfoResultInfo.getData());
-                    CommonInfoHelper.setO(mContext, resultInfoResultInfo.getData(), SpConstant.INDEX_VERSION);
+//                    CommonInfoHelper.setO(mContext, resultInfoResultInfo.getData(), SpConstant.INDEX_VERSION);
+                    MMKV.defaultMMKV().putString(SpConstant.INDEX_VERSION, JSON.toJSONString(resultInfoResultInfo.getData()));
                 } else {
                     getCacheVersion();
                 }
@@ -138,20 +143,27 @@ public class IndexPresenter extends BasePresenter<IndexEngine, IndexContract.Vie
 
 
     private void getCacheVersion() {
-        CommonInfoHelper.getO(mContext, SpConstant.INDEX_VERSION, new TypeReference<VersionInfo>() {
-        }.getType(), new CommonInfoHelper.onParseListener<VersionInfo>() {
-            @Override
-            public void onParse(VersionInfo versionInfo) {
-                if (versionInfo != null) {
-                    showNewData(versionInfo);
-                }
-            }
+        String result = MMKV.defaultMMKV().getString(SpConstant.INDEX_VERSION, "");
+        if (!TextUtils.isEmpty(result)) {
+            VersionInfo versionInfo = JSON.parseObject(result, VersionInfo.class);
+            if (versionInfo != null)
+                showNewData(versionInfo);
+        }
 
-            @Override
-            public void onFail(String json) {
-
-            }
-        });
+//        CommonInfoHelper.getO(mContext, SpConstant.INDEX_VERSION, new TypeReference<VersionInfo>() {
+//        }.getType(), new CommonInfoHelper.onParseListener<VersionInfo>() {
+//            @Override
+//            public void onParse(VersionInfo versionInfo) {
+//                if (versionInfo != null) {
+//                    showNewData(versionInfo);
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String json) {
+//                mView.showNoData();
+//            }
+//        });
     }
 
 

@@ -18,6 +18,7 @@ import com.yc.ac.utils.UserInfoHelper;
 
 import java.io.File;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import yc.com.base.BasePresenter;
@@ -39,7 +40,7 @@ public class SettingPresenter extends BasePresenter<SettingEngine, SettingContra
     }
 
     public void logout() {
-        UserInfoHelper.setUserInfo(null);
+        UserInfoHelper.saveUserInfo(null);
         UserInfoHelper.setToken("");
         RxBus.get().post(BusAction.LOGIN_OUT, "logout");
         ToastUtils.showCenterToast(mContext, "退出登录");
@@ -99,8 +100,35 @@ public class SettingPresenter extends BasePresenter<SettingEngine, SettingContra
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
                 if (userInfoResultInfo != null && userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
-                    UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                    UserInfoHelper.saveUserInfo(userInfoResultInfo.getData());
                     RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
+                }
+            }
+        });
+        mSubscriptions.add(subscription);
+    }
+
+    public void userCancellation() {
+        Subscription subscription = mEngine.userCancellation().subscribe(new Subscriber<ResultInfo<String>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<String> stringResultInfo) {
+                if (stringResultInfo != null) {
+                    if (stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
+                        mView.cancellationSuccess();
+                    } else {
+                        ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
+                    }
+
                 }
             }
         });

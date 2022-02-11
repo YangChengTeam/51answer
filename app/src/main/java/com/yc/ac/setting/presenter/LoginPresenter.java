@@ -71,12 +71,13 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
 
             @Override
             public void onNext(ResultInfo<TokenInfo> stringResultInfo) {
+                mView.dismissDialog();
                 if (stringResultInfo != null) {
                     if (stringResultInfo.getCode() == HttpConfig.STATUS_OK && stringResultInfo.getData() != null) {
                         UserInfoHelper.setToken(stringResultInfo.getData().getToken());
                         getUserInfo(stringResultInfo.getData().getToken());
                     } else {
-                        mView.dismissDialog();
+
                         ToastUtils.showCenterToast(mContext, stringResultInfo.getMsg());
                     }
                 }
@@ -104,7 +105,7 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 mView.dismissDialog();
                 if (userInfoResultInfo != null && userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
-                    UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                    UserInfoHelper.saveUserInfo(userInfoResultInfo.getData());
                     RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                     mView.finish();
                 }
@@ -250,7 +251,7 @@ public class LoginPresenter extends BasePresenter<LoginGroupEngine, LoginContrac
 
     public void snsLogin(UserDataInfo userDataInfo) {
 
-        Subscription subscription = mEngine.snsLogin(userDataInfo.getAccessToken(), userDataInfo.getLoginType(), userDataInfo.getNickname(), userDataInfo.getIconUrl()).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
+        Subscription subscription = mEngine.snsLogin(userDataInfo.getOpenid(), userDataInfo.getLoginType(), userDataInfo.getNickname(), userDataInfo.getIconUrl()).subscribe(new Subscriber<ResultInfo<TokenInfo>>() {
             @Override
             public void onCompleted() {
 

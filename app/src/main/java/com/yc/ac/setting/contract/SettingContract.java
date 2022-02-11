@@ -14,6 +14,9 @@ public interface SettingContract {
         void showLogout();
 
         void showCacheSize(String cacheSize);
+
+        void cancellationSuccess();
+
     }
 
     interface Presenter extends IPresenter {

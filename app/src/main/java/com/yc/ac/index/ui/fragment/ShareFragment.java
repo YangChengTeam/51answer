@@ -1,6 +1,8 @@
 package com.yc.ac.index.ui.fragment;
 
+import android.Manifest;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import com.kk.utils.LogUtil;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.vondear.rxtools.RxDeviceTool;
+import com.vondear.rxtools.RxPermissionsTool;
 import com.yc.ac.R;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.setting.contract.ShareContract;
@@ -93,7 +96,10 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
                         mShareInfo = new ShareInfo();
                         mShareInfo.setBook_id(bookInfo.getBookId());
                         mShareInfo.setBitmap(bmp);
+
+
                         shareInfo(finalI);
+
                     }
                 }, 500);
 
@@ -101,6 +107,7 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
         }
 
     }
+
 
     @Override
     protected float getWidth() {

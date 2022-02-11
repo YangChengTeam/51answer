@@ -21,7 +21,6 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import yc.com.base.EmptyUtils;
 import yc.com.base.UIUtils;
@@ -50,7 +49,7 @@ public class UserInfoHelper {
         return mUserInfo;
     }
 
-    public static void setUserInfo(UserInfo userInfo) {
+    public static void saveUserInfo(UserInfo userInfo) {
         try {
             String userinfoStr = JSON.toJSONString(userInfo);
             RxSPTool.putString(RxTool.getContext(), SpConstant.USER_INFO, userinfoStr);
@@ -65,6 +64,13 @@ public class UserInfoHelper {
             return getUserInfo().getId();
         }
         return "";
+    }
+
+    public static boolean isVip() {
+        if (getUserInfo() != null && getUserInfo().getVip() == 1) {
+            return true;
+        }
+        return false;
     }
 
     private static String mToken;
@@ -139,21 +145,16 @@ public class UserInfoHelper {
 
             @Override
             public void onError(Throwable e) {
-                UIUtils.postDelay(new Runnable() {
-                    @Override
-                    public void run() {
-                        login(context);
-                    }
-                }, 500);
+                UIUtils.postDelay(() -> login(context), 500);
             }
 
             @Override
             public void onNext(ResultInfo<UserInfo> userInfoResultInfo) {
                 if (userInfoResultInfo != null) {
                     if (userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
-                        setUserInfo(userInfoResultInfo.getData());
+                        saveUserInfo(userInfoResultInfo.getData());
                     } else if (userInfoResultInfo.getCode() == HttpStatus.TOKEN_EXPIRED) {
-                        setUserInfo(null);
+                        saveUserInfo(null);
                         setToken("");
                     }
 
@@ -170,8 +171,6 @@ public class UserInfoHelper {
     public static boolean isLogin() {
         return getUserInfo() != null;
     }
-
-
 
 
 }

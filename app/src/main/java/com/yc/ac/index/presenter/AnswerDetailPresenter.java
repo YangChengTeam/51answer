@@ -1,6 +1,7 @@
 package com.yc.ac.index.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
@@ -179,7 +180,6 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
         if (browserInfo == null) return;
         long currentTime = System.currentTimeMillis();
         String time = RxTimeTool.date2String(new Date(currentTime), new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()));
-
 
         BrowserInfo queryBrowserInfo = queryBrowserInfo(browserInfo.getBookId());
 

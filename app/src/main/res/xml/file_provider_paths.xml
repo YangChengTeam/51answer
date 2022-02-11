@@ -15,7 +15,14 @@
     <external-path
         name="camera_photos"
         path="" />
-<!--    <external-path-->
-<!--        name="my_images"-->
-<!--        path="." />-->
+    <!-- QQ 官方分享SDK 共享路径 -->
+    <root-path
+        name="opensdk_root"
+        path="" />
+    <external-files-path
+        name="opensdk_external"
+        path="Images/tmp" />
+    <!--    <external-path-->
+    <!--        name="my_images"-->
+    <!--        path="." />-->
 </paths>

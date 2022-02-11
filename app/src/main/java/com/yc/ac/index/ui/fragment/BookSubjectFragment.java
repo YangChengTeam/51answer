@@ -2,7 +2,9 @@ package com.yc.ac.index.ui.fragment;
 
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.tencent.mmkv.MMKV;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.constant.SpConstant;
@@ -35,10 +37,10 @@ public class BookSubjectFragment extends BaseFragment {
     @Override
     public void init() {
 
-        CommonInfoHelper.getO(getActivity(), SpConstant.INDEX_VERSION, new TypeReference<VersionInfo>() {
-        }.getType(), new CommonInfoHelper.onParseListener<VersionInfo>() {
-            @Override
-            public void onParse(VersionInfo versionInfo) {
+        String result = MMKV.defaultMMKV().getString(SpConstant.INDEX_VERSION, "");
+        if (!TextUtils.isEmpty(result)) {
+            VersionInfo versionInfo = JSON.parseObject(result, VersionInfo.class);
+            if (versionInfo != null) {
                 final List<VersionDetailInfo> versionDetailInfos = createNewData(versionInfo.getSubject());
                 selectGradeView.setGrades(versionDetailInfos, 0);
                 selectGradeView.showTv(false);
@@ -64,14 +66,23 @@ public class BookSubjectFragment extends BaseFragment {
                         ((PerfectBookDetailInfoActivity) getActivity()).transmitData(position, data);
                     }
                 });
-
             }
 
-            @Override
-            public void onFail(String json) {
+        }
 
-            }
-        });
+//        CommonInfoHelper.getO(getActivity(), SpConstant.INDEX_VERSION, new TypeReference<VersionInfo>() {
+//        }.getType(), new CommonInfoHelper.onParseListener<VersionInfo>() {
+//            @Override
+//            public void onParse(VersionInfo versionInfo) {
+//
+//
+//            }
+//
+//            @Override
+//            public void onFail(String json) {
+//
+//            }
+//        });
 
 
     }

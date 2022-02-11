@@ -23,9 +23,6 @@ public interface MyContract {
 
         void showUserInfo(UserInfo userInfo);
 
-        void showQbInfo(QbInfo info);
-
-        void showTaskList(List<TaskListInfo> list);
     }
 
     interface Presenter extends IPresenter {

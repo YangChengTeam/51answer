@@ -1,16 +1,15 @@
 package com.yc.ac.index.ui.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,6 +18,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.google.android.material.tabs.TabLayout;
@@ -26,7 +31,9 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.LogUtil;
 import com.umeng.socialize.UMShareAPI;
+import com.vondear.rxtools.RxPermissionsTool;
 import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.Config;
@@ -41,6 +48,7 @@ import com.yc.ac.index.ui.adapter.AnswerDetailAdapter;
 import com.yc.ac.index.ui.fragment.AnswerTintFragment;
 import com.yc.ac.index.ui.fragment.DeleteTintFragment;
 import com.yc.ac.index.ui.fragment.ShareFragment;
+import com.yc.ac.pay.PaySuccessInfo;
 import com.yc.ac.setting.model.bean.BrowserInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.utils.RxDownloadManager;
@@ -52,15 +60,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
 import yc.com.base.FileUtils;
@@ -109,13 +111,16 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     @BindView(R.id.ll_container)
     MyRelativeLayout llContainer;
-    @BindView(R.id.ll_common_container)
-    LinearLayout llCommonContainer;
+
     @BindView(R.id.fl_ad_container)
     FrameLayout flAdContainer;
 
     @BindView(R.id.iv_scale_icon)
     ImageView ivScaleIcon;
+    @BindView(R.id.rootView)
+    ConstraintLayout rootView;
+
+
     private BookInfo bookInfo;
 
 
@@ -218,23 +223,19 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
         //            }
         RxView.clicks(rlShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
-//                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-            ShareFragment shareFragment = new ShareFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("bookInfo", bookInfo);
-
-            shareFragment.setArguments(bundle);
-//                    ShareInfo shareInfo = new ShareInfo();
-//                    if (bookInfo != null) {
-//                        shareInfo.setTitle(bookInfo.getName());
-//                        shareInfo.setContent(bookInfo.getShare_content());
-//                        shareInfo.setBook_id(bookId);
-////                        shareInfo.setUrl(bookInfo.getCover_img());
-//                    }
-//                    shareFragment.setShareInfo(shareInfo);
-            shareFragment.show(getSupportFragmentManager(), null);
+//            applyPermission(this::showShareDialog);
+            showShareDialog();
         });
 
+    }
+
+    private void showShareDialog() {
+        ShareFragment shareFragment = new ShareFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("bookInfo", bookInfo);
+
+        shareFragment.setArguments(bundle);
+        shareFragment.show(getSupportFragmentManager(), null);
     }
 
     //下载
@@ -264,7 +265,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         commonTvTitle.setText(data.getName());
         if (data.getAnswer_list() != null) {
             bookInfo = data;
-            saveBrowserData();
+
             initView(data, isReload);
         }
     }
@@ -276,8 +277,10 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             downLoadUrlList = data.getAnswer_list();
             tvShare.setText(data.getAccess() == 1 ? getString(R.string.shared) : getString(R.string.share));
 
-            if (!isReload)
+            if (!isReload) {
                 initViewPager(data.getAnswer_list());
+//                saveBrowserData(data);
+            }
         }
     }
 
@@ -321,7 +324,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             public void onViewDoubleClick(boolean isClick) {
                 llTopGuide.setVisibility(isClick ? View.GONE : View.VISIBLE);
                 llBottom.setVisibility(isClick ? View.GONE : View.VISIBLE);
-                llCommonContainer.setVisibility(isClick ? View.GONE : View.VISIBLE);
+                rootView.setVisibility(isClick ? View.GONE : View.VISIBLE);
                 llContainer.setBackgroundColor(ContextCompat.getColor(AnswerDetailActivity.this, R.color.black));
             }
 
@@ -337,21 +340,22 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             public void onPageSelected(int position) {
 
 //!isShare(bookInfo) ||
-                if (position >= 3 && !isShare(bookInfo)) {//isNeedReadVideo
+//                bookInfo.setIsVip(1);
+                if (position >= 3) {//isNeedReadVideo
 
-                    AnswerTintFragment answerTintFragment = new AnswerTintFragment();
+                    if (bookInfo != null && (bookInfo.getIsVip() == 1 && !UserInfoHelper.isVip())) {
+                        showAnswerDialog(1);
+                        return;
+                    }
+                    if (!UserInfoHelper.isVip()) {
+                        if (!isCanNext(bookInfo)) {
+                            showAnswerDialog(0);
+                            return;
+                        }
+                    }
 
 //                    ShareInfo shareInfo = new ShareInfo();
 //                    shareInfo.setBook_id(bookId);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("bookInfo", bookInfo);
-                    answerTintFragment.setArguments(bundle);
-
-                    answerTintFragment.show(getSupportFragmentManager(), "");
-                    answerTintFragment.setConfirmListener(() -> TTAdDispatchManager.getManager().init(AnswerDetailActivity.this, TTAdType.REWARD_VIDEO, null, Config.toutiao_reward_id, 0, null, "解锁看答案", 1, UserInfoHelper.getUId(), TTAdConstant.VERTICAL, AnswerDetailActivity.this));
-                    mViewpager.setCurrentItem(oldPos);
-
-                    return;
 
                 }
                 browserPage = position + 1;
@@ -367,9 +371,25 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     }
 
+    private void showAnswerDialog(int state) {
+        AnswerTintFragment answerTintFragment = new AnswerTintFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("bookInfo", bookInfo);
+        bundle.putInt("state", state);
+        bundle.putString("articleId", bookId);
+        answerTintFragment.setArguments(bundle);
+        answerTintFragment.show(getSupportFragmentManager(), "");
+        answerTintFragment.setConfirmListener(() -> TTAdDispatchManager.getManager().init(AnswerDetailActivity.this, TTAdType.REWARD_VIDEO, null, Config.toutiao_reward_id, 0, null, "解锁看答案", 1, UserInfoHelper.getUId(), TTAdConstant.VERTICAL, AnswerDetailActivity.this));
+        mViewpager.setCurrentItem(oldPos);
+    }
 
-    private boolean isShare(BookInfo bookInfo) {
+
+    //是否可以下一页
+    private boolean isCanNext(BookInfo bookInfo) {
         boolean flag = false;
+//        if (bookInfo != null && bookInfo.getIsVip() == 1&&!UserInfoHelper.isVip()) {//需要付费
+//            return false;
+//        }
         if ((bookInfo != null && bookInfo.getAccess() == 1) || judgeIsDownload()) {
             flag = true;
         }
@@ -467,11 +487,11 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     protected void onDestroy() {
         super.onDestroy();
         RxSPTool.putInt(this, bookId, oldPos);
-//        saveBrowserData();
+        saveBrowserData(bookInfo);
     }
 
 
-    private void saveBrowserData() {
+    private void saveBrowserData(BookInfo bookInfo) {
         BrowserInfo browserInfo = new BrowserInfo();
         if (bookInfo != null) {
             browserInfo.setBookId(bookInfo.getBookId());
@@ -503,17 +523,58 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         getData(true);
     }
 
+
+//    @Subscribe(thread = EventThread.MAIN_THREAD,
+//            tags = {@Tag(BusAction.PAY_SUCCESS)})
+//    public void paySuccess(PaySuccessInfo paySuccessInfo) {
+//        getData(true);
+//    }
+
+
+    private void applyPermission(Runnable runnable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            List<String> permissions = RxPermissionsTool.
+                    with(this).
+                    addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
+                    addPermission(Manifest.permission.READ_EXTERNAL_STORAGE).
+                    initPermission();
+            if (permissions.size() == 0) {
+                runnable.run();
+            }
+        } else {
+            runnable.run();
+        }
+
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            List<String> results = new ArrayList<>();
+            for (String permission : permissions) {
+                LogUtil.msg("TAG: " + permission);
+                if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    results.add(permission);
+                }
+            }
+            if (results.size() == 0) {
+                showShareDialog();
+            }
+
+        }
+    }
 
     @Override
     public void loadSuccess() {
 
-//
     }
 
     @Override
@@ -538,6 +599,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable timerTask;
+
 
     private class MyTask implements Runnable {
         @Override

@@ -1,6 +1,7 @@
 package com.yc.ac.setting.ui.activity;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
@@ -42,8 +44,7 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
     TextView commonTvTitle;
     @BindView(R.id.tv_ok)
     TextView tvOk;
-    @BindView(R.id.ll_common_container)
-    LinearLayout llCommonContainer;
+
     @BindView(R.id.stateView)
     StateView stateView;
     @BindView(R.id.browser_recyclerView)
@@ -51,7 +52,7 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
     private int page = 1;
-    private int PAGESIZE = 50;
+    private int PAGESIZE = 10;
     private BrowserAdapter browserAdapter;
     private List<BrowserInfo> deleteInfos;
 
@@ -72,6 +73,8 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
         browserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         browserAdapter = new BrowserAdapter(null);
         browserRecyclerView.setAdapter(browserAdapter);
+//        browserRecyclerView.setItemAnimator(null);
+
         initRefresh();
         initListener();
     }
@@ -105,9 +108,7 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
                 if (select) {
                     deleteInfos.add(item);
                 } else {
-                    if (deleteInfos.contains(item)) {
-                        deleteInfos.remove(item);
-                    }
+                    deleteInfos.remove(item);
                 }
                 view.setSelected(select);
                 item.setSelect(select);
@@ -140,12 +141,9 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
 
     @Override
     public void showBrowserInfos(List<BrowserInfo> browserInfos) {
-        if (page == 1) {
-            browserAdapter.setNewData(browserInfos);
-        } else {
-            browserAdapter.addData(browserInfos);
-        }
-        if (browserInfos.size() == PAGESIZE) {
+        browserAdapter.setNewData(browserInfos);
+
+        if (browserInfos.size() / page == PAGESIZE) {
             browserAdapter.loadMoreComplete();
             page++;
         } else {
@@ -167,7 +165,8 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             page = 1;
             mPresenter.getBrowserInfos(page, PAGESIZE);
-
+            tvOk.setText("删除");
+            setSelectIconState(false);
         });
     }
 

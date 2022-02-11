@@ -158,4 +158,30 @@ public interface NetConstant {
      * 打开广告开关
      */
     String switch_ad_url = BaseNetConstant.getBaseUrl() + "versionSwitch";
+
+    /**
+     * 支付item
+     */
+    String pay_item_list_url = BaseNetConstant.getBaseUrl() + "pay/goodsList";
+
+    /**
+     * 支付宝支付
+     */
+    String alipay_url = BaseNetConstant.getBaseUrl() + "pay/aliPay";
+
+    /**
+     * 微信支付
+     */
+    String wxpay_url = BaseNetConstant.getBaseUrl() + "pay/wechatPay";
+
+
+    /**
+     * 充值记录列表
+     */
+    String order_list_url = BaseNetConstant.getBaseUrl() + "pay/orderList";
+
+    /**
+     * 用户注销接口
+     */
+    String cancellation_url = BaseNetConstant.getBaseUrl() + "user/cancellation";
 }

@@ -206,7 +206,7 @@ public class EngineUtils {
      *
      * @return
      */
-    public static Observable<ResultInfo<String>> comment(Context context, String userid) {
+    public static Observable<ResultInfo<String>> comment(Context context) {
         Map<String, String> headers = new HashMap<>();
         if (!TextUtils.isEmpty(UserInfoHelper.getToken()))
             headers.put("Authorization", "Bearer " + UserInfoHelper.getToken());

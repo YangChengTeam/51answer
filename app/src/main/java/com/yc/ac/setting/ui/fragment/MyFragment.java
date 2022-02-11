@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -23,8 +26,10 @@ import com.vondear.rxtools.RxPhotoTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.view.dialog.RxDialogEditSureCancel;
 import com.yc.ac.R;
+import com.yc.ac.base.WebActivity;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.constant.SpConstant;
+import com.yc.ac.index.ui.activity.PayActivity;
 import com.yc.ac.setting.contract.MyContract;
 import com.yc.ac.setting.model.bean.QbInfo;
 import com.yc.ac.setting.model.bean.ShareInfo;
@@ -33,11 +38,11 @@ import com.yc.ac.setting.model.bean.UserInfo;
 import com.yc.ac.setting.presenter.MyPresenter;
 import com.yc.ac.setting.ui.activity.BindPhoneActivity;
 import com.yc.ac.setting.ui.activity.BrowserActivity;
-import com.yc.ac.setting.ui.activity.InvitationFriendActicity;
+import com.yc.ac.setting.ui.activity.NotificationActivity;
 import com.yc.ac.setting.ui.activity.PrivacyStatementActivity;
+import com.yc.ac.setting.ui.activity.RechargeRecordActivity;
 import com.yc.ac.setting.ui.activity.SettingActivity;
 import com.yc.ac.setting.ui.activity.StatementActivity;
-import com.yc.ac.setting.ui.activity.UploadBookIntroduceActivity;
 import com.yc.ac.setting.ui.activity.UserPolicyActivity;
 import com.yc.ac.setting.ui.widget.BaseSettingView;
 import com.yc.ac.utils.ActivityUtils;
@@ -52,8 +57,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import yc.com.base.BaseActivity;
 import yc.com.base.BaseFragment;
@@ -90,37 +93,26 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     LinearLayout llPrimarySchool;
     @BindView(R.id.ll_middle_school)
     LinearLayout llMiddleSchool;
-    @BindView(R.id.tv_qb)
-    TextView tvQb;
-    @BindView(R.id.tv_detail)
-    TextView tvDetail;
+
     @BindView(R.id.baseSettingView_service)
     BaseSettingView baseSettingViewService;
     @BindView(R.id.baseSettingView_setting)
     BaseSettingView baseSettingViewSetting;
     @BindView(R.id.tv_statement)
     TextView tvStatement;
-    @BindView(R.id.baseSettingView_new_book)
-    BaseSettingView baseSettingViewNewBook;
-    @BindView(R.id.baseSettingView_market)
-    BaseSettingView baseSettingViewMarket;
-    @BindView(R.id.baseSettingView_share)
-    BaseSettingView baseSettingViewShare;
-    @BindView(R.id.baseSettingView_invite)
-    BaseSettingView baseSettingViewInvite;
+
+
     @BindView(R.id.baseSettingView_browser)
     BaseSettingView baseSettingViewBrowser;
     @BindView(R.id.baseSettingView_privacy_statement)
     BaseSettingView baseSettingViewPrivacyStatement;
     @BindView(R.id.baseSettingView_user_policy)
     BaseSettingView baseSettingViewUserPolicy;
+    @BindView(R.id.baseSettingView_recharge)
+    BaseSettingView baseSettingViewRecharge;
+    @BindView(R.id.baseSettingView_notification)
+    BaseSettingView baseSettingViewNotification;
 
-    private long startTime;
-
-    private String DONE = "已完成";
-    private String GOTODONE = "去完成";
-
-    private List<BaseSettingView> baseSettingViews = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -129,10 +121,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
 
     @Override
     public void init() {
-        baseSettingViews.add(baseSettingViewNewBook);
-        baseSettingViews.add(baseSettingViewMarket);
-        baseSettingViews.add(baseSettingViewShare);
-        baseSettingViews.add(baseSettingViewInvite);
+
 
         mPresenter = new MyPresenter(getActivity(), this);
 
@@ -150,12 +139,12 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
 
         RxView.clicks(tvNickname).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
             if (!UserInfoHelper.isGoToLogin(getActivity())) {//设置昵称
-                showDioloag();
+                showDialog();
             }
         });
         RxView.clicks(ivAvatar).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
             if (!UserInfoHelper.isGoToLogin(getActivity())) {//更改图像
-                RxPhotoTool.openLocalImage(getActivity());
+                RxPhotoTool.openLocalImage(requireActivity());
             }
         });
         RxView.clicks(tvPhone).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
@@ -180,52 +169,18 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         RxView.clicks(tvStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), StatementActivity.class)));
 
 
-        RxView.clicks(tvDetail).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
-//                startActivity(new Intent(getActivity(), EarningsDetailActivity.class));
-            //申请提现
-            ApplyDepositFragment applyDepositFragment = new ApplyDepositFragment();
-            applyDepositFragment.show(getFragmentManager(), "");
-        });
+        RxView.clicks(baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> joinQQ("2645034912"));
 
-        RxView.clicks(baseSettingViewService).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> joinQQ("1872935735"));
-
-        RxView.clicks(baseSettingViewNewBook).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
-            //上传新书
-            startActivity(new Intent(getActivity(), UploadBookIntroduceActivity.class));
-        });
-
-        RxView.clicks(baseSettingViewMarket).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
-            startTime = System.currentTimeMillis();
-            //好评赚钱
-            try {
-                Uri uri = Uri.parse("market://details?id=" + getPackageName());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } catch (Exception e) {
-                e.printStackTrace();
-                ToastUtils.showCenterToast(getActivity(), "你手机安装的应用市场没有上线该应用，请前往其他应用市场进行点评");
-            }
-        });
-
-        RxView.clicks(baseSettingViewShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
-            ShareFragment shareFragment = new ShareFragment();
-
-
-            shareFragment.setIsShareMoney(true);
-            ShareInfo shareInfo = ShareInfoHelper.getShareInfo();
-            shareInfo.setBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.share_pic));
-            shareFragment.setShareInfo(shareInfo);
-
-
-            shareFragment.show(getActivity().getSupportFragmentManager(), "");
-        });
-
-        RxView.clicks(baseSettingViewInvite).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), InvitationFriendActicity.class)));
 
         RxView.clicks(baseSettingViewBrowser).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), BrowserActivity.class)));
-        RxView.clicks(baseSettingViewPrivacyStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), PrivacyStatementActivity.class)));
+        RxView.clicks(baseSettingViewPrivacyStatement).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid ->
+                        WebActivity.startActivity(getActivity(), "http://answer.bshu.com/html/daanquan.html", getString(R.string.policy_title))
+//                startActivity(new Intent(getActivity(), PrivacyStatementActivity.class))
+        );
         RxView.clicks(baseSettingViewUserPolicy).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), UserPolicyActivity.class)));
+
+        RxView.clicks(baseSettingViewRecharge).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), RechargeRecordActivity.class)));
+        RxView.clicks(baseSettingViewNotification).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> startActivity(new Intent(getActivity(), NotificationActivity.class)));
     }
 
 
@@ -244,30 +199,21 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     }
 
 
-    private void showDioloag() {
+    private void showDialog() {
         final RxDialogEditSureCancel rxDialogEditSureCancel = new RxDialogEditSureCancel(getActivity());//提示弹窗
         rxDialogEditSureCancel.getTitleView().setText("请输入你的昵称");
         final EditText editText = rxDialogEditSureCancel.getEditText();
 //                    editText.setHint(tvNickname.getText());
-        rxDialogEditSureCancel.getSureView().setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String text = editText.getText().toString().trim();
-                if (TextUtils.isEmpty(text)) {
-                    ToastUtil.toast(getActivity(), "昵称不能为空");
-                    return;
-                }
-                mPresenter.updateInfo(text, "", "");
-                rxDialogEditSureCancel.cancel();
+        rxDialogEditSureCancel.getSureView().setOnClickListener(v -> {
+            String text = editText.getText().toString().trim();
+            if (TextUtils.isEmpty(text)) {
+                ToastUtil.toast(getActivity(), "昵称不能为空");
+                return;
             }
+            mPresenter.updateInfo(text, "", "");
+            rxDialogEditSureCancel.cancel();
         });
-        rxDialogEditSureCancel.getCancelView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rxDialogEditSureCancel.cancel();
-            }
-        });
+        rxDialogEditSureCancel.getCancelView().setOnClickListener(v -> rxDialogEditSureCancel.cancel());
         rxDialogEditSureCancel.show();
     }
 
@@ -282,7 +228,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
             ivAvatar.setImageResource(R.mipmap.default_not_login);
             llNotLogin.setVisibility(View.VISIBLE);
             llLogin.setVisibility(View.GONE);
-            tvQb.setText(String.valueOf("0.00"));
 
         }
     }
@@ -296,7 +241,7 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
     public void showUserInfo(UserInfo userInfo) {
         llLogin.setVisibility(View.VISIBLE);
         llNotLogin.setVisibility(View.GONE);
-        Glide.with(getActivity()).load(userInfo.getFace()).apply(new RequestOptions().error(R.mipmap.default_login).circleCrop()).into(ivAvatar);
+        Glide.with(requireActivity()).load(userInfo.getFace()).apply(new RequestOptions().error(R.mipmap.default_login).circleCrop()).into(ivAvatar);
         String nick_name = userInfo.getNick_name();
         if (TextUtils.isEmpty(nick_name)) {
             nick_name = "还没设置昵称,快来设置吧!";
@@ -308,39 +253,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         } else {
             tvPhone.setText(userInfo.getMobile());
             tvPhone.setVisibility(View.VISIBLE);
-        }
-        mPresenter.getQbInfo();
-
-
-    }
-
-    @Override
-    public void showQbInfo(QbInfo info) {
-        BigDecimal bd = new BigDecimal(info.qb);
-
-        tvQb.setText(String.valueOf(bd.setScale(2)));
-    }
-
-    @Override
-    public void showTaskList(List<TaskListInfo> list) {
-//        LogUtil.msg("desp: list " + list.size());
-//        taskListAdapter.setNewData(list);
-        setDone(list, baseSettingViews);
-
-    }
-
-
-    private void setDone(List<TaskListInfo> list, List<BaseSettingView> baseSettingViews) {
-        if (list != null && list.size() > 0) {
-            for (TaskListInfo taskListInfo : list) {
-                for (BaseSettingView baseSettingView : baseSettingViews) {
-                    if (taskListInfo.getName().contains(baseSettingView.getTag())) {
-                        baseSettingView.setExtraText(taskListInfo.getIs_done() == 1 ? DONE : GOTODONE);
-                        baseSettingView.setExtraColor(taskListInfo.getIs_done() == 1 ? ContextCompat.getColor(getActivity(), R.color.green_4ec54e) : ContextCompat.getColor(getActivity(), R.color.gray_999));
-                        break;
-                    }
-                }
-            }
         }
     }
 
@@ -357,16 +269,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         mPresenter.uploadFile(file, path.substring(path.lastIndexOf("/") + 1));
     }
 
-    @Subscribe(
-            thread = EventThread.MAIN_THREAD,
-            tags = {
-                    @Tag(BusAction.SHARE_MONEY_SUCCESS)
-            }
-    )
-    public void shareMoneySuccess(String result) {
-        mPresenter.getQbInfo();
-        mPresenter.getTaskInfoList();
-    }
 
     @Override
     public void showLoadingDialog(String mess) {
@@ -378,17 +280,6 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
         ((BaseActivity) getActivity()).dismissDialog();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (startTime > 0 && !RxSPTool.getBoolean(getActivity(), SpConstant.OPEN_MARKET)) {
-            if ((System.currentTimeMillis() - startTime) / 1000 >= 5) {
-                //跳到应用市场
-                mPresenter.comment(UserInfoHelper.getUId());
-            }
-        }
-    }
-
 
     @Override
     public void hide() {
@@ -396,22 +287,11 @@ public class MyFragment extends BaseFragment<MyPresenter> implements MyContract.
 
     @Override
     public void showNoData() {
-        setUndoneState();
+
     }
 
     @Override
     public void showNoNet() {
-        setUndoneState();
-    }
-
-
-    private void setUndoneState() {
-        if (baseSettingViews.size() > 0) {
-            for (BaseSettingView baseSettingView : baseSettingViews) {
-                baseSettingView.setExtraText(GOTODONE);
-                baseSettingView.setExtraColor(ContextCompat.getColor(getActivity(), R.color.gray_999));
-            }
-        }
 
     }
 

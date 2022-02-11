@@ -26,6 +26,7 @@
     <string name="version_update">版本更新</string>
     <string name="version">版本</string>
     <string name="logout">退出登录</string>
+    <string name="exit">注销账号</string>
     <string name="hot_search">热门搜索</string>
     <string name="delete">删除</string>
     <string name="search_histroty">搜索记录</string>
@@ -87,6 +88,8 @@
     <string name="last_browser_page">上次看到了第%1$d页</string>
     <string name="hd_resolution">高清解析</string>
     <string name="policy_title">隐私政策</string>
+    <string name="recharge_record">充值记录</string>
+    <string name="notification_message">消息通知</string>
     <string name="user_policy">一、介绍\n
 1.1答案圈深知个人信息对您的重要性，并会尽全力保护您的个人信息安全可靠。我们致力于维持您对我们的信任，恪守以下原则，保护您的个人信息：权责一致原则、目的明确原则、选择同意原则、最少够用原则、确保安全原则、主体参与原则、公开透明原则等。同时，我们承诺，我们将按业界成熟的安全标准，采取相应的安全保护措施来保护您的个人信息。\n
 1.2我们制定了本隐私政策，向您提供您需要了解的有关我们如何收集和处理信息，并概述您的责任，以帮助您保护自己使用我们的产品的安全。请注意，当我们谈论“服务”时，指的是我们的所有网站，产品和服务。\n

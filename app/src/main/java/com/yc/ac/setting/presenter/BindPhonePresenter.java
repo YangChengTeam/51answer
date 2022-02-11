@@ -64,7 +64,7 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneEngine, BindPhone
                 mView.dismissDialog();
                 if (userInfoResultInfo != null) {
                     if (userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
-                        UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                        UserInfoHelper.saveUserInfo(userInfoResultInfo.getData());
                         RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                         mView.finish();
                     } else {
@@ -105,7 +105,7 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneEngine, BindPhone
                 mView.dismissDialog();
                 if (userInfoResultInfo != null) {
                     if (userInfoResultInfo.getCode() == HttpConfig.STATUS_OK && userInfoResultInfo.getData() != null) {
-                        UserInfoHelper.setUserInfo(userInfoResultInfo.getData());
+                        UserInfoHelper.saveUserInfo(userInfoResultInfo.getData());
                         RxBus.get().post(BusAction.LOGIN_SUCCESS, userInfoResultInfo.getData());
                         mView.finish();
                     } else {

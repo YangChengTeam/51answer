@@ -1,5 +1,6 @@
 package com.yc.ac.setting.ui.adapter;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,6 +21,8 @@ public class BrowserAdapter extends BaseQuickAdapter<BrowserInfo, BaseViewHolder
 
     public BrowserAdapter(@Nullable List<BrowserInfo> data) {
         super(R.layout.browser_item, data);
+
+//        setHasStableIds(true);
     }
 
     @Override
@@ -31,9 +34,13 @@ public class BrowserAdapter extends BaseQuickAdapter<BrowserInfo, BaseViewHolder
                 .addOnClickListener(R.id.iv_select)
                 .setGone(R.id.iv_select, item.isShowIcon());
 
-        GlideHelper.loadImage(mContext, item.getCover_img(), (ImageView) helper.getView(R.id.iv_book));
+//        Log.e("TAG", "img:" + item.getCover_img());
+        GlideHelper.loadImage(mContext, item.getCover_img(), helper.getView(R.id.iv_book));
 
     }
 
-
+    @Override
+    public long getItemId(int position) {
+        return mData.get(position).getId();
+    }
 }

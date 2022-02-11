@@ -60,7 +60,6 @@ public class IndexEngine extends BaseEngine {
         return HttpCoreEngin.get(mContext).rxpost(NetConstant.index_tag_url, new TypeReference<ResultInfo<TagInfoWrapper>>() {
         }.getType(), null, getHeaders(), false, false, false);
 
-
     }
 
     public Observable<ResultInfo<TagInfoWrapper>> getZtInfos() {

@@ -38,6 +38,9 @@
         <item name="android:windowBackground">@mipmap/main_splash</item>
     </style>
 
+    <style name="TabAppearance">
+        <item name="android:textSize">@dimen/t13sp</item>
+    </style>
 
 
 </resources>

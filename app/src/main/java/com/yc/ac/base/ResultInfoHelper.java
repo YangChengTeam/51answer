@@ -22,7 +22,7 @@ public class ResultInfoHelper {
             callback.reulstInfoOk();
         } else if (resultInfo.getCode() == HttpStatus.TOKEN_EXPIRED) {
             UserInfoHelper.setToken("");
-            UserInfoHelper.setUserInfo(null);
+            UserInfoHelper.saveUserInfo(null);
         } else {
             callback.resultInfoNotOk(getMessage(resultInfo.getMsg(), HttpConfig.SERVICE_ERROR));
         }

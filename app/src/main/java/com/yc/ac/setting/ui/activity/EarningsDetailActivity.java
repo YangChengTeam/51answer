@@ -135,7 +135,7 @@ public class EarningsDetailActivity extends BaseActivity<TaskListPresenter> impl
         if (startTime > 0 && !RxSPTool.getBoolean(this, SpConstant.OPEN_MARKET)) {
             if ((System.currentTimeMillis() - startTime) / 1000 >= 5) {
                 //跳到应用市场
-                mPresenter.comment(UserInfoHelper.getUId());
+                mPresenter.comment();
             }
         }
     }

@@ -63,6 +63,9 @@ public class BookInfo implements Parcelable, MultiItemEntity {
     private String answer_img;
     private long saveTime;
     @Transient
+    @JSONField(name = "is_sf")
+    private int isVip;//是否vip 1 0
+    @Transient
     public static final int ADV = 1;
     @Transient
     public static final int CONTENT = 2;
@@ -290,6 +293,14 @@ public class BookInfo implements Parcelable, MultiItemEntity {
         this.saveTime = saveTime;
     }
 
+    public int getIsVip() {
+        return isVip;
+    }
+
+    public void setIsVip(int isVip) {
+        this.isVip = isVip;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -322,6 +333,7 @@ public class BookInfo implements Parcelable, MultiItemEntity {
         dest.writeStringList(this.answer_list);
         dest.writeString(this.cover_id);
         dest.writeString(this.answer_img);
+        dest.writeInt(this.isVip);
     }
 
     public BookInfo() {
@@ -354,13 +366,14 @@ public class BookInfo implements Parcelable, MultiItemEntity {
         this.answer_list = in.createStringArrayList();
         this.cover_id = in.readString();
         this.answer_img = in.readString();
+        this.isVip = in.readInt();
     }
 
     @Generated(hash = 329383499)
-    public BookInfo(long id, String bookId, String name, String cover_img, String year, String version,
-                    String period, String part_type, String grade, String subject, String press, String code, int is_del,
-                    String sort, String share_num, String pv_num, int access, int favorite, int state,
-                    String share_content, String author, String time, String cover_id, String answer_img, long saveTime) {
+    public BookInfo(long id, String bookId, String name, String cover_img, String year, String version, String period,
+            String part_type, String grade, String subject, String press, String code, int is_del, String sort, String share_num,
+            String pv_num, int access, int favorite, int state, String share_content, String author, String time, String cover_id,
+            String answer_img, long saveTime) {
         this.id = id;
         this.bookId = bookId;
         this.name = name;
@@ -428,6 +441,7 @@ public class BookInfo implements Parcelable, MultiItemEntity {
                 ", answer_list=" + answer_list +
                 ", cover_id='" + cover_id + '\'' +
                 ", answer_img='" + answer_img + '\'' +
+                ", isVip='" + isVip + '\'' +
                 '}';
     }
 

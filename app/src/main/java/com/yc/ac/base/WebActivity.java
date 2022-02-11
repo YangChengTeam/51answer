@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -91,7 +93,7 @@ public class WebActivity extends BaseActivity {
 //        webView.addJavascriptInterface(new JavascriptInterface(), "HTML");
 
         //其他细节操作
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存 //优先使用缓存:
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); //关闭webview中缓存 //优先使用缓存:
         webSettings.setAllowFileAccess(true); //设置可以访问文件
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
@@ -99,6 +101,9 @@ public class WebActivity extends BaseActivity {
         webSettings.setBlockNetworkImage(false);//设置是否加载网络图片 true 为不加载 false 为加载
 
         webView.loadUrl(url);
+
+
+//        webView.loadDataWithBaseURL(null, htmlData, "text/html", "utf-8", null);
 
         progressBar.setMax(100);
         webView.setWebChromeClient(new WebChromeClient() {
@@ -151,6 +156,14 @@ public class WebActivity extends BaseActivity {
                 view.loadUrl(url);
                 return false;
             }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                super.onReceivedSslError(view, handler, error);
+                Log.e("TAG", "onReceivedSslError: " + error.getUrl());
+                handler.proceed();//接受证书
+
+            }
         });
         webView.setDownloadListener((url12, userAgent, contentDisposition, mimetype, contentLength) -> {
                     //在这里进行下载的处理。
@@ -171,6 +184,7 @@ public class WebActivity extends BaseActivity {
         );
 
     }
+
 
 
     @Override

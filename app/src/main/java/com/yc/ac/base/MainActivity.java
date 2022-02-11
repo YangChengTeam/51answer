@@ -21,7 +21,7 @@ import com.yc.ac.collect.ui.fragment.CollectFragment;
 import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.ui.activity.ScanTintActivity;
 import com.yc.ac.index.ui.fragment.IndexFragment;
-import com.yc.ac.index.ui.fragment.IndexFragmentNew;
+import com.yc.ac.index.ui.fragment.PolicyTintFragment;
 import com.yc.ac.setting.ui.fragment.MyFragment;
 import com.yc.ac.utils.ActivityScanHelper;
 import com.yc.ac.utils.IvAvatarHelper;
@@ -35,6 +35,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
@@ -66,10 +67,18 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void init() {
         mList = new ArrayList<>();
-        mList.add(new IndexFragmentNew());
+        mList.add(new IndexFragment());
         mList.add(new CollectFragment());
         mList.add(new MyFragment());
 
+        if (!RxSPTool.getBoolean(this, SpConstant.INDEX_DIALOG)) {
+
+            PolicyTintFragment policyTintFragment = new PolicyTintFragment();
+            policyTintFragment.show(getSupportFragmentManager(), "");
+//            policyTintFragment.setOnGrantListener(this::applyPermission);
+        } else {
+//            applyPermission();
+        }
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), mList);
 
@@ -106,7 +115,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         });
 
 
-        applyPermission();
     }
 
 
@@ -160,7 +168,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             RxPermissionsTool.
                     with(this).
                     addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
-                    addPermission(Manifest.permission.CAMERA).
                     addPermission(Manifest.permission.ACCESS_COARSE_LOCATION).
                     addPermission(Manifest.permission.ACCESS_FINE_LOCATION).
                     addPermission(Manifest.permission.READ_EXTERNAL_STORAGE).

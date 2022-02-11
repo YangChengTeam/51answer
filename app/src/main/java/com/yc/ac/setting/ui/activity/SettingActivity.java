@@ -1,23 +1,31 @@
 package com.yc.ac.setting.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
+import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
 import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtools.RxAppTool;
+import com.vondear.rxtools.RxPermissionsTool;
 import com.vondear.rxtools.RxPhotoTool;
 import com.yc.ac.R;
+import com.yc.ac.base.ExitFragment;
 import com.yc.ac.constant.BusAction;
 import com.yc.ac.setting.contract.SettingContract;
 import com.yc.ac.setting.model.bean.UserInfo;
@@ -28,9 +36,12 @@ import com.yc.ac.utils.ToastUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
 import yc.com.base.BaseActivity;
 
@@ -53,8 +64,8 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
     BaseSettingView baseSettingViewCache;
     @BindView(R.id.baseSettingView_version)
     BaseSettingView baseSettingViewVersion;
-    @BindView(R.id.ll_common_container)
-    LinearLayout llCommonContainer;
+    @BindView(R.id.baseSettingView_exit)
+    BaseSettingView baseSettingViewExit;
 
 
     private String NOT_BIND = "未绑定";
@@ -95,6 +106,21 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
                 mPresenter.logout();
             }
         });
+
+        RxView.clicks(baseSettingViewExit).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                //注销账号
+                ExitFragment exitFragment = new ExitFragment();
+                exitFragment.setTintContent("是否注销账号？\n注销账号后购买的的VIP将无法使用，请谨慎选择！");
+                exitFragment.show(getSupportFragmentManager(), "");
+                exitFragment.setOnConfirmListener(() -> {
+                    mPresenter.userCancellation();
+                    exitFragment.dismiss();
+                });
+            }
+        });
+
         RxView.clicks(baseSettingViewCache).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -115,8 +141,9 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
             @Override
             public void call(Void aVoid) {
                 if (!UserInfoHelper.isGoToLogin(SettingActivity.this)) {
-                    RxPhotoTool.openLocalImage(SettingActivity.this);
-//                    RxPhotoTool.openCameraImage(SettingActivity.this);
+
+                    applyPermission(() -> RxPhotoTool.openLocalImage(SettingActivity.this));
+
                 }
             }
         });
@@ -138,6 +165,23 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
 
     }
 
+    private void applyPermission(Runnable runnable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            List<String> permissions = RxPermissionsTool.
+                    with(this).
+                    addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).
+                    addPermission(Manifest.permission.READ_EXTERNAL_STORAGE).
+                    initPermission();
+            if (permissions.size() == 0) {
+                runnable.run();
+            }
+        } else {
+            runnable.run();
+        }
+
+
+    }
+
 
     @Override
     public void showLogout() {
@@ -152,10 +196,19 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
         baseSettingViewCache.setExtraText(cacheSize);
     }
 
+    @Override
+    public void cancellationSuccess() {
+        UserInfoHelper.saveUserInfo(null);
+        UserInfoHelper.setToken("");
+        RxBus.get().post(BusAction.LOGIN_OUT, "logout");
+        finish();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         IvAvatarHelper.onActivityResult(this, requestCode, resultCode, data);
     }
 
@@ -167,6 +220,8 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
             }
     )
     public void getPicture(Uri uri) {
+
+
         String path = RxPhotoTool.getImageAbsolutePath(this, uri);
         File file = new File(path);
         mPresenter.uploadFile(file, path.substring(path.lastIndexOf("/") + 1));
@@ -187,5 +242,25 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements S
             }
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            List<String> results = new ArrayList<>();
+            for (String permission : permissions) {
+//                LogUtil.msg("TAG: " + permission);
+                if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    results.add(permission);
+                }
+            }
+            if (results.size() == 0) {
+                RxPhotoTool.openLocalImage(SettingActivity.this);
+            }
+
+        }
+    }
+
+
 
 }
