@@ -14,17 +14,9 @@
         android:layout_marginRight="@dimen/distance_20"
         android:layout_marginTop="@dimen/distance_10"
         android:elevation="3dp"
-        android:orientation="vertical">
-        <!--手机号-->
-        <!--<com.yc.sleepmm.index.view.EditInputView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="60dp"-->
-        <!--app:inputIcon="@drawable/ic_phone"-->
-        <!--app:cleanIcon="@drawable/ic_login_calen"-->
-        <!--app:textColor="@color/input_text_color"-->
-        <!--app:hintTextColor="@color/input_hint_color"-->
-        <!--app:hintText="请输入手机号">-->
-        <!--</com.yc.sleepmm.index.view.EditInputView>-->
+        android:orientation="vertical"
+        android:visibility="gone">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,11 +104,13 @@
         android:gravity="center"
         android:text="立即登录"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
 
         <TextView
@@ -141,5 +135,11 @@
             android:text="注册"
             android:textColor="@color/black" />
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/login_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
 

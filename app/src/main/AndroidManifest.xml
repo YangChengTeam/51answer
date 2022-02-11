@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yc.answer">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yc.ac">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -12,23 +13,28 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.CAMERA" />
+<!--    <uses-permission android:name="android.permission.CAMERA" />-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
     <application
-        android:name="com.yc.answer.base.MyApp"
+        android:name=".base.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:targetApi="q">
         <activity
             android:name=".index.ui.activity.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppStartLoadTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,37 +45,29 @@
             android:name=".base.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5a94cee38f4a9d77d3000024" />
+            android:value="5c3ea2e5b465f59e50001540" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="app_online" />
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity
             android:name=".setting.ui.activity.SettingActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
-        <activity
-            android:name=".setting.ui.activity.LoginGroupActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".index.ui.activity.SearchActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".index.ui.activity.SearchActivityNew"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.AnswerDetailActivity"
             android:exported="true"
             android:hardwareAccelerated="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -78,75 +76,130 @@
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="behind"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name=".setting.ui.activity.BindPhoneActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".base.WebActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="behind"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name=".index.ui.activity.ScanTintActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".setting.ui.activity.StatementActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <activity
             android:name=".index.ui.activity.UploadBookActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.UploadAnswerActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
 
         <activity
             android:name=".index.ui.activity.PerfectBookInfoActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.PerfectBookDetailInfoActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.AnswerPreviewActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.UploadBookListActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.ForwardActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".index.ui.activity.SearchCodeActivity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".setting.ui.activity.InvitationActivity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".setting.ui.activity.EarningsDetailActivity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".setting.ui.activity.InvitationFriendActicity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".setting.ui.activity.UploadBookIntroduceActivity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".setting.ui.activity.LoginGroupActivity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".setting.ui.activity.BrowserActivity"
+            android:exported="true"
+            android:screenOrientation="behind" />
+        <activity android:name=".setting.ui.activity.PrivacyStatementActivity" />
+        <activity android:name=".setting.ui.activity.UserPolicyActivity" />
+        <activity android:name=".index.ui.activity.PayActivity" />
+        <activity android:name=".index.ui.activity.PaySuccessActivity" />
+        <activity android:name=".setting.ui.activity.RechargeRecordActivity" />
+        <activity android:name=".setting.ui.activity.NotificationActivity" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="Pzp6GbjhhZHHXa1872MlCen2yhfx2I9g" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"
+                tools:replace="android:resource" />
+
+        </provider>
 
     </application>
-
+    <!--        // 指定微信包名-->
+    <queries>
+        <package android:name="com.tencent.mm" />
+        <package android:name="com.tencent.mobileqq" />
+    </queries>
 </manifest>

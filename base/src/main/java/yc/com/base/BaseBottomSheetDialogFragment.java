@@ -4,20 +4,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.hwangjr.rxbus.RxBus;
 import com.umeng.analytics.MobclickAgent;
 
-
+import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import primary.answer.yc.com.base.R;
 
@@ -44,6 +43,7 @@ public abstract class BaseBottomSheetDialogFragment<P extends BasePresenter> ext
     public void onStart() {
         super.onStart();
         Window window = getDialog().getWindow();
+
         WindowManager.LayoutParams windowParams = window.getAttributes();
         //这里设置透明度
         windowParams.dimAmount = 0.5f;
@@ -51,6 +51,8 @@ public abstract class BaseBottomSheetDialogFragment<P extends BasePresenter> ext
         window.setAttributes(windowParams);
         window.setWindowAnimations(R.style.share_anim);
     }
+
+
 
 
     @Override

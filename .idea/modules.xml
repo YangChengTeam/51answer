@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
@@ -12,4 +13,20 @@
       <module fileurl="file://$PROJECT_DIR$/share/share.iml" filepath="$PROJECT_DIR$/share/share.iml" />
     </modules>
   </component>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="primaryanswer/app" />
+      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" group="primaryanswer/base" />
+      <module fileurl="file://$PROJECT_DIR$/photoview/photoview.iml" filepath="$PROJECT_DIR$/photoview/photoview.iml" group="primaryanswer/photoview" />
+      <module fileurl="file://$PROJECT_DIR$/primaryanswer.iml" filepath="$PROJECT_DIR$/primaryanswer.iml" group="primaryanswer" />
+      <module fileurl="file://$PROJECT_DIR$/rxbus/rxbus.iml" filepath="$PROJECT_DIR$/rxbus/rxbus.iml" group="primaryanswer/rxbus" />
+      <module fileurl="file://$PROJECT_DIR$/share/share.iml" filepath="$PROJECT_DIR$/share/share.iml" group="primaryanswer/share" />
+      <module fileurl="file://$PROJECT_DIR$/tools/tools.iml" filepath="$PROJECT_DIR$/tools/tools.iml" group="primaryanswer/tools" />
+      <module fileurl="file://$PROJECT_DIR$/toutiao-adv/toutiao-adv.iml" filepath="$PROJECT_DIR$/toutiao-adv/toutiao-adv.iml" group="primaryanswer/toutiao-adv" />
+    </modules>
+  </component>
+>>>>>>> dev
 </project>

@@ -1,14 +1,14 @@
 package yc.com.base;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import com.vondear.rxtools.RxLogTool;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 
 /**
@@ -20,7 +20,17 @@ public abstract class BaseView extends FrameLayout implements IView {
     protected Context mContext;
 
     public BaseView(@NonNull Context context) {
-        this(context, null);
+        super(context);
+        this.mContext = context;
+        LayoutInflater.from(context).inflate(getLayoutId(), this);
+
+        try {
+            ButterKnife.bind(this);
+        } catch (Exception e) {
+            RxLogTool.e("初始化失败-->" + e.getMessage());
+        }
+        init();
+
     }
 
     public BaseView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -34,8 +44,8 @@ public abstract class BaseView extends FrameLayout implements IView {
             RxLogTool.e("初始化失败-->" + e.getMessage());
         }
         init();
-
     }
+
 
     @Override
     public void init() {

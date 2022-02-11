@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_browser_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_f5f5f5"
+        android:padding="@dimen/t10dp"
+        android:text="2019-03-12"
+        android:textColor="@color/gray_555555" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/t10dp"
+        android:paddingRight="@dimen/t10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/t10dp"
+            android:layout_marginBottom="@dimen/t10dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/t8dp"
+
+                android:src="@drawable/browser_item_selector"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/t5dp">
+
+                    <ImageView
+                        android:id="@+id/iv_book"
+                        android:layout_width="@dimen/t73dp"
+                        android:layout_height="@dimen/t90dp"
+                        android:src="@mipmap/book_sample" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/t10dp"
+                    android:layout_marginTop="@dimen/t5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_book_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="@dimen/t5dp"
+                        android:text="九年级青岛版九年级青岛版九年级青岛版九年级青岛版"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_last_page"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/t10dp"
+                        android:text="上次看到了第30页"
+                        android:textColor="@color/gray_999"
+                        android:textSize="@dimen/t12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_eee" />
+
+    </LinearLayout>
+
+</LinearLayout>

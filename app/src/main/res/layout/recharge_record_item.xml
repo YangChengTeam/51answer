@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/t15dp"
+    android:paddingTop="@dimen/t15dp"
+    android:paddingRight="@dimen/t15dp"
+    android:paddingBottom="@dimen/t10dp">
+
+    <TextView
+        android:id="@+id/tv_order_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/t13sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="订单号：154693250101429902" />
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/t12dp"
+        android:background="@color/gray_ececec"
+        app:layout_constraintTop_toBottomOf="@id/tv_order_num" />
+
+    <TextView
+        android:id="@+id/tv_order_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/t12dp"
+        android:layout_marginEnd="@dimen/t5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/black_222"
+        android:textSize="@dimen/t14sp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_order_money"
+        app:layout_constraintTop_toBottomOf="@id/view_divider"
+        tools:text="数学答案习题" />
+
+    <TextView
+        android:id="@+id/tv_order_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red_f14343"
+        app:layout_constraintBottom_toBottomOf="@id/tv_order_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_order_title"
+        tools:text="¥30.00" />
+
+    <TextView
+        android:id="@+id/tv_order_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/t5dp"
+        android:textSize="@dimen/t13sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_order_title"
+        tools:text="2019-01-08 15:28:24" />
+
+    <TextView
+        android:id="@+id/tv_order_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/t5dp"
+        android:textSize="@dimen/t11sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_order_title"
+        tools:text="已支付" />
+</androidx.constraintlayout.widget.ConstraintLayout>

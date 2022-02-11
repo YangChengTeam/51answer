@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        app:elevation="0dp">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <!--     app:layout_scrollFlags="scroll|enterAlwaysCollapsed"-->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -26,63 +28,110 @@
             <include layout="@layout/fragment_my_top" />
 
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_f5f5f5"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/distance_10"
+
             android:orientation="vertical">
+<!--            android:layout_marginTop="@dimen/distance_10"-->
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_wx"
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_recharge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@mipmap/setting_wx"
-                app:title="@string/care_wx_number" />
+                app:icon="@mipmap/setting_browse"
+                app:title="@string/recharge_record" />
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_share"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_f5f5f5" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_browser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
-                app:icon="@mipmap/setting_share"
-                app:title="@string/share_friend" />
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
-                android:id="@+id/baseSettingView_net"
+                app:icon="@mipmap/setting_browse"
+                app:title="@string/browser_record" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_f5f5f5" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
-                app:icon="@mipmap/setting_net"
-                app:title="@string/answer_net" />
+                app:icon="@mipmap/setting_browse"
+                app:title="@string/notification_message" />
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/t10dp"
+                app:icon="@mipmap/setting_qq"
+                app:show_extra="false"
+                app:title="联系QQ：2645034912" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_privacy_statement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/t10dp"
+                app:icon="@mipmap/seting_privacy"
+                app:show_extra="false"
+                app:title="  隐私政策" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_f5f5f5" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
+                android:id="@+id/baseSettingView_user_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:icon="@mipmap/seting_privacy"
+                app:show_extra="false"
+                app:title="  用户协议" />
+
+            <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSettingView_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10"
+                android:layout_marginTop="@dimen/t8dp"
                 app:icon="@mipmap/setting_setting"
                 app:title="@string/setting" />
+
 
             <TextView
                 android:id="@+id/tv_statement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/distance_20"
-                android:text="51答案免责声明" />
+                android:layout_marginTop="@dimen/distance_15"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:text="51答案免责声明"
+                android:visibility="gone" />
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

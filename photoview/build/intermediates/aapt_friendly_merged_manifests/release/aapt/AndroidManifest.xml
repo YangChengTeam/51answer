@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD:photoview/build/intermediates/manifests/full/debug/AndroidManifest.xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.github.chrisbanes.photoview"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="27" />
+
+=======
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.github.chrisbanes.photoview"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="28" />
+
+>>>>>>> dev:photoview/build/intermediates/aapt_friendly_merged_manifests/release/aapt/AndroidManifest.xml
+</manifest>

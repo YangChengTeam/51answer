@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-files-path
+        name="umeng_cache"
+        path="umeng_cache/" />
+
+    <external-path
+        name="external"
+        path="app/primaryanswer/" />
+
+    <external-path
+        name="external_storage_root"
+        path="." />
+
+    <external-path
+        name="camera_photos"
+        path="" />
+    <!-- QQ 官方分享SDK 共享路径 -->
+    <root-path
+        name="opensdk_root"
+        path="" />
+    <external-files-path
+        name="opensdk_external"
+        path="Images/tmp" />
+    <!--    <external-path-->
+    <!--        name="my_images"-->
+    <!--        path="." />-->
+</paths>

@@ -17,7 +17,7 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
+            <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseBookView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:background="@color/gray_dddddd" />
 
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
+            <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseGradeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_height="@dimen/distance_05"
                 android:background="@color/gray_dddddd" />
 
-            <com.yc.answer.setting.ui.widget.BaseSettingView
+            <com.yc.ac.setting.ui.widget.BaseSettingView
                 android:id="@+id/baseSubjectView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

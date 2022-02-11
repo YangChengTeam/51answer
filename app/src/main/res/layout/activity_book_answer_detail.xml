@@ -9,79 +9,93 @@
         android:id="@+id/common_view"
         layout="@layout/common_top_view" />
 
-    <com.yc.answer.base.StateView
+    <com.yc.ac.base.StateView
         android:id="@+id/stateView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
+    <com.yc.ac.base.MyRelativeLayout
         android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/m_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom_container" />
 
         <LinearLayout
-            android:id="@+id/ll_bottom"
+            android:id="@+id/ll_bottom_container"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/white">
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rl_collect"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            <FrameLayout
+                android:id="@+id/fl_ad_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/tv_collect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:drawableLeft="@mipmap/collect_unselect_icon"
-                    android:drawablePadding="@dimen/distance_5"
-                    android:text="@string/main_collect"
-                    android:textColor="@color/black" />
-            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/ll_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:id="@+id/rl_collect"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_collect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableStart="@mipmap/collect_unselect_icon"
+                        android:drawablePadding="@dimen/distance_5"
+                        android:text="@string/main_collect"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/rl_download"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/rl_download"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tv_downLoad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:drawableLeft="@mipmap/download"
-                    android:drawablePadding="@dimen/distance_5"
-                    android:text="@string/download"
-                    android:textColor="@color/black" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_downLoad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableStart="@mipmap/hd_resolution_icon"
+                        android:drawablePadding="@dimen/distance_5"
+                        android:text="@string/hd_resolution"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_share"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/rl_share"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/tv_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:drawableLeft="@mipmap/share_icon"
-                    android:drawablePadding="@dimen/distance_5"
-                    android:text="@string/share"
-                    android:textColor="@color/black" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableStart="@mipmap/share_icon"
+                        android:drawablePadding="@dimen/distance_5"
+                        android:text="@string/share"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -116,12 +130,12 @@
             <View
                 android:layout_width="@dimen/distance_05"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/distance_10"
                 android:layout_marginLeft="@dimen/distance_10"
                 android:layout_marginTop="@dimen/distance_10"
+                android:layout_marginBottom="@dimen/distance_10"
                 android:background="@color/gray_555555" />
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -132,7 +146,15 @@
                 app:tabTextColor="@color/black" />
         </LinearLayout>
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_scale_icon"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/scale_guesture_icon"
+            android:visibility="gone" />
+
+    </com.yc.ac.base.MyRelativeLayout>
 
 
 </LinearLayout>

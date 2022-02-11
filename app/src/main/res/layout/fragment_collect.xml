@@ -6,39 +6,65 @@
 
     <include layout="@layout/common_top_view" />
 
-    <com.yc.answer.base.StateView
-        android:id="@+id/stateView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/smartRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_container"
+        <com.yc.ac.base.StateView
+            android:id="@+id/stateView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/t10dp"
-            android:paddingLeft="@dimen/t12dp"
-            android:paddingTop="@dimen/t10dp">
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/tv_collect_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_16" />
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/collect_recyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_10" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/collect_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:paddingStart="@dimen/t12dp"
+                    android:paddingBottom="@dimen/t10dp" />
+
+                <FrameLayout
+                    android:id="@+id/topContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/t8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_photograph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/photograph_btn" />
+
+        <ImageView
+            android:id="@+id/iv_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/t8dp"
+            android:src="@mipmap/word_btn" />
+    </LinearLayout>
 </LinearLayout>

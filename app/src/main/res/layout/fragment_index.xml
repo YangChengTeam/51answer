@@ -1,128 +1,175 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!---->
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/smartRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray_qian"
-    android:paddingTop="@dimen/distance_25">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:background="@color/gray_qian">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbarLayout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content">
 
-
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="135dp"
-                app:indicator_height="6dp"
-                app:indicator_margin="5dp"
-                app:indicator_width="6dp"
-                app:layout_collapseMode="pin" />
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/gray_qian"
-            android:padding="@dimen/distance_10"
-            app:layout_collapseMode="pin">
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        app:indicator_height="6dp"
+                        app:indicator_margin="5dp"
+                        app:indicator_width="6dp"
+                        app:layout_collapseMode="pin" />
 
-            <com.yc.answer.index.ui.widget.BaseSearchView
-                android:id="@+id/baseSearchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.v7.widget.Toolbar>
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray_qian"
+                        android:padding="@dimen/t10dp">
+
+                        <com.yc.ac.index.ui.widget.BaseSearchView
+                            android:id="@+id/baseSearchView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:paddingTop="@dimen/status_bar_height"
+                    android:paddingBottom="@dimen/t5dp"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/t15dp"
+                        android:layout_marginRight="@dimen/t15dp">
+
+                        <ImageView
+                            android:id="@+id/index_iv_logo"
+                            android:layout_width="@dimen/t20dp"
+                            android:layout_height="@dimen/t20dp"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/logo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/app_name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/t18sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/iv_index_share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/index_share" />
+
+                        <ImageView
+                            android:id="@+id/iv_index_search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/t10dp"
+                            android:layout_toStartOf="@id/iv_index_share"
+                            android:src="@mipmap/base_index_search" />
+
+                    </RelativeLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
 
         <LinearLayout
-            android:id="@+id/ll_tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/distance_10"
-            android:layout_marginLeft="@dimen/distance_10"
-            android:layout_marginRight="@dimen/distance_10">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.androidkun.xtablayout.XTabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="0dp"
-                android:layout_height="42dp"
-                android:layout_marginRight="50dp"
-                android:layout_weight="1"
-                app:xTabIndicatorColor="@color/red1"
-                app:xTabIndicatorHeight="3dp"
-                app:xTabIndicatorWidth="50dp"
-                app:xTabMode="fixed"
-                app:xTabSelectedTextColor="@color/red1"
-                app:xTabSelectedTextSize="15sp"
-                app:xTabTextColor="@color/black"
-                app:xTabTextSize="14sp" />
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <FrameLayout
+                android:id="@+id/bottomContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/t10dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/ll_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/distance_5">
+                android:id="@+id/ll_upload"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/t40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="@dimen/distance_15"
+                android:layout_marginBottom="@dimen/t8dp"
+                android:background="@drawable/upload_answer_bg"
+                android:gravity="center"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/filtrate" />
+                    android:src="@mipmap/upload_answer" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/filrate"
-                    android:textColor="@color/red1" />
+                    android:text="@string/upload_answer"
+                    android:textColor="@color/red_f14343"
+                    android:textSize="@dimen/text_16" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/q"
+                    android:textColor="@color/red_f14343"
+                    android:textSize="@dimen/text_12" />
             </LinearLayout>
-        </LinearLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <com.yc.answer.base.StateView
-            android:id="@+id/stateView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-
-
-        <LinearLayout
-            android:id="@+id/ll_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

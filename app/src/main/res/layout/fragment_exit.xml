@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/exit_white_bg"
         android:orientation="vertical"
-        android:paddingTop="@dimen/distance_20">
+        android:paddingTop="@dimen/distance_10">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,16 +23,21 @@
             android:id="@+id/tv_tint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/distance_10"
-            android:gravity="center"
-            android:text="是否退出?" />
+            android:layout_marginStart="@dimen/t50dp"
+            android:layout_marginTop="@dimen/distance_20"
+            android:layout_marginEnd="@dimen/t50dp"
+            android:text="是否退出?"
+            android:textColor="@color/black_333" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_05"
+            android:layout_marginTop="@dimen/distance_25"
+            android:background="@color/gray_f5f5f5" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="@dimen/distance_15"
-            android:background="@color/gray_qian"
+            android:layout_height="@dimen/t40dp"
             android:gravity="center">
 
             <TextView
@@ -42,15 +47,13 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/base_ok"
-                android:textColor="@color/black"
+                android:textColor="@color/red_f14343"
                 android:textSize="@dimen/text_16" />
 
             <View
                 android:layout_width="@dimen/distance_05"
                 android:layout_height="match_parent"
-                android:background="@color/gray_aaa"
-                android:layout_marginTop="@dimen/distance_10"
-                android:layout_marginBottom="@dimen/distance_10"/>
+                android:background="@color/gray_f5f5f5" />
 
             <TextView
                 android:id="@+id/tv_cancel"

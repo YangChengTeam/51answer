@@ -2,15 +2,12 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-
+    <color name="colorAccent">@color/red_f14343</color>
     <color name="gray_cccccc">#cccccc</color>
     <color name="gray_bfbfbf">#bfbfbf</color>
-    <color name="black_2c2c2c">#2c2c2c</color>
     <color name="gray_f5f5f5">#F5F5F5</color>
     <color name="red_f14343">#F14343</color>
     <color name="gray_555555">#555555</color>
-    <color name="gray_tint_555555">#DD555555</color>
     <color name="gray_line">#FFCCCCCC</color>
     <color name="gray_qian">#EEEEEE</color>
     <color name="pink_dea8a8">#DEA8A8</color>
@@ -22,4 +19,12 @@
     <color name="red_fff3f3">#FFF3F3</color>
     <color name="red_f0333a">#F0333A</color>
     <color name="gray_dddddd">#DDDDDD</color>
+    <color name="green_4ec54e">#4EC54E</color>
+    <color name="red_ff6058">#FF6058</color>
+    <color name="blue_44b9f5">#44B9F5</color>
+    <color name="red_ea194b">#EA194B</color>
+    <color name="gray_d7d7d7">#D7D7D7</color>
+    <color name="gray_eee">#EEEEEE</color>
+    <color name="black_222">#222222</color>
+    <color name="gray_ececec">#ECECEC</color>
 </resources>

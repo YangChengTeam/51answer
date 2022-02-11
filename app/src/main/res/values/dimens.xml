@@ -6,7 +6,6 @@
     <dimen name="fixed_icon_grid">20dp</dimen>
 
     <dimen name="text_16">16sp</dimen>
-    <dimen name="text_18">18sp</dimen>
     <dimen name="text_14">14sp</dimen>
     <dimen name="text_12">12sp</dimen>
 
@@ -16,17 +15,14 @@
     <dimen name="distance_10">10dp</dimen>
     <dimen name="distance_15">15dp</dimen>
     <dimen name="distance_20">20dp</dimen>
-    <dimen name="distance_80">80dp</dimen>
     <dimen name="distance_25">25dp</dimen>
     <dimen name="distance_3">3dp</dimen>
     <dimen name="distance_30">30dp</dimen>
-    <dimen name="distance_50">50dp</dimen>
     <dimen name="distance_2">2dp</dimen>
-    <dimen name="distance_40">40dp</dimen>
     <!--73dp-->
     <dimen name="book_width">90dp</dimen>
     <!--90dp-->
     <dimen name="book_height">120dp</dimen>
-
+    <dimen name="status_bar_height">0dp</dimen>
 
 </resources>

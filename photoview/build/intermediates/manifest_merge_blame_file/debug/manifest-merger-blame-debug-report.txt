@@ -7,7 +7,11 @@
 7    <uses-sdk
 8        android:minSdkVersion="14"
 8-->D:\AndroidStudioProjects\primaryanswer\photoview\src\main\AndroidManifest.xml
+<<<<<<< HEAD
 9        android:targetSdkVersion="27" />
+=======
+9        android:targetSdkVersion="28" />
+>>>>>>> dev
 9-->D:\AndroidStudioProjects\primaryanswer\photoview\src\main\AndroidManifest.xml
 10
 11</manifest>

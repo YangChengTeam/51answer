@@ -1,8 +1,10 @@
 package yc.com.base;
 
 
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,5 +50,8 @@ public class UIUtils {
         Matcher m = p.matcher(phoneNumber);
         return m.matches();
     }
-
+    //是否是指定机型
+    public static boolean isAssignPhone() {
+        return TextUtils.equals("huawei", Build.BRAND.toLowerCase()) || TextUtils.equals("honor", Build.BRAND.toLowerCase());
+    }
 }
