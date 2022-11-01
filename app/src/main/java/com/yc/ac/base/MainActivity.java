@@ -71,14 +71,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mList.add(new CollectFragment());
         mList.add(new MyFragment());
 
-        if (!RxSPTool.getBoolean(this, SpConstant.INDEX_DIALOG)) {
 
-            PolicyTintFragment policyTintFragment = new PolicyTintFragment();
-            policyTintFragment.show(getSupportFragmentManager(), "");
-//            policyTintFragment.setOnGrantListener(this::applyPermission);
-        } else {
-//            applyPermission();
-        }
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), mList);
 

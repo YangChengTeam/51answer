@@ -11,20 +11,14 @@ android {
         applicationId "com.yc.ac"
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 15
-        versionName "2.0.0"
+        versionCode 18
+        versionName "2.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
         flavorDimensions 'default'//这句不能少
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng"]
 
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-            }
-        }
 
         ndk {
             // 设置支持的SO库架构
@@ -159,7 +153,8 @@ dependencies {
     implementation('com.github.bumptech.glide:glide:4.9.0') {
         exclude group: "com.android.support"
     }
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+  //  annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+  //  annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation project(':photoview')
     implementation project(':base')
     implementation 'com.aliyun.dpa:oss-android-sdk:2.4.2'

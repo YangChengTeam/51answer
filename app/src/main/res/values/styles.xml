@@ -41,6 +41,22 @@
     <style name="TabAppearance">
         <item name="android:textSize">@dimen/t13sp</item>
     </style>
-
-
+    <style name="center_dialog" parent="android:style/Theme.Dialog">
+        <!-- 设置无边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置未浮动窗口 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 设置完全透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/Animation_Center_Dialog</item>
+    </style>
+    <style name="Animation_Center_Dialog">
+        <item name="android:windowEnterAnimation">@anim/abc_shrink_fade_out_from_bottomzq</item>
+        <item name="android:windowExitAnimation">@anim/abc_popup_exit</item>
+    </style>
 </resources>

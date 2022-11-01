@@ -10,13 +10,13 @@ def siteUrl = 'https://github.com/sunshey/toutiao-adv' // 项目主页。
 def gitUrl = 'https://github.com/sunshey/toutiao-adv.git' // Git仓库的url。
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
 
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 

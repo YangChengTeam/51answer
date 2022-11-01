@@ -58,13 +58,8 @@ public class MyApp extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Observable.just("").subscribeOn(Schedulers.io()).subscribe(s -> {
-            init();
             initGalleryFinal();
         });
-
-        Bugly.init(getApplicationContext(), "af5788360b", false);
-
-        TTAdManagerHolder.init(this, Config.toutiao_ad_id);
 
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "answer-circle-db", null);
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -82,63 +77,7 @@ public class MyApp extends MultiDexApplication {
         return daoSession;
     }
 
-    private void init() {
-        RxTool.init(this);
 
-        //友盟统计
-//        UMGameAgent.setDebugMode(false);
-//        UMGameAgent.init(this);
-//        UMGameAgent.setPlayerLevel(1);
-        UMConfigure.setLogEnabled(true);
-
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-
-        UMConfigure.preInit(this, "5c3ea2e5b465f59e50001540", "umeng");
-        if (RxSPTool.getBoolean(this, SpConstant.INDEX_DIALOG)) {
-            UMConfigure.init(this, "5c3ea2e5b465f59e50001540", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
-        }
-        //开启debug模式，方便定位错误，具体错误检查方式可以查看
-        //http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
-        UMConfigure.setLogEnabled(false);
-
-
-        PlatformConfig.setWeixin("wx622cbf19fcb00f29", "4aa67b15c55411749dddfbad0cd66798");
-//        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
-        PlatformConfig.setWXFileProvider("com.yc.ac.fileprovider");
-
-        PlatformConfig.setQQZone("1108013607", "2mun88jc6IlVjy1A");
-        PlatformConfig.setQQFileProvider("com.yc.ac.fileprovider");
-
-        //初始化友盟SDK
-        UMShareAPI.get(this);//初始化sd
-
-//        Config.DEBUG = true;
-
-
-        //全局信息初始化
-
-        UserInfoHelper.login(this);
-        GoagalInfo.get().init(this);
-
-        //设置http默认参数
-        String agent_id = "1";
-        Map<String, String> params = new HashMap<>();
-        if (GoagalInfo.get().channelInfo != null && GoagalInfo.get().channelInfo.agent_id != null) {
-            params.put("from_id", GoagalInfo.get().channelInfo.from_id + "");
-            params.put("author", GoagalInfo.get().channelInfo.author + "");
-            agent_id = GoagalInfo.get().channelInfo.agent_id;
-        }
-        params.put("agent_id", agent_id);
-        params.put("imeil", GoagalInfo.get().uuid);
-        String sv = getSV();
-        params.put("sv", sv);
-        params.put("device_type", "2");
-        if (GoagalInfo.get().packageInfo != null) {
-            params.put("app_version", GoagalInfo.get().packageInfo.versionCode + "");
-        }
-        HttpConfig.setDefaultParams(params);
-
-    }
 
     public static String getSV() {
         return Build.MODEL.contains(Build.BRAND) ? Build.MODEL + " " + Build.VERSION.RELEASE : Build.BRAND + " " + Build.MODEL + " " + Build.VERSION.RELEASE;

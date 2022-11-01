@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:id="@+id/ll_bg"
+    android:background="@drawable/line_bg_white2"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#094067"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:text="个人信息保护指引"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_contents"
+        android:textColor="#5F6C7B"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="请您在使用答案圈前充分阅读《用户协议》《隐私政策》各条款，了解我们对您个人信息的处理规则和申请权限的目的。点击“同意”按钮代表你已同意签署协议和本指引。"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:textColor="#5F6C7B"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="在您使用应用服务的过程中，我们可能会申请(存储权限，主要用来下载缓存相关文件和内容管理)。"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textColor="#5F6C7B"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="你可以在设备本身的操作系统中撤回您的授权，撤回授权后我们将不再手机与这些权限相关的信息。
+"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="18dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_cancle"
+            android:gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#3C88FF"
+            android:textSize="15sp"
+            android:text="拒绝"
+            android:layout_width="0dp"
+            android:layout_height="48dp"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_sure"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#3C88FF"
+            android:textSize="16sp"
+            android:text="同意并继续"
+            android:layout_width="0dp"
+            android:layout_height="48dp"/>
+    </LinearLayout>
+
+</LinearLayout>
