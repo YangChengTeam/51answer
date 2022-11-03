@@ -68,7 +68,7 @@ public class MyApp extends MultiDexApplication {
         daoSession = dm.newSession();
 //        QueryBuilder.LOG_SQL = true;
 //        QueryBuilder.LOG_VALUES = true;
-        MMKV.initialize(this);
+
 
     }
 

@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
@@ -57,16 +58,14 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     protected void setStatusBar() {
         StatusBarUtil.setTranslucentForImageView(this, null);
-
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        MobclickAgent.onResume(this);
         if (EmptyUtils.isNotEmpty(mPresenter)) {
+            MobclickAgent.onResume(this);
             mPresenter.subscribe();
         }
     }
@@ -74,7 +73,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        if (EmptyUtils.isNotEmpty(mPresenter)) {
+            MobclickAgent.onPause(this);
+        }
     }
 
 

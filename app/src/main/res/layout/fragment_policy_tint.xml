@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/t20dp"
-        android:text="隐私政策提醒"
+        android:text="个人信息保护指引"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16"
         app:layout_constraintLeft_toLeftOf="parent"

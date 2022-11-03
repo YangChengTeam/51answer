@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.hwangjr.rxbus.RxBus;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.domain.ResultInfo;
@@ -29,6 +30,7 @@ import com.kk.utils.ToastUtil;
 import com.kk.utils.VUiKit;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.tencent.bugly.Bugly;
+import com.tencent.mmkv.MMKV;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -120,7 +122,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
 
     public void initViews(){
         Bugly.init(getApplicationContext(), "af5788360b", false);
-        TTAdManagerHolder.init(this, Config.toutiao_ad_id);
+        TTAdManagerHolder.init(getApplicationContext(), Config.toutiao_ad_id);
         initsdk();
         rlSelectGrade.setVisibility(View.GONE);
 //        iv.setVisibility(View.VISIBLE);
@@ -130,6 +132,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
     }
 
     public void initsdk() {
+        MMKV.initialize(this);
         RxTool.init(getApplicationContext());
 
         //友盟统计
@@ -316,14 +319,14 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
     protected void onPause() {
         super.onPause();
 //        AdvDispatchManager.getManager().onPause();
-        TTAdDispatchManager.getManager().onStop();
+       // TTAdDispatchManager.getManager().onStop();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
 //        AdvDispatchManager.getManager().onResume();
-        TTAdDispatchManager.getManager().onResume();
+        super.onResume();
+     //   TTAdDispatchManager.getManager().onResume();
     }
 
     @Override
