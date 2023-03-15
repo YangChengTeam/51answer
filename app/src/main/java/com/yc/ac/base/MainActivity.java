@@ -13,6 +13,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.utils.LogUtil;
+import com.kk.utils.VUiKit;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxPermissionsTool;
 import com.vondear.rxtools.RxSPTool;
@@ -26,6 +27,7 @@ import com.yc.ac.setting.ui.fragment.MyFragment;
 import com.yc.ac.utils.ActivityScanHelper;
 import com.yc.ac.utils.IvAvatarHelper;
 import com.yc.ac.utils.RxDownloadManager;
+import com.yc.ac.utils.adgromore.GromoreNewInsetShowTwo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +73,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mList.add(new CollectFragment());
         mList.add(new MyFragment());
 
-
+        GromoreNewInsetShowTwo.getInstance().setContexts(this);
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), mList);
 
@@ -107,9 +109,39 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         });
 
+        showInset();
+    }
+    private void showInset() {
+        if (MyApp.state==1){
+            VUiKit.postDelayed(1500, new Runnable() {
+                @Override
+                public void run() {
+                    GromoreNewInsetShowTwo.getInstance().showInset(new GromoreNewInsetShowTwo.OnNewInsetAdShowCaback() {
+                        @Override
+                        public void onRewardedAdShow() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+
+                        @Override
+                        public void onRewardClick() {
+
+                        }
+
+                        @Override
+                        public void onRewardedAdClosed(boolean isVideoClick) {
+
+                        }
+                    });
+                }
+            });
+        }
 
     }
-
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

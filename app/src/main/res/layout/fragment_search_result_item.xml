@@ -143,4 +143,28 @@
         android:layout_marginTop="@dimen/distance_5"
         android:layout_marginBottom="@dimen/distance_5"
         android:background="@color/gray_cccccc" />
+    <LinearLayout
+        android:adjustViewBounds="true"
+        android:maxHeight="150dp"
+        android:visibility="gone"
+        android:id="@+id/line_exAd"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <FrameLayout
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal|bottom"
+            android:id="@+id/fl_exConstain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_05"
+            android:layout_marginTop="@dimen/distance_5"
+            android:layout_marginBottom="@dimen/distance_5"
+            android:background="@color/gray_cccccc" />
+
+    </LinearLayout>
 </LinearLayout>

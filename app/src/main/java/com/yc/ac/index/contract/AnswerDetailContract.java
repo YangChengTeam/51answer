@@ -18,6 +18,9 @@ public interface AnswerDetailContract {
         void showAnswerDetailInfo(BookInfo data, boolean isReload);
 
         void showFavoriteResult(String data, boolean isCollect);
+
+        void showSuccess();
+
     }
 
     interface Presenter extends IPresenter {

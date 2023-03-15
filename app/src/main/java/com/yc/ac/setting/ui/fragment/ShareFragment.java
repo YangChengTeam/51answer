@@ -2,6 +2,7 @@ package com.yc.ac.setting.ui.fragment;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -101,8 +102,10 @@ public class ShareFragment extends BaseBottomSheetDialogFragment<SharePresenter>
             RxSPTool.putBoolean(mContext, SpConstant.SHARE_SUCCESS, true);
             if (mShareInfo != null) {
                 if (mIsShareMoney) {
+                    Log.d("securityhttp", "--------0000-------onResult: ");
                     mPresenter.shareMoney();
                 } else {
+                    Log.d("securityhttp", "--------1111-------onResult: ");
                     if (!TextUtils.isEmpty(mShareInfo.getBook_id())) {
                         mPresenter.share(mShareInfo);
                     }

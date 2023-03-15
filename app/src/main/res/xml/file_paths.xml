@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path
+        name="hm_private_cache"
+        path="apks" />
+    <root-path
+        name="name"
+        path="" />
+
+    <external-files-path
+        name="opensdk_external"
+        path="Images/tmp" />
+    <root-path
+        name="opensdk_root"
+        path="" />
+
+    <external-path
+        name="external_storage_root"
+        path="." />
+    <external-path name="tt_external_root" path="." />
+    <external-path name="tt_external_download" path="Download" />
+    <external-files-path name="tt_external_files_download" path="Download" />
+    <files-path name="tt_internal_file_download" path="Download" />
+    <cache-path name="tt_internal_cache_download" path="Download" />
+    <external-files-path name="umeng_cache" path="umeng_cache/"/>
+
+
+    <external-cache-path
+        name="gdt_sdk_download_path1"
+        path="com_qq_e_download" />
+    <cache-path
+        name="gdt_sdk_download_path2"
+        path="com_qq_e_download" />
+</paths>

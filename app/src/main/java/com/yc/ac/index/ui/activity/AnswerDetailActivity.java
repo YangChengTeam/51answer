@@ -2,14 +2,26 @@ package com.yc.ac.index.ui.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -32,6 +45,8 @@ import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.utils.LogUtil;
+import com.kk.utils.ToastUtil;
+import com.kk.utils.VUiKit;
 import com.umeng.socialize.UMShareAPI;
 import com.vondear.rxtools.RxPermissionsTool;
 import com.vondear.rxtools.RxSPTool;
@@ -41,6 +56,7 @@ import com.yc.ac.base.MyApp;
 import com.yc.ac.base.MyRelativeLayout;
 import com.yc.ac.base.StateView;
 import com.yc.ac.constant.BusAction;
+import com.yc.ac.dialog.SignDialogThree;
 import com.yc.ac.index.contract.AnswerDetailContract;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.presenter.AnswerDetailPresenter;
@@ -48,15 +64,19 @@ import com.yc.ac.index.ui.adapter.AnswerDetailAdapter;
 import com.yc.ac.index.ui.fragment.AnswerTintFragment;
 import com.yc.ac.index.ui.fragment.DeleteTintFragment;
 import com.yc.ac.index.ui.fragment.ShareFragment;
-import com.yc.ac.pay.PaySuccessInfo;
 import com.yc.ac.setting.model.bean.BrowserInfo;
+import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
+import com.yc.ac.utils.CommonUtils;
+import com.yc.ac.utils.GlideHelper;
 import com.yc.ac.utils.RxDownloadManager;
 import com.yc.ac.utils.ToastUtils;
 import com.yc.ac.utils.UserInfoHelper;
+import com.yc.ac.utils.adgromore.GromoreNewInsetShowTwo;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,15 +86,12 @@ import butterknife.BindView;
 import yc.com.base.BaseActivity;
 import yc.com.base.CacheUtils;
 import yc.com.base.FileUtils;
-import yc.com.toutiao_adv.OnAdvStateListener;
-import yc.com.toutiao_adv.TTAdDispatchManager;
-import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/3/12 10:58.
  */
 
-public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> implements AnswerDetailContract.View, OnAdvStateListener {
+public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> implements AnswerDetailContract.View {
 
 
     @BindView(R.id.iv_back)
@@ -169,9 +186,42 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
         if (MyApp.state == 1) {
 
-            TTAdDispatchManager.getManager().init(this, TTAdType.BANNER, flAdContainer, Config.toutiao_banner1_id, 0, null, null, 0, null, 0, this);
         }
         timerTask = new MyTask();
+        initJiVideoDialog();
+        initShareSureDialog();
+        showInset();
+    }
+
+    private void showInset() {
+        if (MyApp.state==1){
+            VUiKit.postDelayed(400, new Runnable() {
+                @Override
+                public void run() {
+                    GromoreNewInsetShowTwo.getInstance().showInset(new GromoreNewInsetShowTwo.OnNewInsetAdShowCaback() {
+                        @Override
+                        public void onRewardedAdShow() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+
+                        @Override
+                        public void onRewardClick() {
+
+                        }
+
+                        @Override
+                        public void onRewardedAdClosed(boolean isVideoClick) {
+
+                        }
+                    });
+                }
+            });
+        }
     }
 
 
@@ -191,7 +241,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
             if (isCollectClick)
                 tvCollect.setText(getString(R.string.collect_cancel));
         }
-
     }
 
 
@@ -217,14 +266,14 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         //            }
         RxView.clicks(rlDownload).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //                if (!UserInfoHelper.isGoToLogin(AnswerDetailActivity.this)) {
-            TTAdDispatchManager.getManager().init(AnswerDetailActivity.this, TTAdType.REWARD_VIDEO, null, Config.toutiao_reward_id, 0, null, "高清解析", 1, UserInfoHelper.getUId(), TTAdConstant.VERTICAL, AnswerDetailActivity.this);
 
         });
 
         //            }
         RxView.clicks(rlShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
 //            applyPermission(this::showShareDialog);
-            showShareDialog();
+         //   showShareDialog();
+            showJiVideoDialog();
         });
 
     }
@@ -349,7 +398,8 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                     }
                     if (!UserInfoHelper.isVip()) {
                         if (!isCanNext(bookInfo)) {
-                            showAnswerDialog(0);
+                            showShareSureDialog();
+                           // showAnswerDialog(0);
                             return;
                         }
                     }
@@ -368,7 +418,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
             }
         });
-
     }
 
     private void showAnswerDialog(int state) {
@@ -379,7 +428,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         bundle.putString("articleId", bookId);
         answerTintFragment.setArguments(bundle);
         answerTintFragment.show(getSupportFragmentManager(), "");
-        answerTintFragment.setConfirmListener(() -> TTAdDispatchManager.getManager().init(AnswerDetailActivity.this, TTAdType.REWARD_VIDEO, null, Config.toutiao_reward_id, 0, null, "解锁看答案", 1, UserInfoHelper.getUId(), TTAdConstant.VERTICAL, AnswerDetailActivity.this));
         mViewpager.setCurrentItem(oldPos);
     }
 
@@ -402,6 +450,22 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         ToastUtils.showCenterToast(this, (isCollect ? "收藏" : "取消收藏") + "成功");
         setCollectDrawable(isCollect);
 
+    }
+
+    @Override
+    public void showSuccess() {
+        if (fenxaignDialog!=null){
+            if (fenxaignDialog.getIsShow()){
+                fenxaignDialog.setDismiss();
+            }
+        }
+        Log.d("securityhttp", "--------3333-------showSuccess: ");
+        if (bookInfo!=null){
+            bookInfo.setAccess(1);
+        }
+        if (tvShare!=null){
+            tvShare.setText(getString(R.string.shared));
+        }
     }
 
     private int count = 0;
@@ -572,30 +636,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         }
     }
 
-    @Override
-    public void loadSuccess() {
-
-    }
-
-    @Override
-    public void loadFailed() {
-
-    }
-
-    @Override
-    public void clickAD() {
-        isNeedReadVideo = false;
-    }
-
-    @Override
-    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
-
-    }
-
-    @Override
-    public void onNativeExpressDismiss(TTNativeExpressAd view) {
-
-    }
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable timerTask;
@@ -619,7 +659,125 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         toast.show();
     }
 
-    @Override
+
+    private ImageView ivBookCover,ivQq,ivWx,ivCode;
+    private TextView tvAnswerTitle,tvAnswerExtra;
+    private LinearLayout llShare,line_share;
+    private SignDialogThree fenxaignDialog;
+
+    public void initJiVideoDialog() {//
+        fenxaignDialog = new SignDialogThree(this);
+        View builder = fenxaignDialog.builder(R.layout.fragment_share_code);
+        ivBookCover=builder.findViewById(R.id.iv_book_cover);
+        ivQq=builder.findViewById(R.id.iv_qq);
+        ivWx=builder.findViewById(R.id.iv_wx);
+        ivCode=builder.findViewById(R.id.iv_code);
+        tvAnswerTitle=builder.findViewById(R.id.tv_answer_title);
+        tvAnswerExtra=builder.findViewById(R.id.tv_answer_extra);
+        llShare=builder.findViewById(R.id.ll_share);
+        line_share=builder.findViewById(R.id.line_share);
+        fenxaignDialog.setOutCancle(true);
+
+    }
+
+    public void showJiVideoDialog() {//
+        if (fenxaignDialog!=null&&ivCode!=null){
+            tvAnswerTitle.setText(bookInfo.getName());
+            tvAnswerExtra.setText(String.format(getString(R.string.share_answer_extra), bookInfo.getSubject(), bookInfo.getGrade(), bookInfo.getPart_type()));
+            GlideHelper.loadImage(this, bookInfo.getCover_img(), ivBookCover);
+            if (!CommonUtils.isDestory(this)) {
+                RxView.clicks(ivWx).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+                    llShare.setVisibility(View.GONE);
+                    ivCode.setVisibility(View.VISIBLE);
+                    ivCode.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Bitmap bitmap = viewConversionBitmap(line_share);
+                            if (bitmap!=null){
+                                shareWx(bitmap);
+                                mPresenter.share(bookInfo.getBookId());
+                                fenxaignDialog.setDismiss();
+                            }
+                        }
+                    }, 500);
+                });
+                RxView.clicks(ivQq).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
+                    llShare.setVisibility(View.GONE);
+                    ivCode.setVisibility(View.VISIBLE);
+                    ivCode.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Bitmap bitmap = viewConversionBitmap(line_share);
+                            if (bitmap!=null){
+                                shareQQ(bitmap);
+                                mPresenter.share(bookInfo.getBookId());
+                                fenxaignDialog.setDismiss();
+                            }
+                        }
+                    }, 500);
+                });
+                if (!CommonUtils.isDestory(this)) {
+                    fenxaignDialog.setShow();
+                }
+            }
+        }
+    }
+
+
+
+
+    private TextView tvConfirm,tvContent;
+    private SignDialogThree sharSureDialog;
+
+    public void initShareSureDialog() {//
+        sharSureDialog = new SignDialogThree(this);
+        View builder = sharSureDialog.builder(R.layout.dialog_share_code);
+        tvConfirm=builder.findViewById(R.id.tv_confirm);
+        tvContent=builder.findViewById(R.id.tv_content);
+        sharSureDialog.setOutCancle(false);
+    }
+
+    public void showShareSureDialog() {//
+        if (sharSureDialog!=null){
+            if (!CommonUtils.isDestory(this)) {
+                tvContent.setText("分享后即可查看完整答案！！");
+                tvConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showJiVideoDialog();
+                        sharSureDialog.setDismiss();
+                    }
+                });
+                if (!CommonUtils.isDestory(this)) {
+                    sharSureDialog.setShow();
+                }
+            }
+        }
+    }
+
+
+
+    /**
+     * 绘制已经测量过的View
+     */
+    private static Bitmap viewConversionBitmap(View view) {
+        Bitmap bitmap=null;
+        try {
+            int width = view.getWidth();
+            int height = view.getHeight();
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            Canvas canvas = new Canvas(bitmap);
+            view.draw(canvas);
+        }catch (Exception e){
+            return null;
+        }
+        return bitmap;
+    }
+
+
+
+
+   /* @Override
     public void onRewardVideoComplete() {
         mHandler.removeCallbacks(timerTask);
         ivScaleIcon.setVisibility(View.VISIBLE);
@@ -633,6 +791,182 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     @Override
     public void loadRewardVideoSuccess() {
         mHandler.post(timerTask);
+    }*/
+
+
+    /**
+     * 分享图片到微信
+     *
+     * @param context
+     * @param uri
+     */
+    public void shareToWx(Context context, Uri uri) {
+        if (isInstalled(AnswerDetailActivity.this,"com.tencent.mm")) {
+            try {
+                Intent intent = new Intent();
+                ComponentName cop = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
+                intent.setComponent(cop);
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(Intent.createChooser(intent, "Share"));
+            } catch (Exception e) {
+                Toast.makeText(this,"分享失败，请稍后重试",Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this,"请您先安装微信！",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * 检测程序是否安装
+     *
+     * @param packageName
+     * @return
+     */
+    public static boolean isInstalled(Context context, String packageName) {
+        PackageManager manager = context.getPackageManager();
+        //获取所有已安装程序的包信息
+        List<PackageInfo> installedPackages = manager.getInstalledPackages(0);
+        if (installedPackages != null) {
+            for (PackageInfo info : installedPackages) {
+                if (info.packageName.equals(packageName))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+
+
+    public void shareWx(Bitmap resultPosterBitmap) {
+        //Uri tempUri = getImageContentUri(InviteFriendsActivity.this, new File(resultPosterPath));
+        Uri tempUri = null;
+        try {
+            if (Build.VERSION.SDK_INT >= 29) {
+                String displayNames="share_img"+System.currentTimeMillis()+"png";
+                tempUri = getUri(this, resultPosterBitmap, Bitmap.CompressFormat.PNG, "image/png", displayNames, "caicai");
+            } else {
+                try {
+                    tempUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), resultPosterBitmap, null, null));
+                }catch (Exception e){
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (tempUri != null) {
+            shareToWx(AnswerDetailActivity.this, tempUri);
+        } else {
+            Toast.makeText(this,"分享失败，请稍后重试",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
+    public void shareQQ(Bitmap resultPosterBitmap) {
+        //Uri tempUri = getImageContentUri(InviteFriendsActivity.this, new File(resultPosterPath));
+        Uri tempUri = null;
+        try {
+            if (Build.VERSION.SDK_INT >= 29) {
+                String displayNames="share_img"+System.currentTimeMillis()+"png";
+                tempUri = getUri(this, resultPosterBitmap, Bitmap.CompressFormat.PNG, "image/png", displayNames, null);
+            } else {
+                try {
+                    tempUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), resultPosterBitmap, null, null));
+                }catch (Exception e){
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (tempUri != null) {
+            shareToQQ(AnswerDetailActivity.this, tempUri);
+        } else {
+            Toast.makeText(this,"分享失败，请稍后重试",Toast.LENGTH_LONG).show();
+            return;
+        }
+    }
+    @NonNull
+    private Uri getUri(@NonNull final Context context, @NonNull final Bitmap bitmap,
+                       @NonNull final Bitmap.CompressFormat format, @NonNull final String mimeType,
+                       @NonNull final String displayName, @Nullable final String subFolder) throws IOException {
+        String relativeLocation = Environment.DIRECTORY_DCIM;
+
+        if (!TextUtils.isEmpty(subFolder)) {
+            relativeLocation += File.separator + subFolder;
+        }
+
+        final ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
+        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+        contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation);
+
+        final ContentResolver resolver = context.getContentResolver();
+
+        OutputStream stream = null;
+        Uri uri = null;
+
+        try {
+            final Uri contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            uri = resolver.insert(contentUri, contentValues);
+
+            if (uri == null) {
+                throw new IOException("Failed to create new MediaStore record.");
+            }
+
+            stream = resolver.openOutputStream(uri);
+
+            if (stream == null) {
+                throw new IOException("Failed to get output stream.");
+            }
+
+            if (bitmap.compress(format, 95, stream) == false) {
+                throw new IOException("Failed to save bitmap.");
+            }
+
+            return uri;
+        } catch (IOException e) {
+            if (uri != null) {
+                // Don't leave an orphan entry in the MediaStore
+                resolver.delete(uri, null, null);
+            }
+
+            throw e;
+        } finally {
+            if (stream != null) {
+                stream.close();
+            }
+        }
+    }
+
+    /**
+     * 分享图片到QQ
+     *
+     * @param context
+     * @param uri
+     */
+    public void shareToQQ(Context context, Uri uri) {
+        if (isInstalled(AnswerDetailActivity.this,"com.tencent.mobileqq")) {
+            try {
+                Intent intent = new Intent();
+                ComponentName cop = new ComponentName("com.tencent.mobileqq", "com.tencent.mobileqq.activity.JumpActivity");
+                intent.setComponent(cop);
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(Intent.createChooser(intent, "Share"));
+            } catch (Exception e) {
+                Toast.makeText(this,"分享失败，请稍后重试",Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this,"请您先安装QQ！",Toast.LENGTH_LONG).show();
+        }
     }
 
 

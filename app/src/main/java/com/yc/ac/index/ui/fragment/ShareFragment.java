@@ -141,7 +141,6 @@ public class ShareFragment extends BaseDialogFragment<SharePresenter> implements
             if (mShareInfo != null && !TextUtils.isEmpty(mShareInfo.getBook_id())) {
                 mPresenter.share(mShareInfo);
             }
-
         }
 
         @Override

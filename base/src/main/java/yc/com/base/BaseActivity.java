@@ -46,7 +46,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             RxLogTool.e("-->: 初始化失败 " + e.getMessage());
         }
 
-
         baseLoadingView = new BaseLoadingView(this);
         mHandler = new Handler();
         //顶部透明
@@ -65,6 +64,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onResume() {
         super.onResume();
         if (EmptyUtils.isNotEmpty(mPresenter)) {
+            Log.d("ccc", "-----00-----onResume: ");
             MobclickAgent.onResume(this);
             mPresenter.subscribe();
         }
@@ -74,6 +74,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onPause() {
         super.onPause();
         if (EmptyUtils.isNotEmpty(mPresenter)) {
+            Log.d("ccc", "------11----onPause: ");
             MobclickAgent.onPause(this);
         }
     }

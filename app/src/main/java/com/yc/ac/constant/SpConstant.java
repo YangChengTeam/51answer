@@ -52,4 +52,8 @@ public class SpConstant {
     public static final String INDEX_DIALOG = "index_dialog";
 
     public static final String AGREE_MENT = "agent_ment";
+
+    public static final String SHAREBOOK = "SHAREBOOKS";
+
+
 }

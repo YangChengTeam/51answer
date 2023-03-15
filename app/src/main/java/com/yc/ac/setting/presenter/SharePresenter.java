@@ -1,6 +1,7 @@
 package com.yc.ac.setting.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
@@ -52,9 +53,11 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
 
             @Override
             public void onNext(ResultInfo<String> stringResultInfo) {
+                Log.d("securityhttp", "--------333-------onResult: ");
                 if (stringResultInfo != null && stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
                     RxBus.get().post(BusAction.SHARE_SUCCESS, "share_success");
                 } else {
+                    Log.d("securityhttp", "--------444-------onResult: ");
                     saveShare(shareInfo);
                     RxBus.get().post(BusAction.SHARE_SUCCESS, "share_success");
                 }
@@ -91,7 +94,7 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
     }
 
     private boolean queryShareBook(ShareInfo shareInfo) {
-
+        Log.d("securityhttp", "--------777-------onResult: "+ShareInfoDao.Properties.Book_id);
         ShareInfo result = shareInfoDao.queryBuilder().where(ShareInfoDao.Properties.Book_id.eq(shareInfo.getBook_id())).build().unique();
         return result != null;
 
@@ -99,8 +102,9 @@ public class SharePresenter extends BasePresenter<ShareEngine, ShareContract.Vie
 
 
     private void saveShare(ShareInfo shareInfo) {
-
+        Log.d("securityhttp", "--------555-------onResult: ");
         if (!queryShareBook(shareInfo)) {
+            Log.d("securityhttp", "--------6666-------onResult: ");
             shareInfoDao.insert(shareInfo);
         }
     }

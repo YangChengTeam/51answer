@@ -1,21 +1,24 @@
 package com.yc.ac.index.ui.adapter;
 
+import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.bytedance.msdk.api.v2.ad.nativeAd.GMNativeAd;
+import com.bytedance.msdk.api.v2.ad.nativeAd.GMNativeExpressAdListener;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yc.ac.R;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.utils.SubjectHelper;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +28,7 @@ import java.util.List;
 
 public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo, BaseViewHolder> {
     private HashMap<TTNativeExpressAd, Integer> mAdViewPositionMap;
-
+    private boolean isNeedRe;
     public SearchResultItemAdapter(@Nullable List<BookInfo> data, HashMap<TTNativeExpressAd, Integer> adViewPositionMap) {
         super(data);
         this.mAdViewPositionMap = adViewPositionMap;
@@ -80,6 +83,49 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
                         .skipMemoryCache(true).centerCrop().error(R.mipmap.small_placeholder).dontAnimate()).thumbnail(0.1f).into((ImageView) helper.getView(R.id.iv_book));
 
                 SubjectHelper.setSubject(helper, item, R.id.iv_subject);
+                LinearLayout adLine = (LinearLayout) helper.getView(R.id.line_exAd);
+
+
+                adLine.setVisibility(View.GONE);
+                if (MyApp.state==1){
+                    if (helper.getAdapterPosition()==1){
+                        if (ads!=null&&ads.size()>0){
+                            if (ads.get(0)!=null) {
+                                FrameLayout fl_exConstain = (FrameLayout) helper.getView(R.id.fl_exConstain);
+                                if (fl_exConstain.getVisibility()==View.GONE){
+                                    adLine.setVisibility(View.VISIBLE);
+                                    getExpressAdView(ads.get(0),fl_exConstain);
+                                }
+                            }
+                        }
+                    }
+
+                    if (helper.getAdapterPosition()==3){
+                        if (ads!=null&&ads.size()>1){
+                            if (ads.get(1)!=null) {
+                                FrameLayout fl_exConstain = (FrameLayout) helper.getView(R.id.fl_exConstain);
+                                if (fl_exConstain.getVisibility()==View.GONE){
+                                    adLine.setVisibility(View.VISIBLE);
+                                    getExpressAdView(ads.get(1),fl_exConstain);
+                                }
+                            }
+                        }
+                    }
+
+                    if (helper.getAdapterPosition()==6){
+                        if (ads!=null&&ads.size()>2){
+                            if (ads.get(2)!=null) {
+                                FrameLayout fl_exConstain = (FrameLayout) helper.getView(R.id.fl_exConstain);
+                                if (fl_exConstain.getVisibility()==View.GONE){
+                                    adLine.setVisibility(View.VISIBLE);
+                                    getExpressAdView(ads.get(2),fl_exConstain);
+                                }
+                            }
+                        }
+                    }
+                }
+
+
                 break;
         }
 
@@ -99,4 +145,96 @@ public class SearchResultItemAdapter extends BaseMultiItemQuickAdapter<BookInfo,
 
     }
 
+
+    //渲染模板广告
+    @SuppressWarnings("RedundantCast")
+    private View getExpressAdView(final GMNativeAd ad,FrameLayout fl_excontains) {
+        View convertView = null;
+        try {
+            //判断是否存在dislike按钮
+            ad.setNativeAdListener(new GMNativeExpressAdListener() {
+                @Override
+                public void onRenderFail(View view, String s, int i) {
+
+                }
+
+                @Override
+                public void onRenderSuccess(float width, float height) {
+
+                    //回调渲染成功后将模板布局添加的父View中
+                    //获取视频播放view,该view SDK内部渲染，在媒体平台可配置视频是否自动播放等设置。
+                    int sWidth;
+                    int sHeight;
+                    /**
+                     * 如果存在父布局，需要先从父布局中移除
+                     */
+                    final View video = ad.getExpressView(); // 获取广告view  如果存在父布局，需要先从父布局中移除
+                    /*if (width == TTAdSize.FULL_WIDTH && height == TTAdSize.AUTO_HEIGHT) {
+                        sWidth = FrameLayout.LayoutParams.MATCH_PARENT;
+                        sHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
+                    } else {
+                        sWidth = UIUtils.getScreenWidth(MainActivity.this);
+                        sHeight = (int) ((sWidth * height) / width);
+                    }
+                    if (exType==1){
+                        if (fl_excontains != null) {
+                            Log.d("ccc", "-----ex---turn-----555----onRenderSuccess: ");
+                            if (video != null) {
+                                *//**
+                     * 如果存在父布局，需要先从父布局中移除
+                     *//*
+                                Log.d("ccc", "-----ex---turn-----666----onRenderSuccess: ");
+                                UIUtils.removeFromParent(video);
+                                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(sWidth, sHeight);
+                                fl_excontains.removeAllViews();
+                                fl_excontains.addView(video, layoutParams);
+                            }
+                        }
+                    }else {
+                        if (fl_exConstainss != null) {
+                            Log.d("ccc", "-----ex---turn-----555----onRenderSuccess: ");
+                            if (video != null) {
+                                *//**
+                     * 如果存在父布局，需要先从父布局中移除
+                     *//*
+                                Log.d("ccc", "-----ex---turn-----666----onRenderSuccess: ");
+                                UIUtils.removeFromParent(video);
+                                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(sWidth, sHeight);
+                                fl_exConstainss.removeAllViews();
+                                fl_exConstainss.addView(video, layoutParams);
+                            }
+                        }
+                    }*/
+
+
+                    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.gravity = Gravity.CENTER;
+                    if (fl_excontains != null) {
+                        fl_excontains.removeAllViews();
+                        fl_excontains.addView(video,layoutParams);
+                    }
+                }
+
+                @Override
+                public void onAdClick() {
+
+                }
+
+                @Override
+                public void onAdShow() {
+
+                }
+            });
+
+            ad.render();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return convertView;
+    }
+
+    private List<GMNativeAd> ads;
+    public void setExData(List<GMNativeAd> adss) {
+       this.ads=adss;
+    }
 }

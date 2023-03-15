@@ -103,6 +103,7 @@ public class UserInfoHelper {
     }
 
 
+
     public static boolean isGoToLogin(Activity activity) {
         if (!isLogin()) {
             activity.startActivity(new Intent(activity, LoginGroupActivity.class));

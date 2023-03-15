@@ -10,9 +10,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.VUiKit;
 import com.yc.ac.R;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.setting.ui.adapter.NotificationAdapter;
 import com.yc.ac.setting.ui.fragment.NotificationFragment;
+import com.yc.ac.utils.adgromore.GromoreNewInsetShowTwo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,10 @@ public class NotificationActivity extends BaseActivity {
         commonTvTitle.setText("消息通知");
         initViewPager();
         initListener();
+        showInset();
+    }
+    private void showInset() {
+
     }
 
     private void initListener() {

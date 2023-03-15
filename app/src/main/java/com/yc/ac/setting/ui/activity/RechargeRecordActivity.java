@@ -6,15 +6,18 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding.view.RxView;
+import com.kk.utils.VUiKit;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.yc.ac.R;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.base.StateView;
 import com.yc.ac.setting.contract.OrderListContract;
 import com.yc.ac.setting.model.bean.OrderInfo;
 import com.yc.ac.setting.presenter.OrderListPresenter;
 import com.yc.ac.setting.ui.adapter.RechargeRecordAdapter;
 import com.yc.ac.utils.ItemDecorationHelper;
+import com.yc.ac.utils.adgromore.GromoreNewInsetShowTwo;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +47,7 @@ public class RechargeRecordActivity extends BaseActivity<OrderListPresenter> imp
 
     @Override
     public void init() {
+
         mPresenter = new OrderListPresenter(this, this);
         commonTvTitle.setText("充值记录");
 
@@ -51,6 +55,10 @@ public class RechargeRecordActivity extends BaseActivity<OrderListPresenter> imp
         initListener();
         initRefresh();
         initData();
+        showInset();
+    }
+    private void showInset() {
+
     }
 
 

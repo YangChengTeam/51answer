@@ -36,10 +36,8 @@ import com.yc.ac.index.ui.activity.AnswerDetailActivity;
 import com.yc.ac.index.ui.adapter.IndexBookAdapter;
 import com.yc.ac.index.ui.widget.MyDecoration;
 import com.yc.ac.setting.model.bean.UserInfo;
-import com.yc.ac.utils.SpanUtils;
 import com.yc.ac.utils.UserInfoHelper;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -50,18 +48,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import rx.functions.Action1;
 import yc.com.base.BaseFragment;
-import yc.com.base.UIUtils;
-import yc.com.tencent_adv.AdvDispatchManager;
-import yc.com.tencent_adv.AdvType;
-import yc.com.toutiao_adv.OnAdvStateListener;
-import yc.com.toutiao_adv.TTAdDispatchManager;
-import yc.com.toutiao_adv.TTAdType;
 
 /**
  * Created by wanglin  on 2018/3/7 13:53.
  */
 
-public class CollectFragment extends BaseFragment<CollectPresenter> implements CollectContract.View, OnAdvStateListener {
+public class CollectFragment extends BaseFragment<CollectPresenter> implements CollectContract.View {
 
 
     @BindView(R.id.collect_recyclerView)
@@ -111,8 +103,8 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
         initRefresh();
         getData(false);
 //        AdvDispatchManager.getManager().init(getActivity(), AdvType.BANNER, topContainer, null, Config.tencent_media_id, Config.tencent_top_banner_id, null);
-        if (MyApp.state == 1 && RxSPTool.getBoolean(requireActivity(), SpConstant.INDEX_DIALOG))
-            TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, topContainer, Config.toutiao_banner2_id, 0, null, null, 0, null, 0, this);
+        if (MyApp.state == 1 && RxSPTool.getBoolean(requireActivity(), SpConstant.INDEX_DIALOG));
+           // TTAdDispatchManager.getManager().init(getActivity(), TTAdType.BANNER, topContainer, Config.toutiao_banner2_id, 0, null, null, 0, null, 0, this);
 
     }
 
@@ -285,43 +277,9 @@ public class CollectFragment extends BaseFragment<CollectPresenter> implements C
     @Override
     public void onDestroy() {
         super.onDestroy();
-        TTAdDispatchManager.getManager().onDestroy();
     }
 
-    @Override
-    public void loadSuccess() {
 
-    }
-
-    @Override
-    public void loadFailed() {
-
-    }
-
-    @Override
-    public void clickAD() {
-
-    }
-
-    @Override
-    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
-
-    }
-
-    @Override
-    public void onNativeExpressDismiss(TTNativeExpressAd view) {
-
-    }
-
-    @Override
-    public void onRewardVideoComplete() {
-
-    }
-
-    @Override
-    public void loadRewardVideoSuccess() {
-
-    }
 
 
 }

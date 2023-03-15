@@ -1,33 +1,26 @@
 package com.yc.ac.index.ui.activity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
-import com.hwangjr.rxbus.RxBus;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.domain.GoagalInfo;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.LogUtil;
-import com.kk.utils.ToastUtil;
-import com.kk.utils.VUiKit;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.tencent.bugly.Bugly;
 import com.tencent.mmkv.MMKV;
@@ -43,16 +36,16 @@ import com.yc.ac.R;
 import com.yc.ac.base.Config;
 import com.yc.ac.base.MainActivity;
 import com.yc.ac.base.MyApp;
-import com.yc.ac.base.WebActivity;
 import com.yc.ac.constant.SpConstant;
-import com.yc.ac.dialog.YonghuxieyiDialog;
+import com.yc.ac.index.listener.GlidePauseOnScrollListener;
 import com.yc.ac.index.model.bean.AdStateInfo;
+import com.yc.ac.index.model.bean.DaoMaster;
 import com.yc.ac.index.ui.fragment.PolicyTintFragment;
+import com.yc.ac.index.ui.widget.GlideImageLoader;
 import com.yc.ac.index.ui.widget.SelectGradeView;
-import com.yc.ac.utils.CommonUtils;
 import com.yc.ac.utils.EngineUtils;
 import com.yc.ac.utils.UserInfoHelper;
-
+import com.yc.ac.utils.adgromore.GMAdManagerHolder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -61,28 +54,25 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import butterknife.BindView;
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
+import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ThemeConfig;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import yc.com.base.BaseActivity;
 import yc.com.base.StatusBarUtil;
-import yc.com.base.UIUtils;
-import yc.com.tencent_adv.AdvDispatchManager;
-import yc.com.tencent_adv.AdvType;
-import yc.com.tencent_adv.OnAdvStateListener;
-import yc.com.toutiao_adv.TTAdDispatchManager;
-import yc.com.toutiao_adv.TTAdManagerHolder;
-import yc.com.toutiao_adv.TTAdType;
+
 
 /**
  * Created by wanglin  on 2018/3/15 14:11.
  */
 
-public class SplashActivity extends BaseActivity implements OnAdvStateListener, yc.com.toutiao_adv.OnAdvStateListener {
+public class SplashActivity extends BaseActivity {
 
     @BindView(R.id.iv)
     ImageView iv;
@@ -121,18 +111,36 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
     }
 
     public void initViews(){
-        Bugly.init(getApplicationContext(), "af5788360b", false);
-        TTAdManagerHolder.init(getApplicationContext(), Config.toutiao_ad_id);
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getApplicationContext(), "answer-circle-db", null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster dm = new DaoMaster(db);
+        MyApp.daoSession = dm.newSession();
+
+        GMAdManagerHolder.init(getApplicationContext());
+        Bugly.init(getApplicationContext(), "fa044f8f97", false);
+
+     /*   TTAdManagerHolderTwo.init(getApplicationContext(), "5372600", Constant.APPNAME, false, new InitAdCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });*/
+
         initsdk();
         rlSelectGrade.setVisibility(View.GONE);
 //        iv.setVisibility(View.VISIBLE);
-//        getAdState();
-        switchActivity(Time);
-//        AdvDispatchManager.getManager().init(this, AdvType.SPLASH, splashContainer, skipView, Config.tencent_media_id, Config.tencent_splash_id, this);
+        getAdState();
+       // switchActivity(Time);
     }
 
     public void initsdk() {
         MMKV.initialize(this);
+        initGalleryFinal();
         RxTool.init(getApplicationContext());
 
         //友盟统计
@@ -189,6 +197,39 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
         HttpConfig.setDefaultParams(params);
     }
 
+    private void initGalleryFinal() {
+
+        ThemeConfig theme = new ThemeConfig.Builder()
+                .setTitleBarBgColor(Color.rgb(228, 50, 50))//标题栏背景颜色
+                .setFabNornalColor(Color.rgb(228, 50, 50))//确定按钮Noimal状态
+                .setFabPressedColor(Color.rgb(228, 60, 60))//确定按钮Pressed状态
+                .setCheckNornalColor(Color.rgb(204, 204, 204))
+                .setCheckSelectedColor(Color.rgb(228, 50, 50))//选择框选中颜色
+                .setIconBack(R.mipmap.back)//返回按钮
+                .build();
+        //初始化图片选择器
+        FunctionConfig functionConfig = new FunctionConfig.Builder()
+                .setEnablePreview(true)//是否开启预览功能
+                .setEnableEdit(true)//开启编辑功能
+                .setEnableCrop(true)//开启裁剪功能
+                .setEnableCamera(true)//开启相机功能
+                .setCropWidth(getResources().getDisplayMetrics().widthPixels)
+                .setCropHeight(getResources().getDisplayMetrics().widthPixels)
+                .build();
+
+        GlideImageLoader imageloader = new GlideImageLoader();
+
+        //配置imageloader
+        CoreConfig coreConfig = new CoreConfig.Builder(getApplicationContext(), imageloader, theme)
+                .setFunctionConfig(functionConfig)
+                .setTakePhotoFolder(getExternalFilesDir(Environment.DIRECTORY_PICTURES))
+                .setPauseOnScrollListener(new GlidePauseOnScrollListener(false, true))
+                .build();
+
+        GalleryFinal.init(coreConfig);
+        //设置主题
+    }
+
     public static String getSV() {
         return Build.MODEL.contains(Build.BRAND) ? Build.MODEL + " " + Build.VERSION.RELEASE : Build.BRAND + " " + Build.MODEL + " " + Build.VERSION.RELEASE;
     }
@@ -226,10 +267,11 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
                         if (adStateInfoResultInfo != null && adStateInfoResultInfo.getCode() == HttpConfig.STATUS_OK) {
                             MyApp.state = adStateInfoResultInfo.getData().status;
                             if (MyApp.state == 1) {//打开广告
-                                TTAdDispatchManager.getManager().init(SplashActivity.this, TTAdType.SPLASH, splashContainer, Config.toutiao_splash_id, 0, null, null, 0, null, 0, SplashActivity.this);
+                              //  TTAdDispatchManager.getManager().init(SplashActivity.this, TTAdType.SPLASH, splashContainer, Config.toutiao_splash_id, 0, null, null, 0, null, 0, SplashActivity.this);
                             } else {
-                                switchActivity(Time);
+
                             }
+                            switchActivity(Time);
                         }
                     }
                 });
@@ -304,16 +346,7 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
     }
 
 
-    @Override
-    public void onShow() {
-        iv.setVisibility(View.GONE);
-        skipView.setVisibility(View.VISIBLE);
-    }
 
-    @Override
-    public void onDismiss(long delayTime) {
-        switchActivity(delayTime);
-    }
 
     @Override
     protected void onPause() {
@@ -332,59 +365,11 @@ public class SplashActivity extends BaseActivity implements OnAdvStateListener, 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AdvDispatchManager.getManager().onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
-    public void onError() {
 
-    }
 
-    @Override
-    public void onNativeExpressDismiss(NativeExpressADView view) {
 
-    }
-
-    @Override
-    public void onNativeExpressShow(Map<NativeExpressADView, Integer> mDatas) {
-
-    }
-
-    @Override
-    public void loadSuccess() {
-        switchActivity(0);
-    }
-
-    @Override
-    public void loadFailed() {
-        switchActivity(0);
-
-    }
-
-    @Override
-    public void clickAD() {
-        switchActivity(0);
-    }
-
-    @Override
-    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
-
-    }
-
-    @Override
-    public void onNativeExpressDismiss(TTNativeExpressAd view) {
-
-    }
-
-    @Override
-    public void onRewardVideoComplete() {
-
-    }
-
-    @Override
-    public void loadRewardVideoSuccess() {
-
-    }
 
 
 }

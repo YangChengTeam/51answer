@@ -10,17 +10,20 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
 import com.kk.securityhttp.net.contains.HttpConfig;
+import com.kk.utils.VUiKit;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yc.ac.R;
+import com.yc.ac.base.MyApp;
 import com.yc.ac.base.StateView;
 import com.yc.ac.index.ui.activity.AnswerDetailActivity;
 import com.yc.ac.setting.contract.BroswerContract;
 import com.yc.ac.setting.model.bean.BrowserInfo;
 import com.yc.ac.setting.presenter.BrowserPresenter;
 import com.yc.ac.setting.ui.adapter.BrowserAdapter;
+import com.yc.ac.utils.adgromore.GromoreNewInsetShowTwo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +80,11 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
 
         initRefresh();
         initListener();
+        showInset();
+    }
+
+    private void showInset() {
+
     }
 
     private void initListener() {

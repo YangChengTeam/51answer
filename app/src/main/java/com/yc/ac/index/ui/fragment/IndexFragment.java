@@ -20,10 +20,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vondear.rxtools.RxKeyboardTool;
-import com.vondear.rxtools.RxSPTool;
 import com.yc.ac.R;
 import com.yc.ac.base.WebActivity;
-import com.yc.ac.constant.SpConstant;
 import com.yc.ac.index.contract.IndexContract;
 import com.yc.ac.index.model.bean.BookInfo;
 import com.yc.ac.index.model.bean.SlideInfo;
@@ -50,14 +48,12 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import yc.com.base.BaseFragment;
 import yc.com.base.StatusBarUtil;
-import yc.com.toutiao_adv.OnAdvStateListener;
-import yc.com.toutiao_adv.TTAdDispatchManager;
 
 /**
  * Created by wanglin  on 2018/2/27 14:43.
  */
 
-public class IndexFragment extends BaseFragment<IndexPresenter> implements IndexContract.View, OnAdvStateListener {
+public class IndexFragment extends BaseFragment<IndexPresenter> implements IndexContract.View {
 
 
     @BindView(R.id.banner)
@@ -327,7 +323,6 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
     @Override
     public void onDestroy() {
         super.onDestroy();
-        TTAdDispatchManager.getManager().onDestroy();
     }
 
     private void initRefresh() {
@@ -353,40 +348,7 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
         mPresenter.getZtInfos();
     }
 
-    @Override
-    public void loadSuccess() {
 
-    }
-
-    @Override
-    public void loadFailed() {
-
-    }
-
-    @Override
-    public void clickAD() {
-
-    }
-
-    @Override
-    public void onTTNativeExpressed(Map<TTNativeExpressAd, Integer> mDatas) {
-
-    }
-
-    @Override
-    public void onNativeExpressDismiss(TTNativeExpressAd view) {
-
-    }
-
-    @Override
-    public void onRewardVideoComplete() {
-
-    }
-
-    @Override
-    public void loadRewardVideoSuccess() {
-
-    }
 
 
 }

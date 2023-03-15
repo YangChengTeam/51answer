@@ -1,12 +1,14 @@
 package com.yc.ac.index.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.hwangjr.rxbus.RxBus;
 import com.kk.securityhttp.domain.ResultInfo;
 import com.kk.securityhttp.net.contains.HttpConfig;
 import com.kk.utils.LogUtil;
+import com.kk.utils.VUiKit;
 import com.vondear.rxtools.RxNetTool;
 import com.vondear.rxtools.RxTimeTool;
 import com.yc.ac.base.MyApp;
@@ -19,6 +21,7 @@ import com.yc.ac.setting.model.bean.BrowserInfo;
 import com.yc.ac.setting.model.bean.BrowserInfoDao;
 import com.yc.ac.setting.model.bean.ShareInfo;
 import com.yc.ac.setting.model.bean.ShareInfoDao;
+import com.yc.ac.utils.CacheDataUtils;
 import com.yc.ac.utils.EngineUtils;
 import com.yc.ac.utils.ToastUtils;
 
@@ -44,6 +47,7 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
 
         infoDao = MyApp.getDaoSession().getBookInfoDao();
         browserInfoDao = MyApp.getDaoSession().getBrowserInfoDao();
+        shareInfoDao = MyApp.getDaoSession().getShareInfoDao();
     }
 
     @Override
@@ -170,9 +174,12 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
     }
 
     private boolean queryShareBook(String bookId) {
-        ShareInfoDao shareInfoDao = MyApp.getDaoSession().getShareInfoDao();
-        ShareInfo result = shareInfoDao.queryBuilder().where(ShareInfoDao.Properties.Book_id.eq(bookId)).build().unique();
-        return result != null;
+        String shareBook = CacheDataUtils.getInstance().getShareBook(bookId);
+        if (!TextUtils.isEmpty(shareBook)){
+               return true;
+        }else {
+            return false;
+        }
     }
 
 
@@ -203,4 +210,45 @@ public class AnswerDetailPresenter extends BasePresenter<AnswerDetailEngine, Ans
         return browserInfoDao.queryBuilder().where(BrowserInfoDao.Properties.BookId.eq(bookId)).where(BrowserInfoDao.Properties.BrowserTime.eq(time)).build().unique();
     }
 
+
+    public void share( String book_id) {
+        VUiKit.postDelayed(100, new Runnable() {
+            @Override
+            public void run() {
+                saveShare(book_id);
+                mView.showSuccess();
+            }
+        });
+
+       /* Subscription subscription = mEngine.share(book_id).subscribe(new Subscriber<ResultInfo<String>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResultInfo<String> stringResultInfo) {
+                Log.d("ccc", "-----000-----onNext: "+stringResultInfo.getCode() );
+                if (stringResultInfo != null && stringResultInfo.getCode() == HttpConfig.STATUS_OK) {
+                    Log.d("ccc", "-----222-----onNext: ");
+                } else {
+                    Log.d("ccc", "-----444-----onNext: ");
+                    saveShare(book_id);
+                }
+                Log.d("ccc", "------111----onNext: ");
+                mView.showSuccess();
+            }
+        });
+        mSubscriptions.add(subscription);*/
+    }
+
+    private ShareInfoDao shareInfoDao;
+    private void saveShare(String bookiD) {
+        CacheDataUtils.getInstance().setShareBook(bookiD);
+    }
 }

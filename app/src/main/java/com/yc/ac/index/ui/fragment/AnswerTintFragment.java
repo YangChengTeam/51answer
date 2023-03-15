@@ -2,6 +2,7 @@ package com.yc.ac.index.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -48,16 +49,13 @@ public class AnswerTintFragment extends BaseDialogFragment {
         RxView.clicks(tvConfirm).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
             //todo分享
             if (!UserInfoHelper.isGoToLogin(getActivity())) {
-
                 if (state == 0) {
-
                     ShareFragment shareFragment = new ShareFragment();
 
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("bookInfo", bookInfo);
 
                     shareFragment.setArguments(bundle);
-
                     shareFragment.show(getChildFragmentManager(), null);
                 } else if (state == 1) {
 //                    startActivity(new Intent(requireActivity(), PayActivity.class));

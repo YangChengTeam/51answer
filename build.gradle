@@ -12,6 +12,11 @@ buildscript {
         maven { url "https://jitpack.io" }
       //  maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://repo1.maven.org/maven2/' }
+
+        //GroMore SDK依赖
+        maven {
+            url "https://artifact.bytedance.com/repository/pangle"
+        }
     }
 
     dependencies {
@@ -42,6 +47,12 @@ allprojects {
         maven { url "https://jitpack.io" }
       //  maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://repo1.maven.org/maven2/' }
+
+        //GroMore SDK依赖
+        maven {
+            url "https://artifact.bytedance.com/repository/pangle"
+        }
+
     }
 }
 
