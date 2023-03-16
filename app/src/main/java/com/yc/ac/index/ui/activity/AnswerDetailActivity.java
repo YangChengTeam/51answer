@@ -195,7 +195,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
     private void showInset() {
         if (MyApp.state==1){
-            VUiKit.postDelayed(400, new Runnable() {
+            VUiKit.postDelayed(300, new Runnable() {
                 @Override
                 public void run() {
                     GromoreNewInsetShowTwo.getInstance().showInset(new GromoreNewInsetShowTwo.OnNewInsetAdShowCaback() {
@@ -271,9 +271,13 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
 
         //            }
         RxView.clicks(rlShare).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
-//            applyPermission(this::showShareDialog);
+            if (Build.VERSION.SDK_INT<31){
+                applyPermission(this::showJiVideoDialog);
+            }else {
+                showJiVideoDialog();
+            }
+          //  applyPermission(this::showJiVideoDialog);
          //   showShareDialog();
-            showJiVideoDialog();
         });
 
     }
@@ -459,7 +463,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                 fenxaignDialog.setDismiss();
             }
         }
-        Log.d("securityhttp", "--------3333-------showSuccess: ");
         if (bookInfo!=null){
             bookInfo.setAccess(1);
         }
@@ -608,8 +611,6 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         } else {
             runnable.run();
         }
-
-
     }
 
     @Override
@@ -630,7 +631,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                 }
             }
             if (results.size() == 0) {
-                showShareDialog();
+                showJiVideoDialog();
             }
 
         }
@@ -660,7 +661,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
     }
 
 
-    private ImageView ivBookCover,ivQq,ivWx,ivCode;
+    private ImageView ivBookCover,ivQq,ivWx,ivCode,iv_close;
     private TextView tvAnswerTitle,tvAnswerExtra;
     private LinearLayout llShare,line_share;
     private SignDialogThree fenxaignDialog;
@@ -676,6 +677,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         tvAnswerExtra=builder.findViewById(R.id.tv_answer_extra);
         llShare=builder.findViewById(R.id.ll_share);
         line_share=builder.findViewById(R.id.line_share);
+        iv_close=builder.findViewById(R.id.iv_close);
         fenxaignDialog.setOutCancle(true);
 
     }
@@ -701,6 +703,14 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                         }
                     }, 500);
                 });
+
+                iv_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        fenxaignDialog.setDismiss();
+                    }
+                });
+
                 RxView.clicks(ivQq).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
                     llShare.setVisibility(View.GONE);
                     ivCode.setVisibility(View.VISIBLE);
@@ -848,8 +858,8 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                 String displayNames="share_img"+System.currentTimeMillis()+"png";
                 tempUri = getUri(this, resultPosterBitmap, Bitmap.CompressFormat.PNG, "image/png", displayNames, "caicai");
             } else {
-                try {
-                    tempUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), resultPosterBitmap, null, null));
+                try {//需要权限
+                    tempUri = Uri.parse(MediaStore.Images.Media.insertImage(AnswerDetailActivity.this.getContentResolver(), resultPosterBitmap, null, null));
                 }catch (Exception e){
 
                 }
@@ -876,7 +886,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                 tempUri = getUri(this, resultPosterBitmap, Bitmap.CompressFormat.PNG, "image/png", displayNames, null);
             } else {
                 try {
-                    tempUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), resultPosterBitmap, null, null));
+                    tempUri = Uri.parse(MediaStore.Images.Media.insertImage(AnswerDetailActivity.this.getContentResolver(), resultPosterBitmap, null, null));
                 }catch (Exception e){
 
                 }
@@ -884,10 +894,10 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (tempUri != null) {
+         if (tempUri != null) {
             shareToQQ(AnswerDetailActivity.this, tempUri);
-        } else {
-            Toast.makeText(this,"分享失败，请稍后重试",Toast.LENGTH_LONG).show();
+         } else {
+            Toast.makeText(this,"分享失败，请稍后重试1111",Toast.LENGTH_LONG).show();
             return;
         }
     }
@@ -962,7 +972,7 @@ public class AnswerDetailActivity extends BaseActivity<AnswerDetailPresenter> im
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(Intent.createChooser(intent, "Share"));
             } catch (Exception e) {
-                Toast.makeText(this,"分享失败，请稍后重试",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"分享失败，请稍后重试333:"+e.getMessage(),Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(this,"请您先安装QQ！",Toast.LENGTH_LONG).show();

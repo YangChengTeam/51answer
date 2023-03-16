@@ -3,10 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/ll_bg"
+    android:orientation="vertical"
     android:gravity="center"
      >
 
     <LinearLayout
+        android:layout_marginRight="@dimen/t15dp"
+        android:layout_marginLeft="@dimen/t15dp"
         android:id="@+id/line_share"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -29,8 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
             android:paddingTop="@dimen/t20dp">
 
             <ImageView
@@ -110,6 +111,13 @@
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_marginTop="@dimen/t6dp"
+        android:padding="5dp"
+        android:src="@mipmap/close3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

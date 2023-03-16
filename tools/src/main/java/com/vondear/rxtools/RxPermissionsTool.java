@@ -1,6 +1,8 @@
 package com.vondear.rxtools;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author Vondear
@@ -59,6 +62,8 @@ public class RxPermissionsTool {
             }
             return list;
         }
+
+
 
     }
 
