@@ -3,17 +3,24 @@ package com.yc.ac.setting.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kk.utils.LogUtil;
+import com.kk.utils.ToastUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yc.ac.R;
+import com.yc.ac.base.WebActivity;
 import com.yc.ac.setting.contract.LoginContract;
 import com.yc.ac.setting.model.bean.UserDataInfo;
 import com.yc.ac.setting.model.bean.UserInfo;
@@ -43,7 +50,8 @@ import yc.com.base.BaseActivity;
 public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
 
     private static final String TAG = "LoginGroupActivity";
-
+    @BindView(R.id.checkbox)
+    CheckBox checkbox;
     @BindView(R.id.btn_back)
     ImageView btnBack;
     @BindView(R.id.btn_register)
@@ -60,6 +68,9 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
     RelativeLayout reWeibo;
     @BindView(R.id.ll_other_login_view)
     LinearLayout llOtherLoginView;
+    @BindView(R.id.tv_user_policy)
+    TextView tv_user_policy;
+
 
     private Map<String, Fragment> fragmentMap;
     public static final String LOGIN = "login";
@@ -96,6 +107,12 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
         fragmentMap.put(LOGIN_NEW_PWD, new LoginNewPwdFragment());
 
         initViews();
+        tv_user_policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebActivity.startActivity(LoginGroupActivity.this,"http://answer.bshu.com/html/daanquan.html","隐私协议");
+            }
+        });
     }
 
     private void initViews() {
@@ -109,15 +126,28 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
                     break;
                 //微信登录
                 case R.id.re_weichat:
-                    login(SHARE_MEDIA.WEIXIN);
+                    Log.d("ccc", "----2222--initViews: ");
+                    if (checkbox.isChecked()){
+                        login(SHARE_MEDIA.WEIXIN);
+                    }else {
+                        Toast.makeText(LoginGroupActivity.this,"请先勾选同意下方用户协议",Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 //QQ登录
                 case R.id.re_qq:
-                    login(SHARE_MEDIA.QQ);
+                    if (checkbox.isChecked()){
+                        login(SHARE_MEDIA.QQ);
+                    }else {
+                        Toast.makeText(LoginGroupActivity.this,"请先勾选同意下方用户协议",Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 //微博登录
                 case R.id.re_weibo:
-                    login(SHARE_MEDIA.SINA);
+                    if (checkbox.isChecked()){
+                        login(SHARE_MEDIA.SINA);
+                    }else {
+                        Toast.makeText(LoginGroupActivity.this,"请先勾选同意下方用户协议",Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         };
@@ -408,5 +438,13 @@ public class LoginGroupActivity extends BaseActivity<LoginPresenter> implements 
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+    }
+
+    public boolean getIsCheck() {
+        if (checkbox.isChecked()){
+            return  true;
+        }else {
+            return  false;
+        }
     }
 }

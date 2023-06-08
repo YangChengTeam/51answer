@@ -138,6 +138,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     private int totalTime = 60;
 
 
+
     private class MyRunnable implements Runnable {
         TextView mTv;
 

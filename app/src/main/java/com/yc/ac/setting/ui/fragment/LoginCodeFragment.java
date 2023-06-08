@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.yc.ac.R;
@@ -37,7 +38,7 @@ public class LoginCodeFragment extends BaseFragment<LoginPresenter> implements L
     TextView tvGetCode;
     @BindView(R.id.et_code)
     EditText etCode;
-
+    private LoginGroupActivity loginGroupActivity;
 
     private String phone;
     private LoginGroupActivity mLoginGroupActivity;
@@ -56,7 +57,7 @@ public class LoginCodeFragment extends BaseFragment<LoginPresenter> implements L
 
     @Override
     public void init() {
-
+        loginGroupActivity= (LoginGroupActivity) getActivity();
         if (getArguments() != null) {
             phone = getArguments().getString("phone");
         }
@@ -73,8 +74,13 @@ public class LoginCodeFragment extends BaseFragment<LoginPresenter> implements L
         RxView.clicks(tvLogin).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                String code = etCode.getText().toString().trim();
-                mPresenter.login(phone, "", code);
+                boolean isCheck = mLoginGroupActivity.getIsCheck();
+                if (isCheck){
+                    String code = etCode.getText().toString().trim();
+                    mPresenter.login(phone, "", code);
+                }else {
+                    Toast.makeText(getActivity(),"请先勾选同意下方用户协议",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.yc.ac.R;
@@ -39,7 +40,7 @@ public class LoginPwdFragment extends BaseFragment<LoginPresenter> implements Lo
     EditText etPwd;
     @BindView(R.id.iv_cancel)
     ImageView ivCancel;
-
+    private LoginGroupActivity loginGroupActivity;
 
     private String phone;
     private LoginGroupActivity mLoginGroupActivity;
@@ -58,7 +59,7 @@ public class LoginPwdFragment extends BaseFragment<LoginPresenter> implements Lo
 
     @Override
     public void init() {
-
+        loginGroupActivity= (LoginGroupActivity) getActivity();
         if (getArguments() != null) {
             phone = getArguments().getString("phone");
         }
@@ -77,8 +78,13 @@ public class LoginPwdFragment extends BaseFragment<LoginPresenter> implements Lo
         RxView.clicks(tvLogin).throttleFirst(200, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                String pwd = etPwd.getText().toString().trim();
-                mPresenter.login(phone, pwd, "");
+                boolean isCheck = loginGroupActivity.getIsCheck();
+                if (isCheck){
+                    String pwd = etPwd.getText().toString().trim();
+                    mPresenter.login(phone, pwd, "");
+                }else {
+                    Toast.makeText(getActivity(),"请先勾选同意下方用户协议",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
